@@ -6,6 +6,11 @@
 FROM node:24.15.0-alpine3.23 AS build
 WORKDIR /app
 
+# libc6-compat: the prebuilt @tailwindcss/oxide and lightningcss .node bindings
+# are linked against a glibc-compatible runtime and fail to load on bare Alpine
+# musl otherwise — which kills `npm ci` during its postinstall probe.
+RUN apk add --no-cache libc6-compat
+
 # Copy lockfile first so `npm ci` layer caches when only source changes.
 COPY package.json package-lock.json ./
 RUN npm ci --no-audit --no-fund
