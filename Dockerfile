@@ -3,13 +3,12 @@
 # Pinned tags only — no :latest, no floating minors.
 
 # ── 1. Build ───────────────────────────────────────────────────────────────
-FROM node:24.15.0-alpine3.23 AS build
+# Debian slim (glibc) for the build stage. Alpine/musl works in theory with
+# libc6-compat, but Tailwind v4 oxide + lightningcss + rolldown prebuilt
+# .node bindings keep finding new ways to fail there. Debian slim is the
+# known-good path and the build stage is thrown away after COPY --from.
+FROM node:24.15.0-bookworm-slim AS build
 WORKDIR /app
-
-# libc6-compat: the prebuilt @tailwindcss/oxide and lightningcss .node bindings
-# are linked against a glibc-compatible runtime and fail to load on bare Alpine
-# musl otherwise — which kills `npm ci` during its postinstall probe.
-RUN apk add --no-cache libc6-compat
 
 # Copy lockfile first so `npm ci` layer caches when only source changes.
 COPY package.json package-lock.json ./

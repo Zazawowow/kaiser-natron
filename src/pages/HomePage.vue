@@ -6,7 +6,7 @@ import Button from '@/design-system/components/Button.vue'
 
 <template>
   <div class="min-h-screen bg-surface">
-    <Navbar variant="brand" layout="floating" :cart-count="0" />
+    <Navbar variant="brand" layout="standard" :cart-count="0" />
 
     <section class="mx-auto max-w-4xl px-6 py-28 text-center">
       <p class="eyebrow mb-4">Scaffolding</p>
