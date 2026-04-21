@@ -3,7 +3,7 @@
 # Pinned tags only — no :latest, no floating minors.
 
 # ── 1. Build ───────────────────────────────────────────────────────────────
-FROM node:24.13.0-alpine3.20 AS build
+FROM node:24.15.0-alpine3.23 AS build
 WORKDIR /app
 
 # Copy lockfile first so `npm ci` layer caches when only source changes.
