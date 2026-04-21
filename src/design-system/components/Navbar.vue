@@ -3,6 +3,8 @@ import { ref, computed, watch, onBeforeUnmount } from 'vue'
 import Logo from './Logo.vue'
 import Icon from './Icon.vue'
 import LanguageSwitcher from './LanguageSwitcher.vue'
+import Search from './Search.vue'
+import { products as defaultProducts } from '@/api/index.js'
 import { useI18n } from '@/i18n/index.js'
 
 const props = defineProps({
@@ -32,12 +34,19 @@ const props = defineProps({
   },
   cartCount: { type: Number, default: 0 },
   floatOnMobile: { type: Boolean, default: true },
+  /**
+   * Catalogue the search overlay queries. Defaults to the frontend fixture
+   * so the navbar is usable on its own; callers pass in their own list once
+   * the product data is backend-driven.
+   */
+  products: { type: Array, default: () => defaultProducts },
 })
 
-defineEmits(['cart', 'nav'])
+defineEmits(['cart', 'nav', 'select'])
 
 const { t } = useI18n()
 const menuOpen = ref(false)
+const searchOpen = ref(false)
 
 // Cart is always warm yellow — one consistent affordance on mobile and desktop,
 // regardless of bar tone.
@@ -124,8 +133,16 @@ onBeforeUnmount(() => {
         </nav>
       </div>
 
-      <!-- Right: language + cart (desktop only) -->
+      <!-- Right: search + language + cart (desktop only) -->
       <div class="hidden md:flex items-center gap-4">
+        <button
+          type="button"
+          :class="[tone.link, 'inline-flex items-center justify-center w-11 h-11 rounded-full transition-colors duration-base ease-out']"
+          :aria-label="t('ds.search.open')"
+          @click="searchOpen = true"
+        >
+          <Icon name="search" :size="20" />
+        </button>
         <LanguageSwitcher :tone="variant" />
         <button
           type="button"
@@ -140,6 +157,23 @@ onBeforeUnmount(() => {
           >{{ cartCount }}</span>
         </button>
       </div>
+    </div>
+
+    <!-- Mobile floating search (bottom-left). Matches the bottom-right
+         cluster's safe-area handling so it clears the home indicator. -->
+    <div
+      v-if="floatOnMobile"
+      class="md:hidden fixed bottom-5 left-5 z-40"
+      style="padding-bottom: env(safe-area-inset-bottom);"
+    >
+      <button
+        type="button"
+        class="w-14 h-14 rounded-full bg-cream text-brand shadow-lg flex items-center justify-center transition-transform duration-base ease-out hover:-translate-y-0.5 active:translate-y-0"
+        :aria-label="t('ds.search.open')"
+        @click="searchOpen = true"
+      >
+        <Icon name="search" :size="22" :stroke-width="2" />
+      </button>
     </div>
 
     <!-- Mobile floating cluster (bottom-right) -->
@@ -236,5 +270,11 @@ onBeforeUnmount(() => {
         </div>
       </Transition>
     </Teleport>
+
+    <Search
+      v-model="searchOpen"
+      :products="products"
+      @select="(p) => $emit('select', p)"
+    />
   </header>
 </template>

@@ -39,6 +39,7 @@ const routes = [
       { path: 'navbar', name: 'ds-navbar', component: () => import('@/pages/design/NavbarSection.vue') },
       { path: 'language', name: 'ds-language', component: () => import('@/pages/design/LanguageSwitcherSection.vue') },
       { path: 'icons', name: 'ds-icons', component: () => import('@/pages/design/IconsSection.vue') },
+      { path: 'search', name: 'ds-search', component: () => import('@/pages/design/SearchSection.vue') },
     ],
   },
 ]

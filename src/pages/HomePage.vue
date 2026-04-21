@@ -1,6 +1,7 @@
 <script setup>
 import Navbar from '@/design-system/components/Navbar.vue'
 import Hero from '@/design-system/components/Hero.vue'
+import { products } from '@/api/products.js'
 import { useI18n } from '@/i18n/index.js'
 
 const { t } = useI18n()
@@ -15,7 +16,7 @@ const imgPulver250 =
        below the navbar takes the remaining space and vertically centers the
        hero, so the hero sits in the middle of (viewport - navbar). -->
   <div class="h-svh flex flex-col bg-brand overflow-hidden">
-    <Navbar variant="brand" layout="standard" :cart-count="0" />
+    <Navbar variant="brand" layout="standard" :cart-count="0" :products="products" />
 
     <div class="flex-1 flex items-center">
       <Hero
