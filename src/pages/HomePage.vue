@@ -10,10 +10,14 @@ const imgPulver250 =
 </script>
 
 <template>
-  <div class="min-h-screen bg-brand">
+  <!-- First-fold layout: hero fills the viewport below the navbar.
+       `svh` (small viewport height) keeps the hero inside the fold even
+       when mobile browser chrome is visible, so nothing pops off-screen. -->
+  <div class="min-h-svh flex flex-col bg-brand">
     <Navbar variant="brand" layout="standard" :cart-count="0" />
 
     <Hero
+      class="flex-1 flex items-center"
       variant="split"
       tone="brand"
       :eyebrow="t('ds.hero.eyebrow')"
