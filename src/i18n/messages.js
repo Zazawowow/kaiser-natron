@@ -30,6 +30,7 @@ const de = {
   'ds.nav.inputs': 'Eingabefelder',
   'ds.nav.cards': 'Karten',
   'ds.nav.products': 'Produktkarten',
+  'ds.nav.hero': 'Hero',
   'ds.nav.navbar': 'Navigation',
   'ds.nav.language': 'Sprachwahl',
 
@@ -176,6 +177,18 @@ const de = {
   'ds.product.outOfStock': 'Nicht verfügbar',
   'ds.product.added': 'Hinzugefügt',
 
+  // Hero
+  'ds.hero.title': 'Hero',
+  'ds.hero.description': 'Ganzflächiger Bühnenbereich für die Startseite und Kategorie-Auftakte. Eyebrow, Display-Headline mit optionaler Kursiv-Hervorhebung, Unterzeile, Produkt-Cutout auf dekorativer Scheibe und ein Primary/Secondary-CTA-Paar. Responsiv von 390 bis 1280 px, drei Flächen­töne, zwei Layouts.',
+  'ds.hero.variant.label': 'Layout',
+  'ds.hero.variant.split': 'Split',
+  'ds.hero.variant.centered': 'Zentriert',
+  'ds.hero.eyebrow': 'Neu im Shop',
+  'ds.hero.headline.a': 'Kaiser-Natron',
+  'ds.hero.headline.em': 'für alles',
+  'ds.hero.headline.b': 'was glänzen soll.',
+  'ds.hero.sub': 'Reinigt, backt und neutralisiert Gerüche. Die 250-g-Großpackung für den Haushalt, der sich auf das Original verlässt.',
+
   // Navbar section
   'ds.navbar.title': 'Navigation',
   'ds.navbar.description': 'Logo + Nav + Warenkorb, in drei Flächentönen. Auf Mobilgeräten behält die obere Leiste das Logo, Menü + Warenkorb wechseln in ein ergonomisches bodennahes rechtes Floating-Cluster. Das Menü öffnet ein vollflächiges markengrünes Overlay.',
@@ -244,6 +257,7 @@ const en = {
   'ds.nav.inputs': 'Inputs',
   'ds.nav.cards': 'Cards',
   'ds.nav.products': 'Product cards',
+  'ds.nav.hero': 'Hero',
   'ds.nav.navbar': 'Navbar',
   'ds.nav.language': 'Language',
 
@@ -376,6 +390,17 @@ const en = {
   'ds.product.description': 'Composed from Card, Badge, Button, and Icon. Cutout image on a cream media surface, title + size, price in brand, and a full-width primary "Add to cart".',
   'ds.product.outOfStock': 'Out of stock',
   'ds.product.added': 'Added',
+
+  'ds.hero.title': 'Hero',
+  'ds.hero.description': 'Full-bleed stage for the home page and category tops. Eyebrow, display headline with optional italic emphasis, subheadline, product cutout on a decorative disc, and a primary/secondary CTA pair. Responsive from 390 to 1280px, three surface tones, two layouts.',
+  'ds.hero.variant.label': 'Layout',
+  'ds.hero.variant.split': 'Split',
+  'ds.hero.variant.centered': 'Centered',
+  'ds.hero.eyebrow': 'New in shop',
+  'ds.hero.headline.a': 'Kaiser Natron',
+  'ds.hero.headline.em': 'for everything',
+  'ds.hero.headline.b': 'that should shine.',
+  'ds.hero.sub': 'Cleans, bakes, and neutralises odours. The 250 g large pack for the household that trusts the original.',
 
   'ds.navbar.title': 'Navbar',
   'ds.navbar.description': 'Logo + nav + cart, in three surface tones. On mobile, the top bar keeps the logo and the menu + cart move to an ergonomic bottom-right floating cluster. The menu opens a full-screen brand-green overlay.',

@@ -32,6 +32,7 @@ const groups = computed(() => [
       { name: 'ds-inputs', label: t('ds.nav.inputs') },
       { name: 'ds-cards', label: t('ds.nav.cards') },
       { name: 'ds-products', label: t('ds.nav.products') },
+      { name: 'ds-hero', label: t('ds.nav.hero') },
       { name: 'ds-navbar', label: t('ds.nav.navbar') },
       { name: 'ds-language', label: t('ds.nav.language') },
     ],

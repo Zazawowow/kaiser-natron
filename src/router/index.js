@@ -14,6 +14,12 @@ const routes = [
     meta: { layout: 'none', preview: true },
   },
   {
+    path: '/design/preview/hero',
+    name: 'ds-preview-hero',
+    component: () => import('@/pages/design/previews/HeroPreview.vue'),
+    meta: { layout: 'none', preview: true },
+  },
+  {
     path: '/design',
     component: () => import('@/pages/design/DesignLayout.vue'),
     meta: { layout: 'none' },
@@ -29,6 +35,7 @@ const routes = [
       { path: 'inputs', name: 'ds-inputs', component: () => import('@/pages/design/InputsSection.vue') },
       { path: 'cards', name: 'ds-cards', component: () => import('@/pages/design/CardsSection.vue') },
       { path: 'products', name: 'ds-products', component: () => import('@/pages/design/ProductsSection.vue') },
+      { path: 'hero', name: 'ds-hero', component: () => import('@/pages/design/HeroSection.vue') },
       { path: 'navbar', name: 'ds-navbar', component: () => import('@/pages/design/NavbarSection.vue') },
       { path: 'language', name: 'ds-language', component: () => import('@/pages/design/LanguageSwitcherSection.vue') },
       { path: 'icons', name: 'ds-icons', component: () => import('@/pages/design/IconsSection.vue') },
