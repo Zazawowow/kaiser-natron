@@ -293,7 +293,7 @@ function onRowClick(i, item, e) {
               <button
                 v-if="query"
                 type="button"
-                class="shrink-0 inline-flex items-center px-[11px] py-[5px] rounded-pill text-[11px] font-bold tracking-eyebrow uppercase bg-accent text-accent-ink hover:bg-accent-soft transition-colors"
+                class="shrink-0 inline-flex items-center px-[11px] py-[5px] rounded-pill text-[11px] font-bold tracking-eyebrow uppercase text-accent hover:text-accent-soft transition-colors"
                 :aria-label="t('search.clear')"
                 @click="clearQuery"
               >
