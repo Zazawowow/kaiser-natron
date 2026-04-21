@@ -10,30 +10,33 @@ const imgPulver250 =
 </script>
 
 <template>
-  <!-- First-fold layout: hero fills the viewport below the navbar.
-       `svh` (small viewport height) keeps the hero inside the fold even
-       when mobile browser chrome is visible, so nothing pops off-screen. -->
-  <div class="min-h-svh flex flex-col bg-brand">
+  <!-- First-fold layout: wrapper is exactly viewport height (svh keeps mobile
+       browser chrome from pushing content off-screen). The centering row
+       below the navbar takes the remaining space and vertically centers the
+       hero, so the hero sits in the middle of (viewport - navbar). -->
+  <div class="h-svh flex flex-col bg-brand overflow-hidden">
     <Navbar variant="brand" layout="standard" :cart-count="0" />
 
-    <Hero
-      class="flex-1 flex items-center"
-      variant="split"
-      tone="brand"
-      :eyebrow="t('ds.hero.eyebrow')"
-      :subheadline="t('ds.hero.sub')"
-      :image="imgPulver250"
-      image-alt="Kaiser-Natron Pulver 250 g Großpackung"
-      :cta-label="t('ds.buttons.addToCart')"
-      :secondary-label="t('ds.buttons.learnMore')"
-      cta-href="/shop"
-      secondary-href="/anwendungen"
-    >
-      <template #headline>
-        {{ t('ds.hero.headline.a') }}
-        <em class="italic font-light text-accent-soft">{{ t('ds.hero.headline.em') }}</em>
-        {{ t('ds.hero.headline.b') }}
-      </template>
-    </Hero>
+    <div class="flex-1 flex items-center">
+      <Hero
+        class="w-full"
+        variant="split"
+        tone="brand"
+        :eyebrow="t('ds.hero.eyebrow')"
+        :subheadline="t('ds.hero.sub')"
+        :image="imgPulver250"
+        image-alt="Kaiser-Natron Pulver 250 g Großpackung"
+        :cta-label="t('ds.buttons.addToCart')"
+        :secondary-label="t('ds.buttons.learnMore')"
+        cta-href="/shop"
+        secondary-href="/anwendungen"
+      >
+        <template #headline>
+          {{ t('ds.hero.headline.a') }}
+          <em class="italic font-light text-accent-soft">{{ t('ds.hero.headline.em') }}</em>
+          {{ t('ds.hero.headline.b') }}
+        </template>
+      </Hero>
+    </div>
   </div>
 </template>

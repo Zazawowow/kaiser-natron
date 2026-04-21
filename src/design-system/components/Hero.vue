@@ -88,7 +88,7 @@ const layout = computed(() => {
   <section
     :class="[
       'relative overflow-hidden',
-      'px-6 py-16 sm:px-8 sm:py-20 md:px-12 md:py-24 lg:px-16 lg:py-28',
+      'px-6 py-10 sm:px-8 sm:py-12 md:px-12 md:py-16 lg:px-16 lg:py-20',
       tone.surface,
       tone.text,
     ]"
