@@ -2,6 +2,7 @@
 import { ref, computed, watch, onBeforeUnmount } from 'vue'
 import Logo from './Logo.vue'
 import Icon from './Icon.vue'
+import IconButton from './IconButton.vue'
 import LanguageSwitcher from './LanguageSwitcher.vue'
 import Search from './Search.vue'
 import { products as defaultProducts } from '@/api/index.js'
@@ -173,14 +174,14 @@ onBeforeUnmount(() => {
       class="md:hidden fixed bottom-5 left-5 z-40"
       style="padding-bottom: env(safe-area-inset-bottom);"
     >
-      <button
-        type="button"
-        class="w-14 h-14 rounded-full bg-brand-float text-accent shadow-lg flex items-center justify-center transition-transform duration-base ease-out hover:-translate-y-0.5 active:translate-y-0"
+      <IconButton
+        icon="search"
+        variant="float"
+        size="lg"
+        :icon-stroke-width="2"
         :aria-label="t('search.open')"
         @click="searchOpen = true"
-      >
-        <Icon name="search" :size="22" :stroke-width="2" />
-      </button>
+      />
     </div>
 
     <!-- Mobile floating cluster (bottom-right) -->
@@ -201,14 +202,15 @@ onBeforeUnmount(() => {
           class="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full bg-danger text-white text-[10px] font-bold flex items-center justify-center"
         >{{ cartCount }}</span>
       </button>
-      <button
-        type="button"
-        class="w-14 h-14 rounded-full bg-brand-float text-accent shadow-lg flex items-center justify-center transition-transform duration-base ease-out hover:-translate-y-0.5 active:translate-y-0"
+      <IconButton
+        icon="menu"
+        variant="float"
+        size="lg"
+        :icon-size="24"
+        :icon-stroke-width="2"
         :aria-label="t('menu.open')"
         @click="menuOpen = true"
-      >
-        <Icon name="menu" :size="24" :stroke-width="2" />
-      </button>
+      />
     </div>
 
     <!-- Mobile overlay menu -->
@@ -265,14 +267,15 @@ onBeforeUnmount(() => {
                 class="min-w-[22px] h-[22px] px-2 rounded-full bg-brand text-accent text-[12px] font-bold flex items-center justify-center"
               >{{ cartCount }}</span>
             </button>
-            <button
-              type="button"
-              class="shrink-0 w-14 h-14 rounded-full bg-cream-wash text-cream hover:bg-cream-wash-strong transition-colors flex items-center justify-center"
+            <IconButton
+              icon="close"
+              variant="cream-wash"
+              size="lg"
+              :icon-size="20"
               :aria-label="t('menu.close')"
+              class="shrink-0"
               @click="menuOpen = false"
-            >
-              <Icon name="close" :size="20" />
-            </button>
+            />
           </div>
         </div>
       </Transition>

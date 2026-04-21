@@ -1,6 +1,8 @@
 <script setup>
 import { ref, computed, watch, nextTick, onBeforeUnmount } from 'vue'
 import Icon from './Icon.vue'
+import IconButton from './IconButton.vue'
+import Badge from './Badge.vue'
 import { useI18n } from '@/i18n/index.js'
 
 const props = defineProps({
@@ -290,15 +292,16 @@ function onRowClick(i, item, e) {
                   toneClasses.input,
                 ]"
               />
-              <button
+              <Badge
                 v-if="query"
-                type="button"
-                class="shrink-0 inline-flex items-center px-[11px] py-[5px] rounded-pill text-[11px] font-bold tracking-eyebrow uppercase bg-accent text-accent-ink hover:bg-accent-soft transition-colors"
+                as="button"
+                variant="accent"
+                class="shrink-0"
                 :aria-label="t('search.clear')"
                 @click="clearQuery"
               >
                 {{ t('search.clear') }}
-              </button>
+              </Badge>
               <button
                 type="button"
                 :class="[
@@ -380,15 +383,16 @@ function onRowClick(i, item, e) {
 
             <!-- Mobile floating close — mirrors the navbar's search-open
                  button position so users return their thumb to the same spot. -->
-            <button
-              type="button"
-              class="md:hidden fixed bottom-5 left-5 z-[70] w-14 h-14 rounded-full bg-brand-float text-accent shadow-lg flex items-center justify-center transition-transform duration-base ease-out hover:-translate-y-0.5 active:translate-y-0"
-              style="margin-bottom: env(safe-area-inset-bottom);"
+            <IconButton
+              icon="close"
+              variant="float"
+              size="lg"
+              :icon-stroke-width="2"
               :aria-label="t('menu.close')"
+              class="md:hidden fixed bottom-5 left-5 z-[70]"
+              style="margin-bottom: env(safe-area-inset-bottom);"
               @click="close"
-            >
-              <Icon name="close" :size="22" :stroke-width="2" />
-            </button>
+            />
 
             <!-- Keyboard hints — desktop only. -->
             <div
