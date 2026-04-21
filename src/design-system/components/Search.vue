@@ -364,6 +364,18 @@ function onRowClick(i, item, e) {
               </a>
             </div>
 
+            <!-- Mobile floating close — mirrors the navbar's search-open
+                 button position so users return their thumb to the same spot. -->
+            <button
+              type="button"
+              class="md:hidden fixed bottom-5 left-5 z-[70] w-14 h-14 rounded-full bg-cream-wash text-accent hover:bg-cream-wash-strong flex items-center justify-center transition-all duration-base ease-out hover:-translate-y-0.5 active:translate-y-0"
+              style="margin-bottom: env(safe-area-inset-bottom);"
+              :aria-label="t('menu.close')"
+              @click="close"
+            >
+              <Icon name="close" :size="22" :stroke-width="2" />
+            </button>
+
             <!-- Keyboard hints — desktop only. -->
             <div
               :class="[
