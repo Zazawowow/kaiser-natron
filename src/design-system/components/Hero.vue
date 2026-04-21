@@ -74,9 +74,11 @@ const layout = computed(() => {
   }
   // Split: image on top on mobile/tablet, text-left/image-right on desktop.
   // `order-*` flips the stacking order below lg without changing DOM order.
+  // On lg, let the grid stretch items to the row height and then `justify-center`
+  // the copy column so its headline/CTA block sits at the image's vertical midpoint.
   return {
-    root: 'grid gap-10 md:gap-14 lg:grid-cols-[1.05fr_1fr] lg:items-center',
-    copy: 'order-2 lg:order-1 max-w-xl mx-auto lg:mx-0 items-center text-center lg:items-start lg:text-left',
+    root: 'grid gap-10 md:gap-14 lg:grid-cols-[1.05fr_1fr]',
+    copy: 'order-2 lg:order-1 max-w-xl mx-auto lg:mx-0 items-center text-center lg:items-start lg:text-left lg:justify-center',
     actions: 'justify-center lg:justify-start',
     media: 'order-1 lg:order-2',
     mediaSize: 'w-[260px] sm:w-[340px] md:w-[420px] lg:w-full lg:max-w-[520px]',
