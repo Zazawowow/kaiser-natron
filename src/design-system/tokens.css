@@ -19,6 +19,7 @@
 
   /* Neutrals — warm, green-tinted */
   --color-ink: #0d1f13;
+  --color-ink-placeholder: rgba(13, 31, 19, 0.35);
   --color-muted: #5a7866;
   --color-line: rgba(28, 58, 40, 0.11);
   --color-line-strong: rgba(28, 58, 40, 0.22);
@@ -26,10 +27,20 @@
   --color-surface: #faf7f1;
   --color-paper: #ffffff;
 
+  /* Washes — tinted fills for hover / subtle backgrounds / overlay chrome */
+  --color-brand-wash: rgba(28, 58, 40, 0.06);
+  --color-brand-soft-wash: rgba(61, 122, 85, 0.08);
+  --color-cream-wash: rgba(244, 239, 228, 0.08);
+  --color-cream-wash-strong: rgba(244, 239, 228, 0.16);
+  --color-cream-line: rgba(244, 239, 228, 0.15);
+
   /* Semantic */
   --color-success: #3d7a55;
+  --color-success-wash: rgba(61, 122, 85, 0.12);
   --color-warning: #c6900f;
+  --color-warning-wash: rgba(198, 144, 15, 0.15);
   --color-danger: #b23a2a;
+  --color-danger-wash: rgba(178, 58, 42, 0.12);
 
   /* ——— Typography ———————————————————————————————————————————— */
   --font-serif: 'Fraunces', ui-serif, Georgia, 'Times New Roman', serif;

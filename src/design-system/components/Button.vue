@@ -5,7 +5,7 @@ const props = defineProps({
   variant: {
     type: String,
     default: 'primary',
-    validator: (v) => ['primary', 'secondary', 'ghost', 'danger'].includes(v),
+    validator: (v) => ['primary', 'accent', 'secondary', 'ghost', 'danger'].includes(v),
   },
   size: {
     type: String,
@@ -22,28 +22,31 @@ defineEmits(['click'])
 
 const base =
   'inline-flex items-center justify-center gap-2 font-sans font-semibold ' +
-  'rounded-[var(--radius-pill)] border transition-all duration-[var(--duration-base)] ease-[var(--ease-out)] ' +
-  'disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none ' +
-  'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-brand)]'
+  'rounded-pill border transition-all duration-base ease-out ' +
+  'disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none ' +
+  'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand'
 
 const variants = {
   primary:
-    'bg-[var(--color-brand)] text-[var(--color-accent)] border-[var(--color-brand)] ' +
-    'hover:bg-[var(--color-brand-hover)] hover:-translate-y-0.5 hover:shadow-[0_12px_28px_rgba(28,58,40,0.22)]',
+    'bg-brand text-accent border-brand ' +
+    'hover:bg-brand-hover hover:-translate-y-0.5 hover:shadow-md',
+  accent:
+    'bg-accent text-brand border-accent ' +
+    'hover:bg-accent-soft hover:-translate-y-0.5 hover:shadow-md',
   secondary:
-    'bg-transparent text-[var(--color-brand)] border-[var(--color-brand)] ' +
-    'hover:bg-[var(--color-brand)] hover:text-[var(--color-accent)]',
+    'bg-transparent text-brand border-brand ' +
+    'hover:bg-brand hover:text-accent',
   ghost:
-    'bg-transparent text-[var(--color-brand)] border-transparent ' +
-    'hover:bg-[rgba(28,58,40,0.06)]',
+    'bg-transparent text-brand border-transparent hover:bg-brand-wash',
   danger:
-    'bg-[var(--color-danger)] text-white border-[var(--color-danger)] hover:opacity-90',
+    'bg-danger text-white border-danger ' +
+    'hover:opacity-90 hover:-translate-y-0.5 hover:shadow-md',
 }
 
 const sizes = {
-  sm: 'text-[13px] px-[18px] py-[9px] tracking-[var(--tracking-label)]',
-  md: 'text-[15px] px-[26px] py-[13px] tracking-[var(--tracking-label)]',
-  lg: 'text-[16px] px-[34px] py-[17px] tracking-[var(--tracking-label)]',
+  sm: 'text-[13px] px-[18px] py-[9px] tracking-label',
+  md: 'text-[15px] px-[26px] py-[13px] tracking-label',
+  lg: 'text-[16px] px-[34px] py-[17px] tracking-label',
 }
 
 const classes = computed(() => [
@@ -57,6 +60,8 @@ const classes = computed(() => [
 <template>
   <button :type="type" :disabled="disabled || loading" :class="classes" @click="$emit('click', $event)">
     <span v-if="loading" class="inline-block h-3 w-3 rounded-full border-2 border-current border-t-transparent animate-spin" />
+    <slot name="before" />
     <slot />
+    <slot name="after" />
   </button>
 </template>

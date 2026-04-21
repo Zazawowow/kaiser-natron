@@ -1,5 +1,8 @@
 <script setup>
 import SectionShell from './SectionShell.vue'
+import { useI18n } from '@/i18n/index.js'
+
+const { t } = useI18n()
 
 const radii = [
   { name: 'xs', value: '6px' },
@@ -13,18 +16,18 @@ const radii = [
 
 <template>
   <SectionShell
-    eyebrow="Tokens"
-    title="Radii"
-    description="From subtle 6px rounding on small elements to full pills on buttons. Matches the reference site's soft, organic feel."
+    :eyebrow="t('ds.eyebrow.tokens')"
+    :title="t('ds.radii.title')"
+    :description="t('ds.radii.description')"
   >
     <div class="grid grid-cols-2 sm:grid-cols-3 gap-6">
       <div v-for="r in radii" :key="r.name" class="flex flex-col items-center">
         <div
-          class="h-32 w-full bg-[var(--color-paper)] border border-[var(--color-line)] mb-4 shadow-[var(--shadow-sm)]"
+          class="h-32 w-full bg-paper border border-line mb-4 shadow-sm"
           :style="{ borderRadius: `var(--radius-${r.name})` }"
         />
-        <code class="font-mono text-[12px] text-[var(--color-ink)] block">--radius-{{ r.name }}</code>
-        <span class="text-[12px] text-[var(--color-muted)] mt-1">{{ r.value }}</span>
+        <code class="font-mono text-[12px] text-ink block">--radius-{{ r.name }}</code>
+        <span class="text-[12px] text-muted mt-1">{{ r.value }}</span>
       </div>
     </div>
   </SectionShell>

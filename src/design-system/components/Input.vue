@@ -28,9 +28,9 @@ const describedBy = computed(
     <label
       v-if="label"
       :for="inputId"
-      class="text-[11px] font-bold uppercase tracking-[var(--tracking-eyebrow)] text-[var(--color-muted)]"
+      class="text-[11px] font-bold uppercase tracking-eyebrow text-muted"
     >
-      {{ label }}<span v-if="required" class="text-[var(--color-danger)]"> *</span>
+      {{ label }}<span v-if="required" class="text-danger"> *</span>
     </label>
     <input
       :id="inputId"
@@ -41,15 +41,15 @@ const describedBy = computed(
       :required="required"
       :aria-invalid="!!error"
       :aria-describedby="describedBy"
-      class="w-full rounded-[var(--radius-sm)] border bg-[var(--color-paper)] px-4 py-3 text-[15px] text-[var(--color-ink)]
-             placeholder:text-[color:rgba(13,31,19,0.35)]
-             transition-colors duration-[var(--duration-base)]
-             focus:outline-none focus:border-[var(--color-brand)]
+      class="w-full rounded-sm border bg-paper px-4 py-3 text-[15px] text-ink
+             placeholder:text-ink-placeholder
+             transition-colors duration-base
+             focus:outline-none focus:border-brand
              disabled:opacity-50 disabled:cursor-not-allowed"
-      :class="error ? 'border-[var(--color-danger)]' : 'border-[var(--color-line)]'"
+      :class="error ? 'border-danger' : 'border-line'"
       @input="$emit('update:modelValue', $event.target.value)"
     />
-    <p v-if="hint && !error" :id="hintId" class="text-[13px] text-[var(--color-muted)]">{{ hint }}</p>
-    <p v-if="error" :id="errorId" class="text-[13px] text-[var(--color-danger)]">{{ error }}</p>
+    <p v-if="hint && !error" :id="hintId" class="text-[13px] text-muted">{{ hint }}</p>
+    <p v-if="error" :id="errorId" class="text-[13px] text-danger">{{ error }}</p>
   </div>
 </template>

@@ -1,13 +1,25 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
-  { path: '/', name: 'home', component: () => import('@/pages/HomePage.vue') },
+  {
+    path: '/',
+    name: 'home',
+    component: () => import('@/pages/HomePage.vue'),
+    meta: { layout: 'none' },
+  },
+  {
+    path: '/design/preview/navbar',
+    name: 'ds-preview-navbar',
+    component: () => import('@/pages/design/previews/NavbarPreview.vue'),
+    meta: { layout: 'none', preview: true },
+  },
   {
     path: '/design',
     component: () => import('@/pages/design/DesignLayout.vue'),
     meta: { layout: 'none' },
     children: [
-      { path: '', redirect: '/design/colors' },
+      { path: '', redirect: '/design/logo' },
+      { path: 'logo', name: 'ds-logo', component: () => import('@/pages/design/LogoSection.vue') },
       { path: 'colors', name: 'ds-colors', component: () => import('@/pages/design/ColorsSection.vue') },
       { path: 'typography', name: 'ds-typography', component: () => import('@/pages/design/TypographySection.vue') },
       { path: 'radii', name: 'ds-radii', component: () => import('@/pages/design/RadiiSection.vue') },
@@ -16,6 +28,10 @@ const routes = [
       { path: 'badges', name: 'ds-badges', component: () => import('@/pages/design/BadgesSection.vue') },
       { path: 'inputs', name: 'ds-inputs', component: () => import('@/pages/design/InputsSection.vue') },
       { path: 'cards', name: 'ds-cards', component: () => import('@/pages/design/CardsSection.vue') },
+      { path: 'products', name: 'ds-products', component: () => import('@/pages/design/ProductsSection.vue') },
+      { path: 'navbar', name: 'ds-navbar', component: () => import('@/pages/design/NavbarSection.vue') },
+      { path: 'language', name: 'ds-language', component: () => import('@/pages/design/LanguageSwitcherSection.vue') },
+      { path: 'icons', name: 'ds-icons', component: () => import('@/pages/design/IconsSection.vue') },
     ],
   },
 ]

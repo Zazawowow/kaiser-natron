@@ -1,0 +1,43 @@
+# Portainer stack — Kaiser Natron static frontend.
+#
+# Deploy:
+#   Portainer → Stacks → Add stack → Repository (point at this repo)
+#   or Web editor (paste this file).
+#
+# Portainer will build the image from the Dockerfile at the repo root on first
+# deploy and on each "Pull and redeploy".
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: kaiser-natron:portainer
+    container_name: kaiser-natron-web
+    restart: unless-stopped
+    ports:
+      # Host 5555 → container 80. Change the host side if you put a reverse
+      # proxy in front later; the container always listens on 80 internally.
+      - "5555:80"
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O-", "http://127.0.0.1/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    # Hardening: the Vite output + nginx don't need a writable root. The tmp
+    # paths nginx uses are carved out as tmpfs so the main FS can be read-only.
+    read_only: true
+    tmpfs:
+      - /var/cache/nginx
+      - /var/run
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+    # Resource ceiling — a static site doesn't need much, and this prevents
+    # a runaway from starving other stacks on the same host.
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 128M

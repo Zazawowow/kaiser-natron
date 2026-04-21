@@ -1,0 +1,35 @@
+# Keep the build context small and reproducible.
+.git
+.github
+.gitignore
+.DS_Store
+
+# Local development artefacts
+node_modules
+dist
+dist-ssr
+.vite
+coverage
+*.log
+
+# Secrets & env (always excluded; only .env.example is shipped to clients, not the image)
+.env
+.env.*
+!.env.example
+
+# Python scripts/ tooling (rembg etc) — not part of the web image
+scripts/.venv
+__pycache__
+
+# Editor / IDE
+.vscode
+.idea
+
+# Claude Code artefacts
+.claude
+CLAUDE.md
+CLAUDE.local.md
+.claudeignore
+
+# Docs / meta that don't need to ship in the build context
+README.md
