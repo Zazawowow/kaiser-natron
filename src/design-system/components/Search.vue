@@ -112,7 +112,7 @@ function scoreProduct(p, tokens) {
     { val: normalize(p.size), weight: 2 },
     { val: normalize(p.category), weight: 2 },
     { val: (p.keywords || []).map(normalize).join(' '), weight: 3 },
-    { val: normalize(p.sku), weight: 1 },
+    { val: normalize(p.id), weight: 1 },
   ]
   let score = 0
   for (const tok of tokens) {
@@ -230,7 +230,7 @@ function onRowClick(i, item, e) {
         class="fixed inset-0 z-[60] font-sans"
         role="dialog"
         aria-modal="true"
-        :aria-label="t('ds.search.label')"
+        :aria-label="t('search.label')"
         @keydown="onKeydown"
       >
         <!-- Backdrop (md+). Tap to dismiss. -->
@@ -278,8 +278,8 @@ function onRowClick(i, item, e) {
                 autocapitalize="none"
                 spellcheck="false"
                 enterkeyhint="search"
-                :placeholder="placeholder || t('ds.search.placeholder')"
-                :aria-label="t('ds.search.label')"
+                :placeholder="placeholder || t('search.placeholder')"
+                :aria-label="t('search.label')"
                 :class="[
                   'flex-1 min-w-0 bg-transparent border-0 outline-none text-[17px] md:text-[15px]',
                   toneClasses.input,
@@ -304,7 +304,7 @@ function onRowClick(i, item, e) {
               class="flex-1 overflow-y-auto py-2"
               style="padding-bottom: calc(env(safe-area-inset-bottom) + 0.5rem);"
               role="listbox"
-              :aria-label="t('ds.search.results')"
+              :aria-label="t('search.results')"
             >
               <p
                 v-if="!query.trim() && results.length"
@@ -313,19 +313,19 @@ function onRowClick(i, item, e) {
                   toneClasses.eyebrowCream ? 'text-cream/70' : '',
                 ]"
               >
-                {{ t('ds.search.suggested') }}
+                {{ t('search.suggested') }}
               </p>
 
               <p
                 v-if="!results.length"
                 :class="['px-5 md:px-4 py-10 text-center text-sm', toneClasses.noResults]"
               >
-                {{ t('ds.search.noResults') }}
+                {{ t('search.noResults') }}
               </p>
 
               <a
                 v-for="(p, i) in results"
-                :key="p.sku"
+                :key="p.id"
                 :href="p.href || '#'"
                 role="option"
                 :aria-selected="i === activeIndex"
@@ -375,15 +375,15 @@ function onRowClick(i, item, e) {
               <span class="inline-flex items-center gap-1.5">
                 <kbd :class="['px-1.5 py-0.5 rounded-sm border font-mono text-[11px]', toneClasses.kbd]">↑</kbd>
                 <kbd :class="['px-1.5 py-0.5 rounded-sm border font-mono text-[11px]', toneClasses.kbd]">↓</kbd>
-                {{ t('ds.search.hint.navigate') }}
+                {{ t('search.hint.navigate') }}
               </span>
               <span class="inline-flex items-center gap-1.5">
                 <kbd :class="['px-1.5 py-0.5 rounded-sm border font-mono text-[11px]', toneClasses.kbd]">↵</kbd>
-                {{ t('ds.search.hint.select') }}
+                {{ t('search.hint.select') }}
               </span>
               <span class="inline-flex items-center gap-1.5">
                 <kbd :class="['px-1.5 py-0.5 rounded-sm border font-mono text-[11px]', toneClasses.kbd]">esc</kbd>
-                {{ t('ds.search.hint.close') }}
+                {{ t('search.hint.close') }}
               </span>
             </div>
           </div>

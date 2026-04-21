@@ -57,16 +57,19 @@ const tones = {
     bar: 'bg-brand text-cream border-cream-line',
     link: 'text-cream hover:text-accent',
     logo: 'text-cream',
+    searchTrigger: 'border border-cream-line bg-cream-wash text-cream/80 hover:text-accent',
   },
   cream: {
     bar: 'bg-cream text-brand border-line',
     link: 'text-brand hover:text-brand-hover',
     logo: 'text-brand',
+    searchTrigger: 'border border-line-strong bg-paper text-muted hover:text-brand',
   },
   paper: {
     bar: 'bg-paper text-ink border-line',
     link: 'text-ink hover:text-brand',
     logo: 'text-brand',
+    searchTrigger: 'border border-line bg-paper text-muted hover:text-brand',
   },
 }
 
@@ -137,11 +140,15 @@ onBeforeUnmount(() => {
       <div class="hidden md:flex items-center gap-4">
         <button
           type="button"
-          :class="[tone.link, 'inline-flex items-center justify-center w-11 h-11 rounded-full transition-colors duration-base ease-out']"
-          :aria-label="t('ds.search.open')"
+          :class="[
+            'inline-flex items-center gap-2 pl-3 pr-4 py-2 rounded-pill text-[13px] font-medium tracking-label transition-colors duration-base',
+            tone.searchTrigger,
+          ]"
+          :aria-label="t('search.open')"
           @click="searchOpen = true"
         >
-          <Icon name="search" :size="20" />
+          <Icon name="search" :size="16" />
+          <span>{{ t('search.placeholder') }}</span>
         </button>
         <LanguageSwitcher :tone="variant" />
         <button
@@ -168,8 +175,8 @@ onBeforeUnmount(() => {
     >
       <button
         type="button"
-        class="w-14 h-14 rounded-full bg-cream text-brand shadow-lg flex items-center justify-center transition-transform duration-base ease-out hover:-translate-y-0.5 active:translate-y-0"
-        :aria-label="t('ds.search.open')"
+        class="w-14 h-14 rounded-full bg-brand text-accent shadow-sm flex items-center justify-center transition-transform duration-base ease-out hover:-translate-y-0.5 active:translate-y-0"
+        :aria-label="t('search.open')"
         @click="searchOpen = true"
       >
         <Icon name="search" :size="22" :stroke-width="2" />
@@ -274,7 +281,8 @@ onBeforeUnmount(() => {
     <Search
       v-model="searchOpen"
       :products="products"
-      @select="(p) => $emit('select', p)"
+      :tone="variant"
+      @select="(p) => $emit('search', p)"
     />
   </header>
 </template>
