@@ -72,11 +72,13 @@ const layout = computed(() => {
       mediaSize: 'w-[260px] sm:w-[320px] md:w-[400px] lg:w-[480px]',
     }
   }
+  // Split: image on top on mobile/tablet, text-left/image-right on desktop.
+  // `order-*` flips the stacking order below lg without changing DOM order.
   return {
     root: 'grid gap-10 md:gap-14 lg:grid-cols-[1.05fr_1fr] lg:items-center',
-    copy: 'max-w-xl mx-auto lg:mx-0 items-center text-center lg:items-start lg:text-left',
+    copy: 'order-2 lg:order-1 max-w-xl mx-auto lg:mx-0 items-center text-center lg:items-start lg:text-left',
     actions: 'justify-center lg:justify-start',
-    media: '',
+    media: 'order-1 lg:order-2',
     mediaSize: 'w-[260px] sm:w-[340px] md:w-[420px] lg:w-full lg:max-w-[520px]',
   }
 })
