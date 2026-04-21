@@ -49,10 +49,6 @@ const { t } = useI18n()
 const menuOpen = ref(false)
 const searchOpen = ref(false)
 
-// Cart is always warm yellow — one consistent affordance on mobile and desktop,
-// regardless of bar tone.
-const CART_CLASS = 'bg-accent text-brand hover:bg-accent-soft'
-
 const tones = {
   brand: {
     bar: 'bg-brand text-cream border-cream-line',
@@ -152,18 +148,14 @@ onBeforeUnmount(() => {
           <span>{{ t('search.placeholder') }}</span>
         </button>
         <LanguageSwitcher :tone="variant" />
-        <button
-          type="button"
-          :class="[CART_CLASS, 'relative inline-flex items-center justify-center w-11 h-11 rounded-full transition-all duration-base ease-out hover:-translate-y-0.5']"
+        <IconButton
+          icon="cart"
+          variant="accent"
+          size="md"
+          :count="cartCount"
           :aria-label="t('cart.open')"
           @click="$emit('cart')"
-        >
-          <Icon name="cart" :size="20" />
-          <span
-            v-if="cartCount > 0"
-            class="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full bg-danger text-white text-[10px] font-bold flex items-center justify-center"
-          >{{ cartCount }}</span>
-        </button>
+        />
       </div>
     </div>
 
@@ -190,18 +182,15 @@ onBeforeUnmount(() => {
       class="md:hidden fixed bottom-5 right-5 z-40 flex items-center gap-3"
       style="padding-bottom: env(safe-area-inset-bottom);"
     >
-      <button
-        type="button"
-        :class="[CART_CLASS, 'relative w-14 h-14 rounded-full shadow-md flex items-center justify-center transition-transform duration-base ease-out hover:-translate-y-0.5 active:translate-y-0']"
+      <IconButton
+        icon="cart"
+        variant="accent"
+        size="lg"
+        shadow="md"
+        :count="cartCount"
         :aria-label="t('cart.open')"
         @click="$emit('cart')"
-      >
-        <Icon name="cart" :size="22" />
-        <span
-          v-if="cartCount > 0"
-          class="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full bg-danger text-white text-[10px] font-bold flex items-center justify-center"
-        >{{ cartCount }}</span>
-      </button>
+      />
       <IconButton
         icon="menu"
         variant="float"

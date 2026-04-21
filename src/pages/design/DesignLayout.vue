@@ -4,6 +4,7 @@ import { RouterLink, RouterView, useRoute } from 'vue-router'
 import Logo from '@/design-system/components/Logo.vue'
 import LanguageSwitcher from '@/design-system/components/LanguageSwitcher.vue'
 import Icon from '@/design-system/components/Icon.vue'
+import IconButton from '@/design-system/components/IconButton.vue'
 import { useI18n } from '@/i18n/index.js'
 
 const { t } = useI18n()
@@ -141,14 +142,14 @@ watch(() => route.name, closeSheet)
             <span class="eyebrow">{{ t('ds.eyebrow.designSystem') }}</span>
             <span class="text-[15px] font-semibold">{{ t('ds.mobile.selectPage') }}</span>
           </span>
-          <button
-            type="button"
-            class="inline-flex items-center justify-center w-9 h-9 rounded-pill hover:bg-brand-wash text-muted hover:text-brand transition-colors"
+          <IconButton
+            icon="close"
+            variant="ghost"
+            size="xs"
+            :icon-size="22"
             :aria-label="t('menu.close')"
             @click="closeSheet"
-          >
-            <Icon name="close" :size="22" />
-          </button>
+          />
         </div>
 
         <nav class="flex-1 overflow-y-auto px-3 py-4 space-y-6">
