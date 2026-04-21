@@ -297,7 +297,7 @@ function onRowClick(i, item, e) {
                 :aria-label="t('search.clear')"
                 @click="clearQuery"
               >
-                {{ t('search.clearShort') }}
+                {{ t('search.clear') }}
               </button>
               <button
                 type="button"
@@ -382,7 +382,7 @@ function onRowClick(i, item, e) {
                  button position so users return their thumb to the same spot. -->
             <button
               type="button"
-              class="md:hidden fixed bottom-5 left-5 z-[70] w-14 h-14 rounded-full bg-brand text-accent shadow-lg flex items-center justify-center transition-transform duration-base ease-out hover:-translate-y-0.5 active:translate-y-0"
+              class="md:hidden fixed bottom-5 left-5 z-[70] w-14 h-14 rounded-full bg-brand-float text-accent shadow-lg flex items-center justify-center transition-transform duration-base ease-out hover:-translate-y-0.5 active:translate-y-0"
               style="margin-bottom: env(safe-area-inset-bottom);"
               :aria-label="t('menu.close')"
               @click="close"

@@ -11,6 +11,9 @@
   --color-brand: #1c3a28;
   --color-brand-hover: #2b5540;
   --color-brand-soft: #3d7a55;
+  /* Slightly raised pine — reserved for floating buttons sitting on a
+     brand-green surface, where bg-brand would blend in. */
+  --color-brand-float: #274838;
 
   /* Accent (warm yellow) */
   --color-accent: #e9c84b;
