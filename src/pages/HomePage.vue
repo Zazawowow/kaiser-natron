@@ -1,28 +1,36 @@
 <script setup>
-import { RouterLink } from 'vue-router'
 import Navbar from '@/design-system/components/Navbar.vue'
-import Button from '@/design-system/components/Button.vue'
+import Hero from '@/design-system/components/Hero.vue'
+import { useI18n } from '@/i18n/index.js'
+
+const { t } = useI18n()
+
+const imgPulver250 =
+  '/products/cutouts/kaiser-natron-pulver-250-g-gro%C3%9Fpackung-removebg-preview.png'
 </script>
 
 <template>
-  <div class="min-h-screen bg-surface">
+  <div class="min-h-screen bg-brand">
     <Navbar variant="brand" layout="standard" :cart-count="0" />
 
-    <section class="mx-auto max-w-4xl px-6 py-28 text-center">
-      <p class="eyebrow mb-4">Scaffolding</p>
-      <h1
-        class="font-display font-normal tracking-[var(--tracking-tight)] leading-[1.05]"
-        style="font-size: clamp(3rem, 5vw, 4.5rem);"
-      >
-        Design system <em class="italic font-light text-brand-soft">first</em>.
-      </h1>
-      <p class="mt-5 text-muted max-w-xl mx-auto">
-        Tokens, primitives, and patterns live in <code class="font-mono text-sm">/src/design-system</code>.
-        Browse the live reference and iterate.
-      </p>
-      <RouterLink to="/design" class="inline-block mt-10">
-        <Button size="lg">Open design system</Button>
-      </RouterLink>
-    </section>
+    <Hero
+      variant="split"
+      tone="brand"
+      :eyebrow="t('ds.hero.eyebrow')"
+      :subheadline="t('ds.hero.sub')"
+      :image="imgPulver250"
+      image-alt="Kaiser-Natron Pulver 250 g Großpackung"
+      :badge="t('ds.badges.featured')"
+      :cta-label="t('ds.buttons.addToCart')"
+      :secondary-label="t('ds.buttons.learnMore')"
+      cta-href="/shop"
+      secondary-href="/anwendungen"
+    >
+      <template #headline>
+        {{ t('ds.hero.headline.a') }}
+        <em class="italic font-light text-accent-soft">{{ t('ds.hero.headline.em') }}</em>
+        {{ t('ds.hero.headline.b') }}
+      </template>
+    </Hero>
   </div>
 </template>
