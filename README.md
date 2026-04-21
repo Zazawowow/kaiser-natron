@@ -27,13 +27,18 @@ Browse the full system at `/design` when running `npm run dev`. This is the sing
 
 All dep versions are pinned exactly (no `^`/`~`). Use `npm ci` (not `npm install`) in CI and before builds. Run `npm audit` before adding any new dep.
 
-## Deployment (Portainer stack)
+## Deployment (Portainer dev-showcase stack)
 
-Portainer builds the image from the `Dockerfile` at the repo root each time the stack is pulled & redeployed — no registry needed.
+This is the showcase path, not real production — the dev machine is the source of truth for the built output. The container has **no** build step: it just copies a prebuilt `dist/` into nginx.
 
-1. Portainer → **Stacks** → **Add stack**
-2. Either paste `docker-compose.yml` in the web editor or point Portainer at this repo (build path `/`)
-3. Deploy. The site comes up on host port **5555** (internal container port 80).
-4. Health: `GET /health` returns `200 ok`.
+Release flow:
 
-Pinned images: `node:24.15.0-bookworm-slim` (build stage, glibc — Alpine/musl fights with Tailwind v4's native bindings), `nginx:1.27.3-alpine` (serve stage). Bump explicitly when you want to upgrade — no floating tags.
+```
+npm run build          # produces /dist
+git add dist && git commit -m "build: <what changed>"
+git push
+```
+
+Then in Portainer → **Stacks** → **Pull and redeploy**. The site comes up on host port **5555** (`/health` returns `200 ok`).
+
+Base image: `nginx:1.27.3-alpine` (pinned). When this graduates to real production, reintroduce the multi-stage Node build + the hardening (`read_only`, `security_opt`, resource caps) that lived in earlier revisions of this file.

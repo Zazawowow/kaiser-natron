@@ -6,7 +6,7 @@
 
 # Local development artefacts
 node_modules
-dist
+# dist/ is intentionally shipped — the container serves it directly.
 dist-ssr
 .vite
 coverage
