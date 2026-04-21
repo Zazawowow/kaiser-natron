@@ -175,7 +175,7 @@ onBeforeUnmount(() => {
     >
       <button
         type="button"
-        class="w-14 h-14 rounded-full bg-brand text-accent shadow-sm flex items-center justify-center transition-transform duration-base ease-out hover:-translate-y-0.5 active:translate-y-0"
+        class="w-14 h-14 rounded-full bg-cream-wash text-accent hover:bg-cream-wash-strong flex items-center justify-center transition-all duration-base ease-out hover:-translate-y-0.5 active:translate-y-0"
         :aria-label="t('search.open')"
         @click="searchOpen = true"
       >
@@ -203,7 +203,7 @@ onBeforeUnmount(() => {
       </button>
       <button
         type="button"
-        class="w-14 h-14 rounded-full bg-brand text-accent shadow-lg flex items-center justify-center transition-transform duration-base ease-out hover:-translate-y-0.5 active:translate-y-0"
+        class="w-14 h-14 rounded-full bg-cream-wash text-accent hover:bg-cream-wash-strong flex items-center justify-center transition-all duration-base ease-out hover:-translate-y-0.5 active:translate-y-0"
         :aria-label="t('menu.open')"
         @click="menuOpen = true"
       >
