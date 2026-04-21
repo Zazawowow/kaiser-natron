@@ -166,6 +166,11 @@ onBeforeUnmount(() => {
 
 function close() { emit('update:modelValue', false) }
 
+function clearQuery() {
+  query.value = ''
+  nextTick(() => inputRef.value?.focus())
+}
+
 function selectAt(index) {
   const item = results.value[index]
   if (item) emit('select', item)
@@ -281,10 +286,19 @@ function onRowClick(i, item, e) {
                 :placeholder="placeholder || t('search.placeholder')"
                 :aria-label="t('search.label')"
                 :class="[
-                  'flex-1 min-w-0 bg-transparent border-0 outline-none text-[17px] md:text-[15px]',
+                  'search-input flex-1 min-w-0 bg-transparent border-0 outline-none text-[17px] md:text-[15px]',
                   toneClasses.input,
                 ]"
               />
+              <button
+                v-if="query"
+                type="button"
+                class="shrink-0 inline-flex items-center px-[11px] py-[5px] rounded-pill text-[11px] font-bold tracking-eyebrow uppercase bg-accent text-accent-ink hover:bg-accent-soft transition-colors"
+                :aria-label="t('search.clear')"
+                @click="clearQuery"
+              >
+                {{ t('search.clear') }}
+              </button>
               <button
                 type="button"
                 :class="[
@@ -368,7 +382,7 @@ function onRowClick(i, item, e) {
                  button position so users return their thumb to the same spot. -->
             <button
               type="button"
-              class="md:hidden fixed bottom-5 left-5 z-[70] w-14 h-14 rounded-full bg-cream-wash text-accent hover:bg-cream-wash-strong flex items-center justify-center transition-all duration-base ease-out hover:-translate-y-0.5 active:translate-y-0"
+              class="md:hidden fixed bottom-5 left-5 z-[70] w-14 h-14 rounded-full bg-brand text-accent shadow-lg flex items-center justify-center transition-transform duration-base ease-out hover:-translate-y-0.5 active:translate-y-0"
               style="margin-bottom: env(safe-area-inset-bottom);"
               :aria-label="t('menu.close')"
               @click="close"
@@ -404,3 +418,11 @@ function onRowClick(i, item, e) {
     </Transition>
   </Teleport>
 </template>
+
+<style scoped>
+.search-input::-webkit-search-cancel-button,
+.search-input::-webkit-search-decoration {
+  -webkit-appearance: none;
+  appearance: none;
+}
+</style>
