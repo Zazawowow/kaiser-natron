@@ -14,6 +14,10 @@ services:
       context: .
       dockerfile: Dockerfile
     image: kaiser-natron:portainer
+    # Only build locally — never try to pull from a registry. Portainer's
+    # "Pull and redeploy" runs `compose pull` first, which would otherwise
+    # try to resolve `kaiser-natron:portainer` against Docker Hub and fail.
+    pull_policy: build
     restart: unless-stopped
     ports:
       - "5555:80"
