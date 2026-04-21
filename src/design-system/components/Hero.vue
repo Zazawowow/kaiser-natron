@@ -190,7 +190,7 @@ const layout = computed(() => {
               :alt="imageAlt || headline"
               loading="eager"
               decoding="async"
-              class="relative w-full h-auto object-contain drop-shadow-[0_20px_40px_rgba(28,58,40,0.18)]"
+              class="relative mx-auto w-auto max-w-full max-h-[40svh] md:max-h-[55svh] lg:max-h-[70svh] object-contain drop-shadow-[0_20px_40px_rgba(28,58,40,0.18)]"
             />
           </slot>
         </div>

@@ -24,7 +24,6 @@ const imgPulver250 =
       :subheadline="t('ds.hero.sub')"
       :image="imgPulver250"
       image-alt="Kaiser-Natron Pulver 250 g Großpackung"
-      :badge="t('ds.badges.featured')"
       :cta-label="t('ds.buttons.addToCart')"
       :secondary-label="t('ds.buttons.learnMore')"
       cta-href="/shop"
