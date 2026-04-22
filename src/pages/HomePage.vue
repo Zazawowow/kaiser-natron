@@ -59,11 +59,14 @@ onMounted(() => {
 </script>
 
 <template>
-  <!-- First-fold layout: wrapper is exactly viewport height (svh keeps mobile
-       browser chrome from pushing content off-screen). The centering row
-       below the navbar takes the remaining space and vertically centers the
-       hero, so the hero sits in the middle of (viewport - navbar). -->
-  <div class="h-svh flex flex-col bg-brand overflow-hidden">
+  <!-- First fold — on md+ the wrapper is exactly one viewport tall and the
+       centering row below the navbar vertically centres the hero inside
+       the remaining space. On mobile the Hero's stacked split layout
+       (image + copy + CTAs) is taller than a phone viewport, so we drop
+       the height cap and let the section flow at its natural height;
+       otherwise `overflow-hidden` clips the CTAs, which is what the
+       mobile screenshot showed. -->
+  <div class="flex flex-col bg-brand md:h-svh md:overflow-hidden">
     <Navbar
       variant="brand"
       layout="standard"
@@ -73,7 +76,7 @@ onMounted(() => {
       @search="onSearchSelect"
     />
 
-    <div class="flex-1 flex items-center">
+    <div class="md:flex-1 md:flex md:items-center">
       <Hero
         class="w-full"
         variant="split"
