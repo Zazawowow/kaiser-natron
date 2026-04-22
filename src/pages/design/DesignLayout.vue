@@ -38,6 +38,8 @@ const groups = computed(() => [
       { name: 'ds-hero', label: t('ds.nav.hero') },
       { name: 'ds-navbar', label: t('ds.nav.navbar') },
       { name: 'ds-search', label: t('ds.nav.search') },
+      { name: 'ds-quantity-stepper', label: t('ds.nav.qtyStepper') },
+      { name: 'ds-cart-drawer', label: t('ds.nav.cartDrawer') },
       { name: 'ds-language', label: t('ds.nav.language') },
     ],
   },

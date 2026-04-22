@@ -21,7 +21,11 @@ Browse the full system at `/design` when running `npm run dev`. This is the sing
 
 ## API boundary
 
-`src/api/` exposes a typed surface the backend dev fills in. Until then, fixtures in `src/api/fixtures/` drive the UI so frontend work is unblocked.
+`src/api/` exposes a typed surface the backend dev fills in. Until then, fixtures in `src/api/` drive the UI so frontend work is unblocked.
+
+Endpoint specs for backend integration live under `docs/api/`:
+
+- [`docs/api/cart.md`](docs/api/cart.md) — cart endpoints, types, error codes, and how to swap the local implementation for HTTP.
 
 ## Supply chain
 

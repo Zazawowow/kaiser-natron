@@ -40,6 +40,8 @@ const routes = [
       { path: 'language', name: 'ds-language', component: () => import('@/pages/design/LanguageSwitcherSection.vue') },
       { path: 'icons', name: 'ds-icons', component: () => import('@/pages/design/IconsSection.vue') },
       { path: 'search', name: 'ds-search', component: () => import('@/pages/design/SearchSection.vue') },
+      { path: 'cart-drawer', name: 'ds-cart-drawer', component: () => import('@/pages/design/CartDrawerSection.vue') },
+      { path: 'quantity-stepper', name: 'ds-quantity-stepper', component: () => import('@/pages/design/QuantityStepperSection.vue') },
     ],
   },
 ]

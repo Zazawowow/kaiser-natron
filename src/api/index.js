@@ -2,3 +2,10 @@
 // when the Python/MySQL side lands — callers keep the same import path.
 
 export { products, searchProducts, formatPrice } from './products.js'
+export {
+  fetchCart,
+  addToCart,
+  updateCartItem,
+  removeFromCart,
+  clearCart,
+} from './cart.js'

@@ -10,6 +10,14 @@ const de = {
   'nav.contact': 'Kontakt',
   'cart.open': 'Warenkorb öffnen',
   'cart.label': 'Warenkorb',
+  'cart.subtotal': 'Zwischensumme',
+  'cart.checkout': 'Zur Kasse',
+  'cart.remove': 'Entfernen',
+  'cart.qty.increase': 'Menge erhöhen',
+  'cart.qty.decrease': 'Menge verringern',
+  'cart.empty.title': 'Dein Warenkorb ist leer',
+  'cart.empty.subtitle': 'Leg Produkte aus dem Shop hinzu – sie erscheinen direkt hier.',
+  'cart.added': 'Zum Warenkorb hinzugefügt',
   'menu.open': 'Menü öffnen',
   'menu.close': 'Menü schließen',
   'language.label': 'Sprache',
@@ -47,6 +55,8 @@ const de = {
   'ds.nav.hero': 'Hero',
   'ds.nav.navbar': 'Navigation',
   'ds.nav.search': 'Suche',
+  'ds.nav.qtyStepper': 'Mengenwähler',
+  'ds.nav.cartDrawer': 'Warenkorb',
   'ds.nav.language': 'Sprachwahl',
 
   // Search overlay
@@ -245,6 +255,20 @@ const de = {
   'ds.language.brandNote': 'Für Einsätze auf dem Markengrün — z. B. im mobilen Menü-Overlay.',
   'ds.language.floating': 'Schwebend',
   'ds.language.floatingNote': 'Mit dem Prop `floating` dockt die Pille rechts oben im Viewport an (24px Abstand). Genau so wird sie im Design-System oben rechts eingesetzt.',
+
+  // Quantity stepper
+  'ds.qtyStepper.title': 'Mengenwähler',
+  'ds.qtyStepper.description': 'Kompaktes Plus/Minus-Steuerelement zur Auswahl einer Menge. Pillenförmig, passend zu Buttons und Input-Rahmen, erbt Ton und Radius aus den Tokens. Unterstützt `min`/`max`-Grenzen und einen deaktivierten Zustand.',
+  'ds.qtyStepper.minBoundary': 'Untergrenze',
+  'ds.qtyStepper.maxBoundary': 'Obergrenze',
+
+  // Cart drawer
+  'ds.cartDrawer.title': 'Warenkorb-Panel',
+  'ds.cartDrawer.description': 'Seitlich einfahrendes Panel auf Creme-Fläche. Zeigt die Positionen mit Bild, Größe, Mengen-Stepper und Zeilensumme; darunter Zwischensumme und ein breiter Zur-Kasse-Button. Auf Mobilgeräten nimmt das Panel die volle Breite ein, ab 440 px fixiert es rechts an. Scroll-Lock, ESC zum Schließen, Klick auf den Hintergrund schließt ebenfalls.',
+  'ds.cartDrawer.demoLabel': 'Warenkorb befüllen & öffnen',
+  'ds.cartDrawer.demoHint': 'Legt zwei Beispielartikel an und öffnet das Panel.',
+  'ds.cartDrawer.integrationTitle': 'Backend-Integration',
+  'ds.cartDrawer.integrationBody': 'Die Komponente kennt kein Backend direkt – sie emittiert `update-quantity`, `remove` und `checkout`. Ihr Zustand kommt aus dem API-Layer in `src/api/cart.js`, der heute lokal arbeitet und später 1:1 auf die dokumentierten Endpunkte (siehe `docs/api/cart.md`) umgestellt wird, ohne dass oben etwas anzupassen ist.',
 }
 
 // Austrian German (Österreichisches Deutsch) overrides.
@@ -256,9 +280,13 @@ const atOverrides = {
   // Shopping — the clearest DE/AT split
   'cart.open': 'Einkaufstasche öffnen',
   'cart.label': 'Einkaufstasche',
+  'cart.empty.title': 'Deine Einkaufstasche ist leer',
+  'cart.empty.subtitle': 'Leg Produkte aus dem Shop dazu – sie erscheinen gleich hier.',
+  'cart.added': 'Zur Einkaufstasche dazugelegt',
   'ds.buttons.addToCart': 'In die Einkaufstasche',
   'ds.buttons.continueShopping': 'Weiter einkaufen gehen',
   'ds.buttons.save': 'Vormerken',
+  'ds.cartDrawer.title': 'Einkaufstasche-Panel',
 
   // "Retour" is strongly associated with Austrian commerce/admin usage
   'ds.sidebar.back': '← Retour zur Seite',
@@ -275,6 +303,14 @@ const en = {
   'nav.contact': 'Contact',
   'cart.open': 'Open cart',
   'cart.label': 'Cart',
+  'cart.subtotal': 'Subtotal',
+  'cart.checkout': 'Checkout',
+  'cart.remove': 'Remove',
+  'cart.qty.increase': 'Increase quantity',
+  'cart.qty.decrease': 'Decrease quantity',
+  'cart.empty.title': 'Your cart is empty',
+  'cart.empty.subtitle': 'Add products from the shop — they will appear right here.',
+  'cart.added': 'Added to cart',
   'menu.open': 'Open menu',
   'menu.close': 'Close menu',
   'language.label': 'Language',
@@ -311,6 +347,8 @@ const en = {
   'ds.nav.hero': 'Hero',
   'ds.nav.navbar': 'Navbar',
   'ds.nav.search': 'Search',
+  'ds.nav.qtyStepper': 'Quantity stepper',
+  'ds.nav.cartDrawer': 'Cart',
   'ds.nav.language': 'Language',
 
   'ds.search.title': 'Search',
@@ -491,6 +529,20 @@ const en = {
   'ds.language.brandNote': 'For use on the brand green — e.g. inside the mobile menu overlay.',
   'ds.language.floating': 'Floating',
   'ds.language.floatingNote': 'The `floating` prop docks the pill to the top-right of the viewport (24px offset). This is the exact placement used by the design system chrome.',
+
+  // Quantity stepper
+  'ds.qtyStepper.title': 'Quantity stepper',
+  'ds.qtyStepper.description': 'Compact plus/minus control for picking a quantity. Pill-shaped to sit next to Buttons and Input borders, inherits tone and radius from tokens. Supports `min`/`max` bounds and a disabled state.',
+  'ds.qtyStepper.minBoundary': 'At min',
+  'ds.qtyStepper.maxBoundary': 'At max',
+
+  // Cart drawer
+  'ds.cartDrawer.title': 'Cart drawer',
+  'ds.cartDrawer.description': 'A side-drawer that slides in from the right on a cream surface. Lists each line with image, size, quantity stepper, and line total; below that, a subtotal and a full-width checkout CTA. Edge-to-edge on mobile, pinned to the right at 440px from md up. Scroll-locks the page, closes on ESC, and dismisses when the backdrop is clicked.',
+  'ds.cartDrawer.demoLabel': 'Populate & open cart',
+  'ds.cartDrawer.demoHint': 'Adds two sample items and opens the drawer.',
+  'ds.cartDrawer.integrationTitle': 'Backend integration',
+  'ds.cartDrawer.integrationBody': 'The component owns no network code — it emits `update-quantity`, `remove`, and `checkout`. Its state comes from the API boundary in `src/api/cart.js`, which is a local implementation today and swaps to the documented endpoints (see `docs/api/cart.md`) without changes above this line.',
 }
 
 export default {

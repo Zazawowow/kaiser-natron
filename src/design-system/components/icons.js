@@ -38,6 +38,14 @@ export const icons = {
   plus: { path: '<path d="M12 5v14M5 12h14" />', label: 'Hinzufügen' },
   minus: { path: '<path d="M5 12h14" />', label: 'Entfernen' },
   check: { path: '<path d="m5 12 5 5L20 7" />', label: 'Bestätigt' },
+  trash: {
+    path: '<path d="M4 7h16" /><path d="M10 11v6M14 11v6" /><path d="M6 7h12l-1 12a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L6 7Z" /><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" />',
+    label: 'Löschen',
+  },
+  trash: {
+    path: '<path d="M4 7h16" /><path d="M10 11v6M14 11v6" /><path d="M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12" /><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" />',
+    label: 'Entfernen',
+  },
 
   // Contact
   mail: {
