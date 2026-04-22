@@ -230,6 +230,13 @@ const de = {
   'ds.hero.headline.b': 'was glänzen soll.',
   'ds.hero.sub': 'Reinigt, backt und neutralisiert Gerüche. Die 250-g-Großpackung für den Haushalt, der sich auf das Original verlässt.',
 
+  // Home page – second-fold banner
+  'home.banner.eyebrow': 'Vielseitig einsetzbar',
+  'home.banner.headline.a': 'Ein Pulver,',
+  'home.banner.headline.em': 'hundert Anwendungen',
+  'home.banner.headline.b': 'im Haushalt.',
+  'home.banner.sub': 'Vom Kuchen über das Bad bis zur Wäsche – Kaiser-Natron leistet überall still und zuverlässig seine Arbeit.',
+
   // Search section
   'ds.search.title': 'Produktsuche',
   'ds.search.description': 'Suchknopf rechts in der Navbar (links der Sprachwahl) und links unten als Floating-Button auf dem Telefon. Klick öffnet ein Full-Screen-Overlay auf Mobilgeräten bzw. ein zentriertes Panel auf dem Desktop. Eingabefeld ist autofokussiert, Ergebnisliste aktualisiert sich beim Tippen, Pfeiltasten / Enter / Esc werden unterstützt.',
@@ -506,6 +513,13 @@ const en = {
   'ds.hero.headline.em': 'for everything',
   'ds.hero.headline.b': 'that should shine.',
   'ds.hero.sub': 'Cleans, bakes, and neutralises odours. The 250 g large pack for the household that trusts the original.',
+
+  // Home page – second-fold banner
+  'home.banner.eyebrow': 'Truly versatile',
+  'home.banner.headline.a': 'One powder,',
+  'home.banner.headline.em': 'a hundred uses',
+  'home.banner.headline.b': 'around the home.',
+  'home.banner.sub': 'From baking to bathing to laundry — Kaiser Natron quietly does its work wherever you need it.',
 
   'ds.search.title': 'Product search',
   'ds.search.description': 'Search trigger on the right of the navbar (left of the language switcher) and bottom-left as a floating button on mobile. Tapping it opens a full-screen overlay on mobile and a centered panel on desktop. The input auto-focuses, the results list updates as you type, and arrow keys / Enter / Esc are supported.',

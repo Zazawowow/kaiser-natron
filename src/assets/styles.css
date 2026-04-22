@@ -7,7 +7,11 @@ html {
 }
 
 body {
-  background: var(--color-surface);
+  /* Match the last visible section on the home page (cream) so browser
+     overscroll + any empty space below content blends with the banner
+     instead of showing a seam. Design-system pages override with
+     `bg-surface` on their own root wrapper, so they're unaffected. */
+  background: var(--color-cream);
   color: var(--color-ink);
   font-family: var(--font-sans);
   line-height: 1.55;

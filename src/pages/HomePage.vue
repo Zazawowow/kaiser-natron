@@ -22,8 +22,18 @@ const imgPulver250 =
 
 const heroProductId = 'kaiser-natron-pulver-250-g-grosspackung'
 
+// Second-fold banner — cream tone, image-left split, alternate cutout.
+const imgBanner =
+  '/products/cutouts/kaiser-natron-pulver-250-g-gro%C3%9Fpackung-removebg-preview%20%281%29.png'
+const bannerProductId = 'kaiser-natron-pulver-250-g-grosspackung'
+
 async function onHeroAdd() {
   await addToCart(heroProductId, 1)
+  cartOpen.value = true
+}
+
+async function onBannerAdd() {
+  await addToCart(bannerProductId, 1)
   cartOpen.value = true
 }
 
@@ -84,7 +94,56 @@ onMounted(() => {
         </template>
       </Hero>
     </div>
+
+    <!-- Wave divider from brand-green → cream. Fill uses the next
+         section's background so the curve reads as the bottom edge of
+         the green fold. `preserveAspectRatio="none"` lets the SVG
+         stretch across any viewport width while keeping a consistent
+         vertical amplitude. -->
+    <svg
+      aria-hidden="true"
+      class="block w-full h-12 md:h-16 shrink-0"
+      viewBox="0 0 1440 64"
+      preserveAspectRatio="none"
+    >
+      <path
+        d="M0,40 C320,4 520,60 720,32 C920,4 1120,60 1440,24 L1440,64 L0,64 Z"
+        fill="var(--color-cream)"
+      />
+    </svg>
   </div>
+
+  <!-- Second-fold product banner — same Hero component, cream surface,
+       split layout reversed so the product sits on the left. -->
+  <Hero
+    variant="split"
+    tone="cream"
+    reverse
+    :eyebrow="t('home.banner.eyebrow')"
+    :subheadline="t('home.banner.sub')"
+    :image="imgBanner"
+    image-alt="Kaiser-Natron Pulver 250 g Großpackung"
+    :cta-label="t('ds.buttons.addToCart')"
+    :secondary-label="t('ds.buttons.learnMore')"
+    secondary-href="/anwendungen"
+    @cta="onBannerAdd"
+  >
+    <template #headline>
+      {{ t('home.banner.headline.a') }}
+      <em class="italic font-light text-brand-soft">{{ t('home.banner.headline.em') }}</em>
+      {{ t('home.banner.headline.b') }}
+    </template>
+  </Hero>
+
+  <!-- Bottom clearance for the mobile floating cluster (search / cart / menu).
+       Cluster sits at bottom-5 (20px) + safe-area, is 56px tall, and needs a
+       24px breathing gap above it: 20 + 56 + 24 = 100px, plus the device's
+       safe-area inset. Desktop hides the cluster, so no spacer there. -->
+  <div
+    aria-hidden="true"
+    class="md:hidden"
+    style="height: calc(100px + env(safe-area-inset-bottom));"
+  />
 
   <CartDrawer
     v-model="cartOpen"

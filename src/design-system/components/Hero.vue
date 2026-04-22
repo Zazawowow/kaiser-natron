@@ -30,6 +30,10 @@ const props = defineProps({
     default: 'cream',
     validator: (t) => ['cream', 'paper', 'brand'].includes(t),
   },
+  /** Only affects the split variant. When true, the image sits on the left
+   *  and copy on the right from `lg` up. Mobile order is unchanged (image
+   *  on top, copy below) to preserve reading order. */
+  reverse: { type: Boolean, default: false },
 })
 
 defineEmits(['cta', 'secondary'])
@@ -76,11 +80,17 @@ const layout = computed(() => {
   // `order-*` flips the stacking order below lg without changing DOM order.
   // On lg, let the grid stretch items to the row height and then `justify-center`
   // the copy column so its headline/CTA block sits at the image's vertical midpoint.
+  // `reverse` swaps the desktop columns so the image sits on the left.
   return {
-    root: 'grid gap-10 md:gap-14 lg:grid-cols-[1.05fr_1fr]',
-    copy: 'order-2 lg:order-1 max-w-xl mx-auto lg:mx-0 items-center text-center lg:items-start lg:text-left lg:justify-center',
+    root: props.reverse
+      ? 'grid gap-10 md:gap-14 lg:grid-cols-[1fr_1.05fr]'
+      : 'grid gap-10 md:gap-14 lg:grid-cols-[1.05fr_1fr]',
+    copy: [
+      'order-2 max-w-xl mx-auto lg:mx-0 items-center text-center lg:justify-center',
+      props.reverse ? 'lg:order-2 lg:items-start lg:text-left' : 'lg:order-1 lg:items-start lg:text-left',
+    ].join(' '),
     actions: 'justify-center lg:justify-start',
-    media: 'order-1 lg:order-2',
+    media: props.reverse ? 'order-1 lg:order-1' : 'order-1 lg:order-2',
     mediaSize: 'w-[221px] sm:w-[289px] md:w-[357px] lg:w-full lg:max-w-[442px]',
   }
 })
