@@ -7,39 +7,41 @@
 
 @theme {
   /* ——— Color ——————————————————————————————————————————————— */
-  /* Brand (pine green) */
-  --color-brand: #1c3a28;
-  --color-brand-hover: #2b5540;
-  --color-brand-soft: #3d7a55;
-  /* Slightly raised pine — reserved for floating buttons sitting on a
-     brand-green surface, where bg-brand would blend in. */
-  --color-brand-float: #274838;
+  /* Brand — every green-tinted token below is derived from this one
+     via color-mix(), so retuning the brand cascades through hovers,
+     washes, ink, muted, lines, and shadows. */
+  --color-brand: #006548;
+  --color-brand-hover: color-mix(in oklch, var(--color-brand), white 15%);
+  --color-brand-soft: color-mix(in oklch, var(--color-brand), white 30%);
+  /* Slightly raised brand — reserved for floating buttons sitting on a
+     brand surface, where bg-brand would blend in. */
+  --color-brand-float: color-mix(in oklch, var(--color-brand), white 8%);
 
   /* Accent (warm yellow) */
   --color-accent: #e9c84b;
   --color-accent-soft: #f2dc7c;
-  --color-accent-ink: #1c3a28;
+  --color-accent-ink: var(--color-brand);
 
-  /* Neutrals — warm, green-tinted */
-  --color-ink: #0d1f13;
-  --color-ink-placeholder: rgba(13, 31, 19, 0.35);
-  --color-muted: #5a7866;
-  --color-line: rgba(28, 58, 40, 0.11);
-  --color-line-strong: rgba(28, 58, 40, 0.22);
+  /* Neutrals — warm, brand-tinted */
+  --color-ink: color-mix(in oklch, var(--color-brand), black 50%);
+  --color-ink-placeholder: color-mix(in srgb, var(--color-ink) 35%, transparent);
+  --color-muted: color-mix(in oklch, var(--color-brand), white 35%);
+  --color-line: color-mix(in srgb, var(--color-brand) 11%, transparent);
+  --color-line-strong: color-mix(in srgb, var(--color-brand) 22%, transparent);
   --color-cream: #f4efe4;
   --color-surface: #faf7f1;
   --color-paper: #ffffff;
 
   /* Washes — tinted fills for hover / subtle backgrounds / overlay chrome */
-  --color-brand-wash: rgba(28, 58, 40, 0.06);
-  --color-brand-soft-wash: rgba(61, 122, 85, 0.08);
-  --color-cream-wash: rgba(244, 239, 228, 0.08);
-  --color-cream-wash-strong: rgba(244, 239, 228, 0.16);
-  --color-cream-line: rgba(244, 239, 228, 0.15);
+  --color-brand-wash: color-mix(in srgb, var(--color-brand) 6%, transparent);
+  --color-brand-soft-wash: color-mix(in srgb, var(--color-brand-soft) 8%, transparent);
+  --color-cream-wash: color-mix(in srgb, var(--color-cream) 8%, transparent);
+  --color-cream-wash-strong: color-mix(in srgb, var(--color-cream) 16%, transparent);
+  --color-cream-line: color-mix(in srgb, var(--color-cream) 15%, transparent);
 
   /* Semantic */
-  --color-success: #3d7a55;
-  --color-success-wash: rgba(61, 122, 85, 0.12);
+  --color-success: var(--color-brand-soft);
+  --color-success-wash: color-mix(in srgb, var(--color-brand-soft) 12%, transparent);
   --color-warning: #c6900f;
   --color-warning-wash: rgba(198, 144, 15, 0.15);
   --color-danger: #b23a2a;
@@ -74,10 +76,10 @@
   --radius-xl: 28px;
   --radius-pill: 100px;
 
-  /* ——— Shadow (green-tinted) ———————————————————————————————— */
-  --shadow-sm: 0 4px 24px rgba(28, 58, 40, 0.09);
-  --shadow-md: 0 12px 28px rgba(28, 58, 40, 0.15);
-  --shadow-lg: 0 16px 44px rgba(28, 58, 40, 0.18);
+  /* ——— Shadow (brand-tinted) ———————————————————————————————— */
+  --shadow-sm: 0 4px 24px color-mix(in srgb, var(--color-brand) 9%, transparent);
+  --shadow-md: 0 12px 28px color-mix(in srgb, var(--color-brand) 15%, transparent);
+  --shadow-lg: 0 16px 44px color-mix(in srgb, var(--color-brand) 18%, transparent);
 
   /* ——— Motion ——————————————————————————————————————————————— */
   --duration-fast: 120ms;
