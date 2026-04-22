@@ -17,7 +17,7 @@ const tone = computed(() =>
 
 const navVariant = computed(() => (tone.value === 'brand' ? 'brand' : tone.value))
 const imgPulver250 =
-  '/products/cutouts/kaiser-natron-pulver-250-g-gro%C3%9Fpackung-removebg-preview.png'
+  '/products/cutouts/kaiser-natron-pulver-250-g-gro%C3%9Fpackung-removebg-preview-2.png'
 </script>
 
 <template>

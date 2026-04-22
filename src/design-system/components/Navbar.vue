@@ -138,7 +138,7 @@ onBeforeUnmount(() => {
         <button
           type="button"
           :class="[
-            'inline-flex items-center gap-2 pl-3 pr-4 py-2 rounded-pill text-[13px] font-medium tracking-label transition-colors duration-base',
+            'inline-flex items-center gap-2 pl-3 pr-4 h-10 rounded-pill text-[13px] font-medium tracking-label transition-colors duration-base',
             tone.searchTrigger,
           ]"
           :aria-label="t('search.open')"

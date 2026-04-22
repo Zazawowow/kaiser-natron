@@ -40,7 +40,7 @@ const tones = {
     text: 'text-ink',
     sub: 'text-muted',
     disc: 'bg-accent-soft/60',
-    glow: 'bg-accent/15',
+    glow: 'bg-accent/8',
   },
   paper: {
     surface: 'bg-paper',
@@ -54,7 +54,7 @@ const tones = {
     text: 'text-cream',
     sub: 'text-cream/80',
     disc: 'bg-brand-soft/30',
-    glow: 'bg-accent/10',
+    glow: 'bg-accent/5',
   },
 }
 
@@ -163,15 +163,20 @@ const layout = computed(() => {
         v-if="image || $slots.media"
         :class="['relative flex items-center justify-center', layout.media]"
       >
-        <!-- Decorative disc behind product -->
+        <!-- Soft halo behind the disc. Kept low-opacity + blur-xl (not
+             blur-2xl) so the gradient is shallow enough that it doesn't
+             quantize into visible rings on 6-bit panels. Tuning: halve
+             the alpha or drop to blur-lg if banding returns on a specific
+             surface. -->
         <div
           aria-hidden="true"
           :class="[
             'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2',
-            'w-[85%] aspect-square rounded-full blur-2xl',
+            'w-[80%] aspect-square rounded-full blur-xl',
             tone.glow,
           ]"
         />
+        <!-- Decorative disc — solid fill, no blur. -->
         <div
           aria-hidden="true"
           :class="[

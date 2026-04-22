@@ -18,7 +18,7 @@ const cart = useCartStore()
 const cartOpen = ref(false)
 
 const imgPulver250 =
-  '/products/cutouts/kaiser-natron-pulver-250-g-gro%C3%9Fpackung-removebg-preview.png'
+  '/products/cutouts/kaiser-natron-pulver-250-g-gro%C3%9Fpackung-removebg-preview-2.png'
 
 const heroProductId = 'kaiser-natron-pulver-250-g-grosspackung'
 

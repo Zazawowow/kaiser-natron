@@ -45,7 +45,7 @@ const t = computed(() => tones[props.tone])
     role="group"
     aria-label="Language"
     :class="[
-      'inline-flex items-center p-1 gap-0.5 rounded-pill font-sans',
+      'inline-flex items-center h-10 px-2 gap-0.5 rounded-pill font-sans',
       t.container,
       floating ? 'fixed top-6 right-6 z-[60] shadow-sm' : '',
     ]"
