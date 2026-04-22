@@ -107,7 +107,7 @@ onMounted(() => {
          edges against the parent and produce hairline artifacts. -->
     <svg
       aria-hidden="true"
-      class="block w-full h-12 md:h-16 shrink-0"
+      class="block w-full h-12 md:h-16 shrink-0 -mb-px"
       viewBox="0 0 1440 64"
       preserveAspectRatio="none"
     >
@@ -120,8 +120,11 @@ onMounted(() => {
   </div>
 
   <!-- Second-fold product banner — same Hero component, cream surface,
-       split layout reversed so the product sits on the left. -->
+       split layout reversed so the product sits on the left. The -mt-px
+       pairs with the wave's -mb-px to overlap the two sections by 1 CSS
+       pixel and hide any device-pixel seam. -->
   <Hero
+    class="-mt-px"
     variant="split"
     tone="cream"
     reverse
