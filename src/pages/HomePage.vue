@@ -98,20 +98,23 @@ onMounted(() => {
       </Hero>
     </div>
 
-    <!-- Wave divider from brand-green → cream. Fill uses the next
-         section's background so the curve reads as the bottom edge of
-         the green fold. `preserveAspectRatio="none"` lets the SVG
-         stretch across any viewport width while keeping a consistent
-         vertical amplitude. -->
+    <!-- Wave divider from brand-green → cream. The SVG is fully opaque:
+         a cream rect fills the whole viewBox so the SVG's bottom row is
+         solid cream (matches the banner below → no seam), and a green
+         path paints the top portion (matches the bg-brand parent above
+         → no seam). The earlier version left the top half transparent,
+         which caused browsers to anti-alias the path's top/bottom
+         edges against the parent and produce hairline artifacts. -->
     <svg
       aria-hidden="true"
       class="block w-full h-12 md:h-16 shrink-0"
       viewBox="0 0 1440 64"
       preserveAspectRatio="none"
     >
+      <rect width="1440" height="64" fill="var(--color-cream)" />
       <path
-        d="M0,40 C320,4 520,60 720,32 C920,4 1120,60 1440,24 L1440,64 L0,64 Z"
-        fill="var(--color-cream)"
+        d="M0,0 L0,40 C320,4 520,60 720,32 C920,4 1120,60 1440,24 L1440,0 Z"
+        fill="var(--color-brand)"
       />
     </svg>
   </div>
