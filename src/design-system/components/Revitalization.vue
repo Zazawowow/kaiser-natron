@@ -18,12 +18,18 @@ defineProps({
   headlineEm: { type: String, default: '' },
   sub: { type: String, default: '' },
 
-  // Three feature strings. Extra entries are ignored by the slice to
-  // protect the "max three things" invariant visually.
+  // Three feature pillars: `{ title, icon }`. Plain strings are still
+  // accepted for back-compat and render without an orbit icon. Extra
+  // entries are sliced off to keep the "max three things" invariant.
   features: {
     type: Array,
     default: () => [],
-    validator: (arr) => arr.every((v) => typeof v === 'string'),
+    validator: (arr) =>
+      arr.every(
+        (v) =>
+          typeof v === 'string' ||
+          (v && typeof v === 'object' && typeof v.title === 'string'),
+      ),
   },
 
   notifyCta: { type: String, default: '' },
@@ -61,16 +67,23 @@ defineEmits(['notify'])
         class="mt-10 md:mt-14 grid gap-6 sm:grid-cols-3 sm:gap-8 max-w-4xl mx-auto"
       >
         <li
-          v-for="feature in features.slice(0, 3)"
-          :key="feature"
-          class="flex flex-col items-center gap-3 text-center"
+          v-for="(feature, i) in features.slice(0, 3)"
+          :key="typeof feature === 'string' ? feature : feature.title"
+          class="flex flex-col items-center gap-4 text-center"
         >
-          <span
-            aria-hidden="true"
-            class="inline-block h-2 w-2 rounded-full bg-accent"
-          />
+          <span aria-hidden="true" class="rv-orbit">
+            <span
+              class="rv-orbit-ring"
+              :style="{ animationDelay: `${i * -5}s` }"
+            >
+              <span class="rv-orbit-dot" />
+            </span>
+            <span v-if="typeof feature === 'object' && feature.icon" class="rv-orbit-center">
+              {{ feature.icon }}
+            </span>
+          </span>
           <span class="font-sans text-base font-semibold text-cream leading-snug">
-            {{ feature }}
+            {{ typeof feature === 'string' ? feature : feature.title }}
           </span>
         </li>
       </ul>
@@ -83,3 +96,43 @@ defineEmits(['notify'])
     </div>
   </section>
 </template>
+
+<style scoped>
+/* Mini orbit — port of the original Kaiser-Natron revitalisation
+   visual, scaled down so each pillar gets its own. A ring spins
+   around a centered emoji; a small dot rides the ring. */
+.rv-orbit {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+}
+.rv-orbit-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  border: 1px solid color-mix(in oklab, var(--color-accent) 60%, transparent);
+  background: color-mix(in oklab, var(--color-accent) 6%, transparent);
+  animation: var(--animate-orbit);
+}
+.rv-orbit-dot {
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  margin-left: -3px;
+  border-radius: 9999px;
+  background: var(--color-accent);
+  box-shadow: 0 0 8px color-mix(in oklab, var(--color-accent) 55%, transparent);
+}
+.rv-orbit-center {
+  font-size: 22px;
+  line-height: 1;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25));
+}
+/* The `spin` keyframe and reduced-motion guard are shared in
+   `src/design-system/motion.css`. */
+</style>

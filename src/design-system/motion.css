@@ -1,0 +1,79 @@
+/*
+ * Motion system — keyframes, utilities, reduced-motion guard.
+ *
+ * Philosophy
+ * ──────────
+ *   1. Motion is chrome, not content. If a user can't see the animation,
+ *      the page still has to make sense. Never gate meaning on motion.
+ *   2. One role per duration. Tokens in `tokens.css` already encode this:
+ *        --duration-fast  (120ms)  — hover / press feedback
+ *        --duration-base  (200ms)  — small UI transitions (color, opacity)
+ *        --duration-slow  (320ms)  — arrivals, reveals, drawer open
+ *        --duration-scene (480ms)  — section-level entrances
+ *        --duration-orbit (16s)    — ambient loops (orbit, slow pulses)
+ *      Pick the token that matches the role, never a bespoke number.
+ *   3. Easing has intent. `--ease-out` is the house default — motion
+ *      should arrive, not depart. `--ease-in-out` is reserved for things
+ *      that have to come AND go (drawers, overlays). `--ease-linear`
+ *      only for continuous loops where any curve would pulse visibly.
+ *   4. Ambient motion must be low-energy. Orbits, pulses, and other
+ *      always-on animation should sit under the threshold of noticing
+ *      — enough to feel alive on second glance, never enough to compete
+ *      with content for attention.
+ *   5. Reduced motion is not a fallback, it's a contract. Every looping
+ *      or scenic animation must be neutralised by the media query below.
+ *      Micro UI transitions (hover, focus) can keep running; they're
+ *      short enough to be invisible at the vestibular level.
+ *   6. Keyframes live here, not in components. Components consume
+ *      `var(--animate-*)` tokens or the utility classes below. A new
+ *      animation always ships as a token + a keyframe in this file.
+ *
+ * Naming
+ * ──────
+ *   Keyframes: kebab-case verbs describing the transform
+ *     (`fade-in-up`, `pulse-soft`, `spin`).
+ *   Utilities: `.motion-<name>` so they're easy to grep and never
+ *     collide with Tailwind's `animate-*` namespace.
+ */
+
+/* ——— Keyframes ———————————————————————————————————————————— */
+
+/* `spin` is provided by Tailwind v4's defaults; redeclared here so
+   --animate-orbit works even if we ever drop that default. */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 8px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 0.55; transform: scale(1); }
+  50%      { opacity: 1;    transform: scale(1.06); }
+}
+
+/* ——— Utilities ———————————————————————————————————————————— */
+
+.motion-orbit     { animation: var(--animate-orbit); }
+.motion-fade-in   { animation: var(--animate-fade-in-up); }
+.motion-pulse     { animation: var(--animate-pulse-soft); }
+
+/* ——— Reduced-motion contract ————————————————————————————— */
+/* Kills looping / scenic motion. Short UI transitions (hover,
+   focus, press) stay — they're under the vestibular threshold. */
+@media (prefers-reduced-motion: reduce) {
+  .motion-orbit,
+  .motion-fade-in,
+  .motion-pulse,
+  [class*="animate-"] {
+    animation: none !important;
+  }
+}

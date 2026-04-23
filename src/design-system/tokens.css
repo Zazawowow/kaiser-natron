@@ -82,8 +82,23 @@
   --shadow-lg: 0 16px 44px color-mix(in srgb, var(--color-brand) 18%, transparent);
 
   /* ——— Motion ——————————————————————————————————————————————— */
+  /* Three UI durations + one scenic duration for looping atmosphere
+     (orbit, slow pulses). Easings: --ease-out is the house default for
+     arrivals; --ease-in-out only when the element has to come and go. */
   --duration-fast: 120ms;
   --duration-base: 200ms;
   --duration-slow: 320ms;
+  --duration-scene: 480ms;
+  --duration-orbit: 16s;
+
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-linear: linear;
+
+  /* Named animations. Tailwind v4 exposes these as `animate-*`
+     utilities; raw CSS can call them via `animation: var(--animate-*)`.
+     Keyframes live in `motion.css` (outside @theme). */
+  --animate-orbit: spin var(--duration-orbit) linear infinite;
+  --animate-fade-in-up: fade-in-up var(--duration-slow) var(--ease-out) both;
+  --animate-pulse-soft: pulse-soft 2.8s var(--ease-in-out) infinite;
 }

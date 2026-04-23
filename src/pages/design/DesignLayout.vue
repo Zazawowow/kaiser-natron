@@ -24,6 +24,7 @@ const groups = computed(() => [
       { name: 'ds-typography', label: t('ds.nav.typography') },
       { name: 'ds-radii', label: t('ds.nav.radii') },
       { name: 'ds-shadows', label: t('ds.nav.shadows') },
+      { name: 'ds-motion', label: t('ds.nav.motion') },
     ],
   },
   {

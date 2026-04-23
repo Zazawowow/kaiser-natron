@@ -48,6 +48,7 @@ const routes = [
       { path: 'typography', name: 'ds-typography', component: () => import('@/pages/design/TypographySection.vue') },
       { path: 'radii', name: 'ds-radii', component: () => import('@/pages/design/RadiiSection.vue') },
       { path: 'shadows', name: 'ds-shadows', component: () => import('@/pages/design/ShadowsSection.vue') },
+      { path: 'motion', name: 'ds-motion', component: () => import('@/pages/design/MotionSection.vue') },
       { path: 'buttons', name: 'ds-buttons', component: () => import('@/pages/design/ButtonsSection.vue') },
       { path: 'badges', name: 'ds-badges', component: () => import('@/pages/design/BadgesSection.vue') },
       { path: 'inputs', name: 'ds-inputs', component: () => import('@/pages/design/InputsSection.vue') },
