@@ -2,7 +2,7 @@
 
 The frontend talks to the cart through a small, stable surface exported
 from `src/api/cart.js`. That file is the only seam that changes when the
-Python/MySQL backend comes online — everything above it (the Pinia
+PHP / MySQL backend comes online — everything above it (the Pinia
 store, the `CartDrawer` component, pages that add to cart) keeps
 importing the same functions with the same signatures.
 

@@ -1,6 +1,6 @@
 # Kaiser Natron
 
-Ecommerce frontend. Vue 3 + Vite + Tailwind v4. Backend (Python/MySQL) is plugged in at the `src/api/` boundary.
+Ecommerce frontend. Vue 3 + Vite + Tailwind v4. Backend (PHP / MySQL, Stripe for payments) is plugged in at the `src/api/` boundary.
 
 ## Setup
 
@@ -26,6 +26,9 @@ Browse the full system at `/design` when running `npm run dev`. This is the sing
 Endpoint specs for backend integration live under `docs/api/`:
 
 - [`docs/api/cart.md`](docs/api/cart.md) — cart endpoints, types, error codes, and how to swap the local implementation for HTTP.
+- [`docs/api/checkout.md`](docs/api/checkout.md) — Stripe handoff: PaymentIntent creation, client-side confirmation, and the webhook that finalises the order.
+- [`docs/api/orders.md`](docs/api/orders.md) — order lookup and customer order history.
+- [`docs/api/customers.md`](docs/api/customers.md) — account, login, and address endpoints used by the checkout and account pages.
 
 ## Supply chain
 

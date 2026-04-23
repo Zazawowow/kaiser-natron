@@ -1,5 +1,5 @@
 // Cart state — Pinia store. Persists to localStorage so the basket
-// survives page reloads until the Python/MySQL backend takes over.
+// survives page reloads until the PHP / MySQL backend takes over.
 //
 // Nothing outside this file should import the store directly — the rest
 // of the app goes through `src/api/cart.js`, which is the swap-point

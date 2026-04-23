@@ -1,4 +1,4 @@
-// Product catalog — frontend fixture until the Python/MySQL backend takes over.
+// Product catalog — frontend fixture until the PHP / MySQL backend takes over.
 // Shape and helper are the same surface the API module will eventually expose.
 
 export const products = [

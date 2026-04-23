@@ -1,4 +1,4 @@
-// Cart API — the boundary between the Vue frontend and the Python/MySQL
+// Cart API — the boundary between the Vue frontend and the PHP / MySQL
 // backend. Keep the shapes here stable: everything above this file
 // (components, pages, store consumers) calls these functions and never
 // talks to an endpoint directly.
