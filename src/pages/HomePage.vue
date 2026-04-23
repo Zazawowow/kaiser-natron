@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onMounted, ref } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import Navbar from '@/design-system/components/Navbar.vue'
 import Hero from '@/design-system/components/Hero.vue'
 import Bundles from '@/design-system/components/Bundles.vue'
@@ -21,13 +21,12 @@ const cart = useCartStore()
 const cartOpen = ref(false)
 
 const imgPulver250 =
-  '/products/cutouts/kaiser-natron-pulver-250-g-grosspackung-removebg-preview-3.png'
+  '/products/ai/kaiser-natron-pulver-250-g-grosspackung.png'
 
 const heroProductId = 'kaiser-natron-pulver-250-g-grosspackung'
 
 // Second-fold banner — cream tone, image-left split, alternate cutout.
-const imgBanner =
-  '/products/cutouts/kaiser-natron-pulver-250-g-grosspackung-removebg-preview-1.png'
+const imgBanner = '/products/ai/kaiser-natron-bad-500-g.png'
 const bannerProductId = 'kaiser-natron-pulver-250-g-grosspackung'
 
 // Homepage top-level nav items — overrides the Navbar default so the
@@ -182,8 +181,58 @@ async function onSearchSelect(product) {
 
 // Hydrate from the API on mount — today this reads the local store, later
 // it will hit `GET /api/cart`. Either way the drawer has data to show.
+// First-fold vertical centering: the sticky navbar sits above the green
+// hero container and occupies layout space. If the green container is a
+// full 100svh tall, the hero centers inside that block, which sits *below*
+// the navbar — so the hero's visual center ends up ~navH/2 below the
+// viewport's visual center (between nav bottom and viewport bottom).
+//
+// Fix: set the green container's min-height to `100svh - navH`, so the
+// flex-centering wrapper inside centers the hero exactly within the
+// available viewport area below the sticky nav.
+const navRef = ref(null)
+const navHeight = ref(0)
+const isMdUp = ref(false)
+let navResizeObserver = null
+let mdQuery = null
+function syncNavHeight() {
+  const el = navRef.value
+  const node = el && (el.$el || el)
+  if (!node || typeof window === 'undefined') return
+  navHeight.value = Math.round(node.getBoundingClientRect().height)
+  document.documentElement.style.setProperty('--nav-h', `${navHeight.value}px`)
+}
+const heroFoldStyle = computed(() => {
+  const h = navHeight.value
+  if (!h || !isMdUp.value) return {}
+  // Override Tailwind's `md:min-h-svh` with a nav-aware value. Inline
+  // styles win over classes, so this reliably shrinks the centering
+  // block to the viewport area actually visible below the sticky nav.
+  return { minHeight: `calc(100svh - ${h}px)` }
+})
 onMounted(() => {
   fetchCart()
+  // Match Tailwind's `md` breakpoint (768px).
+  if (typeof window !== 'undefined' && window.matchMedia) {
+    mdQuery = window.matchMedia('(min-width: 768px)')
+    isMdUp.value = mdQuery.matches
+    mdQuery.addEventListener('change', onMdChange)
+  }
+  syncNavHeight()
+  if (typeof ResizeObserver !== 'undefined' && navRef.value) {
+    const node = navRef.value.$el || navRef.value
+    navResizeObserver = new ResizeObserver(syncNavHeight)
+    navResizeObserver.observe(node)
+  }
+  window.addEventListener('resize', syncNavHeight)
+})
+function onMdChange(e) {
+  isMdUp.value = e.matches
+}
+onBeforeUnmount(() => {
+  if (navResizeObserver) navResizeObserver.disconnect()
+  if (mdQuery) mdQuery.removeEventListener('change', onMdChange)
+  if (typeof window !== 'undefined') window.removeEventListener('resize', syncNavHeight)
 })
 </script>
 
@@ -197,6 +246,7 @@ onMounted(() => {
        the hero still fills the viewport on md+ without trapping
        sticky. -->
   <Navbar
+    ref="navRef"
     variant="brand"
     layout="standard"
     :items="navItems"
@@ -205,7 +255,10 @@ onMounted(() => {
     @cart="cartOpen = true"
     @search="onSearchSelect"
   />
-  <div class="flex flex-col bg-brand md:min-h-svh">
+  <div
+    class="flex flex-col bg-brand md:min-h-svh"
+    :style="heroFoldStyle"
+  >
     <div class="md:flex-1 md:flex md:items-center">
       <Hero
         class="w-full"
@@ -254,7 +307,7 @@ onMounted(() => {
        pairs with the wave's -mb-px to overlap the two sections by 1 CSS
        pixel and hide any device-pixel seam. -->
   <Hero
-    class="-mt-px"
+    class="banner-shrink-desktop -mt-px"
     variant="split"
     tone="cream"
     reverse
@@ -381,3 +434,19 @@ onMounted(() => {
     @checkout="cartOpen = false"
   />
 </template>
+
+<style scoped>
+/* Banner (second-fold Hero) desktop sizing override.
+   Hero was globally scaled +30%. On desktop we want the banner to read
+   ~20% smaller than ORIGINAL size (0.8 × 575px ≈ 460px max width, and
+   0.8 × 60svh = 48svh max height). Mobile/tablet keep the enlarged
+   sizing from Hero.vue. */
+@media (min-width: 1024px) {
+  .banner-shrink-desktop :deep(img) {
+    max-height: 48svh;
+  }
+  .banner-shrink-desktop :deep(.relative.mx-auto.w-full.max-w-6xl > div:last-child > div.relative) {
+    max-width: 460px;
+  }
+}
+</style>

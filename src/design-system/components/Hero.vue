@@ -73,7 +73,7 @@ const layout = computed(() => {
       copy: 'max-w-2xl mx-auto items-center text-center',
       actions: 'justify-center',
       media: 'mt-4 md:mt-6',
-      mediaSize: 'w-[221px] sm:w-[272px] md:w-[340px] lg:w-[408px]',
+      mediaSize: 'w-[287px] sm:w-[354px] md:w-[442px] lg:w-[530px]',
     }
   }
   // Split: image on top on mobile/tablet, text-left/image-right on desktop.
@@ -91,7 +91,7 @@ const layout = computed(() => {
     ].join(' '),
     actions: 'justify-center lg:justify-start',
     media: props.reverse ? 'order-1 lg:order-1' : 'order-1 lg:order-2',
-    mediaSize: 'w-[221px] sm:w-[289px] md:w-[357px] lg:w-full lg:max-w-[442px]',
+    mediaSize: 'w-[373px] sm:w-[489px] md:w-[603px] lg:w-full lg:max-w-[748px]',
   }
 })
 </script>
@@ -207,7 +207,7 @@ const layout = computed(() => {
               :alt="imageAlt || headline"
               loading="eager"
               decoding="async"
-              class="relative mx-auto w-auto max-w-full max-h-[34svh] md:max-h-[47svh] lg:max-h-[60svh] object-contain drop-shadow-[0_20px_40px_rgba(28,58,40,0.18)]"
+              class="relative mx-auto w-auto max-w-full max-h-[44svh] md:max-h-[61svh] lg:max-h-[78svh] object-contain drop-shadow-[0_20px_40px_rgba(28,58,40,0.18)]"
             />
           </slot>
         </div>
