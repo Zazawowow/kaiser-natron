@@ -35,12 +35,21 @@ const groups = computed(() => [
       { name: 'ds-inputs', label: t('ds.nav.inputs') },
       { name: 'ds-cards', label: t('ds.nav.cards') },
       { name: 'ds-products', label: t('ds.nav.products') },
+      { name: 'ds-bundle-card', label: t('ds.nav.bundleCard') },
       { name: 'ds-hero', label: t('ds.nav.hero') },
       { name: 'ds-navbar', label: t('ds.nav.navbar') },
       { name: 'ds-search', label: t('ds.nav.search') },
       { name: 'ds-quantity-stepper', label: t('ds.nav.qtyStepper') },
       { name: 'ds-cart-drawer', label: t('ds.nav.cartDrawer') },
       { name: 'ds-language', label: t('ds.nav.language') },
+    ],
+  },
+  {
+    title: t('ds.sidebar.sections'),
+    items: [
+      { name: 'ds-bundles', label: t('ds.nav.bundles') },
+      { name: 'ds-revitalization', label: t('ds.nav.revitalization') },
+      { name: 'ds-about', label: t('ds.nav.about') },
     ],
   },
 ])

@@ -20,6 +20,24 @@ const routes = [
     meta: { layout: 'none', preview: true },
   },
   {
+    path: '/design/preview/bundles',
+    name: 'ds-preview-bundles',
+    component: () => import('@/pages/design/previews/BundlesPreview.vue'),
+    meta: { layout: 'none', preview: true },
+  },
+  {
+    path: '/design/preview/revitalization',
+    name: 'ds-preview-revitalization',
+    component: () => import('@/pages/design/previews/RevitalizationPreview.vue'),
+    meta: { layout: 'none', preview: true },
+  },
+  {
+    path: '/design/preview/about',
+    name: 'ds-preview-about',
+    component: () => import('@/pages/design/previews/AboutPreview.vue'),
+    meta: { layout: 'none', preview: true },
+  },
+  {
     path: '/design',
     component: () => import('@/pages/design/DesignLayout.vue'),
     meta: { layout: 'none' },
@@ -35,6 +53,7 @@ const routes = [
       { path: 'inputs', name: 'ds-inputs', component: () => import('@/pages/design/InputsSection.vue') },
       { path: 'cards', name: 'ds-cards', component: () => import('@/pages/design/CardsSection.vue') },
       { path: 'products', name: 'ds-products', component: () => import('@/pages/design/ProductsSection.vue') },
+      { path: 'bundle-card', name: 'ds-bundle-card', component: () => import('@/pages/design/BundleCardSection.vue') },
       { path: 'hero', name: 'ds-hero', component: () => import('@/pages/design/HeroSection.vue') },
       { path: 'navbar', name: 'ds-navbar', component: () => import('@/pages/design/NavbarSection.vue') },
       { path: 'language', name: 'ds-language', component: () => import('@/pages/design/LanguageSwitcherSection.vue') },
@@ -42,6 +61,9 @@ const routes = [
       { path: 'search', name: 'ds-search', component: () => import('@/pages/design/SearchSection.vue') },
       { path: 'cart-drawer', name: 'ds-cart-drawer', component: () => import('@/pages/design/CartDrawerSection.vue') },
       { path: 'quantity-stepper', name: 'ds-quantity-stepper', component: () => import('@/pages/design/QuantityStepperSection.vue') },
+      { path: 'bundles', name: 'ds-bundles', component: () => import('@/pages/design/BundlesSection.vue') },
+      { path: 'revitalization', name: 'ds-revitalization', component: () => import('@/pages/design/RevitalizationSection.vue') },
+      { path: 'about', name: 'ds-about', component: () => import('@/pages/design/AboutSection.vue') },
     ],
   },
 ]

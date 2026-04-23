@@ -1,0 +1,14 @@
+import{B as e,C as t,G as n,T as r,c as i,ct as a,j as o,lt as s,m as c,o as l,p as u,r as d,s as f,st as p,u as m}from"./runtime-core.esm-bundler-BD0e4RlP.js";import{t as h}from"./i18n-C5xQ6LQM.js";import{t as g}from"./SectionShell-BEISUYi8.js";import{t as _}from"./DevicePreview-DvIWByfU.js";var v=[`aria-label`],y=[`aria-selected`,`onClick`],b=[`aria-label`],x=[`aria-selected`,`onClick`],S={class:`eyebrow mb-5`},C={__name:`HeroSection`,setup(C){let{t:w}=h(),T=l(()=>[{id:`split`,label:w(`ds.hero.variant.split`)},{id:`centered`,label:w(`ds.hero.variant.centered`)}]),E=l(()=>[{id:`cream`,label:w(`ds.navbar.tone.cream`),swatch:`var(--color-cream)`},{id:`paper`,label:w(`ds.navbar.tone.paper`),swatch:`#ffffff`},{id:`brand`,label:w(`ds.navbar.tone.brand`),swatch:`var(--color-brand)`}]),D=e(`split`),O=e(`cream`),k=l(()=>`/design/preview/hero?variant=${D.value}&tone=${O.value}`);return(e,l)=>(t(),i(g,{eyebrow:n(w)(`ds.eyebrow.components`),title:n(w)(`ds.hero.title`),description:n(w)(`ds.hero.description`),wide:``},{default:o(()=>[f(`section`,null,[c(_,{src:k.value,initial:`desktop`,height:760},{controls:o(()=>[f(`div`,{role:`tablist`,"aria-label":n(w)(`ds.hero.variant.label`),class:`inline-flex items-center p-1 gap-0.5 rounded-pill border border-line bg-paper`},[(t(!0),m(d,null,r(T.value,e=>(t(),m(`button`,{key:e.id,type:`button`,role:`tab`,"aria-selected":D.value===e.id,class:p([`px-3 py-1.5 text-[12px] font-semibold tracking-label rounded-pill transition-colors duration-base`,D.value===e.id?`bg-brand text-accent`:`text-muted hover:text-brand`]),onClick:t=>D.value=e.id},s(e.label),11,y))),128))],8,v),f(`div`,{role:`tablist`,"aria-label":n(w)(`ds.navbar.tone`),class:`inline-flex items-center p-1 gap-0.5 rounded-pill border border-line bg-paper`},[(t(!0),m(d,null,r(E.value,e=>(t(),m(`button`,{key:e.id,type:`button`,role:`tab`,"aria-selected":O.value===e.id,class:p([`inline-flex items-center gap-2 px-3 py-1.5 text-[12px] font-semibold tracking-label rounded-pill transition-colors duration-base`,O.value===e.id?`bg-brand text-accent`:`text-muted hover:text-brand`]),onClick:t=>O.value=e.id},[f(`span`,{class:`w-2.5 h-2.5 rounded-full border border-line-strong`,style:a({backgroundColor:e.swatch})},null,4),u(` `+s(e.label),1)],10,x))),128))],8,b)]),_:1},8,[`src`])]),f(`section`,null,[f(`h2`,S,s(n(w)(`ds.heading.usage`)),1),l[0]||=f(`div`,{class:`rounded-md border border-line bg-paper p-6 font-mono text-[12px] text-ink`},[f(`pre`,{class:`whitespace-pre-wrap`},`<Hero
+  variant="split"
+  tone="cream"
+  eyebrow="Neu"
+  headline="Kaiser-Natron Pulver"
+  subheadline="Reinigt. Backt. Neutralisiert."
+  image="/products/cutouts/…-removebg-preview.png"
+  image-alt="Kaiser-Natron Pulver 250 g"
+  badge="Bestseller"
+  cta-label="In den Warenkorb"
+  secondary-label="Mehr erfahren"
+  @cta="addToCart(sku)"
+  @secondary="router.push('/anwendungen')"
+/>`)],-1)])]),_:1},8,[`eyebrow`,`title`,`description`]))}};export{C as default};
