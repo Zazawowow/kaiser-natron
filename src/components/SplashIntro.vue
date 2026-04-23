@@ -66,7 +66,11 @@
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 
 const props = defineProps({
-  duration:             { type: Number,  default: 3800 },
+  // Total on-screen time before the leave transition starts.
+  // Desktop animation ends at ~2.70s (stroke-draw finishes at 2.30s,
+  // fill finishes at 2.70s). We give it a 100ms breath then start the
+  // fade so the splash doesn't linger past its own climax.
+  duration:             { type: Number,  default: 2800 },
   dismissOnTap:         { type: Boolean, default: true },
   respectReducedMotion: { type: Boolean, default: true },
   portraitQuery:        { type: String,  default: '(max-width: 768px), (orientation: portrait) and (max-width: 900px)' }
@@ -205,7 +209,7 @@ const dPortMound  = `M 501.491 1116.015 C 501.156 1116.557, 499.810 1117, 498.50
 }
 
 /* ---------- Exit ---------- */
-.splash-fade-leave-active { transition: opacity 600ms ease, filter 600ms ease; }
+.splash-fade-leave-active { transition: opacity 400ms ease, filter 400ms ease; }
 .splash-fade-leave-to     { opacity: 0; filter: blur(2px); }
 
 /* ---------- Reduced motion ---------- */

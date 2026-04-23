@@ -37,13 +37,13 @@ defineProps({
 // visual contract — a caller reordering it would break the intent.
 const CARD_TONES = [
   {
-    card: 'bg-paper border-line',
+    card: 'bg-cream border-line',
     year: 'text-muted',
     title: 'text-ink',
     body: 'text-muted',
   },
   {
-    card: 'bg-cream border-line',
+    card: 'bg-paper border-line',
     year: 'text-muted',
     title: 'text-ink',
     body: 'text-muted',
