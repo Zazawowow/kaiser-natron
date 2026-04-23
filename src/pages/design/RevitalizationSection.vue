@@ -27,9 +27,9 @@ const src = '/design/preview/revitalization'
   :headline-em="t('revit.headline.em')"
   :sub="t('revit.sub')"
   :features="[
-    t('revit.feature.1.title'),
-    t('revit.feature.2.title'),
-    t('revit.feature.3.title'),
+    { title: t('revit.feature.1.title'), icon: '⚗️' },
+    { title: t('revit.feature.2.title'), icon: '💊' },
+    { title: t('revit.feature.3.title'), icon: '🌿' },
   ]"
   :notify-cta="t('revit.notifyCta')"
   @notify="captureEmail()"

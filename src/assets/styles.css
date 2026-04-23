@@ -24,9 +24,16 @@ body {
   border-radius: 4px;
 }
 
-/* Room above anchor targets when scrolling */
+/* Room above anchor targets when scrolling — must clear the sticky
+   navbar. The navbar is taller on md+ (logo scales up), so the value
+   bumps up at the md breakpoint. */
 [id] {
-  scroll-margin-top: 2rem;
+  scroll-margin-top: 5.5rem;
+}
+@media (min-width: 768px) {
+  [id] {
+    scroll-margin-top: 7rem;
+  }
 }
 
 /* Typography helpers */

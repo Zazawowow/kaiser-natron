@@ -6,9 +6,9 @@ import { useI18n } from '@/i18n/index.js'
 const { t } = useI18n()
 
 const features = computed(() => [
-  t('revit.feature.1.title'),
-  t('revit.feature.2.title'),
-  t('revit.feature.3.title'),
+  { title: t('revit.feature.1.title'), icon: '⚗️' },
+  { title: t('revit.feature.2.title'), icon: '💊' },
+  { title: t('revit.feature.3.title'), icon: '🌿' },
 ])
 </script>
 

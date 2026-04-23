@@ -187,24 +187,24 @@ onMounted(() => {
 </script>
 
 <template>
-  <!-- First fold — on md+ the wrapper is exactly one viewport tall and the
-       centering row below the navbar vertically centres the hero inside
-       the remaining space. On mobile the Hero's stacked split layout
-       (image + copy + CTAs) is taller than a phone viewport, so we drop
-       the height cap and let the section flow at its natural height;
-       otherwise `overflow-hidden` clips the CTAs, which is what the
-       mobile screenshot showed. -->
-  <div class="flex flex-col bg-brand md:h-svh md:overflow-hidden">
-    <Navbar
-      variant="brand"
-      layout="standard"
-      :items="navItems"
-      :cart-count="cart.count"
-      :products="products"
-      @cart="cartOpen = true"
-      @search="onSearchSelect"
-    />
-
+  <!-- First fold — the navbar lives OUTSIDE the fold wrapper so its
+       `position: sticky` escapes the wrapper's containing block and
+       sticks to the document scroll instead. Previously the wrapper
+       had `md:overflow-hidden`, which made the browser treat the
+       wrapper as sticky's scrollport — the navbar scrolled away with
+       it. The wrapper is now `md:min-h-svh` (no overflow clip), so
+       the hero still fills the viewport on md+ without trapping
+       sticky. -->
+  <Navbar
+    variant="brand"
+    layout="standard"
+    :items="navItems"
+    :cart-count="cart.count"
+    :products="products"
+    @cart="cartOpen = true"
+    @search="onSearchSelect"
+  />
+  <div class="flex flex-col bg-brand md:min-h-svh">
     <div class="md:flex-1 md:flex md:items-center">
       <Hero
         class="w-full"
