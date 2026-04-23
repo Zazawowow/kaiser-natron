@@ -18,7 +18,7 @@ function onAdd(id) {
 // cutout (not the jpg product shot) because it sits cleanly on the cream
 // media panel without a visible square crop edge.
 const sampleImage =
-  '/products/cutouts/kaiser-natron-pulver-250-g-gro%C3%9Fpackung-removebg-preview%20%281%29.png'
+  '/products/cutouts/kaiser-natron-pulver-250-g-grosspackung-removebg-preview-1.png'
 
 const sample = {
   name: 'Haushalts-Bundle',

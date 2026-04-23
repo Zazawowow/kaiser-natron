@@ -21,13 +21,13 @@ const cart = useCartStore()
 const cartOpen = ref(false)
 
 const imgPulver250 =
-  '/products/cutouts/kaiser-natron-pulver-250-g-gro%C3%9Fpackung-removebg-preview-3.png'
+  '/products/cutouts/kaiser-natron-pulver-250-g-grosspackung-removebg-preview-3.png'
 
 const heroProductId = 'kaiser-natron-pulver-250-g-grosspackung'
 
 // Second-fold banner — cream tone, image-left split, alternate cutout.
 const imgBanner =
-  '/products/cutouts/kaiser-natron-pulver-250-g-gro%C3%9Fpackung-removebg-preview%20%281%29.png'
+  '/products/cutouts/kaiser-natron-pulver-250-g-grosspackung-removebg-preview-1.png'
 const bannerProductId = 'kaiser-natron-pulver-250-g-grosspackung'
 
 // Homepage top-level nav items — overrides the Navbar default so the
@@ -94,7 +94,7 @@ const bundles = [
     price: 24.9,
     memberPrice: 21.17,
     image:
-      '/products/cutouts/kaiser-natron-pulver-250-g-gro%C3%9Fpackung-removebg-preview%20%281%29.png',
+      '/products/cutouts/kaiser-natron-pulver-250-g-grosspackung-removebg-preview-1.png',
     imageAlt: 'Haushalts-Bundle mit Kaiser-Natron',
     badge: 'Bestseller',
     badgeVariant: 'accent',
@@ -119,7 +119,7 @@ const bundles = [
     price: 29.9,
     memberPrice: 25.42,
     image:
-      '/products/cutouts/kaiser-natron-pulver-250-g-gro%C3%9Fpackung-removebg-preview-3.png',
+      '/products/cutouts/kaiser-natron-pulver-250-g-grosspackung-removebg-preview-3.png',
     imageAlt: 'Wohlfühl-Bundle mit Kaiser-Natron Bad',
     badge: '',
     badgeVariant: 'accent',

@@ -21,7 +21,7 @@ const bundles = [
     price: 24.9,
     memberPrice: 21.17,
     image:
-      '/products/cutouts/kaiser-natron-pulver-250-g-gro%C3%9Fpackung-removebg-preview%20%281%29.png',
+      '/products/cutouts/kaiser-natron-pulver-250-g-grosspackung-removebg-preview-1.png',
     imageAlt: 'Haushalts-Bundle mit Kaiser-Natron',
     badge: 'Bestseller',
     badgeVariant: 'accent',

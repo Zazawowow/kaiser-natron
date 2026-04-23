@@ -12,7 +12,7 @@ function onAdd(name) {
   setTimeout(() => { if (lastAdded.value === name) lastAdded.value = '' }, 2000)
 }
 
-const imgPulver250 = '/products/cutouts/kaiser-natron-pulver-250-g-gro%C3%9Fpackung-removebg-preview.png'
+const imgPulver250 = '/products/cutouts/kaiser-natron-pulver-250-g-grosspackung-removebg-preview-1.png'
 </script>
 
 <template>

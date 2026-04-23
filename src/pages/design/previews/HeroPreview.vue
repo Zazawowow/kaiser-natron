@@ -18,7 +18,7 @@ const reverse = computed(() => route.query.reverse === '1')
 
 const navVariant = computed(() => (tone.value === 'brand' ? 'brand' : tone.value))
 const imgPulver250 =
-  '/products/cutouts/kaiser-natron-pulver-250-g-gro%C3%9Fpackung-removebg-preview-2.png'
+  '/products/cutouts/kaiser-natron-pulver-250-g-grosspackung-removebg-preview-3.png'
 const imgBad = '/products/kaiser-natron-bad-500-g.jpg'
 const image = computed(() => (reverse.value ? imgBad : imgPulver250))
 const imageAlt = computed(() =>

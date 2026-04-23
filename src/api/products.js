@@ -21,7 +21,7 @@ export const products = [
     size: '250 g Großpackung',
     category: 'Pulver',
     price: 4.49,
-    image: '/products/cutouts/kaiser-natron-pulver-250-g-gro%C3%9Fpackung-removebg-preview%20%281%29.png',
+    image: '/products/cutouts/kaiser-natron-pulver-250-g-grosspackung-removebg-preview-1.png',
     href: '/shop/kaiser-natron-pulver-250-g-grosspackung',
     inStock: true,
     keywords: ['natron', 'backsoda', 'großpackung', 'bicarbonat', 'baking soda', 'vorrat'],
