@@ -21,7 +21,7 @@ const cart = useCartStore()
 const cartOpen = ref(false)
 
 const imgPulver250 =
-  '/products/cutouts/kaiser-natron-pulver-250-g-gro%C3%9Fpackung-removebg-preview-2.png'
+  '/products/cutouts/kaiser-natron-pulver-250-g-gro%C3%9Fpackung-removebg-preview-3.png'
 
 const heroProductId = 'kaiser-natron-pulver-250-g-grosspackung'
 
@@ -106,7 +106,7 @@ const bundles = [
     items: ['1× Holste Wasch-Soda 500 g', '1× Gazelle Wäschestärke 1 l', '1× Linda Fleckenweg 200 ml'],
     price: 22.9,
     memberPrice: 19.47,
-    image: '/products/holste-wasch-soda-500-g-beutel.jpg',
+    image: '/products/cutouts/holste-wasch-soda-500-g-beutel-Photoroom.png',
     imageAlt: 'Wäsche & Pflege Bundle',
     badge: '',
     badgeVariant: 'accent',
@@ -118,7 +118,8 @@ const bundles = [
     items: ['1× Kaiser-Natron Tabletten 100 g', '1× Kaiser-Natron Bad 500 g', '1× Kaiser-Natron Fußbad 500 g'],
     price: 29.9,
     memberPrice: 25.42,
-    image: '/products/kaiser-natron-bad-500-g.jpg',
+    image:
+      '/products/cutouts/kaiser-natron-pulver-250-g-gro%C3%9Fpackung-removebg-preview-3.png',
     imageAlt: 'Wohlfühl-Bundle mit Kaiser-Natron Bad',
     badge: '',
     badgeVariant: 'accent',
