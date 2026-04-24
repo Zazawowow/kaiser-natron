@@ -24,6 +24,11 @@ const props = defineProps({
     default: 'standard',
     validator: (v) => ['standard', 'floating'].includes(v),
   },
+  /**
+   * Primary nav items — render in the left cluster, next to the logo.
+   * On the shop/home these are the top-level shop destinations
+   * (Shop, Cook, Clean, Care).
+   */
   items: {
     type: Array,
     default: () => [
@@ -32,6 +37,18 @@ const props = defineProps({
       { key: 'nav.about', href: '#' },
       { key: 'nav.contact', href: '#' },
     ],
+  },
+  /**
+   * Secondary nav items — render in the right cluster, immediately to
+   * the LEFT of the search trigger. Intended for supporting pages
+   * (Bundles, Revitalisation, About) that sit above the purchasing
+   * flow but below the category browse in importance. Empty by
+   * default so callers that don't use the split leave the right
+   * cluster unchanged.
+   */
+  secondaryItems: {
+    type: Array,
+    default: () => [],
   },
   cartCount: { type: Number, default: 0 },
   floatOnMobile: { type: Boolean, default: true },
@@ -133,8 +150,24 @@ onBeforeUnmount(() => {
         </nav>
       </div>
 
-      <!-- Right: search + language + cart (desktop only) -->
+      <!-- Right: secondary nav + search + language + cart (desktop only) -->
       <div class="hidden md:flex items-center gap-4">
+        <!-- Secondary nav — supporting pages tucked to the left of
+             search so the primary category nav on the left stays the
+             focal point. Shares the same visual treatment as the
+             primary items for consistency. -->
+        <nav
+          v-if="secondaryItems.length"
+          class="flex items-center gap-6 mr-2"
+        >
+          <a
+            v-for="item in secondaryItems"
+            :key="item.key || item.label"
+            :href="item.href || '#'"
+            :class="[tone.link, 'text-[14px] font-medium tracking-label transition-colors duration-base']"
+            @click="$emit('nav', item)"
+          >{{ itemLabel(item) }}</a>
+        </nav>
         <button
           type="button"
           :class="[
@@ -223,9 +256,13 @@ onBeforeUnmount(() => {
             <Logo class="w-12 h-auto text-cream" />
           </div>
 
+          <!-- Mobile menu shows primary + secondary nav as one stack.
+               Desktop splits them left/right of the search; on mobile
+               the menu is the only nav surface so they read as one
+               list, primary first. -->
           <nav class="flex-1 flex flex-col justify-center px-8 gap-3 overflow-y-auto">
             <a
-              v-for="item in items"
+              v-for="item in [...items, ...secondaryItems]"
               :key="item.key || item.label"
               :href="item.href || '#'"
               class="font-serif font-normal text-[clamp(2.25rem,9vw,3.5rem)] tracking-tight leading-[1.05] text-cream hover:text-accent transition-colors duration-base"

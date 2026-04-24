@@ -1,9 +1,20 @@
 <script setup>
 import { computed } from 'vue'
+import { useRoute } from 'vue-router'
 import Bundles from '@/design-system/components/Bundles.vue'
 import { useI18n } from '@/i18n/index.js'
 
 const { t } = useI18n()
+const route = useRoute()
+
+// Variant selection travels in as a URL query param so the section
+// page's iframe can switch layouts without reloading the component
+// registry. Falls back to the default 'sidebar' layout if the param
+// is missing or not one of the component's recognised variants.
+const layout = computed(() => {
+  const q = route.query.layout
+  return q === 'stacked' ? 'stacked' : 'sidebar'
+})
 
 // Demo fixtures — mirrors HomePage's real content so the preview is
 // representative rather than lorem-ipsum. Kept inline because preview
@@ -66,6 +77,7 @@ const benefits = computed(() => [
 <template>
   <div class="min-h-screen bg-surface">
     <Bundles
+      :layout="layout"
       :bundles="bundles"
       :headline="t('bundles.headline.a')"
       :headline-em="t('bundles.headline.em')"

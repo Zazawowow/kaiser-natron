@@ -4,6 +4,8 @@ import Button from './Button.vue'
 import Icon from './Icon.vue'
 import IconButton from './IconButton.vue'
 import BundleCard from './BundleCard.vue'
+import BundlesHeader from './internal/BundlesHeader.vue'
+import BundlesBenefits from './internal/BundlesBenefits.vue'
 import { useI18n } from '@/i18n/index.js'
 
 /**
@@ -15,6 +17,19 @@ import { useI18n } from '@/i18n/index.js'
  * can be overridden per-instance via the *Label / *A11y props.
  */
 const props = defineProps({
+  // Layout variant.
+  //   - 'sidebar' (default): left column holds headline/sub/benefits/CTA,
+  //     right column holds a one-at-a-time scroll-snap carousel.
+  //   - 'stacked': desktop puts the sidebar content in a full-width row
+  //     on top, then renders the bundles as a 3-up grid below — no
+  //     carousel, no pagination (since all three fit in view).
+  // Mobile (<md) is identical for both: a vertical stack of cards.
+  layout: {
+    type: String,
+    default: 'sidebar',
+    validator: (v) => ['sidebar', 'stacked'].includes(v),
+  },
+
   // Section headline. `headline` renders in the display serif; `headlineEm`
   // is the italicised highlight, styled consistently with Hero.
   headline: { type: String, default: '' },
@@ -124,37 +139,48 @@ onBeforeUnmount(() => {
     <!-- Matches the Hero banner container — same max-w-6xl so the section
          aligns with the banner above rather than breaking full-bleed. -->
     <div
-      class="mx-auto w-full max-w-6xl px-6 py-16 sm:px-8 sm:py-20 md:px-12 md:py-20 lg:px-16 lg:py-24"
+      class="mx-auto w-full max-w-6xl px-6 py-16 sm:px-8 sm:py-20 md:px-12 md:py-24 lg:px-16 lg:py-28"
     >
-      <div class="grid gap-10 md:gap-12 lg:gap-16 lg:grid-cols-[340px_1fr] lg:items-center">
-        <!-- Sidebar: heading + sub + up-to-3 benefits + CTA. -->
-        <aside class="flex flex-col gap-8">
-          <div v-if="headline || sub" class="flex flex-col gap-4">
-            <h2
-              v-if="headline || headlineEm"
-              class="font-display font-normal leading-[1.05] tracking-tight text-ink"
-              style="font-size: clamp(2rem, 4vw, 3rem);"
-            >
-              {{ headline }}
-              <em
-                v-if="headlineEm"
-                class="italic font-light text-brand"
-              >{{ headlineEm }}</em>
-            </h2>
-            <p v-if="sub" class="text-base leading-relaxed text-muted max-w-md">
-              {{ sub }}
-            </p>
-          </div>
+      <!-- STACKED layout (option 2).
+           Row 1: headline + sub (single column, full width).
+           Row 2: benefits as a horizontal chip row inside a paper
+                  container — sits between the pitch and the products
+                  as a "why join" summary strip.
+           Row 3: mobile stack / md+ 3-up grid of bundle cards.
+           Row 4: "become a member" CTA centred below the products. -->
+      <div v-if="layout === 'stacked'" class="flex flex-col gap-10 md:gap-12 lg:gap-14">
+        <!-- Row 1: headline + sub. Full width so the pitch reads as a
+             section opener rather than a split banner. -->
+        <BundlesHeader
+          :headline="headline"
+          :headline-em="headlineEm"
+          :sub="sub"
+          sub-max-width="max-w-2xl"
+        />
 
-          <ul v-if="benefits.length" class="flex flex-col gap-4">
+        <!-- Row 2: benefits strip. Cream-on-surface container, the
+             cream-surface analogue of the LanguageSwitcher's `brand`
+             tone (cream-wash-on-brand). The warm fill + strong line
+             border lifts the chips off the section's surface ground
+             without competing with the bundle cards below.
+             `rounded-md` reads as "card" at this larger scale —
+             reserving the pill shape for true chip rows (nav, tabs,
+             language switcher) where the container is the control.
+             Flex-wrap lets long benefit copy reflow to two lines on
+             narrow viewports instead of overflowing horizontally. -->
+        <div
+          v-if="benefits.length"
+          class="rounded-md border border-cream-dark bg-cream px-5 py-4 sm:px-6 sm:py-5"
+        >
+          <ul class="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-x-8 sm:gap-y-3">
             <li
               v-for="benefit in benefits.slice(0, 3)"
               :key="benefit"
-              class="flex items-start gap-3"
+              class="flex items-center gap-3"
             >
               <span
                 aria-hidden="true"
-                class="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-wash text-brand"
+                class="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-wash text-brand"
               >
                 <Icon name="check" :size="14" :stroke-width="2.2" />
               </span>
@@ -163,20 +189,89 @@ onBeforeUnmount(() => {
               </span>
             </li>
           </ul>
+        </div>
 
+        <!-- Products row. Mobile: vertical stack (same as sidebar
+             layout). md+: 3-up grid, vertical cards. -->
+        <div class="min-w-0">
+          <div class="md:hidden grid gap-5">
+            <BundleCard
+              v-for="bundle in bundles"
+              :key="bundle.id"
+              layout="vertical"
+              :name="bundle.name"
+              :items="bundle.items"
+              :price="bundle.price"
+              :member-price="bundle.memberPrice"
+              :usage="bundle.usage"
+              :image="bundle.image"
+              :image-alt="bundle.imageAlt"
+              :badge="bundle.badge"
+              :badge-variant="bundle.badgeVariant || 'accent'"
+              tone="paper"
+              @add="$emit('add', bundle.id)"
+            />
+          </div>
+          <div class="hidden md:grid md:gap-6 md:grid-cols-3">
+            <BundleCard
+              v-for="bundle in bundles.slice(0, 3)"
+              :key="bundle.id"
+              layout="vertical"
+              :name="bundle.name"
+              :items="bundle.items"
+              :price="bundle.price"
+              :member-price="bundle.memberPrice"
+              :usage="bundle.usage"
+              :image="bundle.image"
+              :image-alt="bundle.imageAlt"
+              :badge="bundle.badge"
+              :badge-variant="bundle.badgeVariant || 'accent'"
+              tone="paper"
+              @add="$emit('add', bundle.id)"
+            />
+          </div>
+        </div>
+
+        <!-- Bottom CTA — centred below the products so the eye lands
+             on it last, after the member pitch has been made above
+             and the products have been scanned. -->
+        <div v-if="joinCta" class="flex justify-center">
+          <Button
+            variant="primary"
+            size="lg"
+            @click="$emit('join')"
+          >{{ joinCta }}</Button>
+        </div>
+      </div>
+
+      <!-- SIDEBAR layout (option 1, original).
+           Left aside + right carousel on lg+. -->
+      <div
+        v-else
+        class="grid gap-10 md:gap-12 lg:gap-16 lg:grid-cols-[340px_1fr] lg:items-center"
+      >
+        <aside class="flex flex-col gap-8">
+          <BundlesHeader
+            :headline="headline"
+            :headline-em="headlineEm"
+            :sub="sub"
+            sub-max-width="max-w-md"
+          />
+          <BundlesBenefits :benefits="benefits" />
           <Button
             v-if="joinCta"
             variant="primary"
             size="md"
+            class="self-start"
             @click="$emit('join')"
           >{{ joinCta }}</Button>
         </aside>
 
-        <!-- Bundles. `min-w-0` is load-bearing: a grid `1fr` column
-             defaults to `min-width: auto`, letting its children's
-             intrinsic width push the column past its allocation.
-             Without this, the carousel's fixed-width slides drag the
-             right column past the section's max-width during resizes. -->
+        <!-- `min-w-0` is load-bearing: a grid `1fr` column defaults to
+             `min-width: auto`, letting children push the column past
+             its allocation. Without this, the carousel's fixed-width
+             slides drag the right column past the section's max-width
+             during resizes. -->
         <div class="min-w-0">
           <!-- Mobile: vertical stack. -->
           <div class="md:hidden grid gap-5">
@@ -198,9 +293,7 @@ onBeforeUnmount(() => {
             />
           </div>
 
-          <!-- md+ : one-at-a-time scroll-snap carousel with horizontal cards.
-               Swipe, keyboard arrow keys, and the prev/next buttons all
-               drive the same scrollLeft — no animation state needed. -->
+          <!-- md+ : one-at-a-time scroll-snap carousel. -->
           <div class="hidden md:flex md:flex-col md:gap-6 relative">
             <!-- Padding + matching negative margins reserve room inside the
                  scroll container for the hover lift and shadow-md without

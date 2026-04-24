@@ -32,12 +32,34 @@ const bannerProductId = 'kaiser-natron-pulver-250-g-grosspackung'
 // Homepage top-level nav items — overrides the Navbar default so the
 // homepage reads as the shop entry point (Shop / Bundles / Revitalisierung
 // / Über uns) instead of the generic catalogue chrome.
+// Primary nav — the top-level shop destinations, rendered on the left
+// of the Navbar. Cook / Clean / Care deep-link into the Shop page's
+// use-case sections so users land on the right band immediately.
 const navItems = [
-  { key: 'nav.shop', href: '#' },
+  { key: 'nav.shop', href: '/shop' },
+  { key: 'nav.cook', href: '/shop#cook' },
+  { key: 'nav.clean', href: '/shop#clean' },
+  { key: 'nav.care', href: '/shop#care' },
+]
+
+// Secondary nav — supporting pages. Rendered on the right, tucked to
+// the left of the search trigger. Same visual treatment as primary so
+// the split reads as "categories | pages" rather than two navs.
+const navSecondaryItems = [
   { key: 'nav.bundles', href: '#bundles' },
   { key: 'nav.revitalization', href: '#revitalize' },
   { key: 'nav.about', href: '#about' },
 ]
+
+// Mobile-only category shortcuts rendered under the hero image. Three
+// pills that point at the shop's top-level use-cases. Labels are
+// translated through the page i18n so the German/English splits stay
+// in sync with the rest of the site copy.
+const heroCategories = computed(() => [
+  { label: t('home.categories.clean'), href: '#clean' },
+  { label: t('home.categories.cook'), href: '#cook' },
+  { label: t('home.categories.care'), href: '#care' },
+])
 
 // Bundles sidebar copy resolves through the page's own i18n namespace so
 // component internals stay decoupled from any particular key tree.
@@ -92,8 +114,7 @@ const bundles = [
     ],
     price: 24.9,
     memberPrice: 21.17,
-    image:
-      '/products/cutouts/kaiser-natron-pulver-250-g-grosspackung-removebg-preview-1.png',
+    image: '/products/ai/kaiser-natron-pulver-250-g-grosspackung.png',
     imageAlt: 'Haushalts-Bundle mit Kaiser-Natron',
     badge: 'Bestseller',
     badgeVariant: 'accent',
@@ -105,7 +126,7 @@ const bundles = [
     items: ['1× Holste Wasch-Soda 500 g', '1× Gazelle Wäschestärke 1 l', '1× Linda Fleckenweg 200 ml'],
     price: 22.9,
     memberPrice: 19.47,
-    image: '/products/cutouts/holste-wasch-soda-500-g-beutel-Photoroom.png',
+    image: '/products/ai/kaiser-natron-pulver-250-g-grosspackung.png',
     imageAlt: 'Wäsche & Pflege Bundle',
     badge: '',
     badgeVariant: 'accent',
@@ -117,8 +138,7 @@ const bundles = [
     items: ['1× Kaiser-Natron Tabletten 100 g', '1× Kaiser-Natron Bad 500 g', '1× Kaiser-Natron Fußbad 500 g'],
     price: 29.9,
     memberPrice: 25.42,
-    image:
-      '/products/cutouts/kaiser-natron-pulver-250-g-grosspackung-removebg-preview-3.png',
+    image: '/products/ai/kaiser-natron-bad-500-g.png',
     imageAlt: 'Wohlfühl-Bundle mit Kaiser-Natron Bad',
     badge: '',
     badgeVariant: 'accent',
@@ -179,45 +199,27 @@ async function onSearchSelect(product) {
   cartOpen.value = true
 }
 
-// Hydrate from the API on mount — today this reads the local store, later
-// it will hit `GET /api/cart`. Either way the drawer has data to show.
-// First-fold vertical centering: the sticky navbar sits above the green
-// hero container and occupies layout space. If the green container is a
-// full 100svh tall, the hero centers inside that block, which sits *below*
-// the navbar — so the hero's visual center ends up ~navH/2 below the
-// viewport's visual center (between nav bottom and viewport bottom).
+// First-fold vertical centering. The sticky navbar takes flow space
+// above the green wrapper; if the wrapper is a full 100svh tall, the
+// hero centers inside that block (which starts BELOW the nav) and
+// its visual center lands ~navH/2 below the viewport's true center.
 //
-// Fix: set the green container's min-height to `100svh - navH`, so the
-// flex-centering wrapper inside centers the hero exactly within the
-// available viewport area below the sticky nav.
+// The wrapper's height is driven by CSS: `100svh - var(--nav-h)`,
+// with `--nav-h` defaulted in global styles so first paint is correct.
+// This ResizeObserver refines `--nav-h` at runtime so the wrapper
+// tracks real Navbar height changes (logo swaps, language changes,
+// responsive breakpoints) without a layout shift.
 const navRef = ref(null)
-const navHeight = ref(0)
-const isMdUp = ref(false)
 let navResizeObserver = null
-let mdQuery = null
 function syncNavHeight() {
   const el = navRef.value
   const node = el && (el.$el || el)
   if (!node || typeof window === 'undefined') return
-  navHeight.value = Math.round(node.getBoundingClientRect().height)
-  document.documentElement.style.setProperty('--nav-h', `${navHeight.value}px`)
+  const h = Math.round(node.getBoundingClientRect().height)
+  document.documentElement.style.setProperty('--nav-h', `${h}px`)
 }
-const heroFoldStyle = computed(() => {
-  const h = navHeight.value
-  if (!h || !isMdUp.value) return {}
-  // Override Tailwind's `md:min-h-svh` with a nav-aware value. Inline
-  // styles win over classes, so this reliably shrinks the centering
-  // block to the viewport area actually visible below the sticky nav.
-  return { minHeight: `calc(100svh - ${h}px)` }
-})
 onMounted(() => {
   fetchCart()
-  // Match Tailwind's `md` breakpoint (768px).
-  if (typeof window !== 'undefined' && window.matchMedia) {
-    mdQuery = window.matchMedia('(min-width: 768px)')
-    isMdUp.value = mdQuery.matches
-    mdQuery.addEventListener('change', onMdChange)
-  }
   syncNavHeight()
   if (typeof ResizeObserver !== 'undefined' && navRef.value) {
     const node = navRef.value.$el || navRef.value
@@ -226,12 +228,8 @@ onMounted(() => {
   }
   window.addEventListener('resize', syncNavHeight)
 })
-function onMdChange(e) {
-  isMdUp.value = e.matches
-}
 onBeforeUnmount(() => {
   if (navResizeObserver) navResizeObserver.disconnect()
-  if (mdQuery) mdQuery.removeEventListener('change', onMdChange)
   if (typeof window !== 'undefined') window.removeEventListener('resize', syncNavHeight)
 })
 </script>
@@ -250,67 +248,90 @@ onBeforeUnmount(() => {
     variant="brand"
     layout="standard"
     :items="navItems"
+    :secondary-items="navSecondaryItems"
     :cart-count="cart.count"
     :products="products"
     @cart="cartOpen = true"
     @search="onSearchSelect"
   />
+  <!-- First-fold wrapper — full viewport height, pulled up under the
+       sticky nav via a negative margin equal to `--nav-h`. The nav
+       and the wrapper share the brand green, so the overlap reads as
+       a single continuous surface, and the hero centers at the TRUE
+       viewport vertical midpoint (50svh) rather than the midpoint of
+       the nav-offset space below it. The wave divider sits OUTSIDE
+       this wrapper so it never eats vertical space from the centering
+       calculation. `--nav-h` is defaulted in global CSS so first
+       paint is correct; a ResizeObserver refines it on mount. -->
   <div
-    class="flex flex-col bg-brand md:min-h-svh"
-    :style="heroFoldStyle"
+    class="flex flex-col bg-brand md:min-h-[calc(100svh-var(--nav-h))] md:justify-center"
   >
-    <div class="md:flex-1 md:flex md:items-center">
-      <Hero
-        class="w-full"
-        variant="split"
-        tone="brand"
-        :eyebrow="t('ds.hero.eyebrow')"
-        :subheadline="t('ds.hero.sub')"
-        :image="imgPulver250"
-        image-alt="Kaiser-Natron Pulver 250 g Großpackung"
-        :cta-label="t('ds.buttons.addToCart')"
-        :secondary-label="t('ds.buttons.learnMore')"
-        secondary-href="/anwendungen"
-        @cta="onHeroAdd"
-      >
-        <template #headline>
-          {{ t('ds.hero.headline.a') }}
-          <em class="italic font-light text-accent-soft">{{ t('ds.hero.headline.em') }}</em>
-          {{ t('ds.hero.headline.b') }}
-        </template>
-      </Hero>
-    </div>
-
-    <!-- Wave divider from brand-green → cream. The SVG is fully opaque:
-         a cream rect fills the whole viewBox so the SVG's bottom row is
-         solid cream (matches the banner below → no seam), and a green
-         path paints the top portion (matches the bg-brand parent above
-         → no seam). The earlier version left the top half transparent,
-         which caused browsers to anti-alias the path's top/bottom
-         edges against the parent and produce hairline artifacts. -->
-    <svg
-      aria-hidden="true"
-      class="block w-full h-12 md:h-16 shrink-0 -mb-px"
-      viewBox="0 0 1440 64"
-      preserveAspectRatio="none"
+    <Hero
+      class="w-full"
+      variant="split"
+      tone="brand"
+      :eyebrow="t('ds.hero.eyebrow')"
+      :subheadline="t('ds.hero.sub')"
+      :image="imgPulver250"
+      image-alt="Kaiser-Natron Pulver 250 g Großpackung"
+      :cta-label="t('ds.buttons.addToCart')"
+      :secondary-label="t('ds.buttons.learnMore')"
+      secondary-href="/anwendungen"
+      @cta="onHeroAdd"
     >
-      <rect width="1440" height="64" fill="var(--color-cream)" />
-      <path
-        d="M0,0 L0,40 C320,4 520,60 720,32 C920,4 1120,60 1440,24 L1440,0 Z"
-        fill="var(--color-brand)"
-      />
-    </svg>
+      <template #headline>
+        {{ t('ds.hero.headline.a') }}
+        <em class="italic font-light text-accent-soft">{{ t('ds.hero.headline.em') }}</em>
+        {{ t('ds.hero.headline.b') }}
+      </template>
+      <!-- Mobile-only category shortcuts. Three pills sit directly
+           under the hero jar so the phone user can jump straight to
+           a use-case context without scrolling past the whole fold.
+           Hidden on md+ because desktop already has full nav chrome. -->
+      <template #afterMedia>
+        <div class="md:hidden mt-6 flex items-center justify-center gap-2">
+          <a
+            v-for="cat in heroCategories"
+            :key="cat.href"
+            :href="cat.href"
+            class="inline-flex items-center justify-center rounded-pill border border-cream/50 px-5 py-2.5 text-sm font-semibold tracking-label text-cream transition-colors duration-base hover:border-cream hover:bg-cream-wash-strong"
+          >{{ cat.label }}</a>
+        </div>
+      </template>
+    </Hero>
   </div>
 
+  <!-- Wave divider from brand-green → cream. Sits OUTSIDE the fold
+       wrapper so it doesn't steal vertical space from the hero's
+       centering. The SVG is fully opaque: a cream rect fills the
+       whole viewBox so the SVG's bottom row is solid cream (matches
+       the banner below → no seam), and a green path paints the top
+       portion (matches the bg-brand fold above → no seam). -->
+  <svg
+    aria-hidden="true"
+    class="block w-full h-12 md:h-16 shrink-0 -mb-px bg-brand"
+    viewBox="0 0 1440 64"
+    preserveAspectRatio="none"
+  >
+    <rect width="1440" height="64" fill="var(--color-cream)" />
+    <path
+      d="M0,0 L0,40 C320,4 520,60 720,32 C920,4 1120,60 1440,24 L1440,0 Z"
+      fill="var(--color-brand)"
+    />
+  </svg>
+
   <!-- Second-fold product banner — same Hero component, cream surface,
-       split layout reversed so the product sits on the left. The -mt-px
-       pairs with the wave's -mb-px to overlap the two sections by 1 CSS
+       split layout reversed so the product sits on the left. `compact`
+       tightens the desktop media sizing so this section reads as a
+       companion band, not a second full hero stage. The -mt-px pairs
+       with the wave's -mb-px to overlap the two sections by 1 CSS
        pixel and hide any device-pixel seam. -->
   <Hero
-    class="banner-shrink-desktop -mt-px"
+    class="-mt-px"
     variant="split"
     tone="cream"
     reverse
+    compact
     :eyebrow="t('home.banner.eyebrow')"
     :subheadline="t('home.banner.sub')"
     :image="imgBanner"
@@ -351,6 +372,7 @@ onBeforeUnmount(() => {
        md+ flips to a one-at-a-time scroll-snap carousel. -->
   <Bundles
     class="-mt-px"
+    layout="stacked"
     :bundles="bundles"
     :headline="bundlesCopy.headline"
     :headline-em="bundlesCopy.headlineEm"
@@ -435,18 +457,3 @@ onBeforeUnmount(() => {
   />
 </template>
 
-<style scoped>
-/* Banner (second-fold Hero) desktop sizing override.
-   Hero was globally scaled +30%. On desktop we want the banner to read
-   ~20% smaller than ORIGINAL size (0.8 × 575px ≈ 460px max width, and
-   0.8 × 60svh = 48svh max height). Mobile/tablet keep the enlarged
-   sizing from Hero.vue. */
-@media (min-width: 1024px) {
-  .banner-shrink-desktop :deep(img) {
-    max-height: 48svh;
-  }
-  .banner-shrink-desktop :deep(.relative.mx-auto.w-full.max-w-6xl > div:last-child > div.relative) {
-    max-width: 460px;
-  }
-}
-</style>

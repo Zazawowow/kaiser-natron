@@ -1,4 +1,5 @@
 <script setup>
+import { computed, ref } from 'vue'
 import SectionShell from './SectionShell.vue'
 import DevicePreview from '@/design-system/components/DevicePreview.vue'
 import { useI18n } from '@/i18n/index.js'
@@ -9,7 +10,17 @@ const { t } = useI18n()
 // md up — iframe it through DevicePreview so we can demo mobile / tablet /
 // desktop breakpoints side by side rather than squeezing into the docs
 // column at a single width.
-const src = '/design/preview/bundles'
+//
+// Layout variant travels to the preview route via `?layout=` so the
+// iframe can re-render in the selected shape. Index-based labelling
+// ('Option 1', 'Option 2', …) keeps the UI generic so the same
+// switcher pattern works for any future component variant set.
+const variants = [
+  { id: 'sidebar', label: 'Option 1' },
+  { id: 'stacked', label: 'Option 2' },
+]
+const variant = ref('sidebar')
+const src = computed(() => `/design/preview/bundles?layout=${variant.value}`)
 </script>
 
 <template>
@@ -20,7 +31,31 @@ const src = '/design/preview/bundles'
     wide
   >
     <section>
-      <DevicePreview :src="src" initial="desktop" :height="1080" />
+      <DevicePreview :src="src" initial="desktop" :height="1080">
+        <template #controls>
+          <!-- Variant switcher. Same pill treatment as the device
+               switcher on the right, aligned left so the two sit at
+               opposite ends of the preview's control bar. -->
+          <div
+            role="tablist"
+            aria-label="Layout variant"
+            class="inline-flex items-center p-1 gap-0.5 rounded-pill border border-line bg-paper"
+          >
+            <button
+              v-for="v in variants"
+              :key="v.id"
+              type="button"
+              role="tab"
+              :aria-selected="variant === v.id"
+              :class="[
+                'inline-flex items-center gap-2 px-3 py-1.5 text-[12px] font-semibold tracking-label rounded-pill transition-colors duration-base',
+                variant === v.id ? 'bg-brand text-accent' : 'text-muted hover:text-brand',
+              ]"
+              @click="variant = v.id"
+            >{{ v.label }}</button>
+          </div>
+        </template>
+      </DevicePreview>
     </section>
 
     <section>

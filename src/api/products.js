@@ -338,3 +338,38 @@ export function formatPrice(amount, currency = '€') {
   if (!Number.isFinite(num)) return ''
   return `${currency} ${num.toFixed(2).replace('.', ',')}`
 }
+
+/**
+ * Shop use-cases — the three top-level bands on the Shop page and in
+ * the desktop nav (Cook / Clean / Care). Product-level `category`
+ * strings are fine-grained (Pulver, Reinigung, Wäsche, Körperpflege,
+ * Sport, Tabletten); this table rolls them up into the three shop-
+ * facing groups so the mapping is declared in one place.
+ *
+ *   cook  — kitchen & digestion (baking, gastro)
+ *   clean — household cleaning & laundry
+ *   care  — bath, body and sport
+ */
+export const USE_CASES = ['cook', 'clean', 'care']
+const USE_CASE_BY_CATEGORY = {
+  Pulver: 'cook',
+  Tabletten: 'cook',
+  Reinigung: 'clean',
+  Wäsche: 'clean',
+  Körperpflege: 'care',
+  Sport: 'care',
+}
+
+export function useCaseFor(product) {
+  return USE_CASE_BY_CATEGORY[product.category] || 'clean'
+}
+
+export function productsByUseCase(list = products) {
+  return list.reduce(
+    (acc, p) => {
+      acc[useCaseFor(p)].push(p)
+      return acc
+    },
+    { cook: [], clean: [], care: [] },
+  )
+}

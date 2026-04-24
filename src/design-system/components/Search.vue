@@ -215,9 +215,20 @@ function priceLabel(p) {
   return p.price ? `€ ${p.price}` : ''
 }
 
-// Real anchors still navigate; prevent the '#' fallback from hash-jumping.
+// Always suppress the browser's native anchor navigation. The row's
+// `href` is retained so middle-click / right-click "open in new tab"
+// keeps working semantically, but a primary-click is a *selection*:
+// we emit `select` and let the parent decide what happens (add to
+// cart, route to the PDP, close a drawer, etc.). Previously an
+// unprevented primary-click also followed the href, which on the
+// homepage caused a full-page navigation to `/shop/<slug>` — a
+// route that doesn't exist — leaving the SPA in an inconsistent
+// state behind the intended "add to cart" flow.
 function onRowClick(i, item, e) {
-  if (!item.href) e.preventDefault()
+  // Respect modifier-click intent (open in new tab / window): let the
+  // browser handle those natively without also firing `select`.
+  if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return
+  e.preventDefault()
   selectAt(i)
 }
 </script>

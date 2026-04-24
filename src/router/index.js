@@ -8,6 +8,12 @@ const routes = [
     meta: { layout: 'none' },
   },
   {
+    path: '/shop',
+    name: 'shop',
+    component: () => import('@/pages/ShopPage.vue'),
+    meta: { layout: 'none' },
+  },
+  {
     path: '/design/preview/navbar',
     name: 'ds-preview-navbar',
     component: () => import('@/pages/design/previews/NavbarPreview.vue'),
@@ -72,7 +78,15 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
-  scrollBehavior: () => ({ top: 0 }),
+  // Anchor-aware scroll: navigating to `/shop#care` scrolls to the
+  // #care section rather than resetting to top. `el: ...` lets the
+  // router run the browser's own findElementBySelector, so the
+  // ShopPage sections' `scroll-mt-[calc(var(--nav-h)+1rem)]` offset
+  // handles the sticky-nav clearance declaratively.
+  scrollBehavior(to) {
+    if (to.hash) return { el: to.hash, behavior: 'smooth' }
+    return { top: 0 }
+  },
 })
 
 export default router

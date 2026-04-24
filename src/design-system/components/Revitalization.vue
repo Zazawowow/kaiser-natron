@@ -46,8 +46,7 @@ defineEmits(['notify'])
 
         <h2
           v-if="headline || headlineEm"
-          class="font-display font-normal leading-[1.04] tracking-tight"
-          style="font-size: clamp(2.25rem, 5vw, 3.75rem);"
+          class="font-display font-normal leading-[1.04] tracking-tight text-headline-lg"
         >
           {{ headline }}
           <em
@@ -106,8 +105,8 @@ defineEmits(['notify'])
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 72px;
-  height: 72px;
+  width: var(--size-orbit);
+  height: var(--size-orbit);
 }
 .rv-orbit-ring {
   position: absolute;

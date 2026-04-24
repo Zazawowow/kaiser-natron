@@ -29,6 +29,12 @@
   --color-line: color-mix(in srgb, var(--color-brand) 11%, transparent);
   --color-line-strong: color-mix(in srgb, var(--color-brand) 22%, transparent);
   --color-cream: #f4efe4;
+  /* Darker cream — brand-tinted so it stays in the warm-green palette
+     rather than drifting toward muddy taupe. Used as a visible border
+     or rule where plain `--color-cream` would disappear against the
+     surface ground, and `--color-line-strong` (brand-tinted hairline)
+     would read as "technical line" rather than "paper edge". */
+  --color-cream-dark: color-mix(in oklab, var(--color-cream), var(--color-brand) 18%);
   --color-surface: #faf7f1;
   --color-paper: #ffffff;
 
@@ -61,12 +67,30 @@
   --text-3xl: 1.875rem;
   --text-4xl: 2.25rem;
   --text-5xl: 3rem;
+
+  /* Section-headline scale — fluid clamps shared by full-bleed
+     sections (Hero, About, Revitalization, Bundles). Centralised so
+     the home page reads as one typographic rhythm rather than a set
+     of individually-tuned clamps. `display` is the first-fold hero
+     statement; `headline-lg` is the standard second-tier section
+     heading; `headline-md` is a quieter band (Bundles). Tailwind v4
+     auto-generates `text-display` / `text-headline-lg` / `text-
+     headline-md` utilities from these custom properties. */
   --text-display: clamp(3.25rem, 5.2vw, 5.125rem);
+  --text-headline-lg: clamp(2.25rem, 5vw, 3.75rem);
+  --text-headline-md: clamp(2rem, 4vw, 3rem);
 
   --tracking-eyebrow: 0.08em;
   --tracking-label: 0.04em;
   --tracking-wide: 0.12em;
   --tracking-tight: -0.025em;
+
+  /* ——— Iconography sizing —————————————————————————————————— */
+  /* Orbit is the decorative dot-on-a-ring glyph used in
+     Revitalization's feature cluster. Kept as a token so any
+     future "pillar / feature / science-beat" block can match
+     without re-deriving the geometry. */
+  --size-orbit: 72px;
 
   /* ——— Radius ———————————————————————————————————————————————— */
   --radius-xs: 6px;

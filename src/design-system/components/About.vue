@@ -77,8 +77,7 @@ const CARD_TONES = [
 
         <h2
           v-if="headline"
-          class="font-display font-normal leading-[1.05] tracking-tight text-ink"
-          style="font-size: clamp(2.25rem, 5vw, 3.75rem);"
+          class="font-display font-normal leading-[1.05] tracking-tight text-ink text-headline-lg"
         >{{ headline }}</h2>
 
         <p v-if="sub" class="text-lg leading-relaxed text-muted max-w-2xl">
@@ -117,14 +116,19 @@ const CARD_TONES = [
         <li
           v-for="(milestone, i) in milestones.slice(0, 3)"
           :key="milestone.year + milestone.title"
-          class="timeline-item flex flex-col"
+          class="timeline-item flex flex-col md:h-full"
         >
           <div class="timeline-mobile-marker">
             <span :class="['timeline-pill', CARD_TONES[i].pill]">{{ milestone.year }}</span>
           </div>
+          <!-- md:flex-1 + md:h-full: the `<li>` stretches to the row's
+               natural tallest height via CSS-grid's default
+               align-items: stretch; the card then fills that li so
+               every card in the row reads as the same height on
+               desktop. Mobile stays auto-height (no grid row). -->
           <div
             :class="[
-              'flex flex-col gap-3 rounded-md border p-6 md:p-7',
+              'flex flex-col gap-3 rounded-md border p-6 md:p-7 md:flex-1 md:h-full',
               CARD_TONES[i].card,
             ]"
           >

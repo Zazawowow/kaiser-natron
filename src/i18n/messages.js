@@ -5,11 +5,32 @@
 const de = {
   // Navbar (also used by the Navbar preview)
   'nav.shop': 'Shop',
+  'nav.cook': 'Kochen',
+  'nav.clean': 'Reinigen',
+  'nav.care': 'Pflege',
   'nav.applications': 'Anwendungen',
   'nav.bundles': 'Bundles',
   'nav.revitalization': 'Revitalisierung',
   'nav.about': 'Über uns',
   'nav.contact': 'Kontakt',
+  // Shop page — section headlines for the three use-case groups.
+  'shop.eyebrow': 'Unser Sortiment',
+  'shop.headline': 'Kaiser-Natron',
+  'shop.headline.em': 'für jeden Bereich',
+  'shop.sub': 'Vom Kochen über das Reinigen bis zur Pflege: drei Sammlungen, ein Rohstoff.',
+  'shop.section.cook.headline': 'Backen, kochen,',
+  'shop.section.cook.headline.em': 'gesund verdauen.',
+  'shop.section.cook.sub': 'Pulver und Tabletten — die Basis für Teig, Gerichte und guten Geschmack.',
+  'shop.section.clean.headline': 'Schrubben, waschen,',
+  'shop.section.clean.headline.em': 'alles sauber.',
+  'shop.section.clean.sub': 'Natron-basierte Reiniger und Waschhelfer, die auch bei hartnäckigem Schmutz überzeugen.',
+  'shop.section.care.headline': 'Baden, pflegen,',
+  'shop.section.care.headline.em': 'durchatmen.',
+  'shop.section.care.sub': 'Bade- und Pflegeprodukte, abgestimmt auf den Alltag und den Sport.',
+  'shop.feature.cook': 'Für die Küche',
+  'shop.feature.clean': 'Für den Haushalt',
+  'shop.feature.care': 'Für Körper & Pflege',
+  'shop.feature.cta': 'Zur Kategorie',
   'cart.open': 'Warenkorb öffnen',
   'cart.label': 'Warenkorb',
   'cart.subtotal': 'Zwischensumme',
@@ -272,6 +293,11 @@ const de = {
   'home.banner.headline.b': 'im Haushalt.',
   'home.banner.sub': 'Vom Kuchen über das Bad bis zur Wäsche – Kaiser-Natron leistet überall still und zuverlässig seine Arbeit.',
 
+  // Home page – mobile-only hero category shortcuts (Clean / Cook / Care).
+  'home.categories.clean': 'Putzen',
+  'home.categories.cook': 'Kochen',
+  'home.categories.care': 'Pflege',
+
   // Bundles section — copy for the sidebar, card chrome, and carousel.
   'bundles.headline.a': 'Bundles &',
   'bundles.headline.em': 'Vorteile',
@@ -392,11 +418,32 @@ const atOverrides = {
 
 const en = {
   'nav.shop': 'Shop',
+  'nav.cook': 'Cook',
+  'nav.clean': 'Clean',
+  'nav.care': 'Care',
   'nav.applications': 'Uses',
   'nav.bundles': 'Bundles',
   'nav.revitalization': 'Revitalisation',
   'nav.about': 'About',
   'nav.contact': 'Contact',
+  // Shop page — section headlines for the three use-case groups.
+  'shop.eyebrow': 'Our range',
+  'shop.headline': 'Kaiser Natron',
+  'shop.headline.em': 'for every corner',
+  'shop.sub': 'From cooking to cleaning to care — three collections, one ingredient.',
+  'shop.section.cook.headline': 'Bake, cook,',
+  'shop.section.cook.headline.em': 'digest well.',
+  'shop.section.cook.sub': 'Powders and tablets — the quiet foundation under bread, cakes and good digestion.',
+  'shop.section.clean.headline': 'Scrub, wash,',
+  'shop.section.clean.headline.em': 'all clean.',
+  'shop.section.clean.sub': 'Natron-based cleaners and laundry helpers that hold up against stubborn grime.',
+  'shop.section.care.headline': 'Bathe, soften,',
+  'shop.section.care.headline.em': 'breathe easy.',
+  'shop.section.care.sub': 'Bath and care products tuned for daily life and sport.',
+  'shop.feature.cook': 'For the kitchen',
+  'shop.feature.clean': 'For the home',
+  'shop.feature.care': 'For body & care',
+  'shop.feature.cta': 'Shop category',
   'cart.open': 'Open cart',
   'cart.label': 'Cart',
   'cart.subtotal': 'Subtotal',
@@ -642,6 +689,11 @@ const en = {
   'home.banner.headline.em': 'a hundred uses',
   'home.banner.headline.b': 'around the home.',
   'home.banner.sub': 'From baking to bathing to laundry — Kaiser Natron quietly does its work wherever you need it.',
+
+  // Home page – mobile-only hero category shortcuts.
+  'home.categories.clean': 'Clean',
+  'home.categories.cook': 'Cook',
+  'home.categories.care': 'Care',
 
   // Bundles section
   'bundles.headline.a': 'Bundles &',

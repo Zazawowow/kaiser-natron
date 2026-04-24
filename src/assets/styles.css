@@ -5,6 +5,13 @@
 html {
   scroll-behavior: smooth;
   font-size: 17px;
+  /* Runtime-measured navbar height. Default matches the standard
+     Navbar variant at lg (py-5 + logo + border) so the home-page
+     first-fold wrapper can use `calc(100svh - var(--nav-h))` from
+     first paint. HomePage still refines this at mount via a
+     ResizeObserver for pixel-exact fit, but the default prevents a
+     ~nav-height layout shift between first paint and hydration. */
+  --nav-h: 68px;
 }
 
 body {

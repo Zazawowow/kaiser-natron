@@ -71,6 +71,11 @@ const props = defineProps({
   // fill finishes at 2.70s). We give it a 100ms breath then start the
   // fade so the splash doesn't linger past its own climax.
   duration:             { type: Number,  default: 2800 },
+  // Portrait/mobile animation is tightened to ~1.0s total: slides
+  // resolve at ~670ms, wordmark + mound land at ~1.0s. Dismiss at
+  // 1150ms gives a ~150ms breath past the climax — matches the snap
+  // of the desktop dismiss (desktop climax 2.70s → dismiss 2.80s).
+  durationPortrait:     { type: Number,  default: 1150 },
   dismissOnTap:         { type: Boolean, default: true },
   respectReducedMotion: { type: Boolean, default: true },
   portraitQuery:        { type: String,  default: '(max-width: 768px), (orientation: portrait) and (max-width: 900px)' }
@@ -97,7 +102,9 @@ onMounted(() => {
     props.respectReducedMotion &&
     typeof window !== 'undefined' &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  const totalMs = reduced ? 1200 : props.duration
+  const totalMs = reduced
+    ? 1200
+    : (isPortrait.value ? props.durationPortrait : props.duration)
   timer = window.setTimeout(() => { visible.value = false }, totalMs)
 })
 onBeforeUnmount(() => {
@@ -164,24 +171,34 @@ const dPortMound  = `M 501.491 1116.015 C 501.156 1116.557, 499.810 1117, 498.50
             transition-delay: 1.30s; }
 .splash-root.go .wordmark { opacity: 1; }
 
-/* Mobile slide-ins */
-.left-m  { fill: #b5d8b6; opacity: 0; transform: translateX(-14%);  transition-delay: 260ms; }
-.right-m { fill: #b5d8b6; opacity: 0; transform: translateX( 14%);  transition-delay: 260ms; }
+/* Mobile slide-ins — tightened to ~550ms so the whole portrait
+   choreography lands in ~1.1s total (was ~1.6s). Uses the same
+   cubic-bezier as the default .layer rule but overrides the
+   duration/delay so the .layer 900ms/260ms transition doesn't
+   slow things down. */
+.left-m  { fill: #b5d8b6; opacity: 0; transform: translateX(-14%);
+           transition: transform 550ms cubic-bezier(.22,.61,.36,1) 120ms,
+                       opacity   450ms ease 120ms; }
+.right-m { fill: #b5d8b6; opacity: 0; transform: translateX( 14%);
+           transition: transform 550ms cubic-bezier(.22,.61,.36,1) 120ms,
+                       opacity   450ms ease 120ms; }
 .splash-root.go .left-m,
 .splash-root.go .right-m { opacity: 1; transform: none; }
 
-/* Mobile wordmark — slides from top + fades in (no stroke draw) */
+/* Mobile wordmark — slides from top + fades in (no stroke draw).
+   Starts as the slides are landing (~500ms) and resolves by ~1.0s
+   so the splash can auto-dismiss shortly after. */
 .top-m { fill: #ffffff; opacity: 0; transform: translateY(-14%);
          transition-property: opacity, transform;
-         transition-duration: 700ms;
+         transition-duration: 500ms;
          transition-timing-function: ease;
-         transition-delay: 900ms; }
+         transition-delay: 500ms; }
 .splash-root.go .top-m { opacity: 1; transform: none; }
 
 /* Mobile handful-of-natron — matches the wordmark fade timing */
 .mound-m { fill: #ffffff; opacity: 0;
-           transition: opacity 700ms ease;
-           transition-delay: 900ms; }
+           transition: opacity 500ms ease;
+           transition-delay: 500ms; }
 .splash-root.go .mound-m { opacity: 1; }
 
 /* Desktop climax: natron droplets */
