@@ -55,10 +55,16 @@ const navSecondaryItems = [
 // pills that point at the shop's top-level use-cases. Labels are
 // translated through the page i18n so the German/English splits stay
 // in sync with the rest of the site copy.
+// Mobile hero category pills — deep-link into the Shop page's
+// matching use-case section (`/shop#cook`, `/shop#clean`,
+// `/shop#care`). The router's `scrollBehavior` resolves the hash
+// after navigation so the user lands directly on the section.
+// Same targets the desktop top-nav uses, so the two entry points
+// stay consistent.
 const heroCategories = computed(() => [
-  { label: t('home.categories.clean'), href: '#clean' },
-  { label: t('home.categories.cook'), href: '#cook' },
-  { label: t('home.categories.care'), href: '#care' },
+  { label: t('home.categories.clean'), href: '/shop#clean' },
+  { label: t('home.categories.cook'), href: '/shop#cook' },
+  { label: t('home.categories.care'), href: '/shop#care' },
 ])
 
 // Bundles sidebar copy resolves through the page's own i18n namespace so

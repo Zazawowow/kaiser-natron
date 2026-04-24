@@ -199,18 +199,14 @@ function onRemove(line) {
           </ul>
         </div>
 
-        <!-- Footer — mirrors the mobile menu overlay: primary action takes
-             the width, close icon sits to its right so the thumb has both
-             controls in the bottom cluster. -->
-        <!-- Footer padding reserves room for the mobile floating
-             close button (bottom-5 right-5 + size-lg ≈ 76 px tall
-             hit-box). Right-padding shifts the checkout CTA left
-             on mobile so the close never overlaps the button. On
-             md+ the floating close is hidden, so the extra right
-             padding collapses. -->
+        <!-- Footer — mirrors the mobile menu overlay: checkout takes
+             the width, close icon sits to its right so the thumb
+             reaches both controls in the bottom cluster. On md+
+             the inline close hides (desktop has the header X);
+             mobile gets the paired row. -->
         <footer
           v-if="hasItems"
-          class="shrink-0 border-t border-line px-6 py-5 flex flex-col gap-4 pr-24 md:pr-6"
+          class="shrink-0 border-t border-line px-6 py-5 flex flex-col gap-4"
           style="padding-bottom: calc(env(safe-area-inset-bottom) + 1.25rem);"
         >
           <div class="flex items-baseline justify-between">
@@ -219,55 +215,39 @@ function onRemove(line) {
               {{ formatPrice(subtotal) }}
             </span>
           </div>
-          <!-- Checkout takes the full width. The mobile close button
-               is rendered outside the drawer as a floating IconButton
-               at the exact `bottom-5 right-5` position that the
-               page's menu-open button uses, so opening/closing feels
-               like the same control. -->
-          <Button
-            variant="primary"
-            size="lg"
-            block
-            @click="$emit('checkout')"
-          >
-            <template #after><Icon name="arrow-right" :size="18" /></template>
-            {{ t('cart.checkout') }}
-          </Button>
+          <div class="flex items-center gap-3">
+            <!-- Checkout stretches to fill the row on mobile and
+                 spans the full footer on desktop (close hidden). -->
+            <Button
+              variant="primary"
+              size="lg"
+              block
+              class="flex-1 min-w-0"
+              @click="$emit('checkout')"
+            >
+              <template #after><Icon name="arrow-right" :size="18" /></template>
+              {{ t('cart.checkout') }}
+            </Button>
+            <!-- Mobile close sits in-row at the right — same edge
+                 margin as the page's menu-open IconButton (footer
+                 px-6 + IconButton size-lg places its right edge
+                 ~20 px from the drawer edge, matching
+                 `right-5`). Wrapped so IconButton's internal
+                 `relative` doesn't fight the flex sizing. -->
+            <div class="md:hidden shrink-0">
+              <IconButton
+                icon="close"
+                variant="float"
+                size="lg"
+                :icon-size="24"
+                :icon-stroke-width="2"
+                :aria-label="t('menu.close')"
+                @click="close"
+              />
+            </div>
+          </div>
         </footer>
       </aside>
-
-    </Transition>
-
-    <!-- Mobile floating close — lives OUTSIDE the drawer Transition
-         (which requires a single root child) so it can fade
-         independently with its own transition. Sits at
-         `bottom-5 right-5` to overlay the page's menu-open
-         IconButton exactly, matching the menu overlay's close
-         position for muscle-memory consistency across the two
-         mobile overlays. -->
-    <Transition
-      enter-active-class="transition-opacity duration-base ease-out"
-      enter-from-class="opacity-0"
-      enter-to-class="opacity-100"
-      leave-active-class="transition-opacity duration-base ease-out"
-      leave-from-class="opacity-100"
-      leave-to-class="opacity-0"
-    >
-      <div
-        v-if="modelValue"
-        class="md:hidden fixed bottom-5 right-5 z-[70]"
-        style="padding-bottom: env(safe-area-inset-bottom);"
-      >
-        <IconButton
-          icon="close"
-          variant="float"
-          size="lg"
-          :icon-size="24"
-          :icon-stroke-width="2"
-          :aria-label="t('menu.close')"
-          @click="close"
-        />
-      </div>
     </Transition>
   </Teleport>
 </template>
