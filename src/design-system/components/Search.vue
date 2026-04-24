@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, watch, nextTick, onBeforeUnmount } from 'vue'
+import { ref, computed, watch, nextTick, onBeforeUnmount, onMounted } from 'vue'
 import Icon from './Icon.vue'
 import IconButton from './IconButton.vue'
 import Badge from './Badge.vue'
@@ -164,6 +164,41 @@ watch(() => props.modelValue, (open) => {
 })
 onBeforeUnmount(() => {
   if (typeof document !== 'undefined') document.documentElement.style.overflow = ''
+})
+
+// Track the software keyboard's occluded height so the floating
+// close button can sit JUST ABOVE the keyboard on the right. The
+// visual viewport reports the visible area; the gap between its
+// bottom edge and the layout viewport's bottom is the keyboard
+// (or URL bar) height.
+//
+//   keyboardOffset = innerHeight - (visualViewport.height +
+//                                   visualViewport.offsetTop)
+//
+// When the keyboard is down this is 0 and the button sits a short
+// `bottom-5` away from the viewport bottom. When the keyboard
+// comes up the offset grows and the button rides up with it.
+const keyboardOffset = ref(0)
+function syncKeyboardOffset() {
+  if (typeof window === 'undefined' || !window.visualViewport) return
+  const vv = window.visualViewport
+  keyboardOffset.value = Math.max(
+    0,
+    Math.round(window.innerHeight - (vv.height + vv.offsetTop)),
+  )
+}
+onMounted(() => {
+  syncKeyboardOffset()
+  if (typeof window !== 'undefined' && window.visualViewport) {
+    window.visualViewport.addEventListener('resize', syncKeyboardOffset)
+    window.visualViewport.addEventListener('scroll', syncKeyboardOffset)
+  }
+})
+onBeforeUnmount(() => {
+  if (typeof window !== 'undefined' && window.visualViewport) {
+    window.visualViewport.removeEventListener('resize', syncKeyboardOffset)
+    window.visualViewport.removeEventListener('scroll', syncKeyboardOffset)
+  }
 })
 
 function close() { emit('update:modelValue', false) }
@@ -392,19 +427,6 @@ function onRowClick(i, item, e) {
               </a>
             </div>
 
-            <!-- Mobile floating close — mirrors the navbar's search-open
-                 button position so users return their thumb to the same spot. -->
-            <IconButton
-              icon="close"
-              variant="float"
-              size="lg"
-              :icon-stroke-width="2"
-              :aria-label="t('menu.close')"
-              class="md:hidden fixed bottom-5 left-5 z-[70]"
-              style="margin-bottom: env(safe-area-inset-bottom);"
-              @click="close"
-            />
-
             <!-- Keyboard hints — desktop only. -->
             <div
               :class="[
@@ -429,6 +451,33 @@ function onRowClick(i, item, e) {
             </div>
           </div>
         </Transition>
+
+        <!-- Mobile floating close. Sibling of the animated panel so
+             the panel's `translate-y-*` transform doesn't capture
+             this fixed positioning into its own containing block.
+             The IconButton's own root carries `position: relative`
+             (for its count badge), so the `fixed` positioning is
+             put on a WRAPPER div — otherwise the two position
+             utilities collide on the same element and `relative`
+             wins via Tailwind's layer order.
+             `bottom` = `keyboardOffset + safe-area + 1.25rem` so
+             the button rides just above the software keyboard and
+             settles at `right-5 bottom-5` edges (matching the menu
+             close) when the keyboard closes. -->
+        <div
+          v-if="modelValue"
+          class="md:hidden fixed right-5 z-[70]"
+          :style="{ bottom: `calc(${keyboardOffset}px + env(safe-area-inset-bottom) + 1.25rem)` }"
+        >
+          <IconButton
+            icon="close"
+            variant="float"
+            size="lg"
+            :icon-stroke-width="2"
+            :aria-label="t('menu.close')"
+            @click="close"
+          />
+        </div>
       </div>
     </Transition>
   </Teleport>

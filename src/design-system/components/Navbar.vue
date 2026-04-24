@@ -256,32 +256,61 @@ onBeforeUnmount(() => {
             <Logo class="w-12 h-auto text-cream" />
           </div>
 
-          <!-- Mobile menu shows primary + secondary nav as one stack.
-               Desktop splits them left/right of the search; on mobile
-               the menu is the only nav surface so they read as one
-               list, primary first. -->
+          <!-- Mobile menu — primary shop categories rendered in
+               accent (yellow) to flag them as the shortcut path,
+               secondary supporting pages in cream below, separated
+               by a hairline divider. Desktop splits them left/
+               right of the search; on mobile they stack here as
+               one list but the tonal split + divider carries the
+               same semantic grouping. -->
           <nav class="flex-1 flex flex-col justify-center px-8 gap-3 overflow-y-auto">
             <a
-              v-for="item in [...items, ...secondaryItems]"
+              v-for="item in items"
               :key="item.key || item.label"
+              :href="item.href || '#'"
+              class="font-serif font-normal text-[clamp(2.25rem,9vw,3.5rem)] tracking-tight leading-[1.05] text-accent hover:text-accent-soft transition-colors duration-base"
+              @click="menuOpen = false; $emit('nav', item)"
+            >{{ itemLabel(item) }}</a>
+            <hr
+              v-if="items.length && secondaryItems.length"
+              class="my-3 border-0 h-px bg-cream-line"
+              aria-hidden="true"
+            />
+            <a
+              v-for="item in secondaryItems"
+              :key="'sec-' + (item.key || item.label)"
               :href="item.href || '#'"
               class="font-serif font-normal text-[clamp(2.25rem,9vw,3.5rem)] tracking-tight leading-[1.05] text-cream hover:text-accent transition-colors duration-base"
               @click="menuOpen = false; $emit('nav', item)"
             >{{ itemLabel(item) }}</a>
           </nav>
 
-          <!-- Language selector above the cart/close row, styled for brand green -->
-          <div class="px-6 pb-6 flex justify-center">
+          <!-- Language selector. Extra bottom padding clears the
+               floating cart+close row (pill ~56px + safe-area +
+               `bottom-5` inset) so it never sits behind that
+               row when the overlay content is short. -->
+          <div
+            class="px-6 flex justify-center"
+            style="padding-bottom: calc(env(safe-area-inset-bottom) + 6.5rem);"
+          >
             <LanguageSwitcher tone="brand" />
           </div>
 
+          <!-- Floating action row — cart pill on the left, close X
+               on the right at `bottom-5 right-5` (same edges as the
+               page's menu-open IconButton). Both live in one
+               horizontal band so cart + close read as a cluster and
+               the X lands exactly over the position the user just
+               tapped to open the menu. The row is a single `fixed`
+               wrapper so only one layout element owns the bottom
+               anchoring. -->
           <div
-            class="px-6 py-6 border-t border-cream-line flex items-center gap-3"
-            style="padding-bottom: calc(env(safe-area-inset-bottom) + 1.5rem);"
+            class="fixed bottom-5 left-5 right-5 z-[60] flex items-center gap-3"
+            style="padding-bottom: env(safe-area-inset-bottom);"
           >
             <button
               type="button"
-              class="flex-1 inline-flex items-center justify-between px-6 py-4 rounded-pill bg-accent text-brand font-semibold tracking-label hover:bg-accent-soft transition-colors"
+              class="flex-1 min-w-0 inline-flex items-center justify-between px-6 py-4 rounded-pill bg-accent text-brand font-semibold tracking-label hover:bg-accent-soft transition-colors shadow-md"
               @click="menuOpen = false; $emit('cart')"
             >
               <span class="inline-flex items-center gap-3">
@@ -293,15 +322,21 @@ onBeforeUnmount(() => {
                 class="min-w-[22px] h-[22px] px-2 rounded-full bg-brand text-accent text-[12px] font-bold flex items-center justify-center"
               >{{ cartCount }}</span>
             </button>
-            <IconButton
-              icon="close"
-              variant="cream-wash"
-              size="lg"
-              :icon-size="20"
-              :aria-label="t('menu.close')"
-              class="shrink-0"
-              @click="menuOpen = false"
-            />
+            <!-- Close wrapped in a div so the fixed row's flex
+                 layout drives width; IconButton's own root is
+                 `relative` (count badge anchor) and would fight a
+                 `fixed` applied directly. -->
+            <div class="shrink-0">
+              <IconButton
+                icon="close"
+                variant="float"
+                size="lg"
+                :icon-size="24"
+                :icon-stroke-width="2"
+                :aria-label="t('menu.close')"
+                @click="menuOpen = false"
+              />
+            </div>
           </div>
         </div>
       </Transition>

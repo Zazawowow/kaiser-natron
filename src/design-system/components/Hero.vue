@@ -122,18 +122,15 @@ const layout = computed(() => {
 // from 78svh → 48svh so the secondary hero reads as a companion,
 // not a second main stage. Mobile/tablet caps are shared because
 // phone screens shouldn't scale content down below its legible size.
-// Image max-height steps. At lg the default cap is intentionally
-// bounded (52svh) so the Hero's total height (section py-20 of
-// 170px + image) stays below the first-fold wrapper's content-box
-// of `100svh - var(--nav-h)` across typical desktop viewports
-// (svh 800–1080). Anything larger makes Hero overflow the wrapper,
-// which then grows to fit — destroying `justify-center`'s
-// vertical centering and pinning Hero to the top of the fold.
-// Compact shrinks it further for the secondary banner.
+// Image max-height steps. Default is the Hero's original scale —
+// the jar is meant to be the focal element of the first fold.
+// Compact shrinks it for secondary banners (e.g. the cream
+// "hundert Anwendungen" band) so the second-fold section reads as
+// a companion rather than a second main stage.
 const imageHeightClass = computed(() =>
   props.compact
     ? 'max-h-[44svh] md:max-h-[61svh] lg:max-h-[48svh]'
-    : 'max-h-[44svh] md:max-h-[61svh] lg:max-h-[52svh]',
+    : 'max-h-[44svh] md:max-h-[61svh] lg:max-h-[78svh]',
 )
 </script>
 

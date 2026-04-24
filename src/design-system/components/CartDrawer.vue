@@ -109,12 +109,17 @@ function onRemove(line) {
             </h2>
             <Badge v-if="count > 0" variant="subtle" class="shrink-0">{{ count }}</Badge>
           </div>
+          <!-- Desktop close — inline in the header for standard
+               drawer UX. Hidden on mobile, where the close lives in
+               the floating cluster position (see below) so it sits
+               exactly where the menu-open button is on the page. -->
           <IconButton
             icon="close"
             variant="ghost"
             size="sm"
             :icon-size="20"
             :aria-label="t('menu.close')"
+            class="hidden md:inline-flex"
             @click="close"
           />
         </header>
@@ -197,9 +202,15 @@ function onRemove(line) {
         <!-- Footer — mirrors the mobile menu overlay: primary action takes
              the width, close icon sits to its right so the thumb has both
              controls in the bottom cluster. -->
+        <!-- Footer padding reserves room for the mobile floating
+             close button (bottom-5 right-5 + size-lg ≈ 76 px tall
+             hit-box). Right-padding shifts the checkout CTA left
+             on mobile so the close never overlaps the button. On
+             md+ the floating close is hidden, so the extra right
+             padding collapses. -->
         <footer
           v-if="hasItems"
-          class="shrink-0 border-t border-line px-6 py-5 flex flex-col gap-4"
+          class="shrink-0 border-t border-line px-6 py-5 flex flex-col gap-4 pr-24 md:pr-6"
           style="padding-bottom: calc(env(safe-area-inset-bottom) + 1.25rem);"
         >
           <div class="flex items-baseline justify-between">
@@ -208,29 +219,55 @@ function onRemove(line) {
               {{ formatPrice(subtotal) }}
             </span>
           </div>
-          <div class="flex items-center gap-3">
-            <Button
-              variant="primary"
-              size="lg"
-              block
-              class="flex-1"
-              @click="$emit('checkout')"
-            >
-              <template #after><Icon name="arrow-right" :size="18" /></template>
-              {{ t('cart.checkout') }}
-            </Button>
-            <IconButton
-              icon="close"
-              variant="brand-wash"
-              size="lg"
-              :icon-size="20"
-              :aria-label="t('menu.close')"
-              class="shrink-0 md:hidden"
-              @click="close"
-            />
-          </div>
+          <!-- Checkout takes the full width. The mobile close button
+               is rendered outside the drawer as a floating IconButton
+               at the exact `bottom-5 right-5` position that the
+               page's menu-open button uses, so opening/closing feels
+               like the same control. -->
+          <Button
+            variant="primary"
+            size="lg"
+            block
+            @click="$emit('checkout')"
+          >
+            <template #after><Icon name="arrow-right" :size="18" /></template>
+            {{ t('cart.checkout') }}
+          </Button>
         </footer>
       </aside>
+
+    </Transition>
+
+    <!-- Mobile floating close — lives OUTSIDE the drawer Transition
+         (which requires a single root child) so it can fade
+         independently with its own transition. Sits at
+         `bottom-5 right-5` to overlay the page's menu-open
+         IconButton exactly, matching the menu overlay's close
+         position for muscle-memory consistency across the two
+         mobile overlays. -->
+    <Transition
+      enter-active-class="transition-opacity duration-base ease-out"
+      enter-from-class="opacity-0"
+      enter-to-class="opacity-100"
+      leave-active-class="transition-opacity duration-base ease-out"
+      leave-from-class="opacity-100"
+      leave-to-class="opacity-0"
+    >
+      <div
+        v-if="modelValue"
+        class="md:hidden fixed bottom-5 right-5 z-[70]"
+        style="padding-bottom: env(safe-area-inset-bottom);"
+      >
+        <IconButton
+          icon="close"
+          variant="float"
+          size="lg"
+          :icon-size="24"
+          :icon-stroke-width="2"
+          :aria-label="t('menu.close')"
+          @click="close"
+        />
+      </div>
     </Transition>
   </Teleport>
 </template>

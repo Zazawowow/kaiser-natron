@@ -45,6 +45,7 @@ const featuredTiles = computed(() =>
   USE_CASES.map((id) => ({
     id,
     label: t(`shop.feature.${id}`),
+    cta: t(`shop.feature.cta.${id}`),
     product: grouped.value[id][0],
   })),
 )
@@ -155,7 +156,7 @@ onBeforeUnmount(() => {
             :href="`#${tile.id}`"
             class="group flex h-full flex-col items-center gap-4 p-4 md:p-5 rounded-md border border-cream-line bg-cream-wash hover:bg-cream-wash-strong transition-colors duration-base"
           >
-            <div class="w-full aspect-[4/3] max-h-[30svh] md:max-h-[26svh] lg:max-h-[28svh] rounded-md bg-cream overflow-hidden flex items-center justify-center">
+            <div class="w-full aspect-[4/3] max-h-[30svh] md:max-h-[26svh] lg:max-h-[28svh] rounded-md bg-paper overflow-hidden flex items-center justify-center">
               <img
                 :src="tile.product.image"
                 :alt="tile.product.title"
@@ -173,7 +174,7 @@ onBeforeUnmount(() => {
             <span
               class="mt-auto inline-flex items-center gap-1.5 text-sm font-semibold tracking-label text-cream/80 group-hover:text-accent transition-colors duration-base"
             >
-              {{ t('shop.feature.cta') }}
+              {{ tile.cta }}
               <span aria-hidden="true" class="transition-transform duration-base group-hover:translate-x-1">→</span>
             </span>
           </a>
@@ -214,6 +215,12 @@ onBeforeUnmount(() => {
           v-if="section.products.length"
           class="mt-12 md:mt-14 grid gap-5 md:gap-7 grid-cols-1 sm:grid-cols-2 md:grid-cols-3"
         >
+          <!-- Add-to-cart variant alternates by section index so
+               the three bands read as a pattern: green → yellow →
+               green. Only the middle band uses the accent (yellow)
+               variant; first and last stay on primary (brand green).
+               `i % 2 === 1` keeps this rhythm working if more
+               sections are ever appended. -->
           <ProductCard
             v-for="product in section.products"
             :key="product.id"
@@ -223,8 +230,9 @@ onBeforeUnmount(() => {
             :image="product.image"
             :image-alt="product.title"
             :href="product.href"
-            :tone="section.tone === 'cream' ? 'paper' : 'cream'"
+            tone="cream"
             :in-stock="product.inStock"
+            :cta-variant="i % 2 === 1 ? 'accent' : 'primary'"
             @add="onAdd(product)"
           />
         </div>

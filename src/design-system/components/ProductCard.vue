@@ -25,16 +25,27 @@ const props = defineProps({
   },
   inStock: { type: Boolean, default: true },
   href: { type: String, default: '' },
+  /** Add-to-cart button variant. Defaults to `primary` (brand
+   *  green); shop sections alternate this to `accent` (yellow) to
+   *  differentiate use-case bands visually. Accepts any Button
+   *  variant; a subset list isn't enforced here so consumers can
+   *  experiment without gatekeeping from the card. */
+  ctaVariant: { type: String, default: 'primary' },
 })
 
 defineEmits(['add'])
 
 const { t } = useI18n()
 
+// Media background is pinned to `bg-paper` (white) for both tones
+// while the product PNGs still carry baked-in solid backgrounds.
+// Once the imagery is re-exported with transparency we can reinstate
+// the tone-coupled media tint (paper→cream, cream→paper) for the
+// subtle surface contrast the DS originally called for.
 const tones = {
   paper: {
     surface: 'bg-paper',
-    media: 'bg-cream',
+    media: 'bg-paper',
     border: 'border-line',
   },
   cream: {
@@ -63,12 +74,18 @@ const priceLabel = computed(() => {
       'hover:-translate-y-1 hover:shadow-md hover:border-brand-soft',
     ]"
   >
-    <!-- Media -->
+    <!-- Media. Height sized to frame the (small) product image
+         comfortably rather than inflating the card with empty
+         whitespace. Image occupies most of the media area so the
+         visible product reads clearly; the card body carries the
+         weight below. Interim sizing — once we have
+         transparent-background imagery the media area can revisit
+         aspect ratios to match the product silhouettes. -->
     <component
       :is="href ? 'a' : 'div'"
       :href="href || null"
       :class="[
-        'relative block aspect-[4/5] overflow-hidden',
+        'relative flex items-center justify-center h-40 md:h-48 overflow-hidden',
         tone.media,
       ]"
     >
@@ -82,22 +99,29 @@ const priceLabel = computed(() => {
         :alt="imageAlt || title"
         loading="lazy"
         decoding="async"
-        class="absolute inset-0 w-full h-full object-contain p-8 transition-transform duration-slow ease-out group-hover:scale-105"
+        class="max-w-[55%] max-h-[80%] object-contain transition-transform duration-slow ease-out group-hover:scale-105"
       />
     </component>
 
     <!-- Body -->
     <div class="flex flex-col gap-3 p-6">
       <div class="flex flex-col gap-1">
+        <!-- Title reserves exactly 2 lines (`min-h-[2lh]`) so cards
+             in a row align their body/price/CTA even when one
+             title wraps and another doesn't. `lh` = computed
+             line-height, so the reservation auto-tracks
+             font-size × leading without hardcoded pixel values. -->
         <component
           :is="href ? 'a' : 'h3'"
           :href="href || null"
           :class="[
-            'font-display text-xl font-normal leading-tight text-ink',
+            'font-display text-xl font-normal leading-tight text-ink min-h-[2lh]',
             href ? 'hover:text-brand transition-colors duration-base' : '',
           ]"
         >{{ title }}</component>
-        <p v-if="size" class="text-sm text-muted tracking-label">{{ size }}</p>
+        <!-- Size slot is always reserved (even when empty) so the
+             row of price + CTA sits at the same y across cards. -->
+        <p class="text-sm text-muted tracking-label min-h-[1lh]">{{ size || '\xa0' }}</p>
       </div>
 
       <div class="mt-auto flex items-center justify-between gap-3 pt-2">
@@ -109,7 +133,7 @@ const priceLabel = computed(() => {
       </div>
 
       <Button
-        variant="primary"
+        :variant="ctaVariant"
         size="md"
         block
         :disabled="!inStock"

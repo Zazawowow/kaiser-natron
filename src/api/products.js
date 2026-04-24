@@ -141,7 +141,7 @@ export const products = [
     size: '500 g Beutel',
     category: 'Wäsche',
     price: 2.9,
-    image: '/products/holste-wasch-soda-500-g-beutel.jpg',
+    image: '/products/cutouts/holste-wasch-soda-500-g-beutel-Photoroom.png',
     href: '/shop/holste-wasch-soda-500-g-beutel',
     inStock: true,
     keywords: ['soda', 'wasch-soda', 'waschen', 'natriumcarbonat'],
