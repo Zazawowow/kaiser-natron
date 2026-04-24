@@ -122,15 +122,14 @@ const layout = computed(() => {
 // from 78svh → 48svh so the secondary hero reads as a companion,
 // not a second main stage. Mobile/tablet caps are shared because
 // phone screens shouldn't scale content down below its legible size.
-// Image max-height steps. At lg the default cap is deliberately
-// conservative (52svh) because anything larger makes the Hero
-// exceed the home page's `min-h-[calc(100svh - var(--nav-h))] +
-// pb-[var(--nav-h)]` content box on typical laptop viewports
-// (svh ≈ 800–900), which forces the wrapper to grow and pins the
-// Hero to the top — losing vertical centering. 52svh keeps the
-// total Hero height below the content box at svh ≥ 700 so
-// centering holds across all common desktop breakpoints. Compact
-// variant is lower still for the secondary banner.
+// Image max-height steps. At lg the default cap is intentionally
+// bounded (52svh) so the Hero's total height (section py-20 of
+// 170px + image) stays below the first-fold wrapper's content-box
+// of `100svh - var(--nav-h)` across typical desktop viewports
+// (svh 800–1080). Anything larger makes Hero overflow the wrapper,
+// which then grows to fit — destroying `justify-center`'s
+// vertical centering and pinning Hero to the top of the fold.
+// Compact shrinks it further for the secondary banner.
 const imageHeightClass = computed(() =>
   props.compact
     ? 'max-h-[44svh] md:max-h-[61svh] lg:max-h-[48svh]'
