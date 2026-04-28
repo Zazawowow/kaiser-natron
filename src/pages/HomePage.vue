@@ -1,5 +1,6 @@
 <script setup>
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
 import Navbar from '@/design-system/components/Navbar.vue'
 import Hero from '@/design-system/components/Hero.vue'
 import Bundles from '@/design-system/components/Bundles.vue'
@@ -18,7 +19,17 @@ import { useI18n } from '@/i18n/index.js'
 
 const { t } = useI18n()
 const cart = useCartStore()
+const router = useRouter()
 const cartOpen = ref(false)
+
+// Cart drawer's "checkout" event closes the drawer and navigates to
+// the checkout page. Kept centralised here (and on ShopPage) so the
+// drawer stays purely presentational — it emits intent, the page
+// decides where the user goes next.
+function goCheckout() {
+  cartOpen.value = false
+  router.push('/checkout')
+}
 
 const imgPulver250 =
   '/products/ai/kaiser-natron-pulver-250-g-grosspackung.png'
@@ -32,40 +43,23 @@ const bannerProductId = 'kaiser-natron-pulver-250-g-grosspackung'
 // Homepage top-level nav items — overrides the Navbar default so the
 // homepage reads as the shop entry point (Shop / Bundles / Revitalisierung
 // / Über uns) instead of the generic catalogue chrome.
-// Primary nav — the top-level shop destinations, rendered on the left
-// of the Navbar. Cook / Clean / Care deep-link into the Shop page's
-// use-case sections so users land on the right band immediately.
+// Single top-left nav list — Shop + the supporting pages all sit
+// together on the left of the Navbar. The category shortcuts
+// (Cook / Clean / Care) are reachable from the Shop page itself
+// rather than the global nav, keeping the chrome focused on
+// top-level destinations.
 const navItems = [
   { key: 'nav.shop', href: '/shop' },
-  { key: 'nav.cook', href: '/shop#cook' },
-  { key: 'nav.clean', href: '/shop#clean' },
-  { key: 'nav.care', href: '/shop#care' },
+  { key: 'nav.bundles', href: '/#bundles' },
+  { key: 'nav.revitalization', href: '/#revitalize' },
+  { key: 'nav.about', href: '/#about' },
 ]
-
-// Secondary nav — supporting pages. Rendered on the right, tucked to
-// the left of the search trigger. Same visual treatment as primary so
-// the split reads as "categories | pages" rather than two navs.
-const navSecondaryItems = [
-  { key: 'nav.bundles', href: '#bundles' },
-  { key: 'nav.revitalization', href: '#revitalize' },
-  { key: 'nav.about', href: '#about' },
-]
+const navSecondaryItems = []
 
 // Mobile-only category shortcuts rendered under the hero image. Three
 // pills that point at the shop's top-level use-cases. Labels are
 // translated through the page i18n so the German/English splits stay
 // in sync with the rest of the site copy.
-// Mobile hero category pills — deep-link into the Shop page's
-// matching use-case section (`/shop#cook`, `/shop#clean`,
-// `/shop#care`). The router's `scrollBehavior` resolves the hash
-// after navigation so the user lands directly on the section.
-// Same targets the desktop top-nav uses, so the two entry points
-// stay consistent.
-const heroCategories = computed(() => [
-  { label: t('home.categories.clean'), href: '/shop#clean' },
-  { label: t('home.categories.cook'), href: '/shop#cook' },
-  { label: t('home.categories.care'), href: '/shop#care' },
-])
 
 // Bundles sidebar copy resolves through the page's own i18n namespace so
 // component internals stay decoupled from any particular key tree.
@@ -290,20 +284,6 @@ onBeforeUnmount(() => {
         <em class="italic font-light text-accent-soft">{{ t('ds.hero.headline.em') }}</em>
         {{ t('ds.hero.headline.b') }}
       </template>
-      <!-- Mobile-only category shortcuts. Three pills sit directly
-           under the hero jar so the phone user can jump straight to
-           a use-case context without scrolling past the whole fold.
-           Hidden on md+ because desktop already has full nav chrome. -->
-      <template #afterMedia>
-        <div class="md:hidden mt-6 flex items-center justify-center gap-2">
-          <a
-            v-for="cat in heroCategories"
-            :key="cat.href"
-            :href="cat.href"
-            class="inline-flex items-center justify-center rounded-pill border border-cream/50 px-5 py-2.5 text-sm font-semibold tracking-label text-cream transition-colors duration-base hover:border-cream hover:bg-cream-wash-strong"
-          >{{ cat.label }}</a>
-        </div>
-      </template>
     </Hero>
   </div>
 
@@ -459,7 +439,7 @@ onBeforeUnmount(() => {
     :count="cart.count"
     @update-quantity="onQty"
     @remove="onRemove"
-    @checkout="cartOpen = false"
+    @checkout="goCheckout"
   />
 </template>
 

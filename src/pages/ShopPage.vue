@@ -1,5 +1,6 @@
 <script setup>
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
 import Navbar from '@/design-system/components/Navbar.vue'
 import ProductCard from '@/design-system/components/ProductCard.vue'
 import WaveDivider from '@/design-system/components/WaveDivider.vue'
@@ -18,23 +19,32 @@ import { useI18n } from '@/i18n/index.js'
 
 const { t } = useI18n()
 const cart = useCartStore()
+const router = useRouter()
 const cartOpen = ref(false)
+
+// Cart drawer's checkout event lands here so the drawer can stay
+// presentational; this page decides to close the drawer and route
+// the user to /checkout.
+function goCheckout() {
+  cartOpen.value = false
+  router.push('/checkout')
+}
 
 // Site-wide nav split mirrors HomePage so the header reads as one
 // piece of chrome across both routes. On /shop the category links
 // point at in-page anchors (`#cook`, `#clean`, `#care`) so they
 // scroll within the page rather than re-route.
+// Same top-left list as HomePage — Shop + supporting pages.
+// Category shortcuts (Cook / Clean / Care) live in the Shop hero
+// banner's three-tile row, not the global nav, so the chrome stays
+// stable across home and shop.
 const navItems = [
   { key: 'nav.shop', href: '/shop' },
-  { key: 'nav.cook', href: '#cook' },
-  { key: 'nav.clean', href: '#clean' },
-  { key: 'nav.care', href: '#care' },
-]
-const navSecondaryItems = [
   { key: 'nav.bundles', href: '/#bundles' },
   { key: 'nav.revitalization', href: '/#revitalize' },
   { key: 'nav.about', href: '/#about' },
 ]
+const navSecondaryItems = []
 
 // Group products by use-case once; iterate a stable config below.
 // The featured tiles in the top banner each pick the FIRST product
@@ -255,6 +265,6 @@ onBeforeUnmount(() => {
     :count="cart.count"
     @update-quantity="onQty"
     @remove="onRemove"
-    @checkout="cartOpen = false"
+    @checkout="goCheckout"
   />
 </template>

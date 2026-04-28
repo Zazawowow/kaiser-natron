@@ -117,6 +117,18 @@ function itemLabel(item) {
   return item.key ? t(item.key) : item.label
 }
 
+// Mobile menu list — Shop + the secondary supporting pages
+// (Bundles / Revitalisation / About). The primary nav's category
+// shortcuts (Cook / Clean / Care) live in the desktop top-bar and
+// the home hero pills only; on mobile the menu collapses back to
+// Shop as a single entry point. Picks the primary item keyed
+// `nav.shop` (or falls back to the first primary item) and prepends
+// it to the secondary list.
+const menuItems = computed(() => {
+  const shop = props.items.find((i) => i.key === 'nav.shop') || props.items[0]
+  return shop ? [shop, ...props.secondaryItems] : [...props.secondaryItems]
+})
+
 watch(menuOpen, (open) => {
   if (typeof document === 'undefined') return
   document.documentElement.style.overflow = open ? 'hidden' : ''
@@ -256,29 +268,16 @@ onBeforeUnmount(() => {
             <Logo class="w-12 h-auto text-cream" />
           </div>
 
-          <!-- Mobile menu — primary shop categories rendered in
-               accent (yellow) to flag them as the shortcut path,
-               secondary supporting pages in cream below, separated
-               by a hairline divider. Desktop splits them left/
-               right of the search; on mobile they stack here as
-               one list but the tonal split + divider carries the
-               same semantic grouping. -->
+          <!-- Mobile menu — Shop + supporting pages (Bundles /
+               Revitalisation / About). The category shortcuts
+               (Cook / Clean / Care) are reachable from the home
+               hero pills and the desktop top-bar; on mobile the
+               menu stays focused on the four top-level
+               destinations. -->
           <nav class="flex-1 flex flex-col justify-center px-8 gap-3 overflow-y-auto">
             <a
-              v-for="item in items"
+              v-for="item in menuItems"
               :key="item.key || item.label"
-              :href="item.href || '#'"
-              class="font-serif font-normal text-[clamp(2.25rem,9vw,3.5rem)] tracking-tight leading-[1.05] text-accent hover:text-accent-soft transition-colors duration-base"
-              @click="menuOpen = false; $emit('nav', item)"
-            >{{ itemLabel(item) }}</a>
-            <hr
-              v-if="items.length && secondaryItems.length"
-              class="my-3 border-0 h-px bg-cream-line"
-              aria-hidden="true"
-            />
-            <a
-              v-for="item in secondaryItems"
-              :key="'sec-' + (item.key || item.label)"
               :href="item.href || '#'"
               class="font-serif font-normal text-[clamp(2.25rem,9vw,3.5rem)] tracking-tight leading-[1.05] text-cream hover:text-accent transition-colors duration-base"
               @click="menuOpen = false; $emit('nav', item)"

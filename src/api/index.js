@@ -16,3 +16,7 @@ export {
   removeFromCart,
   clearCart,
 } from './cart.js'
+export {
+  createCheckoutIntent,
+  confirmCheckout,
+} from './checkout.js'

@@ -14,6 +14,18 @@ const routes = [
     meta: { layout: 'none' },
   },
   {
+    path: '/checkout',
+    name: 'checkout',
+    component: () => import('@/pages/CheckoutPage.vue'),
+    meta: { layout: 'none' },
+  },
+  {
+    path: '/checkout/success',
+    name: 'checkout-success',
+    component: () => import('@/pages/CheckoutSuccessPage.vue'),
+    meta: { layout: 'none' },
+  },
+  {
     path: '/design/preview/navbar',
     name: 'ds-preview-navbar',
     component: () => import('@/pages/design/previews/NavbarPreview.vue'),

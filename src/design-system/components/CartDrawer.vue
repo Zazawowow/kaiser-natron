@@ -126,10 +126,17 @@ function onRemove(line) {
 
         <!-- Body -->
         <div class="flex-1 overflow-y-auto">
-          <!-- Empty state -->
+          <!-- Empty state. No footer renders when empty, so the
+               floating close here fills the role of the populated
+               cart's inline close — anchored bottom-right with the
+               same `right-5 bottom-5` margins as the page's
+               menu-open IconButton. `cream-dark` variant uses the
+               `--color-cream-dark` token (darker cream accent) so
+               it reads as a control on this cream surface without
+               the `float` green shouting. -->
           <div
             v-if="!hasItems"
-            class="h-full flex flex-col items-center justify-center gap-4 px-8 py-16 text-center"
+            class="relative h-full flex flex-col items-center justify-center gap-4 px-8 py-16 text-center"
           >
             <div class="w-16 h-16 rounded-full bg-brand-wash flex items-center justify-center text-brand">
               <Icon name="cart" :size="28" />
@@ -139,6 +146,20 @@ function onRemove(line) {
             <Button variant="secondary" size="md" class="mt-2" @click="close">
               {{ t('ds.buttons.continueShopping') }}
             </Button>
+            <div
+              class="md:hidden absolute bottom-5 right-5"
+              style="padding-bottom: env(safe-area-inset-bottom);"
+            >
+              <IconButton
+                icon="close"
+                variant="cream-dark"
+                size="lg"
+                :icon-size="24"
+                :icon-stroke-width="2"
+                :aria-label="t('menu.close')"
+                @click="close"
+              />
+            </div>
           </div>
 
           <!-- Items -->

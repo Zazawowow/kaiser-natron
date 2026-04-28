@@ -15,12 +15,17 @@ const props = defineProps({
    *  - 'accent'     — warm yellow CTA (cart)
    *  - 'cream-wash' — translucent cream on brand overlays (overlay close)
    *  - 'brand-wash' — subtle brand tint on light surfaces (compact chrome)
+   *  - 'cream-dark' — solid darker-cream accent on cream/paper
+   *                   surfaces (e.g. the empty-cart close);
+   *                   uses the `--color-cream-dark` token where
+   *                   `float` would read too loud and `ghost`
+   *                   would disappear on warm grounds
    *  - 'ghost'      — transparent → brand-wash on hover (sheet close)
    */
   variant: {
     type: String,
     default: 'float',
-    validator: (v) => ['float', 'accent', 'cream-wash', 'brand-wash', 'ghost'].includes(v),
+    validator: (v) => ['float', 'accent', 'cream-wash', 'brand-wash', 'cream-dark', 'ghost'].includes(v),
   },
   /** Button diameter: xs=36px, sm=40px, md=44px, lg=56px. */
   size: {
@@ -54,6 +59,7 @@ const variants = {
   accent: 'bg-accent text-brand hover:bg-accent-soft',
   'cream-wash': 'bg-cream-wash text-cream hover:bg-cream-wash-strong',
   'brand-wash': 'bg-brand-wash text-brand',
+  'cream-dark': 'bg-cream-dark text-brand hover:bg-brand-soft hover:text-cream',
   ghost: 'bg-transparent text-muted hover:bg-brand-wash hover:text-brand',
 }
 
@@ -62,6 +68,7 @@ const defaultShadow = {
   accent: '',
   'cream-wash': '',
   'brand-wash': '',
+  'cream-dark': '',
   ghost: '',
 }
 
