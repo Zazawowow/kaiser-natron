@@ -1,5 +1,6 @@
 <script setup>
 import { ref, computed, watch, onBeforeUnmount } from 'vue'
+import { useRoute } from 'vue-router'
 import Logo from './Logo.vue'
 import Icon from './Icon.vue'
 import IconButton from './IconButton.vue'
@@ -117,17 +118,35 @@ function itemLabel(item) {
   return item.key ? t(item.key) : item.label
 }
 
-// Mobile menu list — Shop + the secondary supporting pages
-// (Bundles / Revitalisation / About). The primary nav's category
-// shortcuts (Cook / Clean / Care) live in the desktop top-bar and
-// the home hero pills only; on mobile the menu collapses back to
-// Shop as a single entry point. Picks the primary item keyed
-// `nav.shop` (or falls back to the first primary item) and prepends
-// it to the secondary list.
-const menuItems = computed(() => {
-  const shop = props.items.find((i) => i.key === 'nav.shop') || props.items[0]
-  return shop ? [shop, ...props.secondaryItems] : [...props.secondaryItems]
-})
+// Mobile menu list — primary items + secondary supporting pages
+// concatenated. The desktop top-bar shows the same items in two
+// clusters (left of logo + right of search) when `secondaryItems`
+// is populated; on mobile they read as one stack so neither group
+// is hidden from a single-column overlay.
+const menuItems = computed(() => [...props.items, ...props.secondaryItems])
+
+// Active-link detection. Two-step compare so we recognise both
+// in-page anchors (`/#bundles` from a different page lands on `/`,
+// and the visible "active" link should be Shop, not Bundles) and
+// hash-only links inside the same page (`#cook` on Shop). The
+// route hash is compared explicitly because Vue Router's path
+// excludes the hash.
+const route = useRoute()
+function isActive(href) {
+  if (!href || href === '#') return false
+  const here = route.path
+  const hereHash = `${route.path}${route.hash || ''}`
+  // Strip leading `/` to compare hash-only forms (`#cook`) against
+  // the current route's hash directly.
+  if (href.startsWith('#')) return route.hash === href
+  // Exact path match (`/shop`, `/`).
+  if (href === here) return true
+  // Path + hash match (`/shop#care`, `/#bundles`). The user is
+  // "on" that destination only when both the path and the hash
+  // line up — otherwise plain `/shop` would also flag `/shop#care`
+  // as active.
+  return href === hereHash
+}
 
 watch(menuOpen, (open) => {
   if (typeof document === 'undefined') return
@@ -156,7 +175,10 @@ onBeforeUnmount(() => {
             v-for="item in items"
             :key="item.key || item.label"
             :href="item.href || '#'"
-            :class="[tone.link, 'text-[14px] font-medium tracking-label transition-colors duration-base']"
+            :class="[
+              isActive(item.href) ? 'text-accent' : tone.link,
+              'text-[14px] font-medium tracking-label transition-colors duration-base',
+            ]"
             @click="$emit('nav', item)"
           >{{ itemLabel(item) }}</a>
         </nav>
@@ -176,7 +198,10 @@ onBeforeUnmount(() => {
             v-for="item in secondaryItems"
             :key="item.key || item.label"
             :href="item.href || '#'"
-            :class="[tone.link, 'text-[14px] font-medium tracking-label transition-colors duration-base']"
+            :class="[
+              isActive(item.href) ? 'text-accent' : tone.link,
+              'text-[14px] font-medium tracking-label transition-colors duration-base',
+            ]"
             @click="$emit('nav', item)"
           >{{ itemLabel(item) }}</a>
         </nav>
@@ -279,7 +304,12 @@ onBeforeUnmount(() => {
               v-for="item in menuItems"
               :key="item.key || item.label"
               :href="item.href || '#'"
-              class="font-serif font-normal text-[clamp(2.25rem,9vw,3.5rem)] tracking-tight leading-[1.05] text-cream hover:text-accent transition-colors duration-base"
+              :class="[
+                'font-serif font-normal text-[clamp(2.25rem,9vw,3.5rem)] tracking-tight leading-[1.05] transition-colors duration-base',
+                isActive(item.href)
+                  ? 'text-accent'
+                  : 'text-cream hover:text-accent',
+              ]"
               @click="menuOpen = false; $emit('nav', item)"
             >{{ itemLabel(item) }}</a>
           </nav>
