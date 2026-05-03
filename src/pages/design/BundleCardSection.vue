@@ -17,8 +17,7 @@ function onAdd(id) {
 // One shared product fixture across the whole page. Using the transparent
 // cutout (not the jpg product shot) because it sits cleanly on the cream
 // media panel without a visible square crop edge.
-const sampleImage =
-  '/products/cutouts/kaiser-natron-pulver-250-g-grosspackung-removebg-preview-1.png'
+const sampleImage = '/products/kaiser-natron-pulver-250-g-grosspackung.webp'
 
 const sample = {
   name: 'Haushalts-Bundle',

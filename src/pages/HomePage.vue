@@ -32,13 +32,13 @@ function goCheckout() {
 }
 
 const imgPulver250 =
-  '/products/ai/kaiser-natron-pulver-250-g-grosspackung.png'
+  '/products/kaiser-natron-pulver-250-g-grosspackung.webp'
 
 const heroProductId = 'kaiser-natron-pulver-250-g-grosspackung'
 
 // Second-fold banner — cream tone, image-left split, alternate cutout.
-const imgBanner = '/products/ai/kaiser-natron-bad-500-g.png'
-const bannerProductId = 'kaiser-natron-pulver-250-g-grosspackung'
+const imgBanner = '/products/kaiser-natron-bad-500-g.webp'
+const bannerProductId = 'kaiser-natron-bad-500-g'
 
 // Homepage top-level nav items — overrides the Navbar default so the
 // homepage reads as the shop entry point (Shop / Bundles / Revitalisierung
@@ -114,7 +114,7 @@ const bundles = [
     ],
     price: 24.9,
     memberPrice: 21.17,
-    image: '/products/ai/kaiser-natron-pulver-250-g-grosspackung.png',
+    image: '/products/kaiser-natron-pulver-250-g-grosspackung.webp',
     imageAlt: 'Haushalts-Bundle mit Kaiser-Natron',
     badge: 'Bestseller',
     badgeVariant: 'accent',
@@ -126,7 +126,7 @@ const bundles = [
     items: ['1× Holste Wasch-Soda 500 g', '1× Gazelle Wäschestärke 1 l', '1× Linda Fleckenweg 200 ml'],
     price: 22.9,
     memberPrice: 19.47,
-    image: '/products/ai/kaiser-natron-pulver-250-g-grosspackung.png',
+    image: '/products/kaiser-natron-pulver-250-g-grosspackung.webp',
     imageAlt: 'Wäsche & Pflege Bundle',
     badge: '',
     badgeVariant: 'accent',
@@ -138,7 +138,7 @@ const bundles = [
     items: ['1× Kaiser-Natron Tabletten 100 g', '1× Kaiser-Natron Bad 500 g', '1× Kaiser-Natron Fußbad 500 g'],
     price: 29.9,
     memberPrice: 25.42,
-    image: '/products/ai/kaiser-natron-bad-500-g.png',
+    image: '/products/kaiser-natron-bad-500-g.webp',
     imageAlt: 'Wohlfühl-Bundle mit Kaiser-Natron Bad',
     badge: '',
     badgeVariant: 'accent',
@@ -177,7 +177,7 @@ function onBundleJoin() {
   // Placeholder — member signup flow is a backend concern. For now,
   // clicking "Mitglied werden" simply scrolls to the bundles grid.
   const el = document.getElementById('bundles')
-  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  if (el) el.scrollIntoView({ block: 'start' })
 }
 
 function onRevitNotify() {
@@ -270,13 +270,12 @@ onBeforeUnmount(() => {
       class="w-full"
       variant="split"
       tone="brand"
-      :eyebrow="t('ds.hero.eyebrow')"
       :subheadline="t('ds.hero.sub')"
       :image="imgPulver250"
       image-alt="Kaiser-Natron Pulver 250 g Großpackung"
       :cta-label="t('ds.buttons.addToCart')"
       :secondary-label="t('ds.buttons.learnMore')"
-      secondary-href="/anwendungen"
+      :secondary-href="`/shop/${heroProductId}`"
       @cta="onHeroAdd"
     >
       <template #headline>
@@ -324,7 +323,7 @@ onBeforeUnmount(() => {
     image-alt="Kaiser-Natron Pulver 250 g Großpackung"
     :cta-label="t('ds.buttons.addToCart')"
     :secondary-label="t('ds.buttons.learnMore')"
-    secondary-href="/anwendungen"
+    :secondary-href="`/shop/${bannerProductId}`"
     @cta="onBannerAdd"
   >
     <template #headline>

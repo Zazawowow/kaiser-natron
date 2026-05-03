@@ -3,7 +3,8 @@
 @import '../design-system/motion.css';
 
 html {
-  scroll-behavior: smooth;
+  /* No `scroll-behavior: smooth` — instant jumps requested for accessibility
+     (smooth animation between scroll positions can trigger motion sickness). */
   font-size: 17px;
   /* Runtime-measured navbar height. Default matches the standard
      Navbar variant at lg (py-5 + logo + border) so the home-page

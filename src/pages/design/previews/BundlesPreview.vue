@@ -31,8 +31,7 @@ const bundles = [
     ],
     price: 24.9,
     memberPrice: 21.17,
-    image:
-      '/products/cutouts/kaiser-natron-pulver-250-g-grosspackung-removebg-preview-1.png',
+    image: '/products/kaiser-natron-pulver-250-g-grosspackung.webp',
     imageAlt: 'Haushalts-Bundle mit Kaiser-Natron',
     badge: 'Bestseller',
     badgeVariant: 'accent',
@@ -48,7 +47,7 @@ const bundles = [
     ],
     price: 22.9,
     memberPrice: 19.47,
-    image: '/products/holste-wasch-soda-500-g-beutel.jpg',
+    image: '/products/holste-wasch-soda-500-g-beutel.webp',
     imageAlt: 'Wäsche & Pflege Bundle',
   },
   {
@@ -62,7 +61,7 @@ const bundles = [
     ],
     price: 29.9,
     memberPrice: 25.42,
-    image: '/products/kaiser-natron-bad-500-g.jpg',
+    image: '/products/kaiser-natron-bad-500-g.webp',
     imageAlt: 'Wohlfühl-Bundle',
   },
 ]

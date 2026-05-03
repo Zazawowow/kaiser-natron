@@ -1,0 +1,388 @@
+{
+  "kaiser-natron-pulver-50-g-beutel": {
+    "slug": "kaiser-natron-pulver-50-g-beutel",
+    "sourceUrl": "https://kaiser-natron.at/kaiser-natron-pulver-50-g-beutel",
+    "sourceTitle": "Kaiser-Natron® Pulver 50 g Beutel",
+    "tagline": "Ein grünes Wunder, vielfach nützlich.",
+    "lead": "Kaiser-Natron® hilft überraschend oft: beim Entsäuern von Speisen, zum Enthärten von Tee- und Kaffeewasser, um Gemüse zu säubern oder Backpulver zu ersetzen oder, oder, oder. Und dazu verblüffend vielseitig. Ein wahrer Alleskönner für Dein Wohlergehen, Pflege und Haushalt.",
+    "descriptionLong": null,
+    "properties": [
+      "Glutenfrei",
+      "Laktosefrei",
+      "Vegan",
+      "Neutralisiert Säuren",
+      "Enthärtet",
+      "Mild-alkalisch"
+    ],
+    "applications": [
+      {
+        "title": "Obst wird bekömmlicher",
+        "body": "Beeren, Rhabarber, Zwetschgen: Sie alle rundet Kaiser-Natron® im Geschmack ab, reduziert die Säure und ersetzt so Zucker. 1/2 Tl pro Kilo Obst genügt!"
+      },
+      {
+        "title": "Erfrischende Zitronenbrause",
+        "body": "Zitronensaft (oder Essig) und Zucker in ein Glas kaltes Wasser einrühren. 1/2 Tl Kaiser-Natron® hinzufügen – wohl bekomms!"
+      }
+    ],
+    "availableIn": [
+      "50 g Beutel",
+      "250 g Schachtel (5 Beutel á 50 g)",
+      "3490 g Eimer"
+    ]
+  },
+  "kaiser-natron-pulver-250-g-grosspackung": {
+    "slug": "kaiser-natron-pulver-250-g-grosspackung",
+    "sourceUrl": "https://kaiser-natron.at/kaiser-natron-pulver-250-g-gro%C3%9Fpackung",
+    "sourceTitle": "Kaiser-Natron® Pulver 250 g Großpackung",
+    "tagline": "Ein grünes Wunder, vielfach nützlich.",
+    "lead": "Kaiser-Natron® hilft überraschend oft: beim Entsäuern von Speisen, zum Enthärten von Tee- und Kaffeewasser, um Gemüse zu säubern oder Backpulver zu ersetzen oder, oder, oder. Und dazu verblüffend vielseitig. Ein wahrer Alleskönner für Dein Wohlergehen, Pflege und Haushalt.",
+    "descriptionLong": null,
+    "properties": [
+      "Glutenfrei",
+      "Laktosefrei",
+      "Vegan",
+      "Neutralisiert Säuren",
+      "Enthärtet",
+      "Mild-alkalisch"
+    ],
+    "applications": [
+      {
+        "title": "Obst wird bekömmlicher",
+        "body": "Beeren, Rhabarber, Zwetschgen: Sie alle rundet Kaiser-Natron® im Geschmack ab, reduziert die Säure und ersetzt so Zucker. 1/2 Tl pro Kilo Obst genügt!"
+      },
+      {
+        "title": "Erfrischende Zitronenbrause",
+        "body": "Zitronensaft (oder Essig) und Zucker in ein Glas kaltes Wasser einrühren. 1/2 Tl Kaiser-Natron® hinzufügen – wohl bekomms!"
+      }
+    ],
+    "availableIn": [
+      "50 g Beutel",
+      "250 g Schachtel (5 Beutel á 50 g)",
+      "3490 g Eimer"
+    ]
+  },
+  "kaiser-natron-pulver-3490-g-eimer": {
+    "slug": "kaiser-natron-pulver-3490-g-eimer",
+    "sourceUrl": "https://kaiser-natron.at/kaiser-natron-pulver-3-490-g-eimer",
+    "sourceTitle": "Kaiser-Natron® Pulver 3.490 g Eimer",
+    "tagline": "Ein grünes Wunder, vielfach nützlich.",
+    "lead": "Kaiser-Natron® hilft überraschend oft: beim Entsäuern von Speisen, zum Enthärten von Tee- und Kaffeewasser, um Gemüse zu säubern oder Backpulver zu ersetzen oder, oder, oder. Und dazu verblüffend vielseitig. Ein wahrer Alleskönner für Dein Wohlergehen, Pflege und Haushalt.",
+    "descriptionLong": null,
+    "properties": [
+      "Glutenfrei",
+      "Laktosefrei",
+      "Vegan",
+      "Neutralisiert Säuren",
+      "Enthärtet",
+      "Mild-alkalisch"
+    ],
+    "applications": [
+      {
+        "title": "Obst wird bekömmlicher",
+        "body": "Beeren, Rhabarber, Zwetschgen: Sie alle rundet Kaiser-Natron® im Geschmack ab, reduziert die Säure und ersetzt so Zucker. 1/2 Tl pro Kilo Obst genügt!"
+      },
+      {
+        "title": "Erfrischende Zitronenbrause",
+        "body": "Zitronensaft (oder Essig) und Zucker in ein Glas kaltes Wasser einrühren. 1/2 Tl Kaiser-Natron® hinzufügen – wohl bekomms!"
+      }
+    ],
+    "availableIn": [
+      "50 g Beutel",
+      "250 g Schachtel (5 Beutel á 50 g)",
+      "3490 g Eimer"
+    ]
+  },
+  "kaiser-natron-tabletten-100-g-dose": {
+    "slug": "kaiser-natron-tabletten-100-g-dose",
+    "sourceUrl": "https://kaiser-natron.at/kaiser-natron-tabletten-100-g-dose",
+    "sourceTitle": "Kaiser-Natron® Tabletten 100 g Dose",
+    "tagline": "Ein echter Geheimtipp mit vielen Anwendungsmöglichkeiten.",
+    "lead": "Kaiser-Natron®. Das unverfälschte Natriumhydrogencarbonat neutralisiert und bindet alle Säuren. In praktischer Tablettenform und garantiert ohne Zusatzstoffe.",
+    "descriptionLong": null,
+    "properties": [
+      "Glutenfrei",
+      "Laktosefrei",
+      "Vegan",
+      "Für Küche und Haushalt"
+    ],
+    "applications": [
+      {
+        "title": null,
+        "body": "1–2 Tabletten unzerkaut mit 1 Glas Wasser einnehmen."
+      }
+    ],
+    "availableIn": [
+      "100 g Dose"
+    ]
+  },
+  "kaiser-natron-bad-500-g": {
+    "slug": "kaiser-natron-bad-500-g",
+    "sourceUrl": "https://kaiser-natron.at/kaiser-natron-bad-gelb-500-g-dose",
+    "sourceTitle": "Kaiser-Natron® Bad gelb 500 g Dose",
+    "tagline": "Die besondere Wellness-Pause für zwischendurch!",
+    "lead": "Mit seinem basischen pH-Wert von 8,5 unterstützt das Kaiser-Natron® die Haut beim Regenerieren des natürlichen Säureschutzmantels und macht sie zart und geschmeidig.",
+    "descriptionLong": null,
+    "properties": [
+      "Mit entspannendem Apfelsinenduft",
+      "Ohne Konservierungsstoffe",
+      "Ohne Mineralöl",
+      "Frei von tierischen Substanzen"
+    ],
+    "applications": [
+      {
+        "title": null,
+        "body": "Für ein Vollbad 4–5 Esslöffel Kaiser-Natron® Bad im Wasser auflösen: 37 °C sind optimal. Wir empfehlen bis zu 30 Minuten Entspannung für Haut und Seele."
+      }
+    ],
+    "availableIn": [
+      "500 g Dose"
+    ]
+  },
+  "kaiser-natron-fussbad-500-g": {
+    "slug": "kaiser-natron-fussbad-500-g",
+    "sourceUrl": "https://kaiser-natron.at/kaiser-natron-fu%C3%9Fbad-500-g-dose",
+    "sourceTitle": "Kaiser-Natron® Fußbad 500 g Dose",
+    "tagline": "Das haben sich Deine Füße echt verdient!",
+    "lead": "Dieses basische Fußbad vitalisiert müde Füße und sorgt für weiche Füße ohne Hornhaut. Der pH-Wert 8,5 unterstützt die Haut beim Regenerieren des natürlichen Säureschutzmantels. Reinigung, Pflege und Desodorierung in einem!",
+    "descriptionLong": null,
+    "properties": [
+      "Mit dem Duft der Latschenkiefer",
+      "Wohltuend und erfrischend",
+      "Ohne Konservierungsstoffe",
+      "Ohne Mineralöl",
+      "Frei von tierischen Substanzen"
+    ],
+    "applications": [
+      {
+        "title": null,
+        "body": "Für ein Fußbad 1 gehäuften Esslöffel Kaiser-Natron® Fußbad in 4 Liter Wasser auflösen. Optimal sind 38–41 °C. Und dann 10 bis 20 Minuten genießen!"
+      }
+    ],
+    "availableIn": [
+      "500 g Dose"
+    ]
+  },
+  "kaiser-natron-daunenwasch-250-ml": {
+    "slug": "kaiser-natron-daunenwasch-250-ml",
+    "sourceUrl": "https://kaiser-natron.at/kaiser-natron-daunen-wasch-250-ml-flasche",
+    "sourceTitle": "Kaiser-Natron® Daunen Wasch 250 ml Flasche",
+    "tagline": "Zarte Daunen brauchen Schutz!",
+    "lead": "Kaiser-Natron® Daunen-Wasch erhält die natürliche Spannung von Daunen und Federn, damit sie flauschig bleiben. Dafür sorgt die Extra-Portion an nachhaltigem Lanolin. Mit anhaltend frischem Duft!",
+    "descriptionLong": null,
+    "properties": [
+      "Mit pflegendem Lanolin",
+      "Frei von Mikroplastik"
+    ],
+    "applications": [
+      {
+        "title": null,
+        "body": "Bis zu 2,5 kg Daunenwäsche pro Waschmaschine im Schongang bei max. 30° C waschen. Gut nachspülen, schwach schleudern. Gut trocknen, öfters ausschütteln. Nur vollständiges Trocknen verhindert Schimmelbildung."
+      }
+    ],
+    "availableIn": [
+      "250 ml Flasche"
+    ]
+  },
+  "kaiser-natron-sport-profi-250-ml": {
+    "slug": "kaiser-natron-sport-profi-250-ml",
+    "sourceUrl": "https://kaiser-natron.at/kaiser-natron-sport-profi-250-ml-flasche",
+    "sourceTitle": "Kaiser-Natron® Sport Profi 250 ml Flasche",
+    "tagline": null,
+    "lead": null,
+    "descriptionLong": null,
+    "properties": [],
+    "applications": [],
+    "availableIn": []
+  },
+  "kaiser-natron-spuelmittel-500-ml": {
+    "slug": "kaiser-natron-spuelmittel-500-ml",
+    "sourceUrl": "https://kaiser-natron.at/kaiser-natron-sp%C3%BClmittel-500-ml-flasche",
+    "sourceTitle": "Kaiser-Natron® Spülmittel 500 ml Flasche",
+    "tagline": "Lust auf funkelnd sauberes Geschirr?",
+    "lead": "Mit Kaiser-Natron® Spülmittel kein Problem – sogar ohne scharfe Chemikalien im Wasser. Denn dieses Spülmittel wirkt rein basisch, was auch für die Haut einfach besser ist. Für die Nase kommt noch der fruchtige Duft nach Pampelmuse dazu.",
+    "descriptionLong": null,
+    "properties": [
+      "Mit Pampelmusenduft",
+      "Hautverträglich – dermatologisch bestätigt",
+      "Frei von Mikroplastik"
+    ],
+    "applications": [
+      {
+        "title": null,
+        "body": "Sparsam in der Dosierung: Schon 3 ml auf 5 l Wasser genügen bei normal verschmutztem Geschirr!"
+      }
+    ],
+    "availableIn": [
+      "500 ml Flasche aus 100 % Altplastik/Regenerat/RPET (Verschluß ausgenommen)"
+    ]
+  },
+  "kaiser-natron-allzweck-reiniger-750-ml": {
+    "slug": "kaiser-natron-allzweck-reiniger-750-ml",
+    "sourceUrl": "https://kaiser-natron.at/kaiser-natron-allzweckreiniger-750-ml-flasche",
+    "sourceTitle": "Kaiser-Natron® Allzweckreiniger 750 ml Flasche",
+    "tagline": "Dem Schmutz keine Chance!",
+    "lead": "Der Kaiser-Natron® Allzweckreiniger ist ein kraftvoller, sehr ergiebiger und umweltfreundlich-nachhaltiger Allzweckreiniger für die schonende Reinigung von Böden, Holz-, Küchen- und Badmöbeln sowie Kacheln und Sanitäreinrichtungen. Der temporäre Schmutzschild erleichtert die nächste Reinigung und der einzigartige frische Pampelmusenduft sorgt für angenehme Raumatmosphäre nach jeder Reinigung.",
+    "descriptionLong": null,
+    "properties": [
+      "Hygienische Sauberkeit",
+      "Für Böden und Oberflächen",
+      "Mit Pampelmusenduft",
+      "Vegan",
+      "Ohne Konservierungsstoffe",
+      "Frei von Mikroplastik"
+    ],
+    "applications": [
+      {
+        "title": null,
+        "body": "30 bis 50 ml auf 5 Liter Wasser bei normaler Verschmutzung. In schweren Fällen einfach unverdünnt anwenden und gründlich mit Wasser nachspülen."
+      }
+    ],
+    "availableIn": [
+      "750 ml Flasche aus 100 % Altplastik/Regenerat/RPET (Verschluß ausgenommen)"
+    ]
+  },
+  "kaiser-natron-allzweck-spray-500-ml": {
+    "slug": "kaiser-natron-allzweck-spray-500-ml",
+    "sourceUrl": "https://kaiser-natron.at/kaiser-natron-allzweck-spray-500-ml-flasche",
+    "sourceTitle": "Kaiser-Natron® Allzweck-Spray 500 ml Flasche",
+    "tagline": "So geht sauberes Teamwork.",
+    "lead": "Für streifenlosen Glanz auf allen glatten Oberflächen gehen hier das gute Kaiser-Natron® und das originale HOLSTE Wasch-Soda Hand in Hand. Zusammen sind sie besonders basisch und extra-wirksam.",
+    "descriptionLong": null,
+    "properties": [
+      "Nachhaltig durch Tenside nachwachsenden Ursprungs",
+      "Ohne Konservierungsstoffe",
+      "Mit natürlicher Seife",
+      "Frei von Mikroplastik"
+    ],
+    "applications": [
+      {
+        "title": null,
+        "body": "Düse drehen, bis Sprühsymbol „ON“ oben steht. Kaiser-Natron® Allzweckspray aufsprühen und mit einem trockenen Tuch sauber wischen. Im Zweifelsfall vorher an einer nicht sichtbaren Stelle testen!"
+      }
+    ],
+    "availableIn": [
+      "500 ml Flasche"
+    ]
+  },
+  "holste-wasch-soda-500-g-beutel": {
+    "slug": "holste-wasch-soda-500-g-beutel",
+    "sourceUrl": "https://kaiser-natron.at/holste-wasch-soda-500-g-beutel",
+    "sourceTitle": "Holste Wasch Soda 500 g Beutel",
+    "tagline": null,
+    "lead": null,
+    "descriptionLong": null,
+    "properties": [],
+    "applications": [],
+    "availableIn": []
+  },
+  "holste-handwaschpaste-500-ml": {
+    "slug": "holste-handwaschpaste-500-ml",
+    "sourceUrl": "https://kaiser-natron.at/holste-handwaschpaste-500-ml",
+    "sourceTitle": "Holste Handwaschpaste 500 ml",
+    "tagline": null,
+    "lead": null,
+    "descriptionLong": null,
+    "properties": [],
+    "applications": [],
+    "availableIn": []
+  },
+  "holste-kalk-und-urinsteinloeser-750-ml": {
+    "slug": "holste-kalk-und-urinsteinloeser-750-ml",
+    "sourceUrl": "https://kaiser-natron.at/holste-kalk-und-urinsteinl%C3%B6ser-750-ml",
+    "sourceTitle": "Holste Kalk- und Urinsteinlöser 750 ml",
+    "tagline": null,
+    "lead": null,
+    "descriptionLong": null,
+    "properties": [],
+    "applications": [],
+    "availableIn": []
+  },
+  "holste-reisstaerke-250-g-faltschachtel": {
+    "slug": "holste-reisstaerke-250-g-faltschachtel",
+    "sourceUrl": "https://kaiser-natron.at/holste-reisst%C3%A4rke-250-g-faltschachtel",
+    "sourceTitle": "Holste Reisstärke 250 g Faltschachtel",
+    "tagline": null,
+    "lead": null,
+    "descriptionLong": null,
+    "properties": [],
+    "applications": [],
+    "availableIn": []
+  },
+  "holste-schmierseife-fluessig-1-l-flasche": {
+    "slug": "holste-schmierseife-fluessig-1-l-flasche",
+    "sourceUrl": "https://kaiser-natron.at/holste-schmierseife-fl%C3%BCssig-1-l-flasche",
+    "sourceTitle": "Holste Schmierseife flüssig 1 l Flasche",
+    "tagline": null,
+    "lead": null,
+    "descriptionLong": null,
+    "properties": [],
+    "applications": [],
+    "availableIn": []
+  },
+  "holste-zitronensaeure-entkalker-fluessig-500-ml": {
+    "slug": "holste-zitronensaeure-entkalker-fluessig-500-ml",
+    "sourceUrl": "https://kaiser-natron.at/holste-zitronens%C3%A4ure-entkalker-fl%C3%BCssig-500-ml",
+    "sourceTitle": "Holste Zitronensäure-Entkalker flüssig 500 ml",
+    "tagline": null,
+    "lead": null,
+    "descriptionLong": null,
+    "properties": [],
+    "applications": [],
+    "availableIn": []
+  },
+  "gazelle-waeschestaerke-1000-ml-flasche": {
+    "slug": "gazelle-waeschestaerke-1000-ml-flasche",
+    "sourceUrl": "https://kaiser-natron.at/gazelle-w%C3%A4schest%C3%A4rke-1000-ml-flasche",
+    "sourceTitle": "Gazelle Wäschestärke 1000 ml Flasche",
+    "tagline": null,
+    "lead": null,
+    "descriptionLong": null,
+    "properties": [],
+    "applications": [],
+    "availableIn": []
+  },
+  "gruene-tante-mit-quarzmehl-500-ml-dose": {
+    "slug": "gruene-tante-mit-quarzmehl-500-ml-dose",
+    "sourceUrl": "https://kaiser-natron.at/gr%C3%BCne-tante-mit-quarzmehl-500-ml-dose",
+    "sourceTitle": "Grüne Tante mit Quarzmehl 500 ml Dose",
+    "tagline": null,
+    "lead": null,
+    "descriptionLong": null,
+    "properties": [],
+    "applications": [],
+    "availableIn": []
+  },
+  "linda-fleckenweg-200-ml-tube": {
+    "slug": "linda-fleckenweg-200-ml-tube",
+    "sourceUrl": "https://kaiser-natron.at/linda-fleckenweg-200-ml-tube",
+    "sourceTitle": "Linda Fleckenweg 200 ml Tube",
+    "tagline": null,
+    "lead": null,
+    "descriptionLong": null,
+    "properties": [],
+    "applications": [],
+    "availableIn": []
+  },
+  "linda-handreiniger-der-kraftvolle-200-g-tube": {
+    "slug": "linda-handreiniger-der-kraftvolle-200-g-tube",
+    "sourceUrl": "https://kaiser-natron.at/linda-handreiniger-der-kraftvolle-200-g-tube",
+    "sourceTitle": "Linda Handreiniger Der Kraftvolle 200 g Tube",
+    "tagline": null,
+    "lead": null,
+    "descriptionLong": null,
+    "properties": [],
+    "applications": [],
+    "availableIn": []
+  },
+  "linda-neutral-375-ml-dose": {
+    "slug": "linda-neutral-375-ml-dose",
+    "sourceUrl": "https://kaiser-natron.at/linda-neutral-375-ml-dose",
+    "sourceTitle": "Linda Neutral 375 ml Dose",
+    "tagline": null,
+    "lead": null,
+    "descriptionLong": null,
+    "properties": [],
+    "applications": [],
+    "availableIn": []
+  }
+}

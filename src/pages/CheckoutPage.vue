@@ -31,14 +31,21 @@
  * and the Stripe component falls back to a placeholder card so
  * the page is fully reviewable for design.
  */
-import { computed, onMounted, onBeforeUnmount, ref } from 'vue'
+import { computed, nextTick, onMounted, onBeforeUnmount, ref } from 'vue'
 import Navbar from '@/design-system/components/Navbar.vue'
 import Input from '@/design-system/components/Input.vue'
 import Button from '@/design-system/components/Button.vue'
 import Icon from '@/design-system/components/Icon.vue'
 import CheckoutSummary from '@/design-system/components/CheckoutSummary.vue'
 import StripePaymentMount from '@/design-system/components/StripePaymentMount.vue'
-import { products, fetchCart, createCheckoutIntent, clearCart } from '@/api/index.js'
+import ExpressCheckoutMount from '@/design-system/components/ExpressCheckoutMount.vue'
+import {
+  products,
+  fetchCart,
+  createCheckoutIntent,
+  createExpressIntent,
+  clearCart,
+} from '@/api/index.js'
 import { useCartStore } from '@/stores/cart.js'
 import { useI18n } from '@/i18n/index.js'
 import { useRouter } from 'vue-router'
@@ -110,6 +117,12 @@ const submitting = ref(false)
 const submitError = ref('')
 
 const paymentMountRef = ref(null)
+const expressMountRef = ref(null)
+// Separate intent + busy state for the express path so a wallet
+// confirmation in flight doesn't block the regular form submit and
+// vice-versa.
+const expressIntent = ref(null)
+const expressBusy = ref(false)
 
 // Country options. ISO-3166 alpha-2 codes; backend validates against
 // its own canonical list. Order is by frequency for our market.
@@ -195,6 +208,48 @@ async function placeOrder() {
   }
 }
 
+// Wallet (Apple Pay / Google Pay) one-click handler. Mirrors the
+// regular `placeOrder` two-phase shape: first call gets an intent
+// from the API, second confirms. In real Stripe mode the Express
+// Element drives confirmation itself via its own `confirm` event;
+// here we re-use the mock branch so design review covers the
+// success page + cart clearing end-to-end.
+async function placeExpress({ wallet }) {
+  if (!cart.items.length) {
+    submitError.value = t('checkout.error.empty')
+    return
+  }
+  submitError.value = ''
+  expressBusy.value = true
+  try {
+    const response = await createExpressIntent({ wallet })
+    expressIntent.value = response
+    // Wait for the mount to observe the new intent prop before
+    // calling confirm — mirrors the real flow where Stripe needs
+    // Elements bound to the clientSecret first.
+    await nextTick()
+    const result = await expressMountRef.value?.confirm()
+    if (result?.error) {
+      submitError.value = result.error.message || t('checkout.error.payment')
+      return
+    }
+    if (result?.paymentIntent?.status === 'succeeded') {
+      const orderId = response.orderId
+      await clearCart()
+      router.push({ path: '/checkout/success', query: { order: orderId } })
+    }
+  } catch (err) {
+    submitError.value = err?.message || t('checkout.error.generic')
+  } finally {
+    expressBusy.value = false
+  }
+}
+
+function onExpressError(error) {
+  submitError.value = error?.message || t('checkout.error.payment')
+  expressBusy.value = false
+}
+
 const ctaLabel = computed(() =>
   intent.value ? t('checkout.cta.pay') : t('checkout.cta.continue'),
 )
@@ -258,6 +313,45 @@ onBeforeUnmount(() => {
           novalidate
           @submit.prevent="placeOrder"
         >
+          <!-- Section: Express checkout. Wallet buttons up top so
+               returning customers can finish in one tap; the full
+               form below is the fallback. The "or" rule visually
+               separates the two paths so it doesn't read like the
+               buttons are part of the contact section. -->
+          <section class="flex flex-col gap-4 rounded-md border border-line bg-paper p-6 md:p-8">
+            <div class="flex items-center justify-between gap-3 flex-wrap">
+              <h2 class="font-display text-xl font-normal text-brand leading-none">
+                {{ t('checkout.section.express') }}
+              </h2>
+              <span class="text-[12px] text-muted">
+                {{ t('checkout.express.sub') }}
+              </span>
+            </div>
+            <ExpressCheckoutMount
+              ref="expressMountRef"
+              :intent="expressIntent"
+              :return-url="returnUrl"
+              :busy="expressBusy"
+              @pay="placeExpress"
+              @error="onExpressError"
+            />
+          </section>
+
+          <!-- Visual divider between the express and form paths.
+               Two soft rules with a centred "or" — purely
+               presentational, role="presentation". -->
+          <div
+            role="presentation"
+            class="flex items-center gap-4 -my-2"
+            aria-hidden="true"
+          >
+            <span class="h-px flex-1 bg-line" />
+            <span class="text-[11px] font-bold uppercase tracking-eyebrow text-muted">
+              {{ t('checkout.express.or') }}
+            </span>
+            <span class="h-px flex-1 bg-line" />
+          </div>
+
           <!-- Section: Contact -->
           <section class="flex flex-col gap-5 rounded-md border border-line bg-paper p-6 md:p-8">
             <h2 class="font-display text-xl font-normal text-brand leading-none">

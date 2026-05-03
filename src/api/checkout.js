@@ -25,10 +25,24 @@
 //           until the order's `status` flips to "paid" (the webhook
 //           is the authoritative source; this just bridges the UI).
 //
+// ─── Express (Apple Pay / Google Pay one-click) ─────────────────────
+//   1. UI:  user taps an Apple Pay / Google Pay button on the cart
+//           or checkout. Calls `createExpressIntent({ wallet })` —
+//           backend creates a pending Order + PaymentIntent scoped
+//           to wallet rails (no address required up front; the
+//           wallet sheet collects email + shipping itself).
+//   2. UI:  Stripe's Express Checkout Element handles the wallet
+//           sheet end-to-end and reports a `confirm` event back;
+//           the page calls `stripe.confirmPayment(...)` with the
+//           returned clientSecret.
+//   3. UI:  same return-url / `confirmCheckout` polling as the
+//           full-form flow.
+//
 // ─── Endpoints (backend to implement) ────────────────────────────────
-//   POST /api/checkout/intent  { CheckoutRequest } → CheckoutIntent
-//   POST /api/checkout/confirm { orderId }         → Order
-//   POST /api/webhooks/stripe  (Stripe event)      → 200 OK
+//   POST /api/checkout/intent          { CheckoutRequest } → CheckoutIntent
+//   POST /api/checkout/express-intent  { wallet }          → CheckoutIntent
+//   POST /api/checkout/confirm         { orderId }         → Order
+//   POST /api/webhooks/stripe          (Stripe event)      → 200 OK
 //
 // ─── Types (mirroring docs/api/checkout.md) ──────────────────────────
 //   Address          { name, company?, street, postalCode, city,
@@ -117,6 +131,56 @@ export async function createCheckoutIntent(request) {
     // Echo the totals so the UI can render the order summary without
     // recomputing. The real backend will return the same shape on
     // the eventual `confirm` response too.
+    breakdown: { subtotal, shipping, tax, total },
+  }
+}
+
+/**
+ * Create an *express* checkout intent for one-click wallet flows
+ * (Apple Pay / Google Pay). Same return shape as
+ * `createCheckoutIntent` so the rest of the UI stays uniform — the
+ * difference is on the backend: no address is required up front
+ * because the wallet sheet collects email + shipping itself, and
+ * the Stripe PaymentIntent is created with `automatic_payment_methods`
+ * scoped to wallet rails. The `wallet` hint lets the backend tag
+ * the order for analytics; Stripe still resolves the actual rail
+ * client-side from what the device supports.
+ *
+ * Backend contract: `POST /api/checkout/express-intent`.
+ *
+ * @param {object} request
+ * @param {'apple' | 'google'} request.wallet
+ * @returns {Promise<CheckoutIntent>}
+ */
+export async function createExpressIntent({ wallet }) {
+  const cart = useCartStore()
+  if (!cart.items.length) {
+    const err = new Error('Cart is empty.')
+    err.code = 'checkout.cartEmpty'
+    throw err
+  }
+  if (wallet !== 'apple' && wallet !== 'google') {
+    const err = new Error('Unsupported wallet.')
+    err.code = 'checkout.invalidRequest'
+    throw err
+  }
+
+  const subtotal = money(cart.subtotal)
+  const shipping = money(SHIPPING_FLAT_EUR)
+  const tax = money((subtotal + shipping) * VAT_RATE)
+  const total = money(subtotal + shipping + tax)
+
+  const orderId = `ord_${Date.now().toString(36)}_${Math.random()
+    .toString(36)
+    .slice(2, 8)}`
+
+  return {
+    orderId,
+    clientSecret: `pi_stub_express_${orderId}_secret_stub`,
+    publishableKey: STUB_PUBLISHABLE_KEY,
+    amount: total,
+    currency: 'eur',
+    wallet,
     breakdown: { subtotal, shipping, tax, total },
   }
 }

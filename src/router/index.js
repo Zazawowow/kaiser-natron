@@ -14,6 +14,12 @@ const routes = [
     meta: { layout: 'none' },
   },
   {
+    path: '/shop/:slug',
+    name: 'product',
+    component: () => import('@/pages/ProductPage.vue'),
+    meta: { layout: 'none' },
+  },
+  {
     path: '/checkout',
     name: 'checkout',
     component: () => import('@/pages/CheckoutPage.vue'),
@@ -94,9 +100,17 @@ const router = createRouter({
   // #care section rather than resetting to top. `el: ...` lets the
   // router run the browser's own findElementBySelector, so the
   // ShopPage sections' `scroll-mt-[calc(var(--nav-h)+1rem)]` offset
-  // handles the sticky-nav clearance declaratively.
-  scrollBehavior(to) {
-    if (to.hash) return { el: to.hash, behavior: 'smooth' }
+  // handles the sticky-nav clearance declaratively. `savedPosition`
+  // honours back/forward navigation — clicking the browser's back
+  // button (or the in-page back link via router.back()) restores the
+  // exact scroll y the user had on the previous page, so deep-linking
+  // into a product detail and returning lands them where they left
+  // off in the shop list.
+  scrollBehavior(to, _from, savedPosition) {
+    if (savedPosition) return savedPosition
+    // Hash nav jumps instantly — smooth scrolling between positions can
+    // trigger motion sickness, so the whole site uses instant jumps.
+    if (to.hash) return { el: to.hash }
     return { top: 0 }
   },
 })

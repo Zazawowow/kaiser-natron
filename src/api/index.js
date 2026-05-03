@@ -18,5 +18,6 @@ export {
 } from './cart.js'
 export {
   createCheckoutIntent,
+  createExpressIntent,
   confirmCheckout,
 } from './checkout.js'

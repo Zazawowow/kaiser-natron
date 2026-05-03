@@ -1,7 +1,16 @@
 <script setup>
 import { computed } from 'vue'
+import { RouterLink } from 'vue-router'
 import Button from './Button.vue'
 import Badge from './Badge.vue'
+
+// In-app paths render as <RouterLink> so clicks stay inside the SPA —
+// preserving Vue Router's scroll history (back-button restores y) and
+// avoiding the flash of a full-document reload. External / anchor /
+// hash-only links keep the plain <a> behaviour.
+function isInternalPath(href) {
+  return typeof href === 'string' && href.startsWith('/') && !href.startsWith('//')
+}
 
 const props = defineProps({
   eyebrow: { type: String, default: '' },
@@ -112,9 +121,12 @@ const layout = computed(() => {
     // and pushed the headline text past the section edge (clipped).
     // Compact heroes cap the desktop media width tighter so the image
     // doesn't dominate; mobile/tablet sizing is identical.
+    // Non-compact caps were knocked back ~20% in May '26 — the main
+    // home hero felt too image-heavy on desktop, eating headroom for
+    // the headline and CTAs.
     mediaSize: props.compact
       ? 'w-full max-w-[373px] sm:max-w-[489px] md:max-w-[603px] lg:max-w-[460px] mx-auto'
-      : 'w-full max-w-[373px] sm:max-w-[489px] md:max-w-[603px] lg:max-w-[748px] mx-auto',
+      : 'w-full max-w-[300px] sm:max-w-[390px] md:max-w-[480px] lg:max-w-[600px] mx-auto',
   }
 })
 
@@ -127,10 +139,14 @@ const layout = computed(() => {
 // Compact shrinks it for secondary banners (e.g. the cream
 // "hundert Anwendungen" band) so the second-fold section reads as
 // a companion rather than a second main stage.
+// Non-compact height caps were knocked back ~20% in May '26 alongside
+// the matching width caps — the image was still hitting the height
+// ceiling on tall desktop viewports even after the width reduction,
+// so the silhouette wasn't visibly smaller.
 const imageHeightClass = computed(() =>
   props.compact
     ? 'max-h-[44svh] md:max-h-[61svh] lg:max-h-[48svh]'
-    : 'max-h-[44svh] md:max-h-[61svh] lg:max-h-[78svh]',
+    : 'max-h-[35svh] md:max-h-[49svh] lg:max-h-[62svh]',
 )
 </script>
 
@@ -191,7 +207,12 @@ const imageHeightClass = computed(() =>
           :class="['mt-2 flex flex-wrap items-center gap-3', layout.actions]"
         >
           <slot name="actions">
-            <a v-if="ctaLabel && ctaHref" :href="ctaHref" class="inline-flex">
+            <RouterLink v-if="ctaLabel && ctaHref && isInternalPath(ctaHref)" :to="ctaHref" class="inline-flex">
+              <Button :variant="primaryVariant" size="lg">
+                <slot name="cta">{{ ctaLabel }}</slot>
+              </Button>
+            </RouterLink>
+            <a v-else-if="ctaLabel && ctaHref" :href="ctaHref" class="inline-flex">
               <Button :variant="primaryVariant" size="lg">
                 <slot name="cta">{{ ctaLabel }}</slot>
               </Button>
@@ -207,15 +228,28 @@ const imageHeightClass = computed(() =>
 
             <template v-if="secondaryLabel">
               <!-- Brand tone needs a cream-outlined pill; Button's ghost/secondary
-                   render dark-on-dark on the brand green. -->
+                   render dark-on-dark on the brand green. Internal paths use
+                   RouterLink so SPA scroll history survives the navigation. -->
+              <RouterLink
+                v-if="isBrandTone && secondaryHref && isInternalPath(secondaryHref)"
+                :to="secondaryHref"
+                class="inline-flex items-center justify-center rounded-pill border border-cream/50 px-[34px] py-[17px] text-[16px] font-semibold tracking-label text-cream transition-colors duration-base hover:border-cream hover:bg-cream-wash-strong"
+              >{{ secondaryLabel }}</RouterLink>
               <component
+                v-else-if="isBrandTone"
                 :is="secondaryHref ? 'a' : 'button'"
-                v-if="isBrandTone"
                 :type="secondaryHref ? undefined : 'button'"
                 :href="secondaryHref || undefined"
                 class="inline-flex items-center justify-center rounded-pill border border-cream/50 px-[34px] py-[17px] text-[16px] font-semibold tracking-label text-cream transition-colors duration-base hover:border-cream hover:bg-cream-wash-strong"
                 @click="secondaryHref ? null : $emit('secondary')"
               >{{ secondaryLabel }}</component>
+              <RouterLink
+                v-else-if="secondaryHref && isInternalPath(secondaryHref)"
+                :to="secondaryHref"
+                class="inline-flex"
+              >
+                <Button variant="secondary" size="lg">{{ secondaryLabel }}</Button>
+              </RouterLink>
               <a v-else-if="secondaryHref" :href="secondaryHref" class="inline-flex">
                 <Button variant="secondary" size="lg">{{ secondaryLabel }}</Button>
               </a>

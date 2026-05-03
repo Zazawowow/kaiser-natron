@@ -1,9 +1,18 @@
 <script setup>
 import { computed } from 'vue'
+import { RouterLink } from 'vue-router'
 import Button from './Button.vue'
 import Badge from './Badge.vue'
 import Icon from './Icon.vue'
 import { useI18n } from '@/i18n/index.js'
+
+// Internal SPA paths use <RouterLink> below so Vue Router's scroll
+// history survives the click — the user's y on /shop is restored
+// when they hit the back button on the product page. External /
+// mailto / hash links keep the plain <a> behaviour.
+function isInternalPath(href) {
+  return typeof href === 'string' && href.startsWith('/') && !href.startsWith('//')
+}
 
 const props = defineProps({
   title: { type: String, required: true },
@@ -81,7 +90,29 @@ const priceLabel = computed(() => {
          weight below. Interim sizing — once we have
          transparent-background imagery the media area can revisit
          aspect ratios to match the product silhouettes. -->
+    <RouterLink
+      v-if="href && isInternalPath(href)"
+      :to="href"
+      :class="[
+        'relative flex items-center justify-center h-40 md:h-48 overflow-hidden',
+        tone.media,
+      ]"
+    >
+      <Badge
+        v-if="badge"
+        :variant="badgeVariant"
+        class="absolute top-4 left-4 z-[1]"
+      >{{ badge }}</Badge>
+      <img
+        :src="image"
+        :alt="imageAlt || title"
+        loading="lazy"
+        decoding="async"
+        class="max-w-[55%] max-h-[80%] object-contain transition-transform duration-slow ease-out group-hover:scale-105"
+      />
+    </RouterLink>
     <component
+      v-else
       :is="href ? 'a' : 'div'"
       :href="href || null"
       :class="[
@@ -111,7 +142,16 @@ const priceLabel = computed(() => {
              title wraps and another doesn't. `lh` = computed
              line-height, so the reservation auto-tracks
              font-size × leading without hardcoded pixel values. -->
+        <RouterLink
+          v-if="href && isInternalPath(href)"
+          :to="href"
+          :class="[
+            'font-display text-xl font-normal leading-tight text-ink min-h-[2lh]',
+            'hover:text-brand transition-colors duration-base',
+          ]"
+        >{{ title }}</RouterLink>
         <component
+          v-else
           :is="href ? 'a' : 'h3'"
           :href="href || null"
           :class="[
