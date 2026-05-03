@@ -259,7 +259,8 @@ onBeforeUnmount(() => {
         <LanguageSwitcher :tone="variant" />
         <IconButton
           icon="user"
-          variant="ghost"
+          variant="float"
+          shadow="none"
           size="md"
           :aria-label="t('auth.login.cta')"
           @click="goToLogin"
@@ -281,7 +282,8 @@ onBeforeUnmount(() => {
       <div class="md:hidden flex items-center">
         <IconButton
           icon="user"
-          variant="ghost"
+          variant="float"
+          shadow="none"
           size="md"
           :aria-label="t('auth.login.cta')"
           @click="goToLogin"
