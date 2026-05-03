@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed, watch, onBeforeUnmount } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, RouterLink } from 'vue-router'
 import Logo from './Logo.vue'
 import Icon from './Icon.vue'
 import IconButton from './IconButton.vue'
@@ -163,24 +163,24 @@ onBeforeUnmount(() => {
     <div :class="[innerPadding, 'flex items-center justify-between gap-6']">
       <!-- Left: logo + desktop nav -->
       <div class="flex items-center gap-10 min-w-0">
-        <a
-          href="/"
+        <RouterLink
+          to="/"
           :class="['block shrink-0 py-1', tone.logo]"
           aria-label="Kaiser Natron home"
         >
           <Logo :class="logoClasses" />
-        </a>
+        </RouterLink>
         <nav class="hidden md:flex items-center gap-7">
-          <a
+          <RouterLink
             v-for="item in items"
             :key="item.key || item.label"
-            :href="item.href || '#'"
+            :to="item.href || '/'"
             :class="[
               isActive(item.href) ? 'text-accent' : tone.link,
               'text-[14px] font-medium tracking-label transition-colors duration-base',
             ]"
             @click="$emit('nav', item)"
-          >{{ itemLabel(item) }}</a>
+          >{{ itemLabel(item) }}</RouterLink>
         </nav>
       </div>
 
@@ -194,16 +194,16 @@ onBeforeUnmount(() => {
           v-if="secondaryItems.length"
           class="flex items-center gap-6 mr-2"
         >
-          <a
+          <RouterLink
             v-for="item in secondaryItems"
             :key="item.key || item.label"
-            :href="item.href || '#'"
+            :to="item.href || '/'"
             :class="[
               isActive(item.href) ? 'text-accent' : tone.link,
               'text-[14px] font-medium tracking-label transition-colors duration-base',
             ]"
             @click="$emit('nav', item)"
-          >{{ itemLabel(item) }}</a>
+          >{{ itemLabel(item) }}</RouterLink>
         </nav>
         <button
           type="button"
@@ -300,10 +300,10 @@ onBeforeUnmount(() => {
                menu stays focused on the four top-level
                destinations. -->
           <nav class="flex-1 flex flex-col justify-center px-8 gap-3 overflow-y-auto">
-            <a
+            <RouterLink
               v-for="item in menuItems"
               :key="item.key || item.label"
-              :href="item.href || '#'"
+              :to="item.href || '/'"
               :class="[
                 'font-serif font-normal text-[clamp(2.25rem,9vw,3.5rem)] tracking-tight leading-[1.05] transition-colors duration-base',
                 isActive(item.href)
@@ -311,7 +311,7 @@ onBeforeUnmount(() => {
                   : 'text-cream hover:text-accent',
               ]"
               @click="menuOpen = false; $emit('nav', item)"
-            >{{ itemLabel(item) }}</a>
+            >{{ itemLabel(item) }}</RouterLink>
           </nav>
 
           <!-- Language selector. Extra bottom padding clears the
