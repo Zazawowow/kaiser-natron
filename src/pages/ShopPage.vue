@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router'
 import Navbar from '@/design-system/components/Navbar.vue'
 import ProductCard from '@/design-system/components/ProductCard.vue'
 import WaveDivider from '@/design-system/components/WaveDivider.vue'
+import Footer from '@/design-system/components/Footer.vue'
 import CartDrawer from '@/design-system/components/CartDrawer.vue'
 import {
   products,
@@ -249,6 +250,8 @@ onBeforeUnmount(() => {
       </div>
     </section>
   </template>
+
+  <Footer />
 
   <!-- Bottom clearance for the mobile floating cluster (search / cart /
        menu), same pattern as HomePage so both pages align visually. -->

@@ -16,6 +16,7 @@
 import { computed, onMounted, ref } from 'vue'
 import { useRoute, RouterLink } from 'vue-router'
 import Navbar from '@/design-system/components/Navbar.vue'
+import Footer from '@/design-system/components/Footer.vue'
 import Button from '@/design-system/components/Button.vue'
 import Icon from '@/design-system/components/Icon.vue'
 import { products, confirmCheckout } from '@/api/index.js'
@@ -127,4 +128,6 @@ onMounted(async () => {
       </article>
     </div>
   </main>
+
+  <Footer />
 </template>

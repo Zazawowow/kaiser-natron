@@ -6,6 +6,7 @@ import Hero from '@/design-system/components/Hero.vue'
 import Bundles from '@/design-system/components/Bundles.vue'
 import Revitalization from '@/design-system/components/Revitalization.vue'
 import About from '@/design-system/components/About.vue'
+import Footer from '@/design-system/components/Footer.vue'
 import CartDrawer from '@/design-system/components/CartDrawer.vue'
 import {
   products,
@@ -420,6 +421,8 @@ onBeforeUnmount(() => {
     :sub="aboutCopy.sub"
     :milestones="aboutCopy.milestones"
   />
+
+  <Footer />
 
   <!-- Bottom clearance for the mobile floating cluster (search / cart / menu).
        Cluster sits at bottom-5 (20px) + safe-area, is 56px tall, and needs a

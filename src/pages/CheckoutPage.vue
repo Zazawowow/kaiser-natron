@@ -33,6 +33,7 @@
  */
 import { computed, nextTick, onMounted, onBeforeUnmount, ref } from 'vue'
 import Navbar from '@/design-system/components/Navbar.vue'
+import Footer from '@/design-system/components/Footer.vue'
 import Input from '@/design-system/components/Input.vue'
 import Button from '@/design-system/components/Button.vue'
 import Icon from '@/design-system/components/Icon.vue'
@@ -537,6 +538,8 @@ onBeforeUnmount(() => {
       </div>
     </div>
   </main>
+
+  <Footer />
 
   <!-- Mobile bottom clearance — same pattern as Home/Shop. -->
   <div
