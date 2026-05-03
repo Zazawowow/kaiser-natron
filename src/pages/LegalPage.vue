@@ -96,7 +96,7 @@ onBeforeUnmount(() => {
 <template>
   <Navbar
     ref="navRef"
-    variant="paper"
+    variant="cream"
     layout="standard"
     :items="navItems"
     :cart-count="cart.count"

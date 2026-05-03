@@ -20,15 +20,49 @@ const routes = [
     meta: { layout: 'none' },
   },
   {
-    path: '/checkout',
-    name: 'checkout',
-    component: () => import('@/pages/CheckoutPage.vue'),
-    meta: { layout: 'none' },
-  },
-  {
     path: '/checkout/success',
     name: 'checkout-success',
     component: () => import('@/pages/CheckoutSuccessPage.vue'),
+    meta: { layout: 'none' },
+  },
+  {
+    path: '/checkout',
+    component: () => import('@/pages/CheckoutPage.vue'),
+    meta: { layout: 'none' },
+    children: [
+      { path: '', redirect: '/checkout/cart' },
+      {
+        path: 'cart',
+        name: 'checkout-cart',
+        component: () => import('@/pages/checkout/CartStep.vue'),
+      },
+      {
+        path: 'account',
+        name: 'checkout-account',
+        component: () => import('@/pages/checkout/AccountStep.vue'),
+      },
+      {
+        path: 'shipping',
+        name: 'checkout-shipping',
+        component: () => import('@/pages/checkout/ShippingStep.vue'),
+      },
+      {
+        path: 'payment',
+        name: 'checkout-payment',
+        component: () => import('@/pages/checkout/PaymentStep.vue'),
+      },
+    ],
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('@/pages/LoginPage.vue'),
+    meta: { layout: 'none' },
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: () => import('@/pages/RegisterPage.vue'),
     meta: { layout: 'none' },
   },
   {

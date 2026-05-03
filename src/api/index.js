@@ -21,3 +21,10 @@ export {
   createExpressIntent,
   confirmCheckout,
 } from './checkout.js'
+export {
+  getCurrentUser,
+  signIn,
+  register,
+  signOut,
+  requestPasswordReset,
+} from './auth.js'

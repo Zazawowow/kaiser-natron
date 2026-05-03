@@ -1,0 +1,187 @@
+<script setup>
+/**
+ * Standalone /register page. New customers arrive here from the
+ * login page's "no account yet" link or from marketing CTAs.
+ * Mirrors the AccountStep register tab so the experience is
+ * consistent — same fields, same validation, same backend call.
+ */
+import { ref, computed, onBeforeUnmount, onMounted } from 'vue'
+import { useRoute, useRouter, RouterLink } from 'vue-router'
+import Navbar from '@/design-system/components/Navbar.vue'
+import Footer from '@/design-system/components/Footer.vue'
+import Input from '@/design-system/components/Input.vue'
+import Button from '@/design-system/components/Button.vue'
+import { products, register } from '@/api/index.js'
+import { useCartStore } from '@/stores/cart.js'
+import { useI18n } from '@/i18n/index.js'
+
+const { t } = useI18n()
+const cart = useCartStore()
+const route = useRoute()
+const router = useRouter()
+
+const navItems = [
+  { key: 'nav.shop', href: '/shop' },
+  { key: 'nav.bundles', href: '/#bundles' },
+  { key: 'nav.revitalization', href: '/#revitalize' },
+  { key: 'nav.about', href: '/#about' },
+]
+
+const firstName = ref('')
+const lastName = ref('')
+const email = ref('')
+const password = ref('')
+const passwordConfirm = ref('')
+const acceptsMarketing = ref(false)
+
+const submitting = ref(false)
+const submitError = ref('')
+
+const passwordsMatch = computed(() => password.value === passwordConfirm.value)
+const submitDisabled = computed(
+  () =>
+    !email.value ||
+    password.value.length < 8 ||
+    !passwordsMatch.value,
+)
+
+async function onSubmit() {
+  submitError.value = ''
+  submitting.value = true
+  try {
+    await register({
+      email: email.value,
+      password: password.value,
+      firstName: firstName.value,
+      lastName: lastName.value,
+      acceptsMarketing: acceptsMarketing.value,
+    })
+    const next = String(route.query.next || '/')
+    router.push(next)
+  } catch (err) {
+    submitError.value = err?.message || t('checkout.error.generic')
+  } finally {
+    submitting.value = false
+  }
+}
+
+const navRef = ref(null)
+let navResizeObserver = null
+function syncNavHeight() {
+  const el = navRef.value
+  const node = el && (el.$el || el)
+  if (!node || typeof window === 'undefined') return
+  const h = Math.round(node.getBoundingClientRect().height)
+  document.documentElement.style.setProperty('--nav-h', `${h}px`)
+}
+onMounted(() => {
+  syncNavHeight()
+  if (typeof ResizeObserver !== 'undefined' && navRef.value) {
+    const node = navRef.value.$el || navRef.value
+    navResizeObserver = new ResizeObserver(syncNavHeight)
+    navResizeObserver.observe(node)
+  }
+  window.addEventListener('resize', syncNavHeight)
+})
+onBeforeUnmount(() => {
+  if (navResizeObserver) navResizeObserver.disconnect()
+  if (typeof window !== 'undefined') window.removeEventListener('resize', syncNavHeight)
+})
+</script>
+
+<template>
+  <Navbar
+    ref="navRef"
+    variant="cream"
+    layout="standard"
+    :items="navItems"
+    :cart-count="cart.count"
+    :products="products"
+  />
+
+  <main class="bg-cream text-ink min-h-svh">
+    <div
+      class="mx-auto w-full max-w-md px-6 py-14 sm:px-8 sm:py-20 md:py-24"
+    >
+      <header class="flex flex-col gap-3 mb-8 text-center">
+        <p class="eyebrow">{{ t('auth.register.eyebrow') }}</p>
+        <h1 class="font-display font-normal leading-[1.05] tracking-tight text-ink text-headline-md">
+          {{ t('auth.register.title') }}
+        </h1>
+        <p class="text-[14px] text-muted">{{ t('auth.register.sub') }}</p>
+      </header>
+
+      <form
+        class="flex flex-col gap-5 rounded-md border border-line bg-paper p-6 md:p-8"
+        novalidate
+        @submit.prevent="onSubmit"
+      >
+        <div class="grid gap-5 md:grid-cols-2">
+          <Input
+            v-model="firstName"
+            :label="t('checkout.field.firstName')"
+          />
+          <Input
+            v-model="lastName"
+            :label="t('checkout.field.lastName')"
+          />
+        </div>
+        <Input
+          v-model="email"
+          :label="t('checkout.field.email')"
+          type="email"
+          required
+          :placeholder="t('checkout.placeholder.email')"
+        />
+        <Input
+          v-model="password"
+          :label="t('checkout.field.password')"
+          type="password"
+          required
+          :hint="t('checkout.hint.password')"
+        />
+        <Input
+          v-model="passwordConfirm"
+          :label="t('checkout.field.passwordConfirm')"
+          type="password"
+          required
+          :error="passwordConfirm && !passwordsMatch ? t('checkout.error.passwordMismatch') : ''"
+        />
+
+        <label class="inline-flex items-center gap-3 cursor-pointer select-none">
+          <input
+            v-model="acceptsMarketing"
+            type="checkbox"
+            class="w-5 h-5 rounded-xs border border-line accent-brand"
+          />
+          <span class="text-sm text-ink">{{ t('checkout.field.marketing') }}</span>
+        </label>
+
+        <p
+          v-if="submitError"
+          class="text-sm text-danger"
+          role="alert"
+          aria-live="polite"
+        >{{ submitError }}</p>
+
+        <Button
+          type="submit"
+          variant="primary"
+          size="lg"
+          block
+          :loading="submitting"
+          :disabled="submitDisabled"
+        >{{ t('auth.register.cta') }}</Button>
+      </form>
+
+      <p class="mt-8 text-center text-[14px] text-muted">
+        {{ t('auth.register.haveAccount') }}
+        <RouterLink to="/login" class="text-brand hover:underline">
+          {{ t('auth.register.cta.signIn') }}
+        </RouterLink>
+      </p>
+    </div>
+  </main>
+
+  <Footer />
+</template>

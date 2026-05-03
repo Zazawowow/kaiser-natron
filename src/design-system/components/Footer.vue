@@ -51,6 +51,8 @@ const legalLinks = [
 
 const exploreLinks = [
   { key: 'footer.explore.shop', href: '/shop' },
+  { key: 'footer.explore.pflege', href: '/pflege' },
+  { key: 'footer.explore.haushalt', href: '/haushalt' },
   { key: 'footer.explore.bundles', href: '/#bundles' },
   { key: 'footer.explore.about', href: '/#about' },
 ]
@@ -65,7 +67,7 @@ const year = new Date().getFullYear()
     >
       <div class="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr] md:gap-12">
         <div class="flex flex-col gap-4 max-w-sm">
-          <Logo :class="tone.logo" />
+          <Logo :class="['w-20 md:w-24 h-auto', tone.logo]" />
           <p :class="['text-sm leading-relaxed', tone.muted]">
             {{ t('footer.tagline') }}
           </p>

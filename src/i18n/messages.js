@@ -481,6 +481,8 @@ const de = {
   'footer.tagline': 'Das Original aus Österreich. Reines Natron für Küche, Haushalt und Pflege – seit Generationen.',
   'footer.explore.heading': 'Entdecken',
   'footer.explore.shop': 'Shop',
+  'footer.explore.pflege': 'Pflege',
+  'footer.explore.haushalt': 'Haushalt',
   'footer.explore.bundles': 'Bundles',
   'footer.explore.about': 'Über uns',
   'footer.legal.heading': 'Rechtliches',
@@ -576,6 +578,76 @@ const de = {
   'category.haushalt.cta.headline.em': 'Küche im Shop.',
   'category.haushalt.cta.sub': 'Bade- und Küchenartikel, Bundles und mehr — alles auf einer Seite.',
   'category.haushalt.cta.button': 'Zum Shop',
+
+  // Stepped checkout — chrome and step-level copy.
+  'checkout.stepper.label': 'Kassenfortschritt',
+  'checkout.step.cart': 'Warenkorb',
+  'checkout.step.account': 'Konto',
+  'checkout.step.shipping': 'Versand',
+  'checkout.step.payment': 'Bezahlung',
+  'checkout.back': 'Zurück',
+  'checkout.exit': 'Verlassen',
+  'checkout.backToShopping': 'Zurück zum Shop',
+  'checkout.home': 'Startseite',
+  'checkout.cta.review': 'Weiter',
+
+  'checkout.cart.heading': 'Dein Warenkorb',
+  'checkout.cart.title': 'Warenkorb',
+  'checkout.cart.itemsLabel': 'Artikel',
+  'checkout.cart.perItem': 'pro Stück',
+  'checkout.cart.shipping': 'Versand',
+  'checkout.cart.total': 'Gesamt',
+  'checkout.cart.cta.shop': 'Zum Shop',
+  'checkout.cart.cta.continueShopping': '← Weiter einkaufen',
+  'checkout.cart.cta.continue': 'Weiter',
+
+  'checkout.account.heading': 'Konto & Kontakt',
+  'checkout.account.sub': 'Als Gast bestellen oder mit deinem Konto fortfahren – ganz wie es dir lieber ist.',
+  'checkout.account.tabsLabel': 'Konto-Optionen',
+  'checkout.account.tab.guest': 'Als Gast',
+  'checkout.account.tab.signin': 'Anmelden',
+  'checkout.account.tab.register': 'Konto erstellen',
+  'checkout.account.forgot': 'Passwort vergessen?',
+  'checkout.account.cta.continue': 'Weiter',
+
+  'checkout.shipping.sub': 'Wohin sollen wir liefern? Du kannst die Rechnungsadresse später separat angeben.',
+  'checkout.billing.sub': 'Falls die Rechnung an eine andere Adresse gehen soll, hier deaktivieren.',
+  'checkout.shipping.cta.continue': 'Weiter',
+
+  'checkout.payment.sub': 'Mit Apple Pay, Google Pay oder per Karte – alles über Stripe abgewickelt.',
+  'checkout.section.card': 'Mit Karte bezahlen',
+
+  'checkout.field.firstName': 'Vorname',
+  'checkout.field.lastName': 'Nachname',
+  'checkout.field.password': 'Passwort',
+  'checkout.field.passwordConfirm': 'Passwort bestätigen',
+  'checkout.hint.password': 'Mindestens 8 Zeichen.',
+
+  'checkout.error.passwordMismatch': 'Die Passwörter stimmen nicht überein.',
+  'checkout.error.addressIncomplete': 'Bitte fülle alle Pflichtfelder der Adresse aus.',
+
+  // Auth — standalone /login and /register pages.
+  'auth.login.eyebrow': 'Wieder da',
+  'auth.login.title': 'Anmelden',
+  'auth.login.sub': 'Mit deinem Kaiser-Natron® Konto fortfahren.',
+  'auth.login.cta': 'Anmelden',
+  'auth.login.forgot': 'Passwort vergessen?',
+  'auth.login.newCustomer': 'Neu hier?',
+  'auth.login.cta.register': 'Konto erstellen',
+
+  'auth.reset.title': 'Passwort zurücksetzen',
+  'auth.reset.sub': 'Wir schicken dir einen sicheren Link an deine E-Mail-Adresse.',
+  'auth.reset.cta': 'Link anfordern',
+  'auth.reset.back': '← Zurück zur Anmeldung',
+  'auth.reset.sent.title': 'Mail unterwegs',
+  'auth.reset.sent.body': 'Wenn ein Konto zu dieser Adresse existiert, findest du den Link in deinem Postfach.',
+
+  'auth.register.eyebrow': 'Konto erstellen',
+  'auth.register.title': 'Willkommen',
+  'auth.register.sub': 'Mit einem Konto siehst du Bestellverlauf, Adressen und exklusive Bundle-Angebote.',
+  'auth.register.cta': 'Konto erstellen',
+  'auth.register.haveAccount': 'Schon ein Konto?',
+  'auth.register.cta.signIn': 'Anmelden',
 }
 
 // Austrian German (Österreichisches Deutsch) overrides.
@@ -1059,6 +1131,8 @@ const en = {
   'footer.tagline': 'The original from Austria. Pure sodium bicarbonate for the kitchen, the home, and personal care — for generations.',
   'footer.explore.heading': 'Explore',
   'footer.explore.shop': 'Shop',
+  'footer.explore.pflege': 'Personal care',
+  'footer.explore.haushalt': 'Home',
   'footer.explore.bundles': 'Bundles',
   'footer.explore.about': 'About',
   'footer.legal.heading': 'Legal',
@@ -1154,6 +1228,76 @@ const en = {
   'category.haushalt.cta.headline.em': 'kitchen too in the shop.',
   'category.haushalt.cta.sub': 'Bath and kitchen products, bundles and more — all on one page.',
   'category.haushalt.cta.button': 'Visit the shop',
+
+  // Stepped checkout (EN).
+  'checkout.stepper.label': 'Checkout progress',
+  'checkout.step.cart': 'Cart',
+  'checkout.step.account': 'Account',
+  'checkout.step.shipping': 'Shipping',
+  'checkout.step.payment': 'Payment',
+  'checkout.back': 'Back',
+  'checkout.exit': 'Exit',
+  'checkout.backToShopping': 'Back to shopping',
+  'checkout.home': 'Home',
+  'checkout.cta.review': 'Continue',
+
+  'checkout.cart.heading': 'Your cart',
+  'checkout.cart.title': 'Cart',
+  'checkout.cart.itemsLabel': 'Items',
+  'checkout.cart.perItem': 'each',
+  'checkout.cart.shipping': 'Shipping',
+  'checkout.cart.total': 'Total',
+  'checkout.cart.cta.shop': 'Visit the shop',
+  'checkout.cart.cta.continueShopping': '← Continue shopping',
+  'checkout.cart.cta.continue': 'Continue',
+
+  'checkout.account.heading': 'Account & contact',
+  'checkout.account.sub': 'Check out as guest or continue with your account — whatever you prefer.',
+  'checkout.account.tabsLabel': 'Account options',
+  'checkout.account.tab.guest': 'Guest',
+  'checkout.account.tab.signin': 'Sign in',
+  'checkout.account.tab.register': 'Create account',
+  'checkout.account.forgot': 'Forgot password?',
+  'checkout.account.cta.continue': 'Continue',
+
+  'checkout.shipping.sub': 'Where shall we deliver? You can enter a separate billing address below if needed.',
+  'checkout.billing.sub': 'If the invoice should go to a different address, untick the box.',
+  'checkout.shipping.cta.continue': 'Continue',
+
+  'checkout.payment.sub': 'Pay with Apple Pay, Google Pay or card — all processed through Stripe.',
+  'checkout.section.card': 'Pay with card',
+
+  'checkout.field.firstName': 'First name',
+  'checkout.field.lastName': 'Last name',
+  'checkout.field.password': 'Password',
+  'checkout.field.passwordConfirm': 'Confirm password',
+  'checkout.hint.password': 'At least 8 characters.',
+
+  'checkout.error.passwordMismatch': 'The passwords don\'t match.',
+  'checkout.error.addressIncomplete': 'Please fill in all required address fields.',
+
+  // Auth (EN).
+  'auth.login.eyebrow': 'Welcome back',
+  'auth.login.title': 'Sign in',
+  'auth.login.sub': 'Continue with your Kaiser-Natron® account.',
+  'auth.login.cta': 'Sign in',
+  'auth.login.forgot': 'Forgot password?',
+  'auth.login.newCustomer': 'New here?',
+  'auth.login.cta.register': 'Create account',
+
+  'auth.reset.title': 'Reset password',
+  'auth.reset.sub': 'We\'ll send a secure link to your email.',
+  'auth.reset.cta': 'Request link',
+  'auth.reset.back': '← Back to sign in',
+  'auth.reset.sent.title': 'Mail on its way',
+  'auth.reset.sent.body': 'If an account exists for that address, you\'ll find the link in your inbox.',
+
+  'auth.register.eyebrow': 'Create account',
+  'auth.register.title': 'Welcome',
+  'auth.register.sub': 'An account gets you order history, saved addresses, and exclusive bundle offers.',
+  'auth.register.cta': 'Create account',
+  'auth.register.haveAccount': 'Already have an account?',
+  'auth.register.cta.signIn': 'Sign in',
 }
 
 export default {
