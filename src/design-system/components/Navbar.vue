@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed, watch, onBeforeUnmount } from 'vue'
-import { useRoute, RouterLink } from 'vue-router'
+import { useRoute, useRouter, RouterLink } from 'vue-router'
 import Logo from './Logo.vue'
 import Icon from './Icon.vue'
 import IconButton from './IconButton.vue'
@@ -132,6 +132,11 @@ const menuItems = computed(() => [...props.items, ...props.secondaryItems])
 // route hash is compared explicitly because Vue Router's path
 // excludes the hash.
 const route = useRoute()
+const router = useRouter()
+
+function goToLogin() {
+  router.push('/login')
+}
 function isActive(href) {
   if (!href || href === '#') return false
   const here = route.path
@@ -253,12 +258,33 @@ onBeforeUnmount(() => {
         </button>
         <LanguageSwitcher :tone="variant" />
         <IconButton
+          icon="user"
+          variant="ghost"
+          size="md"
+          :aria-label="t('auth.login.cta')"
+          @click="goToLogin"
+        />
+        <IconButton
           icon="cart"
           variant="accent"
           size="md"
           :count="cartCount"
           :aria-label="t('cart.open')"
           @click="$emit('cart')"
+        />
+      </div>
+
+      <!-- Mobile-only: account icon on the top right of the bar. The
+           cart still lives in the bottom-right floating cluster; this
+           keeps account discovery one tap away without crowding the
+           thumb-zone cluster. -->
+      <div class="md:hidden flex items-center">
+        <IconButton
+          icon="user"
+          variant="ghost"
+          size="md"
+          :aria-label="t('auth.login.cta')"
+          @click="goToLogin"
         />
       </div>
     </div>

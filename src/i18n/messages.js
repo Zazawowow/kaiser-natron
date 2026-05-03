@@ -621,6 +621,11 @@ const de = {
   'checkout.field.lastName': 'Nachname',
   'checkout.field.password': 'Passwort',
   'checkout.field.passwordConfirm': 'Passwort bestätigen',
+  'checkout.field.salutation': 'Anrede',
+  'checkout.field.salutation.placeholder': 'Bitte auswählen',
+  'checkout.field.salutation.frau': 'Frau',
+  'checkout.field.salutation.herr': 'Herr',
+  'checkout.field.salutation.divers': 'Divers',
   'checkout.hint.password': 'Mindestens 8 Zeichen.',
 
   'checkout.error.passwordMismatch': 'Die Passwörter stimmen nicht überein.',
@@ -648,6 +653,9 @@ const de = {
   'auth.register.cta': 'Konto erstellen',
   'auth.register.haveAccount': 'Schon ein Konto?',
   'auth.register.cta.signIn': 'Anmelden',
+  'auth.register.terms.before': 'Ich habe die',
+  'auth.register.terms.link': 'AGB & Datenschutzerklärung',
+  'auth.register.terms.after': 'gelesen und akzeptiere sie.',
 }
 
 // Austrian German (Österreichisches Deutsch) overrides.
@@ -1271,6 +1279,11 @@ const en = {
   'checkout.field.lastName': 'Last name',
   'checkout.field.password': 'Password',
   'checkout.field.passwordConfirm': 'Confirm password',
+  'checkout.field.salutation': 'Salutation',
+  'checkout.field.salutation.placeholder': 'Please select',
+  'checkout.field.salutation.frau': 'Mrs.',
+  'checkout.field.salutation.herr': 'Mr.',
+  'checkout.field.salutation.divers': 'Diverse',
   'checkout.hint.password': 'At least 8 characters.',
 
   'checkout.error.passwordMismatch': 'The passwords don\'t match.',
@@ -1298,6 +1311,9 @@ const en = {
   'auth.register.cta': 'Create account',
   'auth.register.haveAccount': 'Already have an account?',
   'auth.register.cta.signIn': 'Sign in',
+  'auth.register.terms.before': 'I have read and accept the',
+  'auth.register.terms.link': 'Terms & Privacy policy',
+  'auth.register.terms.after': '.',
 }
 
 export default {

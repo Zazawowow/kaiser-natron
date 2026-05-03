@@ -27,12 +27,14 @@ const navItems = [
   { key: 'nav.about', href: '/#about' },
 ]
 
+const salutation = ref('')
 const firstName = ref('')
 const lastName = ref('')
 const email = ref('')
 const password = ref('')
 const passwordConfirm = ref('')
 const acceptsMarketing = ref(false)
+const acceptsTerms = ref(false)
 
 const submitting = ref(false)
 const submitError = ref('')
@@ -42,7 +44,8 @@ const submitDisabled = computed(
   () =>
     !email.value ||
     password.value.length < 8 ||
-    !passwordsMatch.value,
+    !passwordsMatch.value ||
+    !acceptsTerms.value,
 )
 
 async function onSubmit() {
@@ -52,9 +55,11 @@ async function onSubmit() {
     await register({
       email: email.value,
       password: password.value,
+      salutation: salutation.value,
       firstName: firstName.value,
       lastName: lastName.value,
       acceptsMarketing: acceptsMarketing.value,
+      acceptsTerms: acceptsTerms.value,
     })
     const next = String(route.query.next || '/')
     router.push(next)
@@ -116,6 +121,21 @@ onBeforeUnmount(() => {
         novalidate
         @submit.prevent="onSubmit"
       >
+        <div class="flex flex-col gap-2">
+          <label class="text-[11px] font-bold uppercase tracking-eyebrow text-muted">
+            {{ t('checkout.field.salutation') }}
+          </label>
+          <select
+            v-model="salutation"
+            class="w-full rounded-sm border border-line bg-paper px-4 py-3 text-[15px] text-ink transition-colors duration-base focus:outline-none focus:border-brand"
+          >
+            <option value="">{{ t('checkout.field.salutation.placeholder') }}</option>
+            <option value="frau">{{ t('checkout.field.salutation.frau') }}</option>
+            <option value="herr">{{ t('checkout.field.salutation.herr') }}</option>
+            <option value="divers">{{ t('checkout.field.salutation.divers') }}</option>
+          </select>
+        </div>
+
         <div class="grid gap-5 md:grid-cols-2">
           <Input
             v-model="firstName"
@@ -148,13 +168,29 @@ onBeforeUnmount(() => {
           :error="passwordConfirm && !passwordsMatch ? t('checkout.error.passwordMismatch') : ''"
         />
 
-        <label class="inline-flex items-center gap-3 cursor-pointer select-none">
+        <label class="inline-flex items-start gap-3 cursor-pointer select-none">
           <input
             v-model="acceptsMarketing"
             type="checkbox"
-            class="w-5 h-5 rounded-xs border border-line accent-brand"
+            class="mt-0.5 w-5 h-5 shrink-0 rounded-xs border border-line accent-brand"
           />
           <span class="text-sm text-ink">{{ t('checkout.field.marketing') }}</span>
+        </label>
+
+        <label class="inline-flex items-start gap-3 cursor-pointer select-none">
+          <input
+            v-model="acceptsTerms"
+            type="checkbox"
+            required
+            class="mt-0.5 w-5 h-5 shrink-0 rounded-xs border border-line accent-brand"
+          />
+          <span class="text-sm text-ink">
+            {{ t('auth.register.terms.before') }}
+            <RouterLink to="/datenschutz" class="text-brand underline">
+              {{ t('auth.register.terms.link') }}
+            </RouterLink>
+            {{ t('auth.register.terms.after') }}
+          </span>
         </label>
 
         <p
