@@ -1,6 +1,6 @@
 <script setup>
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 import Navbar from '@/design-system/components/Navbar.vue'
 import Hero from '@/design-system/components/Hero.vue'
 import Bundles from '@/design-system/components/Bundles.vue'
@@ -21,7 +21,24 @@ import { useI18n } from '@/i18n/index.js'
 const { t } = useI18n()
 const cart = useCartStore()
 const router = useRouter()
+const route = useRoute()
 const cartOpen = ref(false)
+
+// Smooth-scroll to the target section when the URL hash changes.
+// Belt-and-suspenders for Vue Router's scrollBehavior — same-route
+// hash navigations sometimes don't trigger it (or run before the
+// section is mounted), so we re-fire scrollIntoView here. `immediate`
+// covers the case where the user lands on /#bundles directly.
+watch(
+  () => route.hash,
+  async (hash) => {
+    if (!hash) return
+    await nextTick()
+    const el = document.querySelector(hash)
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  },
+  { immediate: true },
+)
 
 // Cart drawer's "checkout" event closes the drawer and navigates to
 // the checkout page. Kept centralised here (and on ShopPage) so the

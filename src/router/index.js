@@ -158,14 +158,16 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
-  // Anchor-aware scroll: navigating to `/#bundles` or `/shop#care`
-  // scrolls to that section rather than resetting to top. Each
-  // section's `scroll-mt-[calc(var(--nav-h)+1rem)]` offset handles
-  // the sticky-nav clearance. Back/forward navigation always returns
-  // to the top of the destination — `savedPosition` is intentionally
-  // not honoured so users land at a predictable position rather than
-  // wherever they last scrolled to.
-  scrollBehavior(to) {
+  // Scroll rules:
+  //  • Browser back/forward → restore the previous scroll y so
+  //    /shop ⇄ /shop/<slug> round-trips land where the user left off.
+  //  • Hash nav (e.g. /#bundles) → smooth-scroll to the target.
+  //    Belt-and-suspenders: HomePage also runs a route.hash watcher
+  //    so that hash-only changes within the same route are caught
+  //    even when Vue Router's scrollBehavior is short-circuited.
+  //  • Everything else (forward route nav) → top of the page.
+  scrollBehavior(to, _from, savedPosition) {
+    if (savedPosition) return savedPosition
     if (to.hash) return { el: to.hash, behavior: 'smooth' }
     return { top: 0 }
   },
