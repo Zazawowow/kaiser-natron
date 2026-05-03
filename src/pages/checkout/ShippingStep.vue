@@ -8,6 +8,7 @@ import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import Input from '@/design-system/components/Input.vue'
 import Button from '@/design-system/components/Button.vue'
+import Icon from '@/design-system/components/Icon.vue'
 import { useCheckoutStore } from '@/stores/checkout.js'
 import { useI18n } from '@/i18n/index.js'
 
@@ -77,14 +78,22 @@ function onSubmit() {
           <label class="text-[11px] font-bold uppercase tracking-eyebrow text-muted">
             {{ t('checkout.field.country') }}<span class="text-danger"> *</span>
           </label>
-          <select
-            :value="checkout.shippingAddress.country"
-            required
-            class="w-full rounded-sm border border-line bg-paper px-4 py-3 text-[15px] text-ink transition-colors duration-base focus:outline-none focus:border-brand"
-            @change="checkout.updateShipping({ country: $event.target.value })"
-          >
-            <option v-for="c in countries" :key="c.code" :value="c.code">{{ c.label }}</option>
-          </select>
+          <div class="relative">
+            <select
+              :value="checkout.shippingAddress.country"
+              required
+              class="appearance-none w-full rounded-sm border border-line bg-paper pl-4 pr-10 py-3 text-[15px] text-ink transition-colors duration-base focus:outline-none focus:border-brand"
+              @change="checkout.updateShipping({ country: $event.target.value })"
+            >
+              <option v-for="c in countries" :key="c.code" :value="c.code">{{ c.label }}</option>
+            </select>
+            <Icon
+              name="chevron-down"
+              :size="18"
+              :stroke-width="2"
+              class="absolute right-4 top-1/2 -translate-y-1/2 text-muted pointer-events-none"
+            />
+          </div>
         </div>
         <Input
           :model-value="checkout.shippingAddress.phone"
@@ -142,14 +151,22 @@ function onSubmit() {
           <label class="text-[11px] font-bold uppercase tracking-eyebrow text-muted">
             {{ t('checkout.field.country') }}<span class="text-danger"> *</span>
           </label>
-          <select
-            :value="checkout.billingAddress.country"
-            required
-            class="w-full rounded-sm border border-line bg-paper px-4 py-3 text-[15px] text-ink transition-colors duration-base focus:outline-none focus:border-brand"
-            @change="checkout.updateBilling({ country: $event.target.value })"
-          >
-            <option v-for="c in countries" :key="c.code" :value="c.code">{{ c.label }}</option>
-          </select>
+          <div class="relative">
+            <select
+              :value="checkout.billingAddress.country"
+              required
+              class="appearance-none w-full rounded-sm border border-line bg-paper pl-4 pr-10 py-3 text-[15px] text-ink transition-colors duration-base focus:outline-none focus:border-brand"
+              @change="checkout.updateBilling({ country: $event.target.value })"
+            >
+              <option v-for="c in countries" :key="c.code" :value="c.code">{{ c.label }}</option>
+            </select>
+            <Icon
+              name="chevron-down"
+              :size="18"
+              :stroke-width="2"
+              class="absolute right-4 top-1/2 -translate-y-1/2 text-muted pointer-events-none"
+            />
+          </div>
         </div>
         <Input
           :model-value="checkout.billingAddress.phone"

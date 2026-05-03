@@ -11,6 +11,7 @@ import Navbar from '@/design-system/components/Navbar.vue'
 import Footer from '@/design-system/components/Footer.vue'
 import Input from '@/design-system/components/Input.vue'
 import Button from '@/design-system/components/Button.vue'
+import Icon from '@/design-system/components/Icon.vue'
 import { products, register } from '@/api/index.js'
 import { useCartStore } from '@/stores/cart.js'
 import { useI18n } from '@/i18n/index.js'
@@ -125,15 +126,23 @@ onBeforeUnmount(() => {
           <label class="text-[11px] font-bold uppercase tracking-eyebrow text-muted">
             {{ t('checkout.field.salutation') }}
           </label>
-          <select
-            v-model="salutation"
-            class="w-full rounded-sm border border-line bg-paper px-4 py-3 text-[15px] text-ink transition-colors duration-base focus:outline-none focus:border-brand"
-          >
-            <option value="">{{ t('checkout.field.salutation.placeholder') }}</option>
-            <option value="frau">{{ t('checkout.field.salutation.frau') }}</option>
-            <option value="herr">{{ t('checkout.field.salutation.herr') }}</option>
-            <option value="divers">{{ t('checkout.field.salutation.divers') }}</option>
-          </select>
+          <div class="relative">
+            <select
+              v-model="salutation"
+              class="appearance-none w-full rounded-sm border border-line bg-paper pl-4 pr-10 py-3 text-[15px] text-ink transition-colors duration-base focus:outline-none focus:border-brand"
+            >
+              <option value="">{{ t('checkout.field.salutation.placeholder') }}</option>
+              <option value="frau">{{ t('checkout.field.salutation.frau') }}</option>
+              <option value="herr">{{ t('checkout.field.salutation.herr') }}</option>
+              <option value="divers">{{ t('checkout.field.salutation.divers') }}</option>
+            </select>
+            <Icon
+              name="chevron-down"
+              :size="18"
+              :stroke-width="2"
+              class="absolute right-4 top-1/2 -translate-y-1/2 text-muted pointer-events-none"
+            />
+          </div>
         </div>
 
         <div class="grid gap-5 md:grid-cols-2">
