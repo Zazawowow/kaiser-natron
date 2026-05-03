@@ -12,7 +12,14 @@ import Footer from '@/design-system/components/Footer.vue'
 import Input from '@/design-system/components/Input.vue'
 import Button from '@/design-system/components/Button.vue'
 import Icon from '@/design-system/components/Icon.vue'
-import { products, register } from '@/api/index.js'
+import CartDrawer from '@/design-system/components/CartDrawer.vue'
+import {
+  products,
+  register,
+  addToCart,
+  updateCartItem,
+  removeFromCart,
+} from '@/api/index.js'
 import { useCartStore } from '@/stores/cart.js'
 import { useI18n } from '@/i18n/index.js'
 
@@ -20,6 +27,22 @@ const { t } = useI18n()
 const cart = useCartStore()
 const route = useRoute()
 const router = useRouter()
+const cartOpen = ref(false)
+
+function goCheckout() {
+  cartOpen.value = false
+  router.push('/checkout')
+}
+async function onSearchSelect(product) {
+  await addToCart(product.id, 1)
+  cartOpen.value = true
+}
+async function onQty({ productId, quantity }) {
+  await updateCartItem(productId, quantity)
+}
+async function onRemove(productId) {
+  await removeFromCart(productId)
+}
 
 const navItems = [
   { key: 'nav.shop', href: '/shop' },
@@ -103,6 +126,8 @@ onBeforeUnmount(() => {
     :items="navItems"
     :cart-count="cart.count"
     :products="products"
+    @cart="cartOpen = true"
+    @search="onSearchSelect"
   />
 
   <main class="bg-cream text-ink min-h-svh">
@@ -229,4 +254,14 @@ onBeforeUnmount(() => {
   </main>
 
   <Footer />
+
+  <CartDrawer
+    v-model="cartOpen"
+    :items="cart.items"
+    :subtotal="cart.subtotal"
+    :count="cart.count"
+    @update-quantity="onQty"
+    @remove="onRemove"
+    @checkout="goCheckout"
+  />
 </template>
