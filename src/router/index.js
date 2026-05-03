@@ -166,7 +166,7 @@ const router = createRouter({
   // not honoured so users land at a predictable position rather than
   // wherever they last scrolled to.
   scrollBehavior(to) {
-    if (to.hash) return { el: to.hash }
+    if (to.hash) return { el: to.hash, behavior: 'smooth' }
     return { top: 0 }
   },
 })
