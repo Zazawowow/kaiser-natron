@@ -160,15 +160,21 @@ const router = createRouter({
   routes,
   // Scroll rules:
   //  • Browser back/forward → restore the previous scroll y so
-  //    /shop ⇄ /shop/<slug> round-trips land where the user left off.
-  //  • Hash nav (e.g. /#bundles) → smooth-scroll to the target.
-  //    Belt-and-suspenders: HomePage also runs a route.hash watcher
-  //    so that hash-only changes within the same route are caught
-  //    even when Vue Router's scrollBehavior is short-circuited.
-  //  • Everything else (forward route nav) → top of the page.
-  scrollBehavior(to, _from, savedPosition) {
+  //    /shop ⇄ /shop/<slug> and / ⇄ /shop/<slug> round-trips land
+  //    exactly where the user left off.
+  //  • Same-route hash nav (e.g. clicking Bundles while on the
+  //    home page) → smooth-scroll to the target.
+  //  • Cross-route hash nav (e.g. /shop → /#bundles): the
+  //    destination just mounted, so jump instantly.
+  //  • Plain forward route nav → top of the page.
+  scrollBehavior(to, from, savedPosition) {
     if (savedPosition) return savedPosition
-    if (to.hash) return { el: to.hash, behavior: 'smooth' }
+    if (to.hash) {
+      const sameRoute = from && from.path === to.path
+      return sameRoute
+        ? { el: to.hash, behavior: 'smooth' }
+        : { el: to.hash }
+    }
     return { top: 0 }
   },
 })
