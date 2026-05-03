@@ -148,6 +148,39 @@ function isActive(href) {
   return href === hereHash
 }
 
+// RouterLink doesn't fire a navigation when the destination resolves
+// to the current URL, so Vue Router's scrollBehavior never runs for
+// "logo while on /" or "/#bundles while on /#bundles". We handle the
+// scroll manually here so those clicks always animate.
+function onNavClick(item, event) {
+  if (!item || !item.href) return
+  const [path, hash] = item.href.split('#')
+  const targetPath = path || '/'
+  const onSameRoute = targetPath === route.path
+  if (!onSameRoute) return
+  if (hash) {
+    const el = document.getElementById(hash)
+    if (el) {
+      event?.preventDefault?.()
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      try {
+        history.replaceState(history.state, '', `#${hash}`)
+      } catch {}
+    }
+    return
+  }
+  // Same path, no hash (logo click on home) → smooth-scroll to top.
+  event?.preventDefault?.()
+  window.scrollTo({ top: 0, behavior: 'smooth' })
+}
+
+function onLogoClick(event) {
+  if (route.path === '/') {
+    event?.preventDefault?.()
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+}
+
 watch(menuOpen, (open) => {
   if (typeof document === 'undefined') return
   document.documentElement.style.overflow = open ? 'hidden' : ''
@@ -167,6 +200,7 @@ onBeforeUnmount(() => {
           to="/"
           :class="['block shrink-0 py-1', tone.logo]"
           aria-label="Kaiser Natron home"
+          @click="onLogoClick"
         >
           <Logo :class="logoClasses" />
         </RouterLink>
@@ -179,7 +213,7 @@ onBeforeUnmount(() => {
               isActive(item.href) ? 'text-accent' : tone.link,
               'text-[14px] font-medium tracking-label transition-colors duration-base',
             ]"
-            @click="$emit('nav', item)"
+            @click="onNavClick(item, $event); $emit('nav', item)"
           >{{ itemLabel(item) }}</RouterLink>
         </nav>
       </div>
@@ -202,7 +236,7 @@ onBeforeUnmount(() => {
               isActive(item.href) ? 'text-accent' : tone.link,
               'text-[14px] font-medium tracking-label transition-colors duration-base',
             ]"
-            @click="$emit('nav', item)"
+            @click="onNavClick(item, $event); $emit('nav', item)"
           >{{ itemLabel(item) }}</RouterLink>
         </nav>
         <button
@@ -310,7 +344,7 @@ onBeforeUnmount(() => {
                   ? 'text-accent'
                   : 'text-cream hover:text-accent',
               ]"
-              @click="menuOpen = false; $emit('nav', item)"
+              @click="onNavClick(item, $event); menuOpen = false; $emit('nav', item)"
             >{{ itemLabel(item) }}</RouterLink>
           </nav>
 
