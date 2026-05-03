@@ -130,6 +130,15 @@ const de = {
   'ds.nav.bundles': 'Bundles-Sektion',
   'ds.nav.revitalization': 'Revitalization',
   'ds.nav.about': 'Über uns',
+  'ds.nav.footer': 'Footer',
+  'ds.nav.checkoutStepper': 'Kassen-Stepper',
+  'ds.footer.title': 'Footer',
+  'ds.footer.description': 'Sitewide-Footer mit Logo, Marken-Tagline, Erkundungs- und Rechtslinks. Drei Tonvarianten — cream (Standard), brand (Markengrün), paper (heller Akzent) — passen sich der Seitenfläche an.',
+  'ds.footer.tone.cream': 'Cream (Standard)',
+  'ds.footer.tone.brand': 'Brand',
+  'ds.footer.tone.paper': 'Paper',
+  'ds.checkoutStepper.title': 'Kassen-Stepper',
+  'ds.checkoutStepper.description': 'Horizontale Fortschrittsanzeige mit den vier Schritten: Warenkorb → Konto → Versand → Bezahlung. Erledigte Schritte zeigen ein Häkchen, der aktive Schritt ist gefüllt, kommende Schritte sind dezent umrandet. Vorherige Schritte sind anklickbar; vorwärts springen wird über das `completed`-Flag gesteuert.',
 
   // Search overlay
   'ds.search.title': 'Suche',
@@ -1073,6 +1082,15 @@ const en = {
   'ds.revitalization.description': 'Centered feature-teaser section on brand green. Eyebrow badge, display headline with an italic highlight, subheadline, up to three pillar bullets with accent dots and a single CTA. Designed for "coming soon" announcements.',
   'ds.about.title': 'About / history',
   'ds.about.description': 'Centered intro plus three milestone cards running the Card primitive\'s tones left-to-right (paper / cream / brand). The continuous tonal step gives the timeline a clear sense of visual progression.',
+  'ds.nav.footer': 'Footer',
+  'ds.nav.checkoutStepper': 'Checkout stepper',
+  'ds.footer.title': 'Footer',
+  'ds.footer.description': 'Sitewide footer with logo, brand tagline, explore and legal link columns. Three tone variants — cream (default), brand (primary green), paper (lighter accent) — pick the one that contrasts with the page surface above it.',
+  'ds.footer.tone.cream': 'Cream (default)',
+  'ds.footer.tone.brand': 'Brand',
+  'ds.footer.tone.paper': 'Paper',
+  'ds.checkoutStepper.title': 'Checkout stepper',
+  'ds.checkoutStepper.description': 'Horizontal progress indicator for the four-step checkout: Cart → Account → Shipping → Payment. Completed steps render a filled brand circle with a checkmark, the active step is also filled, upcoming steps are subtly outlined. Earlier steps are click-back navigable; forward jumps are gated on each step\'s `completed` flag.',
 
   // Revitalization Center
   'revit.eyebrow': 'Coming soon',

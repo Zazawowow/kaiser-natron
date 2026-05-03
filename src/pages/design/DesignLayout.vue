@@ -42,6 +42,7 @@ const groups = computed(() => [
       { name: 'ds-search', label: t('ds.nav.search') },
       { name: 'ds-quantity-stepper', label: t('ds.nav.qtyStepper') },
       { name: 'ds-cart-drawer', label: t('ds.nav.cartDrawer') },
+      { name: 'ds-checkout-stepper', label: t('ds.nav.checkoutStepper') },
       { name: 'ds-language', label: t('ds.nav.language') },
     ],
   },
@@ -51,6 +52,7 @@ const groups = computed(() => [
       { name: 'ds-bundles', label: t('ds.nav.bundles') },
       { name: 'ds-revitalization', label: t('ds.nav.revitalization') },
       { name: 'ds-about', label: t('ds.nav.about') },
+      { name: 'ds-footer', label: t('ds.nav.footer') },
     ],
   },
 ])

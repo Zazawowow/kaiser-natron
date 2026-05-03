@@ -151,6 +151,8 @@ const routes = [
       { path: 'bundles', name: 'ds-bundles', component: () => import('@/pages/design/BundlesSection.vue') },
       { path: 'revitalization', name: 'ds-revitalization', component: () => import('@/pages/design/RevitalizationSection.vue') },
       { path: 'about', name: 'ds-about', component: () => import('@/pages/design/AboutSection.vue') },
+      { path: 'footer', name: 'ds-footer', component: () => import('@/pages/design/FooterSection.vue') },
+      { path: 'checkout-stepper', name: 'ds-checkout-stepper', component: () => import('@/pages/design/CheckoutStepperSection.vue') },
     ],
   },
 ]
