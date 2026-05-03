@@ -158,20 +158,14 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
-  // Anchor-aware scroll: navigating to `/shop#care` scrolls to the
-  // #care section rather than resetting to top. `el: ...` lets the
-  // router run the browser's own findElementBySelector, so the
-  // ShopPage sections' `scroll-mt-[calc(var(--nav-h)+1rem)]` offset
-  // handles the sticky-nav clearance declaratively. `savedPosition`
-  // honours back/forward navigation — clicking the browser's back
-  // button (or the in-page back link via router.back()) restores the
-  // exact scroll y the user had on the previous page, so deep-linking
-  // into a product detail and returning lands them where they left
-  // off in the shop list.
-  scrollBehavior(to, _from, savedPosition) {
-    if (savedPosition) return savedPosition
-    // Hash nav jumps instantly — smooth scrolling between positions can
-    // trigger motion sickness, so the whole site uses instant jumps.
+  // Anchor-aware scroll: navigating to `/#bundles` or `/shop#care`
+  // scrolls to that section rather than resetting to top. Each
+  // section's `scroll-mt-[calc(var(--nav-h)+1rem)]` offset handles
+  // the sticky-nav clearance. Back/forward navigation always returns
+  // to the top of the destination — `savedPosition` is intentionally
+  // not honoured so users land at a predictable position rather than
+  // wherever they last scrolled to.
+  scrollBehavior(to) {
     if (to.hash) return { el: to.hash }
     return { top: 0 }
   },
