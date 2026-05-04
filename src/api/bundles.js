@@ -30,7 +30,7 @@ export const bundles = [
     badgeVariant: 'accent',
     price: 24.9,
     memberPrice: 21.17,
-    image: '/bundles/background/haushalt-bundle.webp',
+    image: '/bundles/background/haushalt-bundle-2.webp',
     anchorProductId: 'kaiser-natron-pulver-250-g-grosspackung',
     href: '/bundles/haushalt',
   },

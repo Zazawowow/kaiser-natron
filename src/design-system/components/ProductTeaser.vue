@@ -67,7 +67,8 @@ const tones = {
           :badge="p.badge || ''"
           :badge-variant="p.badgeVariant || 'accent'"
           :href="p.href || (p.id ? `/shop/${p.id}` : '')"
-          tone="brand"
+          tone="cream"
+          cta-variant="accent"
           @add="$emit('add', p.id)"
         />
       </div>
