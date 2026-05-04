@@ -46,16 +46,16 @@ defineEmits(['add'])
 
 const { t } = useI18n()
 
-// Each tone pairs a media wash (the image area at the top of the
-// card) with a body surface (the title / price / CTA cluster
-// underneath).
+// Each tone pairs a body surface (title / price / CTA cluster) with
+// a media wash (the image area on top).
 //   · `paper` — historic all-white card.
-//   · `cream` — cream image wash + white body. Homepage ProductTeaser
-//      uses this so the product silhouettes share the cream surface
-//      of the surrounding section.
-//   · `brand` — brand-green image wash + white body. Shop page uses
-//      this so the products read as the brand stage and the cards
-//      pop off the cream catalogue surface.
+//   · `cream` — cream body + paper (white) media. Catalogue default.
+//      The white image area always pops regardless of section ground,
+//      and the cream body matches sections that share that wash.
+//   · `brand` — paper body + brand-green media. Used by the homepage
+//      3-product teaser so the product silhouettes sit on the brand
+//      stage while the body / price / CTA cluster reads as a clean
+//      paper card. Catalogue product cards stay on `cream`.
 const tones = {
   paper: {
     surface: 'bg-paper',
@@ -63,8 +63,8 @@ const tones = {
     border: 'border-line',
   },
   cream: {
-    surface: 'bg-paper',
-    media: 'bg-cream',
+    surface: 'bg-cream',
+    media: 'bg-paper',
     border: 'border-line',
   },
   brand: {
