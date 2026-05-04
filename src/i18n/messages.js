@@ -350,11 +350,39 @@ const de = {
   'home.categories.cook': 'Kochen',
   'home.categories.care': 'Pflege',
 
-  // Bundle detail page (/bundles/<slug>).
+  // Bundle detail page (/bundles/<slug>) + home grid copy. Each
+  // bundle's name / usage / description / items / image alt / badge
+  // is keyed individually so the structural data in src/api/bundles.js
+  // can stay locale-free.
   'bundle.items': 'Im Bundle enthalten',
   'bundle.memberPrice': 'Mitgliederpreis',
   'product.notFound.title': 'Nicht gefunden',
   'product.notFound.body': 'Dieser Eintrag ist nicht mehr verfügbar oder wurde verschoben.',
+
+  'bundle.haushalt.name': 'Haushalts-Bundle',
+  'bundle.haushalt.usage': '2–3× pro Quartal empfohlen',
+  'bundle.haushalt.description': 'Die drei Klassiker für die wöchentliche Haushaltsroutine — Pulver, Allzweck-Spray und Spülmittel. Spart gegenüber dem Einzelkauf und sorgt dafür, dass die Standards immer im Schrank sind.',
+  'bundle.haushalt.imageAlt': 'Haushalts-Bundle mit Kaiser-Natron',
+  'bundle.haushalt.badge': 'Bestseller',
+  'bundle.haushalt.items.0': '1× Kaiser-Natron Pulver 250 g',
+  'bundle.haushalt.items.1': '1× Allzweck-Spray 500 ml',
+  'bundle.haushalt.items.2': '1× Spülmittel 500 ml',
+
+  'bundle.waesche.name': 'Wäsche & Pflege',
+  'bundle.waesche.usage': '1–2× pro Quartal',
+  'bundle.waesche.description': 'Wäschepflege auf traditioneller Basis — Wasch-Soda für die Vorwäsche, Wäschestärke für Form, Fleckenweg für die hartnäckigen Fälle. Drei Helfer, eine Routine.',
+  'bundle.waesche.imageAlt': 'Wäsche & Pflege Bundle',
+  'bundle.waesche.items.0': '1× Holste Wasch-Soda 500 g',
+  'bundle.waesche.items.1': '1× Gazelle Wäschestärke 1 l',
+  'bundle.waesche.items.2': '1× Linda Fleckenweg 200 ml',
+
+  'bundle.wohlfuehl.name': 'Wohlfühl-Bundle',
+  'bundle.wohlfuehl.usage': '1× pro Quartal',
+  'bundle.wohlfuehl.description': 'Drei Anwendungen für den Körper — Tabletten zur Verdauung, Voll- und Fußbad zur Entspannung. Die ruhigste Routine im Sortiment.',
+  'bundle.wohlfuehl.imageAlt': 'Wohlfühl-Bundle mit Kaiser-Natron Bad',
+  'bundle.wohlfuehl.items.0': '1× Kaiser-Natron Tabletten 100 g',
+  'bundle.wohlfuehl.items.1': '1× Kaiser-Natron Bad 500 g',
+  'bundle.wohlfuehl.items.2': '1× Kaiser-Natron Fußbad 500 g',
 
   // Home page – brand hero (top-of-fold, splash artwork settles here).
   'home.brand.headline.a': 'Kaiser Natron –',
@@ -1029,11 +1057,36 @@ const en = {
   'home.categories.cook': 'Cook',
   'home.categories.care': 'Care',
 
-  // Bundle detail page (/bundles/<slug>).
+  // Bundle detail page (/bundles/<slug>) + home grid copy.
   'bundle.items': 'In this bundle',
   'bundle.memberPrice': 'Member price',
   'product.notFound.title': 'Not found',
   'product.notFound.body': 'This item is no longer available or has been moved.',
+
+  'bundle.haushalt.name': 'Household Bundle',
+  'bundle.haushalt.usage': '2–3× per quarter recommended',
+  'bundle.haushalt.description': 'The three classics for the weekly household routine — powder, all-purpose spray and washing-up liquid. Saves vs single purchase and keeps the staples in stock.',
+  'bundle.haushalt.imageAlt': 'Household bundle with Kaiser-Natron',
+  'bundle.haushalt.badge': 'Bestseller',
+  'bundle.haushalt.items.0': '1× Kaiser-Natron Powder 250 g',
+  'bundle.haushalt.items.1': '1× All-purpose Spray 500 ml',
+  'bundle.haushalt.items.2': '1× Washing-up Liquid 500 ml',
+
+  'bundle.waesche.name': 'Laundry & Care',
+  'bundle.waesche.usage': '1–2× per quarter',
+  'bundle.waesche.description': 'Traditional laundry care — washing soda for the pre-wash, laundry starch for shape, stain remover for the stubborn cases. Three helpers, one routine.',
+  'bundle.waesche.imageAlt': 'Laundry & Care bundle',
+  'bundle.waesche.items.0': '1× Holste Washing Soda 500 g',
+  'bundle.waesche.items.1': '1× Gazelle Laundry Starch 1 l',
+  'bundle.waesche.items.2': '1× Linda Stain Remover 200 ml',
+
+  'bundle.wohlfuehl.name': 'Wellbeing Bundle',
+  'bundle.wohlfuehl.usage': '1× per quarter',
+  'bundle.wohlfuehl.description': 'Three body applications — tablets for digestion, full bath and foot bath for relaxation. The quietest routine in the range.',
+  'bundle.wohlfuehl.imageAlt': 'Wellbeing bundle with Kaiser-Natron Bath',
+  'bundle.wohlfuehl.items.0': '1× Kaiser-Natron Tablets 100 g',
+  'bundle.wohlfuehl.items.1': '1× Kaiser-Natron Bath 500 g',
+  'bundle.wohlfuehl.items.2': '1× Kaiser-Natron Foot Bath 500 g',
 
   // Home page – brand hero (top-of-fold, splash artwork settles here).
   'home.brand.headline.a': 'Kaiser Natron —',

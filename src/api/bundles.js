@@ -2,70 +2,73 @@
 // the dedicated /bundles/<slug> pages, and any future cart wire-up
 // all read from a single source of truth.
 //
+// Localized copy (name, usage, description, items, image alt, badge
+// label) lives in src/i18n/messages.js under `bundle.<id>.<field>`
+// keys — the consumers (HomePage / BundlePage / Bundles) compose
+// the localized record at render time so the locale switcher updates
+// every label reactively.
+//
 // `anchorProductId` is the SKU we drop into the cart when the user
-// hits "Add to cart" on a bundle — until the backend exposes a real
-// bundle SKU endpoint, the anchor product gives the user visible
-// feedback (cart count + drawer pop) without diverging from the
-// fixture-driven cart shape.
+// hits "Add to cart" — until the backend exposes a real bundle SKU
+// endpoint, the anchor product gives the user visible feedback (cart
+// count + drawer pop) without diverging from the fixture-driven
+// cart shape.
 
 export const bundles = [
   {
     id: 'haushalt',
-    name: 'Haushalts-Bundle',
-    usage: '2–3× pro Quartal empfohlen',
-    items: [
-      '1× Kaiser-Natron Pulver 250 g',
-      '1× Allzweck-Spray 500 ml',
-      '1× Spülmittel 500 ml',
+    nameKey: 'bundle.haushalt.name',
+    usageKey: 'bundle.haushalt.usage',
+    descriptionKey: 'bundle.haushalt.description',
+    imageAltKey: 'bundle.haushalt.imageAlt',
+    itemKeys: [
+      'bundle.haushalt.items.0',
+      'bundle.haushalt.items.1',
+      'bundle.haushalt.items.2',
     ],
+    badgeKey: 'bundle.haushalt.badge',
+    badgeVariant: 'accent',
     price: 24.9,
     memberPrice: 21.17,
     image: '/bundles/background/haushalts-bundle.webp',
-    imageAlt: 'Haushalts-Bundle mit Kaiser-Natron',
-    badge: 'Bestseller',
-    badgeVariant: 'accent',
-    description:
-      'Die drei Klassiker für die wöchentliche Haushaltsroutine — Pulver, Allzweck-Spray und Spülmittel. Spart gegenüber dem Einzelkauf und sorgt dafür, dass die Standards immer im Schrank sind.',
     anchorProductId: 'kaiser-natron-pulver-250-g-grosspackung',
     href: '/bundles/haushalt',
   },
   {
     id: 'waesche',
-    name: 'Wäsche & Pflege',
-    usage: '1–2× pro Quartal',
-    items: [
-      '1× Holste Wasch-Soda 500 g',
-      '1× Gazelle Wäschestärke 1 l',
-      '1× Linda Fleckenweg 200 ml',
+    nameKey: 'bundle.waesche.name',
+    usageKey: 'bundle.waesche.usage',
+    descriptionKey: 'bundle.waesche.description',
+    imageAltKey: 'bundle.waesche.imageAlt',
+    itemKeys: [
+      'bundle.waesche.items.0',
+      'bundle.waesche.items.1',
+      'bundle.waesche.items.2',
     ],
+    badgeKey: '',
+    badgeVariant: 'accent',
     price: 22.9,
     memberPrice: 19.47,
     image: '/bundles/background/waesche-pflege-bundle.webp',
-    imageAlt: 'Wäsche & Pflege Bundle',
-    badge: '',
-    badgeVariant: 'accent',
-    description:
-      'Wäschepflege auf traditioneller Basis — Wasch-Soda für die Vorwäsche, Wäschestärke für Form, Fleckenweg für die hartnäckigen Fälle. Drei Helfer, eine Routine.',
     anchorProductId: 'holste-wasch-soda-500-g-beutel',
     href: '/bundles/waesche',
   },
   {
     id: 'wohlfuehl',
-    name: 'Wohlfühl-Bundle',
-    usage: '1× pro Quartal',
-    items: [
-      '1× Kaiser-Natron Tabletten 100 g',
-      '1× Kaiser-Natron Bad 500 g',
-      '1× Kaiser-Natron Fußbad 500 g',
+    nameKey: 'bundle.wohlfuehl.name',
+    usageKey: 'bundle.wohlfuehl.usage',
+    descriptionKey: 'bundle.wohlfuehl.description',
+    imageAltKey: 'bundle.wohlfuehl.imageAlt',
+    itemKeys: [
+      'bundle.wohlfuehl.items.0',
+      'bundle.wohlfuehl.items.1',
+      'bundle.wohlfuehl.items.2',
     ],
+    badgeKey: '',
+    badgeVariant: 'accent',
     price: 29.9,
     memberPrice: 25.42,
     image: '/bundles/background/wohlfuehl-bundle.webp',
-    imageAlt: 'Wohlfühl-Bundle mit Kaiser-Natron Bad',
-    badge: '',
-    badgeVariant: 'accent',
-    description:
-      'Drei Anwendungen für den Körper — Tabletten zur Verdauung, Voll- und Fußbad zur Entspannung. Die ruhigste Routine im Sortiment.',
     anchorProductId: 'kaiser-natron-bad-500-g',
     href: '/bundles/wohlfuehl',
   },

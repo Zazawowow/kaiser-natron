@@ -144,10 +144,27 @@ const aboutCopy = computed(() => ({
   })),
 }))
 
-// Bundle catalogue lives in @/api/bundles.js so HomePage and the
-// dedicated /bundles/<slug> pages share one source of truth.
-// `bundleAnchorProduct` below maps each bundle to the SKU we drop
-// into the cart on add (anchorProductId on the bundle record).
+// Bundle catalogue lives in @/api/bundles.js (structural data only —
+// price, image, anchorProductId, href). The localized labels live in
+// the i18n catalogue keyed `bundle.<id>.<field>`; we resolve them
+// here through `t()` so the Bundles design-system component can stay
+// agnostic of the i18n module and the locale switcher updates every
+// label reactively.
+const localizedBundles = computed(() =>
+  bundles.map((b) => ({
+    id: b.id,
+    name: t(b.nameKey),
+    usage: b.usageKey ? t(b.usageKey) : '',
+    items: b.itemKeys.map((k) => t(k)),
+    image: b.image,
+    imageAlt: b.imageAltKey ? t(b.imageAltKey) : '',
+    badge: b.badgeKey ? t(b.badgeKey) : '',
+    badgeVariant: b.badgeVariant,
+    price: b.price,
+    memberPrice: b.memberPrice,
+    href: b.href,
+  })),
+)
 
 async function onHeroAdd() {
   await addToCart(heroProductId, 1)
@@ -360,7 +377,7 @@ onBeforeUnmount(() => {
   <Bundles
     class="-mt-px"
     layout="stacked"
-    :bundles="bundles"
+    :bundles="localizedBundles"
     :headline="bundlesCopy.headline"
     :headline-em="bundlesCopy.headlineEm"
     :sub="bundlesCopy.sub"

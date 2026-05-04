@@ -89,21 +89,41 @@ const memberPriceLabel = computed(() => {
   return `€ ${b.memberPrice.toFixed(2).replace('.', ',')}`
 })
 
+// Localized bundle copy. The bundle record in src/api/bundles.js
+// only carries i18n KEYS for locale-dependent fields; we resolve
+// them here through `t()` so the labels update reactively when the
+// user switches DE/AT/EN.
+const bundleCopy = computed(() => {
+  const b = bundle.value
+  if (!b) return null
+  return {
+    name: t(b.nameKey),
+    usage: b.usageKey ? t(b.usageKey) : '',
+    description: b.descriptionKey ? t(b.descriptionKey) : '',
+    imageAlt: b.imageAltKey ? t(b.imageAltKey) : '',
+    badge: b.badgeKey ? t(b.badgeKey) : '',
+  }
+})
+
 // Resolve each item label against the products catalogue when we
 // can — gives the items list links and rich data. Falls back to the
 // bundle's static string item label when no product match exists.
+// The label itself is localized (each item is a separate i18n key).
 const resolvedItems = computed(() => {
   const b = bundle.value
   if (!b) return []
-  return b.items.map((label) => ({
-    label,
-    // Match by case-insensitive substring of the product title; loose
-    // on purpose so "1× Kaiser-Natron Pulver 250 g" matches the
-    // Pulver 250 g SKU even with the count prefix.
-    product: products.find((p) =>
-      label.toLowerCase().includes(p.title.toLowerCase().replace(/®/g, '').trim()),
-    ),
-  }))
+  return b.itemKeys.map((key) => {
+    const label = t(key)
+    return {
+      label,
+      // Match by case-insensitive substring of the product title; loose
+      // on purpose so "1× Kaiser-Natron Pulver 250 g" matches the
+      // Pulver 250 g SKU even with the count prefix.
+      product: products.find((p) =>
+        label.toLowerCase().includes(p.title.toLowerCase().replace(/®/g, '').trim()),
+      ),
+    }
+  })
 })
 
 async function onAdd() {
@@ -206,14 +226,14 @@ onBeforeUnmount(() => {
         <!-- Image column. -->
         <div class="relative overflow-hidden rounded-lg bg-cream/10">
           <Badge
-            v-if="bundle.badge"
+            v-if="bundleCopy.badge"
             :variant="bundle.badgeVariant || 'accent'"
             class="absolute top-4 left-4 z-[1] shadow-sm"
-          >{{ bundle.badge }}</Badge>
+          >{{ bundleCopy.badge }}</Badge>
           <div class="relative aspect-[16/10]">
             <img
               :src="bundle.image"
-              :alt="bundle.imageAlt || bundle.name"
+              :alt="bundleCopy.imageAlt || bundleCopy.name"
               loading="eager"
               decoding="async"
               class="absolute inset-0 w-full h-full object-cover"
@@ -223,12 +243,12 @@ onBeforeUnmount(() => {
 
         <!-- Copy + purchase cluster. -->
         <div class="flex flex-col gap-6 min-w-0 text-cream">
-          <p v-if="bundle.usage" class="text-xs tracking-label uppercase text-cream/75">{{ bundle.usage }}</p>
+          <p v-if="bundleCopy.usage" class="text-xs tracking-label uppercase text-cream/75">{{ bundleCopy.usage }}</p>
           <h1 class="font-display font-normal leading-[1.05] tracking-tight text-cream text-[2.25rem] xl:text-[2.75rem] 2xl:text-[3.25rem]">
-            {{ bundle.name }}
+            {{ bundleCopy.name }}
           </h1>
-          <p v-if="bundle.description" class="text-base xl:text-lg leading-relaxed text-cream/85">
-            {{ bundle.description }}
+          <p v-if="bundleCopy.description" class="text-base xl:text-lg leading-relaxed text-cream/85">
+            {{ bundleCopy.description }}
           </p>
 
           <div class="flex flex-col gap-2">
@@ -279,13 +299,13 @@ onBeforeUnmount(() => {
       <section class="mx-auto w-full max-w-7xl px-6 md:px-10 pt-6 md:pt-8">
         <div class="relative overflow-hidden rounded-lg bg-cream/10">
           <Badge
-            v-if="bundle.badge"
+            v-if="bundleCopy.badge"
             :variant="bundle.badgeVariant || 'accent'"
             class="absolute top-4 left-4 z-[1] shadow-sm"
-          >{{ bundle.badge }}</Badge>
+          >{{ bundleCopy.badge }}</Badge>
           <img
             :src="bundle.image"
-            :alt="bundle.imageAlt || bundle.name"
+            :alt="bundleCopy.imageAlt || bundleCopy.name"
             loading="eager"
             decoding="async"
             class="block w-full h-auto"
@@ -295,12 +315,12 @@ onBeforeUnmount(() => {
 
       <section class="mx-auto w-full max-w-7xl px-6 md:px-10 py-10 md:py-14">
         <div class="flex flex-col gap-6">
-          <p v-if="bundle.usage" class="text-xs tracking-label uppercase text-cream/70">{{ bundle.usage }}</p>
+          <p v-if="bundleCopy.usage" class="text-xs tracking-label uppercase text-cream/70">{{ bundleCopy.usage }}</p>
           <h1 class="font-display font-normal leading-[1.06] tracking-tight text-cream text-[2rem] md:text-[2.5rem]">
-            {{ bundle.name }}
+            {{ bundleCopy.name }}
           </h1>
-          <p v-if="bundle.description" class="text-base md:text-lg leading-relaxed text-cream/85">
-            {{ bundle.description }}
+          <p v-if="bundleCopy.description" class="text-base md:text-lg leading-relaxed text-cream/85">
+            {{ bundleCopy.description }}
           </p>
 
           <div class="flex flex-col gap-2">
