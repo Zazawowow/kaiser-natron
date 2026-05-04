@@ -195,97 +195,75 @@ onBeforeUnmount(() => {
     </div>
 
     <!-- =========================================================
-         DESKTOP (lg+) — bundle image as a full-bleed hero background
-         filling the fold. Heavy left → right brand-green gradient
-         keeps the cream copy on the right legible without painting
-         an opaque sidebar over the artwork. Back button overlays the
-         top-left corner so we don't waste a row of green above.
+         DESKTOP (lg+) — split layout. Wide landscape image on the
+         LEFT (gets the heavier 1.4fr column so the 16:9 source has
+         room for its full composition), full purchase cluster on
+         the RIGHT. No background banner / no overlays — the image
+         sits in flow on the left, the back button is the row above.
          ========================================================= -->
-    <section
-      class="hidden lg:block relative overflow-hidden min-h-[calc(100svh-var(--nav-h))]"
-    >
-      <img
-        :src="bundle.image"
-        :alt="bundle.imageAlt || bundle.name"
-        loading="eager"
-        decoding="async"
-        class="absolute inset-0 w-full h-full object-cover"
-      />
-      <!-- Severe legibility gradient — image stays clean for the
-           first ~20%, then ramps fast to opaque brand-green by the
-           midpoint, with the right half fully solid so the copy
-           reads as if it were on the brand surface. -->
-      <div
-        aria-hidden="true"
-        class="absolute inset-0 bg-gradient-to-r from-brand/0 from-20% via-brand via-50% to-brand"
-      />
+    <section class="hidden lg:block mx-auto w-full max-w-7xl px-6 md:px-10 lg:px-16 pt-4 pb-14">
+      <div class="grid grid-cols-[1.4fr_1fr] gap-12 xl:gap-16 items-center">
+        <!-- Image column. -->
+        <div class="relative overflow-hidden rounded-lg bg-cream/10">
+          <Badge
+            v-if="bundle.badge"
+            :variant="bundle.badgeVariant || 'accent'"
+            class="absolute top-4 left-4 z-[1] shadow-sm"
+          >{{ bundle.badge }}</Badge>
+          <div class="relative aspect-[16/10]">
+            <img
+              :src="bundle.image"
+              :alt="bundle.imageAlt || bundle.name"
+              loading="eager"
+              decoding="async"
+              class="absolute inset-0 w-full h-full object-cover"
+            />
+          </div>
+        </div>
 
-      <Badge
-        v-if="bundle.badge"
-        :variant="bundle.badgeVariant || 'accent'"
-        class="absolute top-6 left-6 z-[1] shadow-sm"
-      >{{ bundle.badge }}</Badge>
+        <!-- Copy + purchase cluster. -->
+        <div class="flex flex-col gap-6 min-w-0 text-cream">
+          <p v-if="bundle.usage" class="text-xs tracking-label uppercase text-cream/75">{{ bundle.usage }}</p>
+          <h1 class="font-display font-normal leading-[1.05] tracking-tight text-cream text-[2.25rem] xl:text-[2.75rem] 2xl:text-[3.25rem]">
+            {{ bundle.name }}
+          </h1>
+          <p v-if="bundle.description" class="text-base xl:text-lg leading-relaxed text-cream/85">
+            {{ bundle.description }}
+          </p>
 
-      <!-- Back button overlaid on the hero, lined up with the
-           contained max-width column. -->
-      <div class="absolute top-6 left-0 right-0 z-10 mx-auto w-full max-w-7xl px-10 lg:px-16">
-        <button
-          type="button"
-          class="inline-flex items-center gap-2 text-sm tracking-label uppercase text-cream/85 hover:text-cream transition-colors"
-          @click="goBack"
-        >
-          <Icon name="arrow-left" :size="16" />
-          {{ t(backLabelKey) }}
-        </button>
-      </div>
+          <div class="flex flex-col gap-2">
+            <p class="text-xs tracking-label uppercase text-cream/75">{{ t('bundle.items') }}</p>
+            <ul class="flex flex-col gap-1.5">
+              <li
+                v-for="(item, i) in resolvedItems"
+                :key="i"
+                class="flex items-start gap-2 text-base text-cream/95 leading-relaxed"
+              >
+                <Icon name="check" :size="18" class="mt-0.5 shrink-0 text-accent" />
+                <RouterLink
+                  v-if="item.product"
+                  :to="item.product.href"
+                  class="hover:text-accent transition-colors"
+                >{{ item.label }}</RouterLink>
+                <span v-else>{{ item.label }}</span>
+              </li>
+            </ul>
+          </div>
 
-      <!-- Foreground copy + purchase cluster on the right, vertically
-           centred in the fold. -->
-      <div class="relative z-10 mx-auto w-full max-w-7xl h-full px-10 lg:px-16">
-        <div class="flex h-full min-h-[calc(100svh-var(--nav-h))] items-center justify-end">
-          <div class="w-full max-w-md xl:max-w-lg flex flex-col gap-6 text-cream">
-            <p v-if="bundle.usage" class="text-xs tracking-label uppercase text-cream/85">{{ bundle.usage }}</p>
-            <h1 class="font-display font-normal leading-[1.05] tracking-tight text-cream text-[2.5rem] xl:text-[3rem] 2xl:text-[3.5rem]">
-              {{ bundle.name }}
-            </h1>
-            <p v-if="bundle.description" class="text-base xl:text-lg leading-relaxed text-cream/90">
-              {{ bundle.description }}
-            </p>
+          <div class="flex flex-col gap-1">
+            <span class="font-display text-3xl xl:text-4xl text-cream">{{ priceLabel }}</span>
+            <span v-if="memberPriceLabel" class="text-sm text-cream/75">
+              {{ t('bundle.memberPrice') }}
+              <span class="text-accent font-medium">{{ memberPriceLabel }}</span>
+            </span>
+          </div>
 
-            <div class="flex flex-col gap-2">
-              <p class="text-xs tracking-label uppercase text-cream/85">{{ t('bundle.items') }}</p>
-              <ul class="flex flex-col gap-1.5">
-                <li
-                  v-for="(item, i) in resolvedItems"
-                  :key="i"
-                  class="flex items-start gap-2 text-base text-cream leading-relaxed"
-                >
-                  <Icon name="check" :size="18" class="mt-0.5 shrink-0 text-accent" />
-                  <RouterLink
-                    v-if="item.product"
-                    :to="item.product.href"
-                    class="hover:text-accent transition-colors"
-                  >{{ item.label }}</RouterLink>
-                  <span v-else>{{ item.label }}</span>
-                </li>
-              </ul>
-            </div>
-
-            <div class="flex flex-col gap-1">
-              <span class="font-display text-3xl xl:text-4xl text-cream">{{ priceLabel }}</span>
-              <span v-if="memberPriceLabel" class="text-sm text-cream/85">
-                {{ t('bundle.memberPrice') }}
-                <span class="text-accent font-medium">{{ memberPriceLabel }}</span>
-              </span>
-            </div>
-
-            <div class="flex flex-wrap items-center gap-4 mt-2">
-              <QuantityStepper v-model="qty" :min="1" :max="10" />
-              <Button variant="accent" size="lg" @click="onAdd">
-                <template #before><Icon name="plus" :size="16" /></template>
-                {{ t('ds.buttons.addToCart') }}
-              </Button>
-            </div>
+          <div class="flex flex-wrap items-center gap-4 mt-2">
+            <QuantityStepper v-model="qty" :min="1" :max="10" />
+            <Button variant="accent" size="lg" @click="onAdd">
+              <template #before><Icon name="plus" :size="16" /></template>
+              {{ t('ds.buttons.addToCart') }}
+            </Button>
           </div>
         </div>
       </div>
