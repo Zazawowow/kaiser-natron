@@ -254,10 +254,11 @@ onBeforeUnmount(() => {
   <Footer />
 
   <!-- Bottom clearance for the mobile floating cluster (search / cart /
-       menu), same pattern as HomePage so both pages align visually. -->
+       menu), same pattern as HomePage so both pages align visually.
+       Tied to the navbar's 1100 px collapse threshold. -->
   <div
     aria-hidden="true"
-    class="md:hidden"
+    class="min-[1100px]:hidden"
     style="height: calc(100px + env(safe-area-inset-bottom));"
   />
 

@@ -209,7 +209,7 @@ onBeforeUnmount(() => {
         >
           <Logo :class="logoClasses" />
         </RouterLink>
-        <nav class="hidden md:flex items-center gap-7">
+        <nav class="hidden min-[1100px]:flex items-center gap-7">
           <RouterLink
             v-for="item in items"
             :key="item.key || item.label"
@@ -224,7 +224,7 @@ onBeforeUnmount(() => {
       </div>
 
       <!-- Right: secondary nav + search + language + cart (desktop only) -->
-      <div class="hidden md:flex items-center gap-4">
+      <div class="hidden min-[1100px]:flex items-center gap-4">
         <!-- Secondary nav — supporting pages tucked to the left of
              search so the primary category nav on the left stays the
              focal point. Shares the same visual treatment as the
@@ -279,7 +279,7 @@ onBeforeUnmount(() => {
            cart still lives in the bottom-right floating cluster; this
            keeps account discovery one tap away without crowding the
            thumb-zone cluster. -->
-      <div class="md:hidden flex items-center">
+      <div class="min-[1100px]:hidden flex items-center">
         <IconButton
           icon="user"
           variant="float"
@@ -295,7 +295,7 @@ onBeforeUnmount(() => {
          cluster's safe-area handling so it clears the home indicator. -->
     <div
       v-if="floatOnMobile"
-      class="md:hidden fixed bottom-5 left-5 z-40"
+      class="min-[1100px]:hidden fixed bottom-5 left-5 z-40"
       style="padding-bottom: env(safe-area-inset-bottom);"
     >
       <IconButton
@@ -311,7 +311,7 @@ onBeforeUnmount(() => {
     <!-- Mobile floating cluster (bottom-right) -->
     <div
       v-if="floatOnMobile"
-      class="md:hidden fixed bottom-5 right-5 z-40 flex items-center gap-3"
+      class="min-[1100px]:hidden fixed bottom-5 right-5 z-40 flex items-center gap-3"
       style="padding-bottom: env(safe-area-inset-bottom);"
     >
       <IconButton

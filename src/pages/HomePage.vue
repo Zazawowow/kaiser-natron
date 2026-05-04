@@ -513,10 +513,11 @@ onBeforeUnmount(() => {
   <!-- Bottom clearance for the mobile floating cluster (search / cart / menu).
        Cluster sits at bottom-5 (20px) + safe-area, is 56px tall, and needs a
        24px breathing gap above it: 20 + 56 + 24 = 100px, plus the device's
-       safe-area inset. Desktop hides the cluster, so no spacer there. -->
+       safe-area inset. Visible whenever the floating cluster is — i.e.
+       below the navbar's 1100 px collapse threshold. -->
   <div
     aria-hidden="true"
-    class="md:hidden"
+    class="min-[1100px]:hidden"
     style="height: calc(100px + env(safe-area-inset-bottom));"
   />
 
