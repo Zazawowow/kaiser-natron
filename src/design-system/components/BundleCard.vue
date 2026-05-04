@@ -1,9 +1,18 @@
 <script setup>
 import { computed } from 'vue'
+import { RouterLink } from 'vue-router'
 import Button from './Button.vue'
 import Badge from './Badge.vue'
 import Icon from './Icon.vue'
 import { useI18n } from '@/i18n/index.js'
+
+// Internal SPA paths render as <RouterLink> so vue-router's saved
+// scroll position is restored when the user hits back from the
+// detail page. External / hash / mailto links keep the plain <a>
+// behaviour. Mirrors the ProductCard pattern.
+function isInternalPath(href) {
+  return typeof href === 'string' && href.startsWith('/') && !href.startsWith('//')
+}
 
 const props = defineProps({
   name: { type: String, required: true },
@@ -89,8 +98,39 @@ const extraCount = computed(() => Math.max(0, props.items.length - MAX_ITEMS))
   >
     <!-- Media. In horizontal mode the media column is a tighter ~38% of the
          row from md up and drops its mobile aspect ratio so flex-stretch
-         can match the body height. -->
+         can match the body height. Internal SPA paths use RouterLink
+         so back-navigation restores the home grid's scroll position. -->
+    <RouterLink
+      v-if="href && isInternalPath(href)"
+      :to="href"
+      :class="[
+        'relative block overflow-hidden',
+        layout === 'horizontal'
+          ? 'aspect-[4/3] md:aspect-auto md:w-[38%] md:shrink-0 md:min-h-[300px]'
+          : 'aspect-[4/3]',
+        tone.media,
+      ]"
+    >
+      <Badge
+        v-if="badge"
+        :variant="badgeVariant"
+        class="absolute top-4 left-4 z-[1]"
+      >{{ badge }}</Badge>
+      <img
+        :src="image"
+        :alt="imageAlt || name"
+        loading="lazy"
+        decoding="async"
+        :class="[
+          'absolute inset-0 w-full h-full transition-transform duration-slow ease-out group-hover:scale-105',
+          imageFit === 'cover'
+            ? 'object-cover'
+            : 'object-contain ' + (layout === 'horizontal' ? 'p-6 md:p-5' : 'p-8'),
+        ]"
+      />
+    </RouterLink>
     <component
+      v-else
       :is="href ? 'a' : 'div'"
       :href="href || null"
       :class="[
@@ -132,7 +172,13 @@ const extraCount = computed(() => Math.max(0, props.items.length - MAX_ITEMS))
           v-if="usage"
           class="text-xs font-semibold tracking-label text-muted uppercase"
         >{{ usage }}</span>
+        <RouterLink
+          v-if="href && isInternalPath(href)"
+          :to="href"
+          class="font-display text-xl font-normal leading-tight text-ink hover:text-brand transition-colors duration-base"
+        >{{ name }}</RouterLink>
         <component
+          v-else
           :is="href ? 'a' : 'h3'"
           :href="href || null"
           :class="[

@@ -182,10 +182,8 @@ onBeforeUnmount(() => {
   </main>
 
   <main v-else class="bg-brand text-cream">
-    <!-- Mobile-only back button row. On desktop the back button is
-         absolutely positioned over the hero image (see below) so the
-         layout doesn't waste a row of brand-green above the artwork. -->
-    <div class="lg:hidden mx-auto w-full max-w-7xl px-6 md:px-10 pt-6">
+    <!-- Back button row — sits above the hero on every viewport. -->
+    <div class="mx-auto w-full max-w-7xl px-6 md:px-10 lg:px-16 pt-6">
       <button
         type="button"
         class="inline-flex items-center gap-2 text-sm tracking-label uppercase text-cream/75 hover:text-cream transition-colors"
@@ -197,11 +195,11 @@ onBeforeUnmount(() => {
     </div>
 
     <!-- =========================================================
-         DESKTOP (lg+) — bundle image as a full-bleed hero background;
-         all copy + purchase actions overlay on the right side. The
-         landscape source art (≈ 16:9) drives the fold; a left → right
-         brand-green gradient softens the right edge so the cream copy
-         stays legible regardless of what the image carries underneath.
+         DESKTOP (lg+) — bundle image as a full-bleed hero background
+         filling the fold. Heavy left → right brand-green gradient
+         keeps the cream copy on the right legible without painting
+         an opaque sidebar over the artwork. Back button overlays the
+         top-left corner so we don't waste a row of green above.
          ========================================================= -->
     <section
       class="hidden lg:block relative overflow-hidden min-h-[calc(100svh-var(--nav-h))]"
@@ -213,15 +211,13 @@ onBeforeUnmount(() => {
         decoding="async"
         class="absolute inset-0 w-full h-full object-cover"
       />
-      <!-- Legibility gradient — heavy on the right so the cream
-           copy reads cleanly regardless of the underlying photo.
-           Stops: image fully visible until 25 %, ramps to opaque
-           brand-green by 70 %, solid green from there to the right
-           edge. Adjust the second / third stops to soften or
-           sharpen the transition. -->
+      <!-- Severe legibility gradient — image stays clean for the
+           first ~20%, then ramps fast to opaque brand-green by the
+           midpoint, with the right half fully solid so the copy
+           reads as if it were on the brand surface. -->
       <div
         aria-hidden="true"
-        class="absolute inset-0 bg-gradient-to-r from-brand/0 from-25% via-brand/90 via-65% to-brand to-80%"
+        class="absolute inset-0 bg-gradient-to-r from-brand/0 from-20% via-brand via-50% to-brand"
       />
 
       <Badge
@@ -230,9 +226,8 @@ onBeforeUnmount(() => {
         class="absolute top-6 left-6 z-[1] shadow-sm"
       >{{ bundle.badge }}</Badge>
 
-      <!-- Back button overlaid on the hero (top-left corner of the
-           contained max-width column so it lines up with the rest
-           of the desktop chrome). -->
+      <!-- Back button overlaid on the hero, lined up with the
+           contained max-width column. -->
       <div class="absolute top-6 left-0 right-0 z-10 mx-auto w-full max-w-7xl px-10 lg:px-16">
         <button
           type="button"
@@ -244,12 +239,12 @@ onBeforeUnmount(() => {
         </button>
       </div>
 
-      <!-- Foreground copy + purchase cluster, pinned to the right
-           half of the section and vertically centred in the fold. -->
+      <!-- Foreground copy + purchase cluster on the right, vertically
+           centred in the fold. -->
       <div class="relative z-10 mx-auto w-full max-w-7xl h-full px-10 lg:px-16">
         <div class="flex h-full min-h-[calc(100svh-var(--nav-h))] items-center justify-end">
           <div class="w-full max-w-md xl:max-w-lg flex flex-col gap-6 text-cream">
-            <p v-if="bundle.usage" class="text-xs tracking-label uppercase text-cream/80">{{ bundle.usage }}</p>
+            <p v-if="bundle.usage" class="text-xs tracking-label uppercase text-cream/85">{{ bundle.usage }}</p>
             <h1 class="font-display font-normal leading-[1.05] tracking-tight text-cream text-[2.5rem] xl:text-[3rem] 2xl:text-[3.5rem]">
               {{ bundle.name }}
             </h1>
@@ -258,7 +253,7 @@ onBeforeUnmount(() => {
             </p>
 
             <div class="flex flex-col gap-2">
-              <p class="text-xs tracking-label uppercase text-cream/80">{{ t('bundle.items') }}</p>
+              <p class="text-xs tracking-label uppercase text-cream/85">{{ t('bundle.items') }}</p>
               <ul class="flex flex-col gap-1.5">
                 <li
                   v-for="(item, i) in resolvedItems"
@@ -278,7 +273,7 @@ onBeforeUnmount(() => {
 
             <div class="flex flex-col gap-1">
               <span class="font-display text-3xl xl:text-4xl text-cream">{{ priceLabel }}</span>
-              <span v-if="memberPriceLabel" class="text-sm text-cream/80">
+              <span v-if="memberPriceLabel" class="text-sm text-cream/85">
                 {{ t('bundle.memberPrice') }}
                 <span class="text-accent font-medium">{{ memberPriceLabel }}</span>
               </span>
