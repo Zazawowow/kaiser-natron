@@ -61,14 +61,14 @@
              stays predictable across breakpoints. -->
         <div class="brand-hero__copy flex w-1/2 items-center justify-start pl-4 md:pl-6 lg:pl-8">
           <div class="w-full max-w-md xl:max-w-lg 2xl:max-w-xl text-left">
-            <p class="mb-4 md:mb-5 text-sm md:text-base tracking-label uppercase text-cream/75">{{ since }}</p>
+            <p class="mb-4 md:mb-5 text-sm md:text-base tracking-label uppercase text-cream/75">{{ t('home.brand.since') }}</p>
             <h1 class="font-display font-normal leading-[1.06] tracking-tight text-cream text-[1.75rem] md:text-[2.25rem] lg:text-[2.5rem] xl:text-[2.75rem] 2xl:text-[3.25rem]">
-              {{ headlineA }}
-              <em class="italic font-light text-accent-soft">{{ headlineEm }}</em>
-              {{ headlineB }}
+              {{ t('home.brand.headline.a') }}
+              <em class="italic font-light text-accent-soft">{{ t('home.brand.headline.em') }}</em>
+              {{ t('home.brand.headline.b') }}
             </h1>
             <RouterLink to="/shop" class="mt-7 md:mt-8 inline-flex">
-              <Button variant="accent" size="lg">{{ shopLabel }}</Button>
+              <Button variant="accent" size="lg">{{ t('nav.shop') }}</Button>
             </RouterLink>
           </div>
         </div>
@@ -98,13 +98,13 @@
 
       <div class="brand-hero__copy flex flex-col items-center text-center">
         <h1 class="max-w-3xl font-display font-normal leading-[1.08] tracking-tight text-cream text-[1.5rem] sm:text-[2rem]">
-          {{ headlineA }}
-          <em class="italic font-light text-accent-soft">{{ headlineEm }}</em>
-          {{ headlineB }}
+          {{ t('home.brand.headline.a') }}
+          <em class="italic font-light text-accent-soft">{{ t('home.brand.headline.em') }}</em>
+          {{ t('home.brand.headline.b') }}
         </h1>
-        <p class="mt-4 text-[0.95rem] tracking-label uppercase text-cream/75">{{ since }}</p>
+        <p class="mt-4 text-[0.95rem] tracking-label uppercase text-cream/75">{{ t('home.brand.since') }}</p>
         <RouterLink to="/shop" class="mt-6 inline-flex">
-          <Button variant="accent" size="lg">{{ shopLabel }}</Button>
+          <Button variant="accent" size="lg">{{ t('nav.shop') }}</Button>
         </RouterLink>
       </div>
     </div>
@@ -154,15 +154,11 @@ onBeforeUnmount(() => {
   }
 })
 
+// `t` is invoked inline in the template (not cached as setup
+// constants) so the headline / SINCE 1881 / Shop button update
+// reactively when the user switches locale via the navbar — calls
+// resolved at setup time freeze the value at first paint.
 const { t } = useI18n()
-const headlineA = t('home.brand.headline.a')
-const headlineEm = t('home.brand.headline.em')
-const headlineB = t('home.brand.headline.b')
-const since = t('home.brand.since')
-// Reuses the navbar's "Shop" / "Shop" label — keeps the wording in
-// step with the top-nav entry point so the user sees the same word
-// for the same destination.
-const shopLabel = t('nav.shop')
 </script>
 
 <style scoped>
