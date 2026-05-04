@@ -49,9 +49,14 @@
             preserveAspectRatio="xMidYMid meet"
             xmlns="http://www.w3.org/2000/svg"
           >
-            <path class="layer left-m"  fill-rule="evenodd" :d="dPortLeft"  />
+            <!-- Mound paints BEHIND the woman so her fingers read mint
+                 where they wrap the natron handful. With the mound
+                 on top (the splash entrance order) one finger bled
+                 white because the mound's bounds extend slightly
+                 past the grip outline. -->
             <path class="layer right-m" fill-rule="evenodd" :d="dPortRight" />
             <path class="layer mound-m" fill-rule="evenodd" :d="dPortMound" />
+            <path class="layer left-m"  fill-rule="evenodd" :d="dPortLeft"  />
           </svg>
         </div>
 
@@ -90,9 +95,9 @@
           xmlns="http://www.w3.org/2000/svg"
           aria-hidden="true"
         >
-          <path class="layer left-m"  fill-rule="evenodd" :d="dPortLeft"  />
           <path class="layer right-m" fill-rule="evenodd" :d="dPortRight" />
           <path class="layer mound-m" fill-rule="evenodd" :d="dPortMound" />
+          <path class="layer left-m"  fill-rule="evenodd" :d="dPortLeft"  />
         </svg>
       </div>
 
