@@ -20,6 +20,12 @@ const routes = [
     meta: { layout: 'none' },
   },
   {
+    path: '/bundles/:slug',
+    name: 'bundle',
+    component: () => import('@/pages/BundlePage.vue'),
+    meta: { layout: 'none' },
+  },
+  {
     path: '/checkout/success',
     name: 'checkout-success',
     component: () => import('@/pages/CheckoutSuccessPage.vue'),

@@ -208,6 +208,7 @@ onBeforeUnmount(() => {
               :image-alt="bundle.imageAlt"
               :badge="bundle.badge"
               :badge-variant="bundle.badgeVariant || 'accent'"
+              :href="bundle.href || ''"
               tone="paper"
               @add="$emit('add', bundle.id)"
             />
@@ -226,6 +227,7 @@ onBeforeUnmount(() => {
               :image-alt="bundle.imageAlt"
               :badge="bundle.badge"
               :badge-variant="bundle.badgeVariant || 'accent'"
+              :href="bundle.href || ''"
               tone="paper"
               @add="$emit('add', bundle.id)"
             />
@@ -288,6 +290,7 @@ onBeforeUnmount(() => {
               :image-alt="bundle.imageAlt"
               :badge="bundle.badge"
               :badge-variant="bundle.badgeVariant || 'accent'"
+              :href="bundle.href || ''"
               tone="paper"
               @add="$emit('add', bundle.id)"
             />
@@ -327,6 +330,7 @@ onBeforeUnmount(() => {
                   :image-alt="bundle.imageAlt"
                   :badge="bundle.badge"
                   :badge-variant="bundle.badgeVariant || 'accent'"
+              :href="bundle.href || ''"
                   tone="paper"
                   @add="$emit('add', bundle.id)"
                 />

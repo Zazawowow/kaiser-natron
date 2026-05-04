@@ -17,6 +17,7 @@ import {
   updateCartItem,
   removeFromCart,
 } from '@/api/index.js'
+import { bundles } from '@/api/bundles.js'
 import { useCartStore } from '@/stores/cart.js'
 import { useI18n } from '@/i18n/index.js'
 
@@ -143,51 +144,10 @@ const aboutCopy = computed(() => ({
   })),
 }))
 
-// Three curated bundles. Each caps items at three to honour the
-// "max three things" rule — Haushalts and Wäsche are trimmed to their
-// most distinctive products; Wohlfühl is naturally three already.
-const bundles = [
-  {
-    id: 'haushalt',
-    name: 'Haushalts-Bundle',
-    usage: '2–3× pro Quartal empfohlen',
-    items: [
-      '1× Kaiser-Natron Pulver 250 g',
-      '1× Allzweck-Spray 500 ml',
-      '1× Spülmittel 500 ml',
-    ],
-    price: 24.9,
-    memberPrice: 21.17,
-    image: '/bundles/transparent/haushalts-bundle.webp',
-    imageAlt: 'Haushalts-Bundle mit Kaiser-Natron',
-    badge: 'Bestseller',
-    badgeVariant: 'accent',
-  },
-  {
-    id: 'waesche',
-    name: 'Wäsche & Pflege',
-    usage: '1–2× pro Quartal',
-    items: ['1× Holste Wasch-Soda 500 g', '1× Gazelle Wäschestärke 1 l', '1× Linda Fleckenweg 200 ml'],
-    price: 22.9,
-    memberPrice: 19.47,
-    image: '/bundles/transparent/waesche-pflege-bundle.webp',
-    imageAlt: 'Wäsche & Pflege Bundle',
-    badge: '',
-    badgeVariant: 'accent',
-  },
-  {
-    id: 'wohlfuehl',
-    name: 'Wohlfühl-Bundle',
-    usage: '1× pro Quartal',
-    items: ['1× Kaiser-Natron Tabletten 100 g', '1× Kaiser-Natron Bad 500 g', '1× Kaiser-Natron Fußbad 500 g'],
-    price: 29.9,
-    memberPrice: 25.42,
-    image: '/bundles/transparent/wohlfuehl-bundle.webp',
-    imageAlt: 'Wohlfühl-Bundle mit Kaiser-Natron Bad',
-    badge: '',
-    badgeVariant: 'accent',
-  },
-]
+// Bundle catalogue lives in @/api/bundles.js so HomePage and the
+// dedicated /bundles/<slug> pages share one source of truth.
+// `bundleAnchorProduct` below maps each bundle to the SKU we drop
+// into the cart on add (anchorProductId on the bundle record).
 
 async function onHeroAdd() {
   await addToCart(heroProductId, 1)
@@ -208,18 +168,12 @@ async function onTeaserAdd(productId) {
 // Bundles share a single "add" handler. Until the backend exposes a
 // real bundle SKU endpoint, the UI stand-in adds the bundle's anchor
 // product to the cart so the user gets visible feedback. The mapping
-// lives here (not on the bundle object) to keep the bundle config
-// decoupled from the fixture-driven cart.
-const bundleAnchorProduct = {
-  haushalt: 'kaiser-natron-pulver-250-g-grosspackung',
-  waesche: 'holste-wasch-soda-500-g-beutel',
-  wohlfuehl: 'kaiser-natron-bad-500-g',
-}
-
+// is defined on each bundle (`anchorProductId`) so HomePage and the
+// dedicated /bundles/<slug> pages stay in lock-step.
 async function onBundleAdd(bundleId) {
-  const productId = bundleAnchorProduct[bundleId]
-  if (!productId) return
-  await addToCart(productId, 1)
+  const bundle = bundles.find((b) => b.id === bundleId)
+  if (!bundle?.anchorProductId) return
+  await addToCart(bundle.anchorProductId, 1)
   cartOpen.value = true
 }
 

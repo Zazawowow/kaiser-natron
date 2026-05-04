@@ -40,15 +40,15 @@ const props = defineProps({
   currency: { type: String, default: '€' },
   href: { type: String, default: '' },
   // How the bundle artwork sits inside the media area:
-  //   · `contain` (default) — full artwork visible with breathing
-  //     padding around it. Works for line-up product silhouettes
-  //     where cropping would lose information.
-  //   · `cover` — fills the media area edge-to-edge, may crop edges.
-  //     Use when the artwork is a styled scene that benefits from
-  //     full-bleed framing (e.g. lifestyle bundle photography).
+  //   · `cover` (default) — fills the media area edge-to-edge, may
+  //     crop edges. Matches the current `/bundles/background/*` art
+  //     which is composed for full-bleed framing.
+  //   · `contain` — full artwork visible with breathing padding
+  //     around it. Use for line-up product silhouettes where
+  //     cropping would lose information.
   imageFit: {
     type: String,
-    default: 'contain',
+    default: 'cover',
     validator: (v) => ['contain', 'cover'].includes(v),
   },
 })

@@ -350,6 +350,12 @@ const de = {
   'home.categories.cook': 'Kochen',
   'home.categories.care': 'Pflege',
 
+  // Bundle detail page (/bundles/<slug>).
+  'bundle.items': 'Im Bundle enthalten',
+  'bundle.memberPrice': 'Mitgliederpreis',
+  'product.notFound.title': 'Nicht gefunden',
+  'product.notFound.body': 'Dieser Eintrag ist nicht mehr verfügbar oder wurde verschoben.',
+
   // Home page – brand hero (top-of-fold, splash artwork settles here).
   'home.brand.headline.a': 'Kaiser Natron –',
   'home.brand.headline.em': 'der Premium-Anbieter',
@@ -1022,6 +1028,12 @@ const en = {
   'home.categories.clean': 'Clean',
   'home.categories.cook': 'Cook',
   'home.categories.care': 'Care',
+
+  // Bundle detail page (/bundles/<slug>).
+  'bundle.items': 'In this bundle',
+  'bundle.memberPrice': 'Member price',
+  'product.notFound.title': 'Not found',
+  'product.notFound.body': 'This item is no longer available or has been moved.',
 
   // Home page – brand hero (top-of-fold, splash artwork settles here).
   'home.brand.headline.a': 'Kaiser Natron —',
