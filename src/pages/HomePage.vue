@@ -385,17 +385,48 @@ onBeforeUnmount(() => {
     </template>
   </Hero>
 
-  <!-- Wave brand → cream for the second-fold cream banner. -->
+  <!-- Wave brand → surface — sets up the Bundles section, which now
+       sits directly under the Pulver hero (banner + bundles swapped). -->
   <svg
     aria-hidden="true"
     class="block w-full h-12 md:h-16 shrink-0 -mb-px bg-brand"
     viewBox="0 0 1440 64"
     preserveAspectRatio="none"
   >
-    <rect width="1440" height="64" fill="var(--color-cream)" />
+    <rect width="1440" height="64" fill="var(--color-surface)" />
     <path
       d="M0,0 L0,40 C320,4 520,60 720,32 C920,4 1120,60 1440,24 L1440,0 Z"
       fill="var(--color-brand)"
+    />
+  </svg>
+
+  <!-- Bundles — surface (warm off-white). Three bundles, three items
+       per bundle, three benefits. Mobile stacks the cards; md+ flips
+       to a one-at-a-time scroll-snap carousel. -->
+  <Bundles
+    class="-mt-px"
+    layout="stacked"
+    :bundles="bundles"
+    :headline="bundlesCopy.headline"
+    :headline-em="bundlesCopy.headlineEm"
+    :sub="bundlesCopy.sub"
+    :benefits="bundlesCopy.benefits"
+    :join-cta="bundlesCopy.joinCta"
+    @add="onBundleAdd"
+    @join="onBundleJoin"
+  />
+
+  <!-- Wave surface → cream into the second-fold cream banner. -->
+  <svg
+    aria-hidden="true"
+    class="block w-full h-12 md:h-16 shrink-0 -mb-px bg-surface"
+    viewBox="0 0 1440 64"
+    preserveAspectRatio="none"
+  >
+    <rect width="1440" height="64" fill="var(--color-cream)" />
+    <path
+      d="M0,0 L0,40 C320,4 520,60 720,32 C920,4 1120,60 1440,24 L1440,0 Z"
+      fill="var(--color-surface)"
     />
   </svg>
 
@@ -425,53 +456,17 @@ onBeforeUnmount(() => {
     </template>
   </Hero>
 
-  <!-- Cream → surface wave between the second banner and the bundles
-       section. Same construction as the green→cream wave on the first
-       fold: solid rect fills the destination color (surface), a path
-       paints the wavy top in the source color (cream). `-mb-px` overlaps
-       the bundles section by a device pixel to hide hairline seams. -->
+  <!-- Wave cream → brand into the Revitalization section. -->
   <svg
     aria-hidden="true"
     class="block w-full h-12 md:h-16 shrink-0 -mb-px bg-cream"
     viewBox="0 0 1440 64"
     preserveAspectRatio="none"
   >
-    <rect width="1440" height="64" fill="var(--color-surface)" />
-    <path
-      d="M0,0 L0,40 C320,4 520,60 720,32 C920,4 1120,60 1440,24 L1440,0 Z"
-      fill="var(--color-cream)"
-    />
-  </svg>
-
-  <!-- Bundles — surface (warm off-white) so the cream banner above and the
-       cream cards below both stand out as distinct layers. Three bundles,
-       three items per bundle, three benefits. Mobile stacks the cards;
-       md+ flips to a one-at-a-time scroll-snap carousel. -->
-  <Bundles
-    class="-mt-px"
-    layout="stacked"
-    :bundles="bundles"
-    :headline="bundlesCopy.headline"
-    :headline-em="bundlesCopy.headlineEm"
-    :sub="bundlesCopy.sub"
-    :benefits="bundlesCopy.benefits"
-    :join-cta="bundlesCopy.joinCta"
-    @add="onBundleAdd"
-    @join="onBundleJoin"
-  />
-
-  <!-- Surface → brand wave. rect is the destination (brand), path is the
-       source (surface) painted over the top of the wave. -->
-  <svg
-    aria-hidden="true"
-    class="block w-full h-12 md:h-16 shrink-0 -mb-px bg-surface"
-    viewBox="0 0 1440 64"
-    preserveAspectRatio="none"
-  >
     <rect width="1440" height="64" fill="var(--color-brand)" />
     <path
       d="M0,0 L0,40 C320,4 520,60 720,32 C920,4 1120,60 1440,24 L1440,0 Z"
-      fill="var(--color-surface)"
+      fill="var(--color-cream)"
     />
   </svg>
 
