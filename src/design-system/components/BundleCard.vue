@@ -39,6 +39,18 @@ const props = defineProps({
   inStock: { type: Boolean, default: true },
   currency: { type: String, default: '€' },
   href: { type: String, default: '' },
+  // How the bundle artwork sits inside the media area:
+  //   · `contain` (default) — full artwork visible with breathing
+  //     padding around it. Works for line-up product silhouettes
+  //     where cropping would lose information.
+  //   · `cover` — fills the media area edge-to-edge, may crop edges.
+  //     Use when the artwork is a styled scene that benefits from
+  //     full-bleed framing (e.g. lifestyle bundle photography).
+  imageFit: {
+    type: String,
+    default: 'contain',
+    validator: (v) => ['contain', 'cover'].includes(v),
+  },
 })
 
 defineEmits(['add'])
@@ -100,8 +112,10 @@ const extraCount = computed(() => Math.max(0, props.items.length - MAX_ITEMS))
         loading="lazy"
         decoding="async"
         :class="[
-          'absolute inset-0 w-full h-full object-contain transition-transform duration-slow ease-out group-hover:scale-105',
-          layout === 'horizontal' ? 'p-6 md:p-5' : 'p-8',
+          'absolute inset-0 w-full h-full transition-transform duration-slow ease-out group-hover:scale-105',
+          imageFit === 'cover'
+            ? 'object-cover'
+            : 'object-contain ' + (layout === 'horizontal' ? 'p-6 md:p-5' : 'p-8'),
         ]"
       />
     </component>

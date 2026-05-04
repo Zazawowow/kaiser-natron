@@ -202,7 +202,10 @@ const shopLabel = t('nav.shop')
     #000 calc(100% - var(--hero-feather)),
     transparent 100%
   );
-  transition: --hero-feather 400ms ease 1850ms;
+  /* Synced with the tagline fade-in below (700ms ease 1150ms) so
+     the side feathers dissolve in the same beat as the copy
+     resolves — one smooth landing instead of two staggered ones. */
+  transition: --hero-feather 700ms ease 1150ms;
 }
 
 .brand-hero.go .brand-hero__svg--bg {
