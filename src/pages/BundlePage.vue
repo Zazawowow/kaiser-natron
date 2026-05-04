@@ -182,9 +182,10 @@ onBeforeUnmount(() => {
   </main>
 
   <main v-else class="bg-brand text-cream">
-    <!-- Back button row — sits above the hero, mirrors ProductPage's
-         affordance so the chrome rhymes across detail pages. -->
-    <div class="mx-auto w-full max-w-7xl px-6 md:px-10 lg:px-16 pt-6">
+    <!-- Mobile-only back button row. On desktop the back button is
+         absolutely positioned over the hero image (see below) so the
+         layout doesn't waste a row of brand-green above the artwork. -->
+    <div class="lg:hidden mx-auto w-full max-w-7xl px-6 md:px-10 pt-6">
       <button
         type="button"
         class="inline-flex items-center gap-2 text-sm tracking-label uppercase text-cream/75 hover:text-cream transition-colors"
@@ -203,7 +204,7 @@ onBeforeUnmount(() => {
          stays legible regardless of what the image carries underneath.
          ========================================================= -->
     <section
-      class="hidden lg:block relative overflow-hidden min-h-[calc(100svh-var(--nav-h)-3rem)]"
+      class="hidden lg:block relative overflow-hidden min-h-[calc(100svh-var(--nav-h))]"
     >
       <img
         :src="bundle.image"
@@ -212,12 +213,15 @@ onBeforeUnmount(() => {
         decoding="async"
         class="absolute inset-0 w-full h-full object-cover"
       />
-      <!-- Legibility gradient — fades the brand-green back in over
-           the right ~50 % of the image so cream text stays readable
-           without painting an opaque sidebar over the artwork. -->
+      <!-- Legibility gradient — heavy on the right so the cream
+           copy reads cleanly regardless of the underlying photo.
+           Stops: image fully visible until 25 %, ramps to opaque
+           brand-green by 70 %, solid green from there to the right
+           edge. Adjust the second / third stops to soften or
+           sharpen the transition. -->
       <div
         aria-hidden="true"
-        class="absolute inset-0 bg-gradient-to-r from-brand/0 via-brand/55 to-brand"
+        class="absolute inset-0 bg-gradient-to-r from-brand/0 from-25% via-brand/90 via-65% to-brand to-80%"
       />
 
       <Badge
@@ -226,10 +230,24 @@ onBeforeUnmount(() => {
         class="absolute top-6 left-6 z-[1] shadow-sm"
       >{{ bundle.badge }}</Badge>
 
+      <!-- Back button overlaid on the hero (top-left corner of the
+           contained max-width column so it lines up with the rest
+           of the desktop chrome). -->
+      <div class="absolute top-6 left-0 right-0 z-10 mx-auto w-full max-w-7xl px-10 lg:px-16">
+        <button
+          type="button"
+          class="inline-flex items-center gap-2 text-sm tracking-label uppercase text-cream/85 hover:text-cream transition-colors"
+          @click="goBack"
+        >
+          <Icon name="arrow-left" :size="16" />
+          {{ t(backLabelKey) }}
+        </button>
+      </div>
+
       <!-- Foreground copy + purchase cluster, pinned to the right
            half of the section and vertically centred in the fold. -->
       <div class="relative z-10 mx-auto w-full max-w-7xl h-full px-10 lg:px-16">
-        <div class="flex h-full min-h-[calc(100svh-var(--nav-h)-3rem)] items-center justify-end">
+        <div class="flex h-full min-h-[calc(100svh-var(--nav-h))] items-center justify-end">
           <div class="w-full max-w-md xl:max-w-lg flex flex-col gap-6 text-cream">
             <p v-if="bundle.usage" class="text-xs tracking-label uppercase text-cream/80">{{ bundle.usage }}</p>
             <h1 class="font-display font-normal leading-[1.05] tracking-tight text-cream text-[2.5rem] xl:text-[3rem] 2xl:text-[3.5rem]">
