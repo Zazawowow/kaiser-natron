@@ -3,6 +3,8 @@ import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import Navbar from '@/design-system/components/Navbar.vue'
 import Hero from '@/design-system/components/Hero.vue'
+import BrandHero from '@/design-system/components/BrandHero.vue'
+import ProductTeaser from '@/design-system/components/ProductTeaser.vue'
 import Bundles from '@/design-system/components/Bundles.vue'
 import Revitalization from '@/design-system/components/Revitalization.vue'
 import About from '@/design-system/components/About.vue'
@@ -57,6 +59,30 @@ const heroProductId = 'kaiser-natron-pulver-250-g-grosspackung'
 // Second-fold banner — cream tone, image-left split, alternate cutout.
 const imgBanner = '/products/kaiser-natron-bad-500-g.webp'
 const bannerProductId = 'kaiser-natron-bad-500-g'
+
+// Brand-hero → product-hero teaser: one SKU per use-case (Cook /
+// Clean / Care). Avoids duplicating the Pulver 250 g (primary hero)
+// and Bad 500 g (cream banner) so the row reads as new surface area
+// rather than a repeat of what's already on screen.
+const teaserIds = [
+  'kaiser-natron-tabletten-100-g-dose',     // cook
+  'kaiser-natron-allzweck-spray-500-ml',    // clean
+  'kaiser-natron-fussbad-500-g',            // care
+]
+const teaserProducts = computed(() =>
+  teaserIds
+    .map((id) => products.find((p) => p.id === id))
+    .filter(Boolean)
+    .map((p) => ({
+      id: p.id,
+      name: p.title,
+      size: p.size,
+      price: p.price,
+      image: p.image,
+      imageAlt: p.title,
+      href: p.href,
+    })),
+)
 
 // Homepage top-level nav items — overrides the Navbar default so the
 // homepage reads as the shop entry point (Shop / Bundles / Revitalisierung
@@ -132,7 +158,7 @@ const bundles = [
     ],
     price: 24.9,
     memberPrice: 21.17,
-    image: '/products/kaiser-natron-pulver-250-g-grosspackung.webp',
+    image: '/bundles/background/Haushalts-Bundle.webp',
     imageAlt: 'Haushalts-Bundle mit Kaiser-Natron',
     badge: 'Bestseller',
     badgeVariant: 'accent',
@@ -144,7 +170,7 @@ const bundles = [
     items: ['1× Holste Wasch-Soda 500 g', '1× Gazelle Wäschestärke 1 l', '1× Linda Fleckenweg 200 ml'],
     price: 22.9,
     memberPrice: 19.47,
-    image: '/products/kaiser-natron-pulver-250-g-grosspackung.webp',
+    image: '/bundles/background/Wäsche & Pflege-Bundle.webp',
     imageAlt: 'Wäsche & Pflege Bundle',
     badge: '',
     badgeVariant: 'accent',
@@ -156,7 +182,7 @@ const bundles = [
     items: ['1× Kaiser-Natron Tabletten 100 g', '1× Kaiser-Natron Bad 500 g', '1× Kaiser-Natron Fußbad 500 g'],
     price: 29.9,
     memberPrice: 25.42,
-    image: '/products/kaiser-natron-bad-500-g.webp',
+    image: '/bundles/background/Wohlfühl_Bundle.webp',
     imageAlt: 'Wohlfühl-Bundle mit Kaiser-Natron Bad',
     badge: '',
     badgeVariant: 'accent',
@@ -170,6 +196,12 @@ async function onHeroAdd() {
 
 async function onBannerAdd() {
   await addToCart(bannerProductId, 1)
+  cartOpen.value = true
+}
+
+async function onTeaserAdd(productId) {
+  if (!productId) return
+  await addToCart(productId, 1)
   cartOpen.value = true
 }
 
@@ -274,42 +306,86 @@ onBeforeUnmount(() => {
   />
   <!-- First-fold wrapper — full viewport height, pulled up under the
        sticky nav via a negative margin equal to `--nav-h`. The nav
-       and the wrapper share the brand green, so the overlap reads as
-       a single continuous surface, and the hero centers at the TRUE
-       viewport vertical midpoint (50svh) rather than the midpoint of
-       the nav-offset space below it. The wave divider sits OUTSIDE
-       this wrapper so it never eats vertical space from the centering
-       calculation. `--nav-h` is defaulted in global CSS so first
-       paint is correct; a ResizeObserver refines it on mount. -->
+       and the wrapper share the brand green so the overlap reads as
+       one continuous surface. Hosts the BrandHero — same illustration
+       the SplashIntro overlay leaves behind, so the splash dismiss
+       fades into a matching in-page artwork with no visual seam. -->
   <div
     class="flex flex-col bg-brand md:min-h-[calc(100svh-var(--nav-h))] md:justify-center"
   >
-    <Hero
-      class="w-full"
-      variant="split"
-      tone="brand"
-      :subheadline="t('ds.hero.sub')"
-      :image="imgPulver250"
-      image-alt="Kaiser-Natron Pulver 250 g Großpackung"
-      :cta-label="t('ds.buttons.addToCart')"
-      :secondary-label="t('ds.buttons.learnMore')"
-      :secondary-href="`/shop/${heroProductId}`"
-      @cta="onHeroAdd"
-    >
-      <template #headline>
-        {{ t('ds.hero.headline.a') }}
-        <em class="italic font-light text-accent-soft">{{ t('ds.hero.headline.em') }}</em>
-        {{ t('ds.hero.headline.b') }}
-      </template>
-    </Hero>
+    <BrandHero class="w-full" />
   </div>
 
-  <!-- Wave divider from brand-green → cream. Sits OUTSIDE the fold
-       wrapper so it doesn't steal vertical space from the hero's
-       centering. The SVG is fully opaque: a cream rect fills the
-       whole viewBox so the SVG's bottom row is solid cream (matches
-       the banner below → no seam), and a green path paints the top
-       portion (matches the bg-brand fold above → no seam). -->
+  <!-- Wave brand → cream. Mirrors the existing pattern: rect = dest
+       colour (cream), path = source colour (brand), parent painted in
+       source so the seam disappears against the section above. -->
+  <svg
+    aria-hidden="true"
+    class="block w-full h-12 md:h-16 shrink-0 -mb-px bg-brand"
+    viewBox="0 0 1440 64"
+    preserveAspectRatio="none"
+  >
+    <rect width="1440" height="64" fill="var(--color-cream)" />
+    <path
+      d="M0,0 L0,40 C320,4 520,60 720,32 C920,4 1120,60 1440,24 L1440,0 Z"
+      fill="var(--color-brand)"
+    />
+  </svg>
+
+  <!-- Three-product teaser — one SKU per Cook/Clean/Care use-case,
+       cream surface, "Shop Kaiser Natron" CTA underneath funnels
+       into the full catalogue. -->
+  <ProductTeaser
+    class="-mt-px"
+    :eyebrow="t('home.teaser.eyebrow')"
+    :headline="t('home.teaser.headline')"
+    :sub="t('home.teaser.sub')"
+    :products="teaserProducts"
+    :cta-label="t('home.teaser.cta')"
+    cta-href="/shop"
+    tone="cream"
+    @add="onTeaserAdd"
+  />
+
+  <!-- Wave cream → brand — sets up the existing Pulver product hero,
+       which keeps its brand-green ground. rect = brand (dest), path =
+       cream (source), parent painted cream. -->
+  <svg
+    aria-hidden="true"
+    class="block w-full h-12 md:h-16 shrink-0 -mb-px bg-cream"
+    viewBox="0 0 1440 64"
+    preserveAspectRatio="none"
+  >
+    <rect width="1440" height="64" fill="var(--color-brand)" />
+    <path
+      d="M0,0 L0,40 C320,4 520,60 720,32 C920,4 1120,60 1440,24 L1440,0 Z"
+      fill="var(--color-cream)"
+    />
+  </svg>
+
+  <!-- Existing Pulver 250 g hero — moved out of the first-fold
+       wrapper since BrandHero now owns the first fold. Sits on
+       brand-green via `tone="brand"`. -->
+  <Hero
+    class="-mt-px w-full"
+    variant="split"
+    tone="brand"
+    :subheadline="t('ds.hero.sub')"
+    :image="imgPulver250"
+    image-alt="Kaiser-Natron Pulver 250 g Großpackung"
+    :cta-label="t('ds.buttons.addToCart')"
+    :secondary-label="t('ds.buttons.learnMore')"
+    :secondary-href="`/shop/${heroProductId}`"
+    @cta="onHeroAdd"
+  >
+    <template #headline>
+      {{ t('ds.hero.headline.a') }}
+      <em class="italic font-light text-accent-soft">{{ t('ds.hero.headline.em') }}</em>
+      {{ t('ds.hero.headline.b') }}
+    </template>
+  </Hero>
+
+  <!-- Wave brand → cream for the second-fold cream banner. -->
   <svg
     aria-hidden="true"
     class="block w-full h-12 md:h-16 shrink-0 -mb-px bg-brand"
@@ -326,9 +402,7 @@ onBeforeUnmount(() => {
   <!-- Second-fold product banner — same Hero component, cream surface,
        split layout reversed so the product sits on the left. `compact`
        tightens the desktop media sizing so this section reads as a
-       companion band, not a second full hero stage. The -mt-px pairs
-       with the wave's -mb-px to overlap the two sections by 1 CSS
-       pixel and hide any device-pixel seam. -->
+       companion band, not a second full hero stage. -->
   <Hero
     class="-mt-px"
     variant="split"

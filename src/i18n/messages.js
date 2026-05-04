@@ -350,6 +350,17 @@ const de = {
   'home.categories.cook': 'Kochen',
   'home.categories.care': 'Pflege',
 
+  // Home page – brand hero (top-of-fold, splash artwork settles here).
+  'home.brand.headline.a': 'Kaiser Natron –',
+  'home.brand.headline.em': 'der Premium-Anbieter',
+  'home.brand.headline.b': 'für Reinigen, Kochen, Pflegen.',
+  'home.brand.since': 'seit 1881',
+  // Home page – 3-product teaser sitting between brand hero and product hero.
+  'home.teaser.eyebrow': 'Drei Klassiker',
+  'home.teaser.headline': 'Für jeden Bereich das Richtige.',
+  'home.teaser.sub': 'Ein Beispiel aus jeder Familie – Kochen, Reinigen, Pflegen.',
+  'home.teaser.cta': 'Kaiser Natron Shop',
+
   // Checkout page (DE).
   'checkout.eyebrow': 'Bestellung abschließen',
   'checkout.headline': 'Fast geschafft —',
@@ -1011,6 +1022,17 @@ const en = {
   'home.categories.clean': 'Clean',
   'home.categories.cook': 'Cook',
   'home.categories.care': 'Care',
+
+  // Home page – brand hero (top-of-fold, splash artwork settles here).
+  'home.brand.headline.a': 'Kaiser Natron —',
+  'home.brand.headline.em': 'the premium provider',
+  'home.brand.headline.b': 'for Clean, Cook, Care.',
+  'home.brand.since': 'since 1881',
+  // Home page – 3-product teaser sitting between brand hero and product hero.
+  'home.teaser.eyebrow': 'Three classics',
+  'home.teaser.headline': 'One pick from every family.',
+  'home.teaser.sub': 'A flagship for cooking, cleaning and care — three SKUs, one origin.',
+  'home.teaser.cta': 'Shop Kaiser Natron',
 
   // Checkout page (EN).
   'checkout.eyebrow': 'Complete your order',

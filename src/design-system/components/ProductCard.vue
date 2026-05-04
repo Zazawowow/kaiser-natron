@@ -30,7 +30,7 @@ const props = defineProps({
   tone: {
     type: String,
     default: 'paper',
-    validator: (t) => ['paper', 'cream'].includes(t),
+    validator: (t) => ['paper', 'cream', 'brand'].includes(t),
   },
   inStock: { type: Boolean, default: true },
   href: { type: String, default: '' },
@@ -46,11 +46,16 @@ defineEmits(['add'])
 
 const { t } = useI18n()
 
-// Media background is pinned to `bg-paper` (white) for both tones
-// while the product PNGs still carry baked-in solid backgrounds.
-// Once the imagery is re-exported with transparency we can reinstate
-// the tone-coupled media tint (paper→cream, cream→paper) for the
-// subtle surface contrast the DS originally called for.
+// Each tone pairs a media wash (the image area at the top of the
+// card) with a body surface (the title / price / CTA cluster
+// underneath).
+//   · `paper` — historic all-white card.
+//   · `cream` — cream image wash + white body. Homepage ProductTeaser
+//      uses this so the product silhouettes share the cream surface
+//      of the surrounding section.
+//   · `brand` — brand-green image wash + white body. Shop page uses
+//      this so the products read as the brand stage and the cards
+//      pop off the cream catalogue surface.
 const tones = {
   paper: {
     surface: 'bg-paper',
@@ -58,8 +63,13 @@ const tones = {
     border: 'border-line',
   },
   cream: {
-    surface: 'bg-cream',
-    media: 'bg-paper',
+    surface: 'bg-paper',
+    media: 'bg-cream',
+    border: 'border-line',
+  },
+  brand: {
+    surface: 'bg-paper',
+    media: 'bg-brand',
     border: 'border-line',
   },
 }
