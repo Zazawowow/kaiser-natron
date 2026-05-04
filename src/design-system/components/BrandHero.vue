@@ -54,9 +54,10 @@
                  on top (the splash entrance order) one finger bled
                  white because the mound's bounds extend slightly
                  past the grip outline. -->
-            <path class="layer right-m" fill-rule="evenodd" :d="dPortRight" />
-            <path class="layer mound-m" fill-rule="evenodd" :d="dPortMound" />
-            <path class="layer left-m"  fill-rule="nonzero" :d="dPortLeft"  />
+            <path class="layer right-m"      fill-rule="evenodd" :d="dPortRight" />
+            <path class="layer mound-m"      fill-rule="evenodd" :d="dPortMound" />
+            <path class="layer mound-finger" fill-rule="evenodd" :d="dPortMoundFinger" />
+            <path class="layer left-m"       fill-rule="nonzero" :d="dPortLeft"  />
           </svg>
         </div>
 
@@ -95,9 +96,10 @@
           xmlns="http://www.w3.org/2000/svg"
           aria-hidden="true"
         >
-          <path class="layer right-m" fill-rule="evenodd" :d="dPortRight" />
-          <path class="layer mound-m" fill-rule="evenodd" :d="dPortMound" />
-          <path class="layer left-m"  fill-rule="nonzero" :d="dPortLeft"  />
+          <path class="layer right-m"      fill-rule="evenodd" :d="dPortRight" />
+          <path class="layer mound-m"      fill-rule="evenodd" :d="dPortMound" />
+          <path class="layer mound-finger" fill-rule="evenodd" :d="dPortMoundFinger" />
+          <path class="layer left-m"       fill-rule="nonzero" :d="dPortLeft"  />
         </svg>
       </div>
 
@@ -123,6 +125,7 @@ import {
   dPortLeft,
   dPortRight,
   dPortMound,
+  dPortMoundFinger,
 } from '@/components/splashPaths.js'
 import Button from './Button.vue'
 import { useI18n } from '@/i18n/index.js'
@@ -222,9 +225,14 @@ const { t } = useI18n()
 }
 
 /* Layer fills (matches the splash's resolved palette). */
-.left-m  { fill: #b5d8b6; }
-.right-m { fill: #b5d8b6; }
-.mound-m { fill: #ffffff; }
+.left-m       { fill: #b5d8b6; }
+.right-m      { fill: #b5d8b6; }
+.mound-m      { fill: #ffffff; }
+/* The original trace bundled a small hand/finger fragment under
+   the mound shape and painted it white; rendering it in the same
+   mint as the woman's other features makes it read as part of her
+   grip on the natron handful. */
+.mound-finger { fill: #b5d8b6; }
 
 /* ---------- Entrance animation (replaces SplashIntro) ----------
    Initial state: figures translated off to their respective sides
