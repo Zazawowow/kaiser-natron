@@ -195,50 +195,123 @@ onBeforeUnmount(() => {
       </button>
     </div>
 
-    <!-- Wide banner image — fills the full container width on every
-         viewport so the landscape source art (≈ 16:9) gets to breathe
-         instead of being cropped to a square. Mobile uses the image's
-         natural aspect (no clamp), desktop caps the height so the
-         banner doesn't dominate the fold past the image's intent.
-         `object-cover` keeps the framing consistent if a future
-         bundle image lands at a slightly different aspect. -->
-    <section class="mx-auto w-full max-w-7xl px-6 md:px-10 lg:px-16 pt-6 md:pt-8">
-      <div class="relative overflow-hidden rounded-lg bg-cream/10">
-        <Badge
-          v-if="bundle.badge"
-          :variant="bundle.badgeVariant || 'accent'"
-          class="absolute top-4 left-4 z-[1] shadow-sm"
-        >{{ bundle.badge }}</Badge>
-        <img
-          :src="bundle.image"
-          :alt="bundle.imageAlt || bundle.name"
-          loading="eager"
-          decoding="async"
-          class="block w-full h-auto object-cover lg:max-h-[55svh]"
-        />
+    <!-- =========================================================
+         DESKTOP (lg+) — bundle image as a full-bleed hero background;
+         all copy + purchase actions overlay on the right side. The
+         landscape source art (≈ 16:9) drives the fold; a left → right
+         brand-green gradient softens the right edge so the cream copy
+         stays legible regardless of what the image carries underneath.
+         ========================================================= -->
+    <section
+      class="hidden lg:block relative overflow-hidden min-h-[calc(100svh-var(--nav-h)-3rem)]"
+    >
+      <img
+        :src="bundle.image"
+        :alt="bundle.imageAlt || bundle.name"
+        loading="eager"
+        decoding="async"
+        class="absolute inset-0 w-full h-full object-cover"
+      />
+      <!-- Legibility gradient — fades the brand-green back in over
+           the right ~50 % of the image so cream text stays readable
+           without painting an opaque sidebar over the artwork. -->
+      <div
+        aria-hidden="true"
+        class="absolute inset-0 bg-gradient-to-r from-brand/0 via-brand/55 to-brand"
+      />
+
+      <Badge
+        v-if="bundle.badge"
+        :variant="bundle.badgeVariant || 'accent'"
+        class="absolute top-6 left-6 z-[1] shadow-sm"
+      >{{ bundle.badge }}</Badge>
+
+      <!-- Foreground copy + purchase cluster, pinned to the right
+           half of the section and vertically centred in the fold. -->
+      <div class="relative z-10 mx-auto w-full max-w-7xl h-full px-10 lg:px-16">
+        <div class="flex h-full min-h-[calc(100svh-var(--nav-h)-3rem)] items-center justify-end">
+          <div class="w-full max-w-md xl:max-w-lg flex flex-col gap-6 text-cream">
+            <p v-if="bundle.usage" class="text-xs tracking-label uppercase text-cream/80">{{ bundle.usage }}</p>
+            <h1 class="font-display font-normal leading-[1.05] tracking-tight text-cream text-[2.5rem] xl:text-[3rem] 2xl:text-[3.5rem]">
+              {{ bundle.name }}
+            </h1>
+            <p v-if="bundle.description" class="text-base xl:text-lg leading-relaxed text-cream/90">
+              {{ bundle.description }}
+            </p>
+
+            <div class="flex flex-col gap-2">
+              <p class="text-xs tracking-label uppercase text-cream/80">{{ t('bundle.items') }}</p>
+              <ul class="flex flex-col gap-1.5">
+                <li
+                  v-for="(item, i) in resolvedItems"
+                  :key="i"
+                  class="flex items-start gap-2 text-base text-cream leading-relaxed"
+                >
+                  <Icon name="check" :size="18" class="mt-0.5 shrink-0 text-accent" />
+                  <RouterLink
+                    v-if="item.product"
+                    :to="item.product.href"
+                    class="hover:text-accent transition-colors"
+                  >{{ item.label }}</RouterLink>
+                  <span v-else>{{ item.label }}</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="flex flex-col gap-1">
+              <span class="font-display text-3xl xl:text-4xl text-cream">{{ priceLabel }}</span>
+              <span v-if="memberPriceLabel" class="text-sm text-cream/80">
+                {{ t('bundle.memberPrice') }}
+                <span class="text-accent font-medium">{{ memberPriceLabel }}</span>
+              </span>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-4 mt-2">
+              <QuantityStepper v-model="qty" :min="1" :max="10" />
+              <Button variant="accent" size="lg" @click="onAdd">
+                <template #before><Icon name="plus" :size="16" /></template>
+                {{ t('ds.buttons.addToCart') }}
+              </Button>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- Copy + purchase block. Stacked on mobile (description above
-         the items / price / CTA cluster); on desktop the description
-         sits on the left and the items + price + qty + CTA cluster
-         on the right, so the buy actions stay aligned to the eye's
-         primary scan column. -->
-    <section class="mx-auto w-full max-w-7xl px-6 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
-      <div class="grid grid-cols-1 gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-14">
-        <!-- Description column. -->
-        <div class="flex flex-col gap-5 min-w-0">
+    <!-- =========================================================
+         MOBILE / TABLET (< lg) — full-width banner at the image's
+         natural aspect, then description + items + purchase cluster
+         stacked underneath. Keeps the buy actions reachable in a
+         single thumb-scroll on phone widths.
+         ========================================================= -->
+    <div class="lg:hidden">
+      <section class="mx-auto w-full max-w-7xl px-6 md:px-10 pt-6 md:pt-8">
+        <div class="relative overflow-hidden rounded-lg bg-cream/10">
+          <Badge
+            v-if="bundle.badge"
+            :variant="bundle.badgeVariant || 'accent'"
+            class="absolute top-4 left-4 z-[1] shadow-sm"
+          >{{ bundle.badge }}</Badge>
+          <img
+            :src="bundle.image"
+            :alt="bundle.imageAlt || bundle.name"
+            loading="eager"
+            decoding="async"
+            class="block w-full h-auto"
+          />
+        </div>
+      </section>
+
+      <section class="mx-auto w-full max-w-7xl px-6 md:px-10 py-10 md:py-14">
+        <div class="flex flex-col gap-6">
           <p v-if="bundle.usage" class="text-xs tracking-label uppercase text-cream/70">{{ bundle.usage }}</p>
-          <h1 class="font-display font-normal leading-[1.06] tracking-tight text-cream text-[2rem] md:text-[2.5rem] lg:text-[3rem]">
+          <h1 class="font-display font-normal leading-[1.06] tracking-tight text-cream text-[2rem] md:text-[2.5rem]">
             {{ bundle.name }}
           </h1>
-          <p v-if="bundle.description" class="text-base md:text-lg leading-relaxed text-cream/85 max-w-2xl">
+          <p v-if="bundle.description" class="text-base md:text-lg leading-relaxed text-cream/85">
             {{ bundle.description }}
           </p>
-        </div>
 
-        <!-- Purchase column. -->
-        <div class="flex flex-col gap-6 min-w-0">
           <div class="flex flex-col gap-2">
             <p class="text-xs tracking-label uppercase text-cream/70">{{ t('bundle.items') }}</p>
             <ul class="flex flex-col gap-1.5">
@@ -274,8 +347,8 @@ onBeforeUnmount(() => {
             </Button>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   </main>
 
   <!-- Bottom clearance for the mobile floating cluster — same pattern
