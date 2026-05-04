@@ -241,7 +241,7 @@ onBeforeUnmount(() => {
             :image="product.image"
             :image-alt="product.title"
             :href="product.href"
-            tone="brand"
+            tone="cream"
             :in-stock="product.inStock"
             :cta-variant="i % 2 === 1 ? 'accent' : 'primary'"
             @add="onAdd(product)"
