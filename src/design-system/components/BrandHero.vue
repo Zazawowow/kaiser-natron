@@ -241,7 +241,8 @@ const { t } = useI18n()
    so the figures land first, the mound fades in once they've
    landed, and the copy is the last beat — the eye reaches the
    tagline only after the artwork has settled. */
-.layer.left-m {
+.layer.left-m,
+.layer.mound-finger {
   opacity: 0;
   transform: translateX(-14%);
   transition: transform 800ms cubic-bezier(.22, .61, .36, 1) 150ms,
@@ -263,7 +264,8 @@ const { t } = useI18n()
 }
 
 .brand-hero.go .layer.left-m,
-.brand-hero.go .layer.right-m {
+.brand-hero.go .layer.right-m,
+.brand-hero.go .layer.mound-finger {
   opacity: 1;
   transform: none;
 }
@@ -281,6 +283,7 @@ const { t } = useI18n()
   .layer.left-m,
   .layer.right-m,
   .layer.mound-m,
+  .layer.mound-finger,
   .brand-hero__copy {
     opacity: 1 !important;
     transform: none !important;
