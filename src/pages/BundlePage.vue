@@ -195,41 +195,50 @@ onBeforeUnmount(() => {
       </button>
     </div>
 
-    <!-- Hero. Image left, copy + CTA right on lg+; stacked below. -->
-    <section class="mx-auto w-full max-w-7xl px-6 md:px-10 lg:px-16 py-10 md:py-14 lg:py-20">
-      <div class="grid grid-cols-1 gap-10 lg:grid-cols-[1.05fr_1fr] lg:gap-14 items-center">
-        <!-- Image. `aspect-square` reserves the slot before the
-             image loads so the layout doesn't reflow on slow
-             networks. `object-cover` matches the BundleCard treatment
-             — the new background art is composed for full bleed. -->
-        <div class="relative overflow-hidden rounded-lg bg-cream/10">
-          <div class="aspect-square">
-            <Badge
-              v-if="bundle.badge"
-              :variant="bundle.badgeVariant || 'accent'"
-              class="absolute top-4 left-4 z-[1] shadow-sm"
-            >{{ bundle.badge }}</Badge>
-            <img
-              :src="bundle.image"
-              :alt="bundle.imageAlt || bundle.name"
-              loading="eager"
-              decoding="async"
-              class="absolute inset-0 w-full h-full object-cover"
-            />
-          </div>
-        </div>
+    <!-- Wide banner image — fills the full container width on every
+         viewport so the landscape source art (≈ 16:9) gets to breathe
+         instead of being cropped to a square. Mobile uses the image's
+         natural aspect (no clamp), desktop caps the height so the
+         banner doesn't dominate the fold past the image's intent.
+         `object-cover` keeps the framing consistent if a future
+         bundle image lands at a slightly different aspect. -->
+    <section class="mx-auto w-full max-w-7xl px-6 md:px-10 lg:px-16 pt-6 md:pt-8">
+      <div class="relative overflow-hidden rounded-lg bg-cream/10">
+        <Badge
+          v-if="bundle.badge"
+          :variant="bundle.badgeVariant || 'accent'"
+          class="absolute top-4 left-4 z-[1] shadow-sm"
+        >{{ bundle.badge }}</Badge>
+        <img
+          :src="bundle.image"
+          :alt="bundle.imageAlt || bundle.name"
+          loading="eager"
+          decoding="async"
+          class="block w-full h-auto object-cover lg:max-h-[55svh]"
+        />
+      </div>
+    </section>
 
-        <!-- Copy + CTA. -->
-        <div class="flex flex-col gap-6 min-w-0">
+    <!-- Copy + purchase block. Stacked on mobile (description above
+         the items / price / CTA cluster); on desktop the description
+         sits on the left and the items + price + qty + CTA cluster
+         on the right, so the buy actions stay aligned to the eye's
+         primary scan column. -->
+    <section class="mx-auto w-full max-w-7xl px-6 md:px-10 lg:px-16 py-10 md:py-14 lg:py-16">
+      <div class="grid grid-cols-1 gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-14">
+        <!-- Description column. -->
+        <div class="flex flex-col gap-5 min-w-0">
           <p v-if="bundle.usage" class="text-xs tracking-label uppercase text-cream/70">{{ bundle.usage }}</p>
           <h1 class="font-display font-normal leading-[1.06] tracking-tight text-cream text-[2rem] md:text-[2.5rem] lg:text-[3rem]">
             {{ bundle.name }}
           </h1>
-          <p v-if="bundle.description" class="text-base md:text-lg leading-relaxed text-cream/85 max-w-xl">
+          <p v-if="bundle.description" class="text-base md:text-lg leading-relaxed text-cream/85 max-w-2xl">
             {{ bundle.description }}
           </p>
+        </div>
 
-          <!-- Items list. -->
+        <!-- Purchase column. -->
+        <div class="flex flex-col gap-6 min-w-0">
           <div class="flex flex-col gap-2">
             <p class="text-xs tracking-label uppercase text-cream/70">{{ t('bundle.items') }}</p>
             <ul class="flex flex-col gap-1.5">
@@ -249,8 +258,7 @@ onBeforeUnmount(() => {
             </ul>
           </div>
 
-          <!-- Pricing. -->
-          <div class="flex flex-col gap-1 mt-2">
+          <div class="flex flex-col gap-1">
             <span class="font-display text-3xl md:text-4xl text-cream">{{ priceLabel }}</span>
             <span v-if="memberPriceLabel" class="text-sm text-cream/70">
               {{ t('bundle.memberPrice') }}
@@ -258,7 +266,6 @@ onBeforeUnmount(() => {
             </span>
           </div>
 
-          <!-- Qty + Add to cart. -->
           <div class="flex flex-wrap items-center gap-4 mt-2">
             <QuantityStepper v-model="qty" :min="1" :max="10" />
             <Button variant="accent" size="lg" @click="onAdd">
