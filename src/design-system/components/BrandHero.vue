@@ -56,7 +56,7 @@
                  past the grip outline. -->
             <path class="layer right-m" fill-rule="evenodd" :d="dPortRight" />
             <path class="layer mound-m" fill-rule="evenodd" :d="dPortMound" />
-            <path class="layer left-m"  fill-rule="evenodd" :d="dPortLeft"  />
+            <path class="layer left-m"  fill-rule="nonzero" :d="dPortLeft"  />
           </svg>
         </div>
 
@@ -97,7 +97,7 @@
         >
           <path class="layer right-m" fill-rule="evenodd" :d="dPortRight" />
           <path class="layer mound-m" fill-rule="evenodd" :d="dPortMound" />
-          <path class="layer left-m"  fill-rule="evenodd" :d="dPortLeft"  />
+          <path class="layer left-m"  fill-rule="nonzero" :d="dPortLeft"  />
         </svg>
       </div>
 
