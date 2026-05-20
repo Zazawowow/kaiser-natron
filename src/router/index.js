@@ -14,6 +14,12 @@ const routes = [
     meta: { layout: 'none' },
   },
   {
+    path: '/kaiserhacks',
+    name: 'kaiserhacks',
+    component: () => import('@/pages/KaiserhacksPage.vue'),
+    meta: { layout: 'none' },
+  },
+  {
     path: '/shop/:slug',
     name: 'product',
     component: () => import('@/pages/ProductPage.vue'),
@@ -130,6 +136,12 @@ const routes = [
     meta: { layout: 'none', preview: true },
   },
   {
+    path: '/design/preview/kaiserhacks',
+    name: 'ds-preview-kaiserhacks',
+    component: () => import('@/pages/design/previews/KaiserhacksPreview.vue'),
+    meta: { layout: 'none', preview: true },
+  },
+  {
     path: '/design',
     component: () => import('@/pages/design/DesignLayout.vue'),
     meta: { layout: 'none' },
@@ -155,6 +167,7 @@ const routes = [
       { path: 'cart-drawer', name: 'ds-cart-drawer', component: () => import('@/pages/design/CartDrawerSection.vue') },
       { path: 'quantity-stepper', name: 'ds-quantity-stepper', component: () => import('@/pages/design/QuantityStepperSection.vue') },
       { path: 'bundles', name: 'ds-bundles', component: () => import('@/pages/design/BundlesSection.vue') },
+      { path: 'kaiserhacks', name: 'ds-kaiserhacks', component: () => import('@/pages/design/KaiserhacksSection.vue') },
       { path: 'revitalization', name: 'ds-revitalization', component: () => import('@/pages/design/RevitalizationSection.vue') },
       { path: 'about', name: 'ds-about', component: () => import('@/pages/design/AboutSection.vue') },
       { path: 'footer', name: 'ds-footer', component: () => import('@/pages/design/FooterSection.vue') },

@@ -50,6 +50,7 @@ const groups = computed(() => [
     title: t('ds.sidebar.sections'),
     items: [
       { name: 'ds-bundles', label: t('ds.nav.bundles') },
+      { name: 'ds-kaiserhacks', label: t('ds.nav.kaiserhacks') },
       { name: 'ds-revitalization', label: t('ds.nav.revitalization') },
       { name: 'ds-about', label: t('ds.nav.about') },
       { name: 'ds-footer', label: t('ds.nav.footer') },

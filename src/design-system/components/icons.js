@@ -23,6 +23,10 @@ export const icons = {
     path: '<circle cx="11" cy="11" r="6.5" /><path d="m20 20-3.5-3.5" />',
     label: 'Suche',
   },
+  play: {
+    path: '<path d="M8 5v14l11-7Z" />',
+    label: 'Abspielen',
+  },
 
   // Navigation
   menu: { path: '<path d="M5 7h14M5 12h14M5 17h14" />', label: 'Menü' },

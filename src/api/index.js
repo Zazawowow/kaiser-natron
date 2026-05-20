@@ -28,3 +28,8 @@ export {
   signOut,
   requestPasswordReset,
 } from './auth.js'
+export {
+  kaiserhacksPage,
+  fetchKaiserhacks,
+  localizeKaiserhacks,
+} from './kaiserhacks.js'

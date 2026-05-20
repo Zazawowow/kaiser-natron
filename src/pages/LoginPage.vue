@@ -49,7 +49,9 @@ const navItems = [
   { key: 'nav.bundles', href: '/#bundles' },
   { key: 'nav.revitalization', href: '/#revitalize' },
   { key: 'nav.about', href: '/#about' },
+  { key: 'nav.kaiserhacks', href: '/kaiserhacks' },
 ]
+const navSecondaryItems = []
 
 const email = ref('')
 const password = ref('')
@@ -114,6 +116,7 @@ onBeforeUnmount(() => {
     variant="cream"
     layout="standard"
     :items="navItems"
+    :secondary-items="navSecondaryItems"
     :cart-count="cart.count"
     :products="products"
     @cart="cartOpen = true"

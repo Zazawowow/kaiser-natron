@@ -74,6 +74,7 @@ const navItems = [
   { key: 'nav.bundles', href: '/#bundles' },
   { key: 'nav.revitalization', href: '/#revitalize' },
   { key: 'nav.about', href: '/#about' },
+  { key: 'nav.kaiserhacks', href: '/kaiserhacks' },
 ]
 const navSecondaryItems = []
 

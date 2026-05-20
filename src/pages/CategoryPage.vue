@@ -48,7 +48,9 @@ const navItems = [
   { key: 'nav.bundles', href: '/#bundles' },
   { key: 'nav.revitalization', href: '/#revitalize' },
   { key: 'nav.about', href: '/#about' },
+  { key: 'nav.kaiserhacks', href: '/kaiserhacks' },
 ]
+const navSecondaryItems = []
 
 const categoryProducts = computed(() => productsByUseCase(products)[props.useCase] || [])
 
@@ -103,6 +105,7 @@ onBeforeUnmount(() => {
     variant="brand"
     layout="standard"
     :items="navItems"
+    :secondary-items="navSecondaryItems"
     :cart-count="cart.count"
     :products="products"
     @cart="cartOpen = true"

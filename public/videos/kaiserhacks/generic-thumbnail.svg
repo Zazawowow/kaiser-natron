@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 550 450" role="img" aria-labelledby="title desc">
+  <title id="title">Kaiserhacks thumbnail</title>
+  <desc id="desc">Generic Kaiserhacks thumbnail without a play icon</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#006548"/>
+      <stop offset="1" stop-color="#003b2c"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="70%" cy="20%" r="60%">
+      <stop offset="0" stop-color="#e9c84b" stop-opacity=".55"/>
+      <stop offset=".45" stop-color="#e9c84b" stop-opacity=".16"/>
+      <stop offset="1" stop-color="#e9c84b" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse">
+      <circle cx="4" cy="4" r="2" fill="#f4efe4" opacity=".16"/>
+    </pattern>
+  </defs>
+  <rect width="550" height="450" fill="url(#bg)"/>
+  <rect width="550" height="450" fill="url(#glow)"/>
+  <rect width="550" height="450" fill="url(#dots)"/>
+  <path d="M-40 340 C110 265 175 412 315 330 C422 268 474 294 600 238 L600 450 L-40 450 Z" fill="#f4efe4" opacity=".16"/>
+  <path d="M-35 360 C118 300 180 430 325 350 C426 295 485 318 595 280 L595 450 L-35 450 Z" fill="#e9c84b" opacity=".18"/>
+  <g fill="#f4efe4">
+    <text x="52" y="102" font-family="DM Sans, Arial, sans-serif" font-size="21" font-weight="700" letter-spacing="4">KAISERHACKS</text>
+    <text x="52" y="190" font-family="Fraunces, Georgia, serif" font-size="58" font-weight="400">Einfach.</text>
+    <text x="52" y="252" font-family="Fraunces, Georgia, serif" font-size="58" font-style="italic" font-weight="300" fill="#e9c84b">Vielseitig.</text>
+    <text x="52" y="308" font-family="DM Sans, Arial, sans-serif" font-size="20" font-weight="500" opacity=".82">Kochen · Reinigen · Pflegen</text>
+  </g>
+  <g transform="translate(410 70)" fill="none" stroke="#e9c84b" stroke-width="7" opacity=".9">
+    <circle cx="52" cy="52" r="42"/>
+    <path d="M52 10 V0 M52 104 v-10 M10 52 H0 M104 52 H94"/>
+  </g>
+</svg>

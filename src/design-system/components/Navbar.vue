@@ -61,7 +61,7 @@ const props = defineProps({
   products: { type: Array, default: () => defaultProducts },
 })
 
-defineEmits(['cart', 'nav', 'select'])
+defineEmits(['cart', 'nav', 'search', 'select'])
 
 const { t } = useI18n()
 const menuOpen = ref(false)
@@ -361,7 +361,7 @@ onBeforeUnmount(() => {
                hero pills and the desktop top-bar; on mobile the
                menu stays focused on the four top-level
                destinations. -->
-          <nav class="flex-1 flex flex-col justify-center px-8 gap-3 overflow-y-auto">
+          <nav class="flex-1 flex flex-col-reverse justify-center px-8 gap-3 overflow-y-auto">
             <RouterLink
               v-for="item in menuItems"
               :key="item.key || item.label"
