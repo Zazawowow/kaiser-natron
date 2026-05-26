@@ -29,6 +29,7 @@ export const kaiserhacksPage = {
           id: 'zuckerfreie-limonade',
           titleKey: 'kaiserhacks.hack.zuckerfreieLimonade.title',
           descriptionKey: 'kaiserhacks.hack.zuckerfreieLimonade.description',
+          detailKey: 'kaiserhacks.hack.zuckerfreieLimonade.detail',
           duration: '0:25',
           tagKeys: ['kaiserhacks.tag.kueche', 'kaiserhacks.tag.getraenk'],
           video: {
@@ -42,6 +43,7 @@ export const kaiserhacksPage = {
           id: 'burger',
           titleKey: 'kaiserhacks.hack.burger.title',
           descriptionKey: 'kaiserhacks.hack.burger.description',
+          detailKey: 'kaiserhacks.hack.burger.detail',
           duration: '0:31',
           tagKeys: ['kaiserhacks.tag.backen', 'kaiserhacks.tag.teig'],
           video: {
@@ -55,6 +57,7 @@ export const kaiserhacksPage = {
           id: 'obst-gemuese-waesche',
           titleKey: 'kaiserhacks.hack.obstGemueseWaesche.title',
           descriptionKey: 'kaiserhacks.hack.obstGemueseWaesche.description',
+          detailKey: 'kaiserhacks.hack.obstGemueseWaesche.detail',
           duration: '0:22',
           tagKeys: ['kaiserhacks.tag.kueche', 'kaiserhacks.tag.vorbereiten'],
           video: {
@@ -68,6 +71,7 @@ export const kaiserhacksPage = {
           id: 'ofen-risotto',
           titleKey: 'kaiserhacks.hack.ofenRisotto.title',
           descriptionKey: 'kaiserhacks.hack.ofenRisotto.description',
+          detailKey: 'kaiserhacks.hack.ofenRisotto.detail',
           duration: '0:37',
           tagKeys: ['kaiserhacks.tag.kochen', 'kaiserhacks.tag.ofen'],
           video: {
@@ -90,6 +94,7 @@ export const kaiserhacksPage = {
           id: 'beauty-zubehoer',
           titleKey: 'kaiserhacks.hack.beautyZubehoer.title',
           descriptionKey: 'kaiserhacks.hack.beautyZubehoer.description',
+          detailKey: 'kaiserhacks.hack.beautyZubehoer.detail',
           duration: '0:35',
           tagKeys: ['kaiserhacks.tag.pflege', 'kaiserhacks.tag.reinigen'],
           video: {
@@ -103,6 +108,7 @@ export const kaiserhacksPage = {
           id: 'metallspuren-geschirr',
           titleKey: 'kaiserhacks.hack.metallspurenGeschirr.title',
           descriptionKey: 'kaiserhacks.hack.metallspurenGeschirr.description',
+          detailKey: 'kaiserhacks.hack.metallspurenGeschirr.detail',
           duration: '0:20',
           tagKeys: ['kaiserhacks.tag.haushalt', 'kaiserhacks.tag.geschirr'],
           video: {
@@ -116,6 +122,7 @@ export const kaiserhacksPage = {
           id: 'muelleimer-gerueche',
           titleKey: 'kaiserhacks.hack.muelleimerGerueche.title',
           descriptionKey: 'kaiserhacks.hack.muelleimerGerueche.description',
+          detailKey: 'kaiserhacks.hack.muelleimerGerueche.detail',
           duration: '0:34',
           tagKeys: ['kaiserhacks.tag.haushalt', 'kaiserhacks.tag.geruch'],
           video: {
@@ -129,6 +136,7 @@ export const kaiserhacksPage = {
           id: 'express-backblech-reinigung',
           titleKey: 'kaiserhacks.hack.expressBackblechReinigung.title',
           descriptionKey: 'kaiserhacks.hack.expressBackblechReinigung.description',
+          detailKey: 'kaiserhacks.hack.expressBackblechReinigung.detail',
           duration: '0:25',
           tagKeys: ['kaiserhacks.tag.reinigen', 'kaiserhacks.tag.kueche'],
           video: {
@@ -151,6 +159,7 @@ export const kaiserhacksPage = {
           id: 'glow-peeling',
           titleKey: 'kaiserhacks.hack.glowPeeling.title',
           descriptionKey: 'kaiserhacks.hack.glowPeeling.description',
+          detailKey: 'kaiserhacks.hack.glowPeeling.detail',
           duration: '0:36',
           tagKeys: ['kaiserhacks.tag.pflege', 'kaiserhacks.tag.haut'],
           video: {
@@ -164,6 +173,7 @@ export const kaiserhacksPage = {
           id: 'lippen-blaeschen',
           titleKey: 'kaiserhacks.hack.lippenBlaeschen.title',
           descriptionKey: 'kaiserhacks.hack.lippenBlaeschen.description',
+          detailKey: 'kaiserhacks.hack.lippenBlaeschen.detail',
           duration: '0:25',
           tagKeys: ['kaiserhacks.tag.pflege', 'kaiserhacks.tag.lippen'],
           video: {
@@ -177,6 +187,7 @@ export const kaiserhacksPage = {
           id: 'lackschaden-nagellack',
           titleKey: 'kaiserhacks.hack.lackschadenNagellack.title',
           descriptionKey: 'kaiserhacks.hack.lackschadenNagellack.description',
+          detailKey: 'kaiserhacks.hack.lackschadenNagellack.detail',
           duration: '0:30',
           tagKeys: ['kaiserhacks.tag.pflege', 'kaiserhacks.tag.naegel'],
           video: {
@@ -190,6 +201,7 @@ export const kaiserhacksPage = {
           id: 'mueckenstich',
           titleKey: 'kaiserhacks.hack.mueckenstich.title',
           descriptionKey: 'kaiserhacks.hack.mueckenstich.description',
+          detailKey: 'kaiserhacks.hack.mueckenstich.detail',
           duration: '0:30',
           tagKeys: ['kaiserhacks.tag.pflege', 'kaiserhacks.tag.sommer'],
           video: {
@@ -224,6 +236,7 @@ export function localizeKaiserhacks(page, t) {
         id: hack.id,
         title: t(hack.titleKey),
         description: t(hack.descriptionKey),
+        detailDescription: hack.detailKey ? t(hack.detailKey) : t(hack.descriptionKey),
         duration: hack.duration,
         tags: hack.tagKeys.map((key) => t(key)),
         video: {

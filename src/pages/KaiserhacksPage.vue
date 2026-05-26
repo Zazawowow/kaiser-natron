@@ -37,6 +37,7 @@ const labels = computed(() => ({
   categories: t('kaiserhacks.labels.categories'),
   categoryNav: t('kaiserhacks.labels.categoryNav'),
   openVideo: t('kaiserhacks.labels.openVideo'),
+  openImage: t('kaiserhacks.labels.openImage'),
   community: t('kaiserhacks.labels.community'),
   handoffNote: t('kaiserhacks.labels.handoffNote'),
 }))
@@ -61,7 +62,7 @@ async function onSearchSelect(product) {
 }
 
 function onHackSelect(hack) {
-  if (!hack?.video?.src) return
+  if (!hack?.video?.src && !hack?.video?.poster) return
   selectedHack.value = hack
 }
 
@@ -142,8 +143,16 @@ onBeforeUnmount(() => {
             />
           </div>
 
-          <div class="relative aspect-[9/16] h-[min(62svh,640px)] max-h-[calc(100svh-14rem)] min-h-0 w-full shrink overflow-hidden bg-ink">
+          <div
+            :class="[
+              'relative min-h-0 w-full shrink overflow-hidden bg-ink',
+              selectedHack.video?.src
+                ? 'aspect-[9/16] h-[min(62svh,640px)] max-h-[calc(100svh-14rem)]'
+                : 'aspect-[11/9] max-h-[min(54svh,450px)]',
+            ]"
+          >
             <video
+              v-if="selectedHack.video?.src"
               :key="selectedHack.id"
               class="absolute inset-0 h-full w-full bg-ink object-contain"
               :poster="selectedHack.video?.poster"
@@ -153,15 +162,21 @@ onBeforeUnmount(() => {
             >
               <source :src="selectedHack.video.src" type="video/mp4" />
             </video>
+            <img
+              v-else
+              :src="selectedHack.video?.poster"
+              :alt="selectedHack.video?.alt || selectedHack.title"
+              class="absolute inset-0 h-full w-full bg-paper object-contain"
+            />
           </div>
 
-          <div class="shrink-0 p-5">
+          <div class="min-h-0 overflow-y-auto p-5">
             <p class="eyebrow mb-2">{{ t('nav.kaiserhacks') }}</p>
             <h2 class="font-display text-2xl font-normal leading-tight text-ink">
               {{ selectedHack.title }}
             </h2>
             <p class="mt-2 text-sm leading-relaxed text-muted">
-              {{ selectedHack.description }}
+              {{ selectedHack.detailDescription || selectedHack.description }}
             </p>
           </div>
         </div>

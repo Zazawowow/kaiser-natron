@@ -14,6 +14,7 @@ defineProps({
       categories: '',
       categoryNav: '',
       openVideo: '',
+      openImage: '',
       community: '',
       handoffNote: '',
     }),
@@ -91,14 +92,18 @@ function scrollToCategory(event, id) {
 
           <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <li v-for="hack in category.hacks" :key="hack.id">
-              <article class="group flex h-full flex-col overflow-hidden rounded-md border border-line bg-paper transition-all duration-base hover:-translate-y-1 hover:border-brand-soft hover:shadow-md">
-                <button
-                  type="button"
-                  class="relative aspect-[4/3] w-full overflow-hidden bg-cream text-left disabled:cursor-default"
+              <article
+                class="group flex h-full cursor-pointer flex-col overflow-hidden rounded-md border border-line bg-paper transition-all duration-base hover:-translate-y-1 hover:border-brand-soft hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2"
+                role="button"
+                tabindex="0"
+                :aria-label="`${hack.video?.src ? labels.openVideo : labels.openImage}: ${hack.title}`"
+                @click="$emit('select', hack)"
+                @keydown.enter.prevent="$emit('select', hack)"
+                @keydown.space.prevent="$emit('select', hack)"
+              >
+                <div
+                  class="relative aspect-[4/3] w-full overflow-hidden bg-cream text-left"
                   :data-video-src="hack.video?.src"
-                  :aria-label="`${labels.openVideo}: ${hack.title}`"
-                  :disabled="!hack.video?.src"
-                  @click="$emit('select', hack)"
                 >
                   <img
                     v-if="hack.video?.poster"
@@ -117,7 +122,7 @@ function scrollToCategory(event, id) {
                     </span>
                     <span class="text-[12px] font-bold tracking-label">{{ hack.duration }}</span>
                   </span>
-                </button>
+                </div>
 
                 <div class="flex flex-1 flex-col gap-4 p-5">
                   <div>
@@ -133,7 +138,7 @@ function scrollToCategory(event, id) {
                     <h3 class="font-display text-xl font-normal leading-tight text-ink">
                       {{ hack.title }}
                     </h3>
-                    <p class="mt-2 text-[14px] leading-relaxed text-muted">
+                    <p class="mt-2 overflow-hidden text-[14px] leading-relaxed text-muted [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:2]">
                       {{ hack.description }}
                     </p>
                   </div>
