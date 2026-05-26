@@ -13,7 +13,6 @@ defineProps({
     default: () => ({
       categories: '',
       categoryNav: '',
-      watchVideo: '',
       openVideo: '',
       mockPlayer: '',
       community: '',
@@ -23,6 +22,14 @@ defineProps({
 })
 
 defineEmits(['select'])
+
+function scrollToCategory(event, id) {
+  const target = document.getElementById(id)
+  if (!target) return
+  event.preventDefault()
+  target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  history.pushState(null, '', `#${id}`)
+}
 </script>
 
 <template>
@@ -47,6 +54,7 @@ defineEmits(['select'])
             :key="category.id"
             :href="`#${category.id}`"
             class="inline-flex items-center gap-2 rounded-pill border border-cream-line bg-cream-wash px-4 py-2 text-[13px] font-semibold tracking-label text-cream transition-colors hover:bg-cream-wash-strong hover:text-accent"
+            @click="scrollToCategory($event, category.id)"
           >
             {{ category.title }}
             <Icon name="arrow-right" :size="15" />
@@ -127,14 +135,6 @@ defineEmits(['select'])
                     </p>
                   </div>
 
-                  <button
-                    type="button"
-                    class="mt-auto inline-flex items-center gap-2 text-left text-[14px] font-semibold tracking-label text-brand transition-colors hover:text-brand-hover"
-                    @click="$emit('select', hack)"
-                  >
-                    {{ labels.watchVideo }}
-                    <Icon name="arrow-right" :size="16" />
-                  </button>
                 </div>
               </article>
             </li>

@@ -9,7 +9,6 @@ const page = computed(() => localizeKaiserhacks(kaiserhacksPage, t))
 const labels = computed(() => ({
   categories: t('kaiserhacks.labels.categories'),
   categoryNav: t('kaiserhacks.labels.categoryNav'),
-  watchVideo: t('kaiserhacks.labels.watchVideo'),
   openVideo: t('kaiserhacks.labels.openVideo'),
   mockPlayer: t('kaiserhacks.labels.mockPlayer'),
   community: t('kaiserhacks.labels.community'),

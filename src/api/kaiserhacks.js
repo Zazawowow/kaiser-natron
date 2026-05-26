@@ -15,7 +15,7 @@ export const kaiserhacksPage = {
       id: 'kochen-backen',
       titleKey: 'kaiserhacks.category.kochenBacken.title',
       summaryKey: 'kaiserhacks.category.kochenBacken.summary',
-      href: '/kaiserhacks#kochen-backen',
+      href: '/shop#cook',
       ctaLabelKey: 'kaiserhacks.category.kochenBacken.cta',
       hacks: [
         {
@@ -72,7 +72,7 @@ export const kaiserhacksPage = {
       id: 'haus-garten',
       titleKey: 'kaiserhacks.category.hausGarten.title',
       summaryKey: 'kaiserhacks.category.hausGarten.summary',
-      href: '/kaiserhacks#haus-garten',
+      href: '/shop#clean',
       ctaLabelKey: 'kaiserhacks.category.hausGarten.cta',
       hacks: [
         {
@@ -129,7 +129,7 @@ export const kaiserhacksPage = {
       id: 'koerper-pflege',
       titleKey: 'kaiserhacks.category.koerperPflege.title',
       summaryKey: 'kaiserhacks.category.koerperPflege.summary',
-      href: '/kaiserhacks#koerper-pflege',
+      href: '/shop#care',
       ctaLabelKey: 'kaiserhacks.category.koerperPflege.cta',
       hacks: [
         {

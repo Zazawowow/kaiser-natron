@@ -83,6 +83,13 @@ async function onSearchSelect(product) {
   await addToCart(product.id, 1)
   cartOpen.value = true
 }
+function scrollToSection(event, id) {
+  const target = document.getElementById(id)
+  if (!target) return
+  event.preventDefault()
+  target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  history.pushState(null, '', `#${id}`)
+}
 async function onQty({ productId, quantity }) {
   await updateCartItem(productId, quantity)
 }
@@ -167,6 +174,7 @@ onBeforeUnmount(() => {
           <a
             :href="`#${tile.id}`"
             class="group flex h-full flex-col items-center gap-4 p-4 md:p-5 rounded-md border border-cream-line bg-cream-wash hover:bg-cream-wash-strong transition-colors duration-base"
+            @click="scrollToSection($event, tile.id)"
           >
             <div class="w-full aspect-[4/3] max-h-[30svh] md:max-h-[26svh] lg:max-h-[28svh] rounded-md bg-paper overflow-hidden flex items-center justify-center">
               <img
