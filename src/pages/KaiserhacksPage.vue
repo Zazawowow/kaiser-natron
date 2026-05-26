@@ -37,7 +37,6 @@ const labels = computed(() => ({
   categories: t('kaiserhacks.labels.categories'),
   categoryNav: t('kaiserhacks.labels.categoryNav'),
   openVideo: t('kaiserhacks.labels.openVideo'),
-  mockPlayer: t('kaiserhacks.labels.mockPlayer'),
   community: t('kaiserhacks.labels.community'),
   handoffNote: t('kaiserhacks.labels.handoffNote'),
 }))
@@ -62,6 +61,7 @@ async function onSearchSelect(product) {
 }
 
 function onHackSelect(hack) {
+  if (!hack?.video?.src) return
   selectedHack.value = hack
 }
 
@@ -125,13 +125,13 @@ onBeforeUnmount(() => {
     >
       <div
         v-if="selectedHack"
-        class="fixed inset-0 z-50 flex items-center justify-center bg-ink/70 px-4 py-8"
+        class="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto bg-ink/70 p-4 sm:p-6"
         role="dialog"
         aria-modal="true"
         :aria-label="selectedHack.title"
         @click.self="selectedHack = null"
       >
-        <div class="relative w-full max-w-[360px] overflow-hidden rounded-md bg-paper shadow-lg">
+        <div class="relative my-auto flex max-h-[calc(100svh-2rem)] w-full max-w-[min(430px,calc(100vw-2rem))] flex-col overflow-hidden rounded-md bg-paper shadow-lg sm:max-h-[calc(100svh-3rem)] sm:max-w-[min(430px,calc(100vw-3rem))]">
           <div class="absolute right-3 top-3 z-10">
             <IconButton
               icon="close"
@@ -142,30 +142,20 @@ onBeforeUnmount(() => {
             />
           </div>
 
-          <div class="relative aspect-video w-full overflow-hidden bg-ink">
-            <img
-              :src="selectedHack.video?.poster"
-              :alt="selectedHack.video?.alt || selectedHack.title"
-              class="absolute inset-0 h-full w-full object-cover opacity-70"
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/25 to-transparent" />
-            <div class="absolute inset-0 flex items-center justify-center">
-              <div class="flex h-16 w-16 items-center justify-center rounded-pill bg-accent text-brand shadow-md">
-                <span class="ml-1 h-0 w-0 border-y-[12px] border-l-[18px] border-y-transparent border-l-current" />
-              </div>
-            </div>
-            <div class="absolute inset-x-5 bottom-5">
-              <div class="mb-3 flex items-center justify-between text-[12px] font-bold tracking-label text-cream">
-                <span>{{ t('kaiserhacks.labels.mockPlayer') }}</span>
-                <span>{{ selectedHack.duration }}</span>
-              </div>
-              <div class="h-1.5 overflow-hidden rounded-pill bg-cream/25">
-                <div class="h-full w-1/3 rounded-pill bg-accent" />
-              </div>
-            </div>
+          <div class="relative aspect-[9/16] h-[min(62svh,640px)] max-h-[calc(100svh-14rem)] min-h-0 w-full shrink overflow-hidden bg-ink">
+            <video
+              :key="selectedHack.id"
+              class="absolute inset-0 h-full w-full bg-ink object-contain"
+              :poster="selectedHack.video?.poster"
+              controls
+              autoplay
+              playsinline
+            >
+              <source :src="selectedHack.video.src" type="video/mp4" />
+            </video>
           </div>
 
-          <div class="p-5">
+          <div class="shrink-0 p-5">
             <p class="eyebrow mb-2">{{ t('nav.kaiserhacks') }}</p>
             <h2 class="font-display text-2xl font-normal leading-tight text-ink">
               {{ selectedHack.title }}

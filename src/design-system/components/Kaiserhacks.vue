@@ -14,7 +14,6 @@ defineProps({
       categories: '',
       categoryNav: '',
       openVideo: '',
-      mockPlayer: '',
       community: '',
       handoffNote: '',
     }),
@@ -95,9 +94,10 @@ function scrollToCategory(event, id) {
               <article class="group flex h-full flex-col overflow-hidden rounded-md border border-line bg-paper transition-all duration-base hover:-translate-y-1 hover:border-brand-soft hover:shadow-md">
                 <button
                   type="button"
-                  class="relative aspect-[4/3] w-full overflow-hidden bg-cream text-left"
+                  class="relative aspect-[4/3] w-full overflow-hidden bg-cream text-left disabled:cursor-default"
                   :data-video-src="hack.video?.src"
                   :aria-label="`${labels.openVideo}: ${hack.title}`"
+                  :disabled="!hack.video?.src"
                   @click="$emit('select', hack)"
                 >
                   <img
@@ -108,7 +108,10 @@ function scrollToCategory(event, id) {
                     decoding="async"
                     class="absolute inset-0 h-full w-full object-cover transition-transform duration-slow group-hover:scale-105"
                   />
-                  <span class="absolute inset-x-0 bottom-0 flex items-center justify-between gap-3 bg-brand/90 px-4 py-3 text-cream">
+                  <span
+                    v-if="hack.video?.src"
+                    class="absolute inset-x-0 bottom-0 flex items-center justify-between gap-3 bg-brand/90 px-4 py-3 text-cream"
+                  >
                     <span class="inline-flex h-10 w-10 items-center justify-center rounded-pill bg-accent text-brand shadow-sm">
                       <Icon name="play" :size="18" />
                     </span>

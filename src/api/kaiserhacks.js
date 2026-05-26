@@ -2,8 +2,15 @@
 // src/i18n/messages.js under `kaiserhacks.*` keys, matching the bundle
 // fixture pattern. The backend can replace this module with HTTP calls while
 // callers keep the same structural shape.
+//
+// Video contract for the UI:
+//   video.src       final playable MP4 URL
+//   video.poster    final thumbnail URL
+//   video.sourceHref optional import/origin metadata, not used for playback
 
 const genericThumb = '/videos/kaiserhacks/generic-thumbnail.svg'
+const videoPath = (id) => `/videos/kaiserhacks/${id}.mp4`
+const posterPath = (id) => `/videos/kaiserhacks/${id}.jpg`
 
 export const kaiserhacksPage = {
   eyebrowKey: 'kaiserhacks.eyebrow',
@@ -22,11 +29,12 @@ export const kaiserhacksPage = {
           id: 'zuckerfreie-limonade',
           titleKey: 'kaiserhacks.hack.zuckerfreieLimonade.title',
           descriptionKey: 'kaiserhacks.hack.zuckerfreieLimonade.description',
-          duration: '0:38',
+          duration: '0:25',
           tagKeys: ['kaiserhacks.tag.kueche', 'kaiserhacks.tag.getraenk'],
           video: {
-            src: 'https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2F100077375413679%2Fvideos%2F1093112835730953%2F&show_text=false&width=267&t=0',
-            poster: genericThumb,
+            src: videoPath('zuckerfreie-limonade'),
+            poster: posterPath('zuckerfreie-limonade'),
+            sourceHref: 'https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2F100077375413679%2Fvideos%2F1093112835730953%2F&show_text=false&width=267&t=0',
             altKey: 'kaiserhacks.hack.zuckerfreieLimonade.alt',
           },
         },
@@ -34,11 +42,12 @@ export const kaiserhacksPage = {
           id: 'burger',
           titleKey: 'kaiserhacks.hack.burger.title',
           descriptionKey: 'kaiserhacks.hack.burger.description',
-          duration: '0:45',
+          duration: '0:31',
           tagKeys: ['kaiserhacks.tag.backen', 'kaiserhacks.tag.teig'],
           video: {
-            src: 'https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2F100077375413679%2Fvideos%2F2381822465547336%2F&show_text=false&width=267&t=0',
-            poster: genericThumb,
+            src: videoPath('burger'),
+            poster: posterPath('burger'),
+            sourceHref: 'https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2F100077375413679%2Fvideos%2F2381822465547336%2F&show_text=false&width=267&t=0',
             altKey: 'kaiserhacks.hack.burger.alt',
           },
         },
@@ -46,11 +55,12 @@ export const kaiserhacksPage = {
           id: 'obst-gemuese-waesche',
           titleKey: 'kaiserhacks.hack.obstGemueseWaesche.title',
           descriptionKey: 'kaiserhacks.hack.obstGemueseWaesche.description',
-          duration: '0:31',
+          duration: '0:22',
           tagKeys: ['kaiserhacks.tag.kueche', 'kaiserhacks.tag.vorbereiten'],
           video: {
-            src: 'https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2F100077375413679%2Fvideos%2F1026985529610447%2F&show_text=false&width=267&t=0',
-            poster: genericThumb,
+            src: videoPath('obst-gemuese-waesche'),
+            poster: posterPath('obst-gemuese-waesche'),
+            sourceHref: 'https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2F100077375413679%2Fvideos%2F1026985529610447%2F&show_text=false&width=267&t=0',
             altKey: 'kaiserhacks.hack.obstGemueseWaesche.alt',
           },
         },
@@ -58,11 +68,12 @@ export const kaiserhacksPage = {
           id: 'ofen-risotto',
           titleKey: 'kaiserhacks.hack.ofenRisotto.title',
           descriptionKey: 'kaiserhacks.hack.ofenRisotto.description',
-          duration: '0:52',
+          duration: '0:37',
           tagKeys: ['kaiserhacks.tag.kochen', 'kaiserhacks.tag.ofen'],
           video: {
-            src: 'https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2F100077375413679%2Fvideos%2F1676469699652231%2F&show_text=false&width=267&t=0',
-            poster: genericThumb,
+            src: videoPath('ofen-risotto'),
+            poster: posterPath('ofen-risotto'),
+            sourceHref: 'https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2F100077375413679%2Fvideos%2F1676469699652231%2F&show_text=false&width=267&t=0',
             altKey: 'kaiserhacks.hack.ofenRisotto.alt',
           },
         },
@@ -79,11 +90,12 @@ export const kaiserhacksPage = {
           id: 'beauty-zubehoer',
           titleKey: 'kaiserhacks.hack.beautyZubehoer.title',
           descriptionKey: 'kaiserhacks.hack.beautyZubehoer.description',
-          duration: '0:33',
+          duration: '0:35',
           tagKeys: ['kaiserhacks.tag.pflege', 'kaiserhacks.tag.reinigen'],
           video: {
-            src: 'https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2F100077375413679%2Fvideos%2F798060882682814%2F&show_text=false&width=267&t=0',
-            poster: genericThumb,
+            src: videoPath('beauty-zubehoer'),
+            poster: posterPath('beauty-zubehoer'),
+            sourceHref: 'https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2F100077375413679%2Fvideos%2F798060882682814%2F&show_text=false&width=267&t=0',
             altKey: 'kaiserhacks.hack.beautyZubehoer.alt',
           },
         },
@@ -91,11 +103,12 @@ export const kaiserhacksPage = {
           id: 'metallspuren-geschirr',
           titleKey: 'kaiserhacks.hack.metallspurenGeschirr.title',
           descriptionKey: 'kaiserhacks.hack.metallspurenGeschirr.description',
-          duration: '0:29',
+          duration: '0:20',
           tagKeys: ['kaiserhacks.tag.haushalt', 'kaiserhacks.tag.geschirr'],
           video: {
-            src: 'https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F2625021024499858%2F&show_text=false&width=267&t=0',
-            poster: genericThumb,
+            src: videoPath('metallspuren-geschirr'),
+            poster: posterPath('metallspuren-geschirr'),
+            sourceHref: 'https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F2625021024499858%2F&show_text=false&width=267&t=0',
             altKey: 'kaiserhacks.hack.metallspurenGeschirr.alt',
           },
         },
@@ -107,7 +120,8 @@ export const kaiserhacksPage = {
           tagKeys: ['kaiserhacks.tag.haushalt', 'kaiserhacks.tag.geruch'],
           video: {
             src: '',
-            poster: genericThumb,
+            poster: posterPath('muelleimer-gerueche'),
+            sourceHref: 'https://www.kaiser-natron.de/kaiserhacks/hack/gerueche-aus-muelleimer-entfernen/',
             altKey: 'kaiserhacks.hack.muelleimerGerueche.alt',
           },
         },
@@ -115,11 +129,12 @@ export const kaiserhacksPage = {
           id: 'express-backblech-reinigung',
           titleKey: 'kaiserhacks.hack.expressBackblechReinigung.title',
           descriptionKey: 'kaiserhacks.hack.expressBackblechReinigung.description',
-          duration: '0:41',
+          duration: '0:25',
           tagKeys: ['kaiserhacks.tag.reinigen', 'kaiserhacks.tag.kueche'],
           video: {
-            src: 'https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2F100077375413679%2Fvideos%2F1473646797116293%2F&show_text=false&width=267&t=0',
-            poster: genericThumb,
+            src: videoPath('express-backblech-reinigung'),
+            poster: posterPath('express-backblech-reinigung'),
+            sourceHref: 'https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2F100077375413679%2Fvideos%2F1473646797116293%2F&show_text=false&width=267&t=0',
             altKey: 'kaiserhacks.hack.expressBackblechReinigung.alt',
           },
         },
@@ -140,7 +155,8 @@ export const kaiserhacksPage = {
           tagKeys: ['kaiserhacks.tag.pflege', 'kaiserhacks.tag.haut'],
           video: {
             src: '',
-            poster: genericThumb,
+            poster: posterPath('glow-peeling'),
+            sourceHref: 'https://www.kaiser-natron.de/kaiserhacks/hack/glow-peeling/',
             altKey: 'kaiserhacks.hack.glowPeeling.alt',
           },
         },
@@ -152,7 +168,8 @@ export const kaiserhacksPage = {
           tagKeys: ['kaiserhacks.tag.pflege', 'kaiserhacks.tag.lippen'],
           video: {
             src: '',
-            poster: genericThumb,
+            poster: posterPath('lippen-blaeschen'),
+            sourceHref: 'https://www.kaiser-natron.de/kaiserhacks/hack/lippen-blaeschen/',
             altKey: 'kaiserhacks.hack.lippenBlaeschen.alt',
           },
         },
@@ -160,11 +177,12 @@ export const kaiserhacksPage = {
           id: 'lackschaden-nagellack',
           titleKey: 'kaiserhacks.hack.lackschadenNagellack.title',
           descriptionKey: 'kaiserhacks.hack.lackschadenNagellack.description',
-          duration: '0:33',
+          duration: '0:30',
           tagKeys: ['kaiserhacks.tag.pflege', 'kaiserhacks.tag.naegel'],
           video: {
-            src: 'https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2F100077375413679%2Fvideos%2F964807425679685%2F&show_text=false&width=267&t=0',
-            poster: genericThumb,
+            src: videoPath('lackschaden-nagellack'),
+            poster: posterPath('lackschaden-nagellack'),
+            sourceHref: 'https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2F100077375413679%2Fvideos%2F964807425679685%2F&show_text=false&width=267&t=0',
             altKey: 'kaiserhacks.hack.lackschadenNagellack.alt',
           },
         },
@@ -176,7 +194,8 @@ export const kaiserhacksPage = {
           tagKeys: ['kaiserhacks.tag.pflege', 'kaiserhacks.tag.sommer'],
           video: {
             src: '',
-            poster: genericThumb,
+            poster: posterPath('mueckenstich'),
+            sourceHref: 'https://www.kaiser-natron.de/kaiserhacks/hack/mueckenstich-juckt-mich-nicht/',
             altKey: 'kaiserhacks.hack.mueckenstich.alt',
           },
         },
@@ -210,6 +229,7 @@ export function localizeKaiserhacks(page, t) {
         video: {
           src: hack.video.src,
           poster: hack.video.poster,
+          sourceHref: hack.video.sourceHref || '',
           alt: t(hack.video.altKey),
         },
       })),

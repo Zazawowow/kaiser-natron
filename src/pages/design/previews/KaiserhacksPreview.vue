@@ -10,7 +10,6 @@ const labels = computed(() => ({
   categories: t('kaiserhacks.labels.categories'),
   categoryNav: t('kaiserhacks.labels.categoryNav'),
   openVideo: t('kaiserhacks.labels.openVideo'),
-  mockPlayer: t('kaiserhacks.labels.mockPlayer'),
   community: t('kaiserhacks.labels.community'),
   handoffNote: t('kaiserhacks.labels.handoffNote'),
 }))
