@@ -240,7 +240,7 @@ function onRemove(line) {
             <!-- Checkout stretches to fill the row on mobile and
                  spans the full footer on desktop (close hidden). -->
             <Button
-              variant="primary"
+              variant="accent"
               size="lg"
               block
               class="flex-1 min-w-0"

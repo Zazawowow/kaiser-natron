@@ -39,7 +39,7 @@ const props = defineProps({
    *  differentiate use-case bands visually. Accepts any Button
    *  variant; a subset list isn't enforced here so consumers can
    *  experiment without gatekeeping from the card. */
-  ctaVariant: { type: String, default: 'primary' },
+  ctaVariant: { type: String, default: 'accent' },
 })
 
 defineEmits(['add'])

@@ -70,9 +70,9 @@ const searchOpen = ref(false)
 const tones = {
   brand: {
     bar: 'bg-brand text-cream border-cream-line',
-    link: 'text-cream hover:text-accent',
+    link: 'text-cream hover:text-highlight',
     logo: 'text-cream',
-    searchTrigger: 'border border-cream-line bg-cream-wash text-cream/80 hover:text-accent',
+    searchTrigger: 'border border-cream-line bg-cream-wash text-cream/80 hover:text-highlight',
   },
   cream: {
     bar: 'bg-cream text-brand border-line',
@@ -215,7 +215,7 @@ onBeforeUnmount(() => {
             :key="item.key || item.label"
             :to="item.href || '/'"
             :class="[
-              isActive(item.href) ? 'text-accent' : tone.link,
+              isActive(item.href) ? 'text-highlight' : tone.link,
               'text-[14px] font-medium tracking-label transition-colors duration-base',
             ]"
             @click="onNavClick(item, $event); $emit('nav', item)"
@@ -238,7 +238,7 @@ onBeforeUnmount(() => {
             :key="item.key || item.label"
             :to="item.href || '/'"
             :class="[
-              isActive(item.href) ? 'text-accent' : tone.link,
+              isActive(item.href) ? 'text-highlight' : tone.link,
               'text-[14px] font-medium tracking-label transition-colors duration-base',
             ]"
             @click="onNavClick(item, $event); $emit('nav', item)"
@@ -369,8 +369,8 @@ onBeforeUnmount(() => {
               :class="[
                 'font-serif font-normal text-[clamp(2.25rem,9vw,3.5rem)] tracking-tight leading-[1.05] transition-colors duration-base',
                 isActive(item.href)
-                  ? 'text-accent'
-                  : 'text-cream hover:text-accent',
+                  ? 'text-highlight'
+                  : 'text-cream hover:text-highlight',
               ]"
               @click="onNavClick(item, $event); menuOpen = false; $emit('nav', item)"
             >{{ itemLabel(item) }}</RouterLink>

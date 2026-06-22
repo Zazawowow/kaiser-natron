@@ -29,6 +29,11 @@
   --color-accent-fill-hover: color-mix(in oklch, var(--color-accent-fill), black 12%);
   --color-accent-fill-ink: #ffffff;
 
+  /* Interactive highlight (mint) — hover/active state for nav tabs and
+     footer links on the brand-green chrome. Replaces the old yellow
+     accent highlight. */
+  --color-highlight: #6eceb2;
+
   /* Neutrals — warm, brand-tinted */
   --color-ink: color-mix(in oklch, var(--color-brand), black 50%);
   --color-ink-placeholder: color-mix(in srgb, var(--color-ink) 35%, transparent);

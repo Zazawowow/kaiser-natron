@@ -21,7 +21,7 @@ const tone = computed(() => {
       bottomRule: 'border-cream-line/40',
       muted: 'text-cream/80',
       logo: 'text-cream',
-      link: 'hover:text-accent',
+      link: 'hover:text-highlight',
     }
   }
   if (props.variant === 'paper') {

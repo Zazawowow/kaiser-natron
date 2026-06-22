@@ -228,7 +228,7 @@ const extraCount = computed(() => Math.max(0, props.items.length - MAX_ITEMS))
         </div>
 
         <Button
-          variant="primary"
+          variant="accent"
           size="md"
           :block="layout === 'vertical'"
           :disabled="!inStock"

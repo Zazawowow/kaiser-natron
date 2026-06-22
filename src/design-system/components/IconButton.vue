@@ -55,7 +55,7 @@ defineEmits(['click'])
 const RAISED = new Set(['float', 'accent'])
 
 const variants = {
-  float: 'bg-brand-float text-accent',
+  float: 'bg-brand-float text-white',
   accent: 'bg-accent-fill text-accent-fill-ink hover:bg-accent-fill-hover',
   'cream-wash': 'bg-cream-wash text-cream hover:bg-cream-wash-strong',
   'brand-wash': 'bg-brand-wash text-brand',

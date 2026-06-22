@@ -252,7 +252,7 @@ onBeforeUnmount(() => {
             :href="product.href"
             tone="cream"
             :in-stock="product.inStock"
-            :cta-variant="i % 2 === 1 ? 'accent' : 'primary'"
+            cta-variant="accent"
             @add="onAdd(product)"
           />
         </div>

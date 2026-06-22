@@ -73,7 +73,7 @@ const CARD_TONES = [
   <section id="about" class="bg-cream text-ink">
     <div class="mx-auto w-full max-w-6xl px-6 py-16 sm:px-8 sm:py-20 md:px-12 md:py-24 lg:px-16 lg:py-28">
       <div class="flex flex-col items-center text-center gap-4 max-w-3xl mx-auto">
-        <Badge v-if="eyebrow" variant="brand">{{ eyebrow }}</Badge>
+        <Badge v-if="eyebrow" variant="accent">{{ eyebrow }}</Badge>
 
         <h2
           v-if="headline"
@@ -185,9 +185,9 @@ const CARD_TONES = [
   border-color: color-mix(in srgb, var(--color-brand) 28%, transparent);
 }
 .pill-accent {
-  background: var(--color-accent);
-  color: var(--color-brand);
-  border-color: color-mix(in srgb, var(--color-accent) 70%, var(--color-brand));
+  background: var(--color-accent-fill);
+  color: var(--color-accent-fill-ink);
+  border-color: var(--color-accent-fill);
 }
 
 /* ——— Desktop: horizontal pill-line-pill track ———————————— */

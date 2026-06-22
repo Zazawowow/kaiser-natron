@@ -227,20 +227,21 @@ const imageHeightClass = computed(() =>
             </Button>
 
             <template v-if="secondaryLabel">
-              <!-- Brand tone needs a cream-outlined pill; Button's ghost/secondary
-                   render dark-on-dark on the brand green. Internal paths use
-                   RouterLink so SPA scroll history survives the navigation. -->
+              <!-- Brand tone renders a direct white-outlined pill (transparent
+                   fill, white text/icons, subtle white hover) so the secondary
+                   CTA reads on the green ground. Internal paths use RouterLink
+                   so SPA scroll history survives the navigation. -->
               <RouterLink
                 v-if="isBrandTone && secondaryHref && isInternalPath(secondaryHref)"
                 :to="secondaryHref"
-                class="inline-flex items-center justify-center rounded-pill border border-cream/50 px-[34px] py-[17px] text-[16px] font-semibold tracking-label text-cream transition-colors duration-base hover:border-cream hover:bg-cream-wash-strong"
+                class="inline-flex items-center justify-center rounded-pill border border-accent-fill bg-accent-fill px-[34px] py-[17px] text-[14px] font-semibold uppercase tracking-label text-accent-fill-ink transition-colors duration-base hover:bg-accent-fill-hover"
               >{{ secondaryLabel }}</RouterLink>
               <component
                 v-else-if="isBrandTone"
                 :is="secondaryHref ? 'a' : 'button'"
                 :type="secondaryHref ? undefined : 'button'"
                 :href="secondaryHref || undefined"
-                class="inline-flex items-center justify-center rounded-pill border border-cream/50 px-[34px] py-[17px] text-[16px] font-semibold tracking-label text-cream transition-colors duration-base hover:border-cream hover:bg-cream-wash-strong"
+                class="inline-flex items-center justify-center rounded-pill border border-accent-fill bg-accent-fill px-[34px] py-[17px] text-[14px] font-semibold uppercase tracking-label text-accent-fill-ink transition-colors duration-base hover:bg-accent-fill-hover"
                 @click="secondaryHref ? null : $emit('secondary')"
               >{{ secondaryLabel }}</component>
               <RouterLink
