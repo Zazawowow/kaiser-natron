@@ -304,7 +304,27 @@ converted from EPS to SVG.
 
 ---
 
-## 14. Design-system docs page
+## 14. Product image — 250 g Großpackung box recoloured
+
+**Files:** `public/products/kaiser-natron-pulver-250-g-grosspackung.webp`
+(source of truth) and the build copy `dist/products/…` (same filename).
+
+The 250 g box product shot had a muted, grey/pine green that didn't match the
+brighter brand green of the other Kaiser-Natron powder packs (e.g. the 50 g
+sachet `public/products/kaiser-natron-pulver-50-g-beutel.webp`). It was replaced
+with an updated box render carrying the correct vivid brand green (the dark-green
+3-D side panels and the red bottom band are intact).
+
+- **Where product images live:** `public/products/*.webp` (served as static
+  assets; the build mirrors them to `dist/products/*.webp`). Convention:
+  **transparent RGBA, ~1200 px tall**.
+- The replacement was supplied as a 939×1200 transparent PNG and saved straight
+  to WebP (`quality 92`, no scaling needed — already matching the original
+  dimensions), so edges/text stay crisp.
+
+---
+
+## 15. Design-system docs page
 
 **File:** `src/pages/design/ColorsSection.vue`
 
