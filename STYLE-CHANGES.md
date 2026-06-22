@@ -272,7 +272,39 @@ The `paper` and `cream` tones keep `text-brand` (unchanged).
 
 ---
 
-## 13. Design-system docs page
+## 13. Brand-hero intro artwork → official brand assets
+
+**Files:** `src/design-system/components/BrandHero.vue`,
+`src/components/heroFigures.js`, `src/assets/brand/{hebe,waterfall}.svg`
+
+The home-page intro animation (the in-flow figure entrance — the full-screen
+`SplashIntro` overlay was already retired) previously used hand-traced
+approximations of the woman + waterfall. It now uses the **official Kaiser-Natron
+brand vectors**: the Ikone ("Hebe") and the Waterfall (2021 Druckdaten-Final),
+converted from EPS to SVG.
+
+- **Source SVGs** live in `src/assets/brand/` for provenance; the extracted path
+  data lives in `src/components/heroFigures.js` (`ladyMint`, `ladyWhite`,
+  `waterfall`).
+- **Dark outline removed** — the brand icon's `#006648` outline tone is dropped;
+  the figures render as flat mint silhouettes, matching the established splash
+  aesthetic. Mint tones: lady `#72c1ad`, waterfall `#6eceb2`; natron handful
+  `#ffffff`.
+- **Composition** — shared `0 0 2760 3624` viewBox: the lady at the origin
+  (native 1828×3624), the waterfall **half-scale** (`scale(0.5)`) to her right
+  and **vertically centred** against her (`translate(1793,1310)`).
+- **Animation unchanged** — same choreography/timing: lady slides in from the
+  left (`left-m`), waterfall from the right (`right-m`), the white natron fades
+  in once she's landed (`mound-m`), tagline + SINCE 1881 last; same edge-feather
+  mask and reduced-motion handling.
+
+> Side effect: the home-page chunk shrank ~214 KB → ~70 KB because the new
+> `heroFigures.js` (~57 KB) replaces the much larger traced `splashPaths.js`
+> import. `splashPaths.js` / `SplashIntro.vue` remain only as unused legacy.
+
+---
+
+## 14. Design-system docs page
 
 **File:** `src/pages/design/ColorsSection.vue`
 
