@@ -42,7 +42,7 @@ const tones = {
     mediaBg: 'bg-cream',
     title: 'text-cream',
     meta: 'text-cream/70',
-    price: 'text-accent',
+    price: 'text-cream',
     noResults: 'text-cream/70',
     rowActive: 'bg-cream-wash',
     rowHover: 'hover:bg-cream-wash/60',

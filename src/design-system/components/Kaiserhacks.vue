@@ -1,6 +1,7 @@
 <script setup>
 import Icon from './Icon.vue'
 import Badge from './Badge.vue'
+import WaveDivider from './WaveDivider.vue'
 
 defineProps({
   eyebrow: { type: String, default: '#kaiserhacks' },
@@ -63,7 +64,9 @@ function scrollToCategory(event, id) {
       </div>
     </header>
 
-    <div class="mx-auto w-full max-w-6xl px-6 py-14 sm:px-8 sm:py-16 md:px-12 md:py-20 lg:px-16">
+    <WaveDivider from="brand" to="surface" />
+
+    <div class="-mt-px mx-auto w-full max-w-6xl px-6 py-14 sm:px-8 sm:py-16 md:px-12 md:py-20 lg:px-16">
       <div class="space-y-14">
         <section
           v-for="category in categories"

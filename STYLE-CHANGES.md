@@ -247,9 +247,32 @@ path:     (cubic-bézier wave)  →  M0,0 L0,116 L1440,12 L1440,0 Z
 The seam-free construction is unchanged: a full-height `<rect>` paints the
 *lower* section colour and the `<path>` paints the *upper* section colour.
 
+The same diagonal divider also sits between the **Kaiserhacks** green header
+and the white body below it:
+
+**File:** `src/design-system/components/Kaiserhacks.vue` — imports `WaveDivider`
+and renders `<WaveDivider from="brand" to="surface" />` between the `bg-brand`
+header and the content `<div>` (which gains `-mt-px` to sit flush).
+
 ---
 
-## 12. Design-system docs page
+## 12. Search dropdown prices → white (on green)
+
+**File:** `src/design-system/components/Search.vue`
+
+In the search overlay, the price labels on the brand-green tone were yellow.
+They are now white to match the rest of the green-surface text:
+
+```js
+// brand tone
+price: 'text-accent'  →  'text-cream'   // (#ffffff on green)
+```
+
+The `paper` and `cream` tones keep `text-brand` (unchanged).
+
+---
+
+## 13. Design-system docs page
 
 **File:** `src/pages/design/ColorsSection.vue`
 
