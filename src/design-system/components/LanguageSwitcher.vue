@@ -22,17 +22,17 @@ const { locale, setLocale, availableLocales } = useI18n()
 const tones = {
   paper: {
     container: 'border border-line bg-paper',
-    active: 'bg-brand text-accent',
+    active: 'bg-accent-fill text-accent-fill-ink',
     inactive: 'text-muted hover:text-brand',
   },
   cream: {
     container: 'border border-line-strong bg-paper',
-    active: 'bg-brand text-accent',
+    active: 'bg-accent-fill text-accent-fill-ink',
     inactive: 'text-muted hover:text-brand',
   },
   brand: {
     container: 'border border-cream-line bg-cream-wash',
-    active: 'bg-accent text-brand',
+    active: 'bg-accent-fill text-accent-fill-ink',
     inactive: 'text-cream hover:text-accent',
   },
 }

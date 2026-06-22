@@ -31,11 +31,11 @@ const variants = {
     'bg-brand text-accent border-brand ' +
     'hover:bg-brand-hover hover:-translate-y-0.5 hover:shadow-md',
   accent:
-    'bg-accent text-brand border-accent ' +
-    'hover:bg-accent-soft hover:-translate-y-0.5 hover:shadow-md',
+    'bg-accent-fill text-accent-fill-ink border-accent-fill ' +
+    'hover:bg-accent-fill-hover hover:-translate-y-0.5 hover:shadow-md',
   secondary:
-    'bg-transparent text-brand border-brand ' +
-    'hover:bg-brand hover:text-accent',
+    'bg-transparent text-white border-white ' +
+    'hover:bg-white/10',
   ghost:
     'bg-transparent text-brand border-transparent hover:bg-brand-wash',
   danger:

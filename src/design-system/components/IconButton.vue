@@ -56,7 +56,7 @@ const RAISED = new Set(['float', 'accent'])
 
 const variants = {
   float: 'bg-brand-float text-accent',
-  accent: 'bg-accent text-brand hover:bg-accent-soft',
+  accent: 'bg-accent-fill text-accent-fill-ink hover:bg-accent-fill-hover',
   'cream-wash': 'bg-cream-wash text-cream hover:bg-cream-wash-strong',
   'brand-wash': 'bg-brand-wash text-brand',
   'cream-dark': 'bg-cream-dark text-brand hover:bg-brand-soft hover:text-cream',

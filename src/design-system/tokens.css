@@ -17,10 +17,17 @@
      brand surface, where bg-brand would blend in. */
   --color-brand-float: color-mix(in oklch, var(--color-brand), white 8%);
 
-  /* Accent (warm yellow) */
+  /* Accent (warm yellow) — text & emphasis on brand-green surfaces */
   --color-accent: #e9c84b;
   --color-accent-soft: #f2dc7c;
   --color-accent-ink: var(--color-brand);
+
+  /* Accent fill (crimson) — solid CTA color for buttons, active pills,
+     icon buttons and chips. Carries white ink for contrast. Kept distinct
+     from --color-accent so yellow text/emphasis on green stays yellow. */
+  --color-accent-fill: #cc0230;
+  --color-accent-fill-hover: color-mix(in oklch, var(--color-accent-fill), black 12%);
+  --color-accent-fill-ink: #ffffff;
 
   /* Neutrals — warm, brand-tinted */
   --color-ink: color-mix(in oklch, var(--color-brand), black 50%);
@@ -28,14 +35,14 @@
   --color-muted: color-mix(in oklch, var(--color-brand), white 35%);
   --color-line: color-mix(in srgb, var(--color-brand) 11%, transparent);
   --color-line-strong: color-mix(in srgb, var(--color-brand) 22%, transparent);
-  --color-cream: #f4efe4;
+  --color-cream: #ffffff;
   /* Darker cream — brand-tinted so it stays in the warm-green palette
      rather than drifting toward muddy taupe. Used as a visible border
      or rule where plain `--color-cream` would disappear against the
      surface ground, and `--color-line-strong` (brand-tinted hairline)
      would read as "technical line" rather than "paper edge". */
   --color-cream-dark: color-mix(in oklab, var(--color-cream), var(--color-brand) 18%);
-  --color-surface: #faf7f1;
+  --color-surface: #ffffff;
   --color-paper: #ffffff;
 
   /* Washes — tinted fills for hover / subtle backgrounds / overlay chrome */
@@ -54,8 +61,12 @@
   --color-danger-wash: rgba(178, 58, 42, 0.12);
 
   /* ——— Typography ———————————————————————————————————————————— */
-  --font-serif: 'Fraunces', ui-serif, Georgia, 'Times New Roman', serif;
-  --font-sans: 'DM Sans', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  /* Zeitung everywhere — both the display and body tokens resolve to the
+     same family (self-hosted via @font-face in styles.css). The serif
+     token is kept as a separate name so `.font-display` headings can be
+     retuned independently later; fallbacks are sans since Zeitung is. */
+  --font-serif: 'Zeitung', ui-sans-serif, system-ui, -apple-system, Arial, sans-serif;
+  --font-sans: 'Zeitung', ui-sans-serif, system-ui, -apple-system, Arial, sans-serif;
   --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
 
   --text-xs: 0.75rem;

@@ -152,7 +152,7 @@ onBeforeUnmount(() => {
       <div class="flex flex-col items-center text-center gap-4 max-w-3xl mx-auto">
         <h1 class="font-display font-normal leading-[1.05] tracking-tight text-cream text-headline-lg">
           {{ t('shop.headline') }}
-          <em class="italic font-light text-accent-soft">{{ t('shop.headline.em') }}</em>
+          <em class="italic font-light text-cream">{{ t('shop.headline.em') }}</em>
         </h1>
         <p class="text-base md:text-lg leading-relaxed text-cream/80 max-w-2xl">
           {{ t('shop.sub') }}
@@ -186,7 +186,7 @@ onBeforeUnmount(() => {
               />
             </div>
             <div class="flex flex-col items-center text-center gap-1">
-              <p class="eyebrow text-accent">{{ tile.label }}</p>
+              <p class="eyebrow text-cream/75">{{ tile.label }}</p>
               <h3 class="font-display text-lg md:text-xl font-normal leading-tight text-cream">
                 {{ tile.product.title }}
               </h3>

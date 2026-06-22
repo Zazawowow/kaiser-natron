@@ -235,7 +235,7 @@ onBeforeUnmount(() => {
 
             <p
               v-if="copy && copy.tagline"
-              class="mt-5 font-display italic font-light text-xl text-accent-soft md:text-2xl"
+              class="mt-5 font-display italic font-light text-xl text-cream md:text-2xl"
             >{{ copy.tagline }}</p>
 
             <p

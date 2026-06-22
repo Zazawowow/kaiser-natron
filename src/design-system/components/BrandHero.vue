@@ -70,7 +70,7 @@
             <p class="mb-4 md:mb-5 text-sm md:text-base tracking-label uppercase text-cream/75">{{ t('home.brand.since') }}</p>
             <h1 class="font-display font-normal leading-[1.06] tracking-tight text-cream text-[1.75rem] md:text-[2.25rem] lg:text-[2.5rem] xl:text-[2.75rem] 2xl:text-[3.25rem]">
               {{ t('home.brand.headline.a') }}
-              <em class="italic font-light text-accent-soft">{{ t('home.brand.headline.em') }}</em>
+              <em class="italic font-light text-cream">{{ t('home.brand.headline.em') }}</em>
               {{ t('home.brand.headline.b') }}
             </h1>
             <RouterLink to="/shop" class="mt-7 md:mt-8 inline-flex">
@@ -106,7 +106,7 @@
       <div class="brand-hero__copy flex flex-col items-center text-center">
         <h1 class="max-w-3xl font-display font-normal leading-[1.08] tracking-tight text-cream text-[1.5rem] sm:text-[2rem]">
           {{ t('home.brand.headline.a') }}
-          <em class="italic font-light text-accent-soft">{{ t('home.brand.headline.em') }}</em>
+          <em class="italic font-light text-cream">{{ t('home.brand.headline.em') }}</em>
           {{ t('home.brand.headline.b') }}
         </h1>
         <p class="mt-4 text-[0.95rem] tracking-label uppercase text-cream/75">{{ t('home.brand.since') }}</p>

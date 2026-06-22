@@ -1,7 +1,8 @@
 <script setup>
 /**
- * WaveDivider — the home page's signature soft-wave transition
- * between two full-bleed coloured sections. Extracted from
+ * WaveDivider — the signature diagonal transition between two
+ * full-bleed coloured sections. The boundary is a straight diagonal
+ * that sits low on the left and high on the right. Extracted from
  * HomePage.vue so the shop page (and any future sections page) can
  * reuse the same visual grammar instead of duplicating the SVG.
  *
@@ -60,13 +61,13 @@ const toFill = computed(() => toneVar[props.to])
 <template>
   <svg
     aria-hidden="true"
-    :class="['block w-full h-12 md:h-16 shrink-0 -mb-px', wrapperClass]"
-    viewBox="0 0 1440 64"
+    :class="['block w-full h-24 md:h-32 shrink-0 -mb-px', wrapperClass]"
+    viewBox="0 0 1440 128"
     preserveAspectRatio="none"
   >
-    <rect width="1440" height="64" :fill="toFill" />
+    <rect width="1440" height="128" :fill="toFill" />
     <path
-      d="M0,0 L0,40 C320,4 520,60 720,32 C920,4 1120,60 1440,24 L1440,0 Z"
+      d="M0,0 L0,116 L1440,12 L1440,0 Z"
       :fill="fromFill"
     />
   </svg>

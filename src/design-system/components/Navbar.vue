@@ -401,7 +401,7 @@ onBeforeUnmount(() => {
           >
             <button
               type="button"
-              class="flex-1 min-w-0 inline-flex items-center justify-between px-6 py-4 rounded-pill bg-accent text-brand font-semibold tracking-label hover:bg-accent-soft transition-colors shadow-md"
+              class="flex-1 min-w-0 inline-flex items-center justify-between px-6 py-4 rounded-pill bg-accent-fill text-accent-fill-ink font-semibold tracking-label hover:bg-accent-fill-hover transition-colors shadow-md"
               @click="menuOpen = false; $emit('cart')"
             >
               <span class="inline-flex items-center gap-3">

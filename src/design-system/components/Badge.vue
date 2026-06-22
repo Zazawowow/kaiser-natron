@@ -24,7 +24,7 @@ defineEmits(['click'])
 const variants = {
   neutral: 'bg-cream text-muted border border-line',
   brand: 'bg-brand text-accent',
-  accent: 'bg-accent text-accent-ink',
+  accent: 'bg-accent-fill text-accent-fill-ink',
   subtle: 'bg-brand-soft-wash text-brand-soft',
   success: 'bg-success-wash text-success',
   warning: 'bg-warning-wash text-warning',
@@ -35,7 +35,7 @@ const variants = {
 const interactiveHover = {
   neutral: 'hover:bg-cream-wash',
   brand: 'hover:bg-brand-hover',
-  accent: 'hover:bg-accent-soft',
+  accent: 'hover:bg-accent-fill-hover',
   subtle: 'hover:bg-brand-wash',
   success: 'hover:opacity-90',
   warning: 'hover:opacity-90',

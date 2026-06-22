@@ -51,7 +51,7 @@ defineEmits(['notify'])
           {{ headline }}
           <em
             v-if="headlineEm"
-            class="italic font-light text-accent-soft"
+            class="italic font-light text-cream"
           >{{ headlineEm }}</em>
         </h2>
 

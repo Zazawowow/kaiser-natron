@@ -293,13 +293,13 @@ onBeforeUnmount(() => {
        source so the seam disappears against the section above. -->
   <svg
     aria-hidden="true"
-    class="block w-full h-12 md:h-16 shrink-0 -mb-px bg-brand"
-    viewBox="0 0 1440 64"
+    class="block w-full h-24 md:h-32 shrink-0 -mb-px bg-brand"
+    viewBox="0 0 1440 128"
     preserveAspectRatio="none"
   >
-    <rect width="1440" height="64" fill="var(--color-cream)" />
+    <rect width="1440" height="128" fill="var(--color-cream)" />
     <path
-      d="M0,0 L0,40 C320,4 520,60 720,32 C920,4 1120,60 1440,24 L1440,0 Z"
+      d="M0,0 L0,116 L1440,12 L1440,0 Z"
       fill="var(--color-brand)"
     />
   </svg>
@@ -324,13 +324,13 @@ onBeforeUnmount(() => {
        cream (source), parent painted cream. -->
   <svg
     aria-hidden="true"
-    class="block w-full h-12 md:h-16 shrink-0 -mb-px bg-cream"
-    viewBox="0 0 1440 64"
+    class="block w-full h-24 md:h-32 shrink-0 -mb-px bg-cream"
+    viewBox="0 0 1440 128"
     preserveAspectRatio="none"
   >
-    <rect width="1440" height="64" fill="var(--color-brand)" />
+    <rect width="1440" height="128" fill="var(--color-brand)" />
     <path
-      d="M0,0 L0,40 C320,4 520,60 720,32 C920,4 1120,60 1440,24 L1440,0 Z"
+      d="M0,0 L0,116 L1440,12 L1440,0 Z"
       fill="var(--color-cream)"
     />
   </svg>
@@ -352,7 +352,7 @@ onBeforeUnmount(() => {
   >
     <template #headline>
       {{ t('ds.hero.headline.a') }}
-      <em class="italic font-light text-accent-soft">{{ t('ds.hero.headline.em') }}</em>
+      <em class="italic font-light text-cream">{{ t('ds.hero.headline.em') }}</em>
       {{ t('ds.hero.headline.b') }}
     </template>
   </Hero>
@@ -361,13 +361,13 @@ onBeforeUnmount(() => {
        sits directly under the Pulver hero (banner + bundles swapped). -->
   <svg
     aria-hidden="true"
-    class="block w-full h-12 md:h-16 shrink-0 -mb-px bg-brand"
-    viewBox="0 0 1440 64"
+    class="block w-full h-24 md:h-32 shrink-0 -mb-px bg-brand"
+    viewBox="0 0 1440 128"
     preserveAspectRatio="none"
   >
-    <rect width="1440" height="64" fill="var(--color-surface)" />
+    <rect width="1440" height="128" fill="var(--color-surface)" />
     <path
-      d="M0,0 L0,40 C320,4 520,60 720,32 C920,4 1120,60 1440,24 L1440,0 Z"
+      d="M0,0 L0,116 L1440,12 L1440,0 Z"
       fill="var(--color-brand)"
     />
   </svg>
@@ -391,13 +391,13 @@ onBeforeUnmount(() => {
   <!-- Wave surface → cream into the second-fold cream banner. -->
   <svg
     aria-hidden="true"
-    class="block w-full h-12 md:h-16 shrink-0 -mb-px bg-surface"
-    viewBox="0 0 1440 64"
+    class="block w-full h-24 md:h-32 shrink-0 -mb-px bg-surface"
+    viewBox="0 0 1440 128"
     preserveAspectRatio="none"
   >
-    <rect width="1440" height="64" fill="var(--color-cream)" />
+    <rect width="1440" height="128" fill="var(--color-cream)" />
     <path
-      d="M0,0 L0,40 C320,4 520,60 720,32 C920,4 1120,60 1440,24 L1440,0 Z"
+      d="M0,0 L0,116 L1440,12 L1440,0 Z"
       fill="var(--color-surface)"
     />
   </svg>
@@ -431,13 +431,13 @@ onBeforeUnmount(() => {
   <!-- Wave cream → brand into the Revitalization section. -->
   <svg
     aria-hidden="true"
-    class="block w-full h-12 md:h-16 shrink-0 -mb-px bg-cream"
-    viewBox="0 0 1440 64"
+    class="block w-full h-24 md:h-32 shrink-0 -mb-px bg-cream"
+    viewBox="0 0 1440 128"
     preserveAspectRatio="none"
   >
-    <rect width="1440" height="64" fill="var(--color-brand)" />
+    <rect width="1440" height="128" fill="var(--color-brand)" />
     <path
-      d="M0,0 L0,40 C320,4 520,60 720,32 C920,4 1120,60 1440,24 L1440,0 Z"
+      d="M0,0 L0,116 L1440,12 L1440,0 Z"
       fill="var(--color-cream)"
     />
   </svg>
@@ -459,13 +459,13 @@ onBeforeUnmount(() => {
        between the revit section and the about section. -->
   <svg
     aria-hidden="true"
-    class="block w-full h-12 md:h-16 shrink-0 -mb-px bg-brand"
-    viewBox="0 0 1440 64"
+    class="block w-full h-24 md:h-32 shrink-0 -mb-px bg-brand"
+    viewBox="0 0 1440 128"
     preserveAspectRatio="none"
   >
-    <rect width="1440" height="64" fill="var(--color-cream)" />
+    <rect width="1440" height="128" fill="var(--color-cream)" />
     <path
-      d="M0,0 L0,40 C320,4 520,60 720,32 C920,4 1120,60 1440,24 L1440,0 Z"
+      d="M0,0 L0,116 L1440,12 L1440,0 Z"
       fill="var(--color-brand)"
     />
   </svg>

@@ -7,7 +7,7 @@ const { t } = useI18n()
 
 const groups = computed(() => [
   { title: t('ds.colors.group.brand'), names: ['brand', 'brand-hover', 'brand-soft'] },
-  { title: t('ds.colors.group.accent'), names: ['accent', 'accent-soft', 'accent-ink'] },
+  { title: t('ds.colors.group.accent'), names: ['accent', 'accent-soft', 'accent-ink', 'accent-fill', 'accent-fill-hover', 'accent-fill-ink'] },
   { title: t('ds.colors.group.surface'), names: ['surface', 'paper', 'cream'] },
   { title: t('ds.colors.group.ink'), names: ['ink', 'muted'] },
   { title: t('ds.colors.group.line'), names: ['line', 'line-strong'] },

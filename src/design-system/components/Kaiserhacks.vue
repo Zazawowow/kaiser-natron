@@ -36,7 +36,7 @@ function scrollToCategory(event, id) {
   <section class="bg-surface text-ink">
     <header class="bg-brand text-cream">
       <div class="mx-auto flex w-full max-w-6xl flex-col items-center px-6 py-14 text-center sm:px-8 sm:py-16 md:px-12 md:py-20 lg:px-16">
-        <p class="eyebrow mb-4 text-accent">{{ eyebrow }}</p>
+        <p class="eyebrow mb-4 text-cream/75">{{ eyebrow }}</p>
         <h1 class="font-display text-headline-lg font-normal leading-[1.05] text-cream">
           {{ headline }}
         </h1>
@@ -117,7 +117,7 @@ function scrollToCategory(event, id) {
                     v-if="hack.video?.src"
                     class="absolute inset-x-0 bottom-0 flex items-center justify-between gap-3 bg-brand/90 px-4 py-3 text-cream"
                   >
-                    <span class="inline-flex h-10 w-10 items-center justify-center rounded-pill bg-accent text-brand shadow-sm">
+                    <span class="inline-flex h-10 w-10 items-center justify-center rounded-pill bg-accent-fill text-accent-fill-ink shadow-sm">
                       <Icon name="play" :size="18" />
                     </span>
                     <span class="text-[12px] font-bold tracking-label">{{ hack.duration }}</span>

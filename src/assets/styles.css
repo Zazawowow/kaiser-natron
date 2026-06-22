@@ -2,6 +2,25 @@
 @import '../design-system/tokens.css';
 @import '../design-system/motion.css';
 
+/* Zeitung — self-hosted (licensed; mirrored from kaiser-natron.de).
+   Only Regular (400) and Bold (700) ship; intermediate weights are
+   synthesized by the browser. No italics in the family, so the
+   display italic emphasis renders as an oblique slant. */
+@font-face {
+  font-family: 'Zeitung';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./fonts/Zeitung-Regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Zeitung';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('./fonts/Zeitung-Bold.woff2') format('woff2');
+}
+
 html {
   /* No global `scroll-behavior: smooth` — only same-route hash
      anchors (handled in `router.scrollBehavior`) smooth-scroll.

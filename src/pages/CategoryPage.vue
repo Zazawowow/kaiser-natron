@@ -118,12 +118,12 @@ onBeforeUnmount(() => {
     <div
       class="mx-auto w-full max-w-4xl px-6 py-16 sm:px-8 sm:py-20 md:px-12 md:py-24 lg:px-16 text-center flex flex-col gap-5"
     >
-      <p class="eyebrow text-accent">{{ t(`category.${slug}.eyebrow`) }}</p>
+      <p class="eyebrow text-cream/75">{{ t(`category.${slug}.eyebrow`) }}</p>
       <h1
         class="font-display font-normal leading-[1.05] tracking-tight text-cream text-headline-lg"
       >
         {{ t(`category.${slug}.title.a`) }}
-        <em class="italic font-light text-accent-soft">{{ t(`category.${slug}.title.em`) }}</em>
+        <em class="italic font-light text-cream">{{ t(`category.${slug}.title.em`) }}</em>
       </h1>
       <p class="text-base md:text-lg leading-relaxed text-cream/80 max-w-2xl mx-auto">
         {{ t(`category.${slug}.sub`) }}
@@ -214,7 +214,7 @@ onBeforeUnmount(() => {
         class="font-display font-normal leading-[1.05] tracking-tight text-cream text-headline-md"
       >
         {{ t(`category.${slug}.cta.headline`) }}
-        <em class="italic font-light text-accent-soft">{{ t(`category.${slug}.cta.headline.em`) }}</em>
+        <em class="italic font-light text-cream">{{ t(`category.${slug}.cta.headline.em`) }}</em>
       </h2>
       <p class="text-base md:text-lg leading-relaxed text-cream/80 max-w-xl">
         {{ t(`category.${slug}.cta.sub`) }}
