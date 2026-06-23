@@ -1,6 +1,5 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue'
-import Button from './Button.vue'
 import Icon from './Icon.vue'
 import IconButton from './IconButton.vue'
 import BundleCard from './BundleCard.vue'
@@ -45,9 +44,7 @@ const props = defineProps({
     validator: (arr) => arr.every((v) => typeof v === 'string'),
   },
 
-  joinCta: { type: String, default: '' },
-
-  // { id, name, items[], price, memberPrice?, usage?, image, imageAlt?,
+  // { id, name, items[], price, usage?, image, imageAlt?,
   //   badge?, badgeVariant? } per bundle.
   bundles: { type: Array, required: true },
 
@@ -58,7 +55,7 @@ const props = defineProps({
   carouselGoToPrefix: { type: String, default: '' },
 })
 
-defineEmits(['add', 'join'])
+defineEmits(['add'])
 
 const { t } = useI18n()
 
@@ -145,9 +142,8 @@ onBeforeUnmount(() => {
            Row 1: headline + sub (single column, full width).
            Row 2: benefits as a horizontal chip row inside a paper
                   container — sits between the pitch and the products
-                  as a "why join" summary strip.
-           Row 3: mobile stack / md+ 3-up grid of bundle cards.
-           Row 4: "become a member" CTA centred below the products. -->
+                  as a "why bundle" summary strip.
+           Row 3: mobile stack / md+ 3-up grid of bundle cards. -->
       <div v-if="layout === 'stacked'" class="flex flex-col gap-10 md:gap-12 lg:gap-14">
         <!-- Row 1: headline + sub. Full width so the pitch reads as a
              section opener rather than a split banner. -->
@@ -202,7 +198,6 @@ onBeforeUnmount(() => {
               :name="bundle.name"
               :items="bundle.items"
               :price="bundle.price"
-              :member-price="bundle.memberPrice"
               :usage="bundle.usage"
               :image="bundle.image"
               :image-alt="bundle.imageAlt"
@@ -222,7 +217,6 @@ onBeforeUnmount(() => {
               :name="bundle.name"
               :items="bundle.items"
               :price="bundle.price"
-              :member-price="bundle.memberPrice"
               :usage="bundle.usage"
               :image="bundle.image"
               :image-alt="bundle.imageAlt"
@@ -234,17 +228,6 @@ onBeforeUnmount(() => {
               @add="$emit('add', bundle.id)"
             />
           </div>
-        </div>
-
-        <!-- Bottom CTA — centred below the products so the eye lands
-             on it last, after the member pitch has been made above
-             and the products have been scanned. -->
-        <div v-if="joinCta" class="flex justify-center">
-          <Button
-            variant="primary"
-            size="lg"
-            @click="$emit('join')"
-          >{{ joinCta }}</Button>
         </div>
       </div>
 
@@ -262,13 +245,6 @@ onBeforeUnmount(() => {
             sub-max-width="max-w-md"
           />
           <BundlesBenefits :benefits="benefits" />
-          <Button
-            v-if="joinCta"
-            variant="primary"
-            size="md"
-            class="self-start"
-            @click="$emit('join')"
-          >{{ joinCta }}</Button>
         </aside>
 
         <!-- `min-w-0` is load-bearing: a grid `1fr` column defaults to
@@ -286,7 +262,6 @@ onBeforeUnmount(() => {
               :name="bundle.name"
               :items="bundle.items"
               :price="bundle.price"
-              :member-price="bundle.memberPrice"
               :usage="bundle.usage"
               :image="bundle.image"
               :image-alt="bundle.imageAlt"
@@ -327,7 +302,6 @@ onBeforeUnmount(() => {
                   :name="bundle.name"
                   :items="bundle.items"
                   :price="bundle.price"
-                  :member-price="bundle.memberPrice"
                   :usage="bundle.usage"
                   :image="bundle.image"
                   :image-alt="bundle.imageAlt"

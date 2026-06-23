@@ -21,7 +21,6 @@ const props = defineProps({
   // collapse into a "+ N weitere" line so the card stays scannable.
   items: { type: Array, required: true },
   price: { type: Number, required: true },
-  memberPrice: { type: Number, default: null },
   usage: { type: String, default: '' },
   image: { type: String, required: true },
   imageAlt: { type: String, default: '' },
@@ -80,9 +79,6 @@ function formatMoney(amount) {
 }
 
 const priceLabel = computed(() => formatMoney(props.price))
-const memberLabel = computed(() =>
-  props.memberPrice != null ? formatMoney(props.memberPrice) : '',
-)
 
 const MAX_ITEMS = 3
 const visibleItems = computed(() => props.items.slice(0, MAX_ITEMS))
@@ -228,9 +224,6 @@ const extraCount = computed(() => Math.max(0, props.items.length - MAX_ITEMS))
           </span>
           <span class="font-display text-2xl font-normal text-brand leading-none">
             {{ priceLabel }}
-          </span>
-          <span v-if="memberLabel" class="text-xs text-muted mt-1">
-            {{ t('bundles.card.memberPrefix') }} {{ memberLabel }}
           </span>
           <span
             v-if="!inStock"

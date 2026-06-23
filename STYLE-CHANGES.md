@@ -5,6 +5,9 @@
 > of each item (succinctly — not the iterations it took to get there): the
 > file, what it is now, and the token/class. If a new value supersedes an old
 > one, **edit the existing entry** instead of appending a duplicate.
+>
+> **Also update [STYLE-CHANGES-simple.md](STYLE-CHANGES-simple.md)** — the
+> plain-language version for non-technical reviewers — in the same change.
 
 A plain-language summary of every visual change made in this restyle pass,
 with the **exact file**, **what changed**, and the **CSS / Tailwind classes**
@@ -492,14 +495,77 @@ with `/haushalt` + `/pflege`:
 - `CategoryPage.vue` — `slug` validator allows `kueche`; `useCase` allows `cook`.
 - `messages.js` — full `category.kueche.*` copy (de + en), mirroring pflege/haushalt.
 
-> ⚠️ **Open decision on the standalone category pages.** The footer
-> (`Footer.vue:54-55`) links only to `/pflege` and `/haushalt` — **`/kueche` is not
-> linked anywhere** (reachable only by direct URL). Also, splitting Wäsche into the
-> `wash` group means the `/haushalt` page (`useCase: clean`) no longer lists laundry
-> products, and there's no `/waesche` page. The **shop page itself is complete** (all
-> four groups); only these secondary category pages need a taxonomy decision — wire
-> up `/kueche` (+ a `/waesche`?) and a footer link, or retire the standalone pages in
-> favour of the shop's in-page sections.
+> ℹ️ **Resolved (see §21).** The three content-complete category pages
+> (`/kueche`, `/haushalt`, `/pflege`) are now wired into the footer. `/waesche`
+> (wash) is intentionally **deferred** pending brand copy — the shop's in-page
+> `wash` section covers laundry in the meantime.
+
+---
+
+## 21. Category pages wired up + naming aligned to shop sections
+
+**Files:** `src/design-system/components/Footer.vue`, `src/i18n/messages.js`
+
+**Decision.** Of the four use-groups, the three with complete copy (`cook`/`clean`/
+`care` → `/kueche`, `/haushalt`, `/pflege`) are kept as standalone landing pages
+*alongside* the shop's in-page sections, and linked from the footer. The `wash`
+group has no standalone page (`/waesche`) yet — **deferred** until brand copy is
+supplied; the shop's `wash` section covers laundry meanwhile.
+
+**Footer links.** `Footer.vue` `exploreLinks` now lists `Shop → Küche → Haushalt →
+Pflege → Bundles → About` (the `/kueche` link was previously missing — page was
+reachable only by direct URL). Order follows the shop's use-group order.
+
+**Naming aligned to the shop.** The footer **link labels** and the category-page
+**eyebrows** now use the shop's plain section names (`shop.feature.*`) instead of
+the older descriptive variants, so a section and its landing page read identically:
+
+| Page (route) | use-case | eyebrow + footer label — DE / EN | was |
+|---|---|---|---|
+| `/kueche` | cook | **Küche / Kitchen** | "Küche & Backen" / "Kitchen & baking" |
+| `/haushalt` | clean | **Reinigung / Clean** | "Haushalt & Reinigung" / "Home & cleaning" |
+| `/pflege` | care | **Pflege / Care** | "Pflege & Wohlbefinden" / "Personal care & wellbeing" |
+
+Route slugs are unchanged (`/haushalt` still serves the `clean` group); only the
+visible labels/eyebrows moved to the new names.
+
+---
+
+## 22. Membership removed — bundles are single-price (U2)
+
+**Files:** `src/api/bundles.js`, `src/design-system/components/BundleCard.vue`,
+`src/design-system/components/Bundles.vue`, `src/pages/BundlePage.vue`,
+`src/pages/HomePage.vue`, `src/i18n/messages.js`, plus the design-system demos
+(`BundleCardSection.vue`, `BundlesSection.vue`, `previews/BundlesPreview.vue`).
+
+There is **no membership programme**, so every trace of one was removed (the
+join button went earlier in §U2; this completes it). **Decision: single retail
+price** — bundles now show only their regular price (e.g. €24,90); the old lower
+`memberPrice` was dropped entirely (no discount remains).
+
+- **Data.** `bundles.js` — `memberPrice` deleted from all three bundles.
+- **`BundleCard.vue`** — removed the `memberPrice` prop, the `memberLabel`
+  computed, and the "Mitglieder: €X" line under the price.
+- **`Bundles.vue`** — removed all four `:member-price` bindings, the `joinCta`
+  prop, the `join` emit, both "become a member" buttons (stacked + sidebar), and
+  the now-unused `Button` import. Stale "why join" / "member pitch" comments
+  reworded to "why bundle".
+- **`BundlePage.vue`** — removed the `memberPriceLabel` computed and the member
+  price line in both desktop and mobile hero blocks.
+- **`HomePage.vue`** — dropped `memberPrice` from the localized-bundle mapping.
+- **Copy (`messages.js`).** Deleted orphaned keys `bundle.memberPrice`,
+  `bundles.joinCta`, `bundles.card.memberPrefix`. `bundles.card.priceLabel`
+  → "Preis" / "Price" (was "Verkaufspreis" / "Retail price"). The section
+  subtitle + three benefits were rewritten from membership perks to **bundle
+  value** (no savings claim, since the price is now flat):
+  - sub: "Kuratierte Sets … in einem Paket." / "Curated sets … in a single pack."
+  - benefits: *Aufeinander abgestimmt · Alles für einen Bereich · In einer Lieferung*
+    (EN: *Chosen to work together · Everything for one area · In a single delivery*).
+  - `ds.bundleCard.description` / `ds.bundles.description` updated to drop the
+    member-price / member-CTA mentions.
+
+The `headline.em` stays "Vorteile / Benefits" — it now reads as the bundles'
+advantages rather than membership perks.
 
 ---
 

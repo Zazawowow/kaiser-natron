@@ -457,7 +457,6 @@ const de = {
   // is keyed individually so the structural data in src/api/bundles.js
   // can stay locale-free.
   'bundle.items': 'Im Bundle enthalten',
-  'bundle.memberPrice': 'Mitgliederpreis',
   'product.notFound.title': 'Nicht gefunden',
   'product.notFound.body': 'Dieser Eintrag ist nicht mehr verfügbar oder wurde verschoben.',
 
@@ -544,13 +543,11 @@ const de = {
   // Bundles section — copy for the sidebar, card chrome, and carousel.
   'bundles.headline.a': 'Bundles &',
   'bundles.headline.em': 'Vorteile',
-  'bundles.sub': 'Als Mitglied sparst du durch Staffelrabatte, exklusive Bundle-Deals und Frühzugang auf neue Produkte.',
-  'bundles.benefit.1.title': 'Staffelrabatt bis −25 %',
-  'bundles.benefit.2.title': 'Exklusive Bundle-Deals',
-  'bundles.benefit.3.title': 'Frühzugang & Neuheiten',
-  'bundles.joinCta': 'Mitglied werden',
-  'bundles.card.priceLabel': 'Verkaufspreis',
-  'bundles.card.memberPrefix': 'Mitglieder:',
+  'bundles.sub': 'Kuratierte Sets aus aufeinander abgestimmten Produkten — alles, was du für einen Bereich brauchst, in einem Paket.',
+  'bundles.benefit.1.title': 'Aufeinander abgestimmt',
+  'bundles.benefit.2.title': 'Alles für einen Bereich',
+  'bundles.benefit.3.title': 'In einer Lieferung',
+  'bundles.card.priceLabel': 'Preis',
   'bundles.card.moreItems': 'weitere',
   // Carousel chrome — lives under ds.* because it belongs to the Bundles
   // component itself, not to any particular page's content.
@@ -561,9 +558,9 @@ const de = {
 
   // Design-system documentation pages (BundleCard, Bundles, Revitalization, About)
   'ds.bundleCard.title': 'Bundle-Karte',
-  'ds.bundleCard.description': 'Zusammengesetzte Karte für kuratierte Produktpakete. Medien mit optionalem Badge, Nutzungs-Label, Titel, bis zu drei Artikeln, Preisblock (inkl. Mitgliederpreis) und Primär-CTA. Zwei Layouts — vertikal für Raster, horizontal für Karussell-Slides von md aufwärts.',
+  'ds.bundleCard.description': 'Zusammengesetzte Karte für kuratierte Produktpakete. Medien mit optionalem Badge, Nutzungs-Label, Titel, bis zu drei Artikeln, Preisblock und Primär-CTA. Zwei Layouts — vertikal für Raster, horizontal für Karussell-Slides von md aufwärts.',
   'ds.bundles.title': 'Bundles-Sektion',
-  'ds.bundles.description': 'Kompound-Sektion mit fixer Sidebar (Headline + drei Vorteile + Mitglieder-CTA) und einem Scroll-Snap-Karussell mit horizontalen Bundle-Karten von md aufwärts. Tastatur und Touch-Swipe funktionieren out of the box; die Pfeile loopen am Ende zurück zum Anfang.',
+  'ds.bundles.description': 'Kompound-Sektion mit fixer Sidebar (Headline + drei Vorteile) und einem Scroll-Snap-Karussell mit horizontalen Bundle-Karten von md aufwärts. Tastatur und Touch-Swipe funktionieren out of the box; die Pfeile loopen am Ende zurück zum Anfang.',
   'ds.revitalization.title': 'Revitalization Center',
   'ds.revitalization.description': 'Zentrierte Feature-Teaser-Sektion auf Markengrün. Eyebrow-Badge, Display-Headline mit italic-Highlight, Unterzeile, bis zu drei Pillar-Punkte mit Akzent-Dots und ein einzelner CTA. Gedacht für „Demnächst"-Ankündigungen.',
   'ds.about.title': 'About / Geschichte',
@@ -637,8 +634,9 @@ const de = {
   'footer.tagline': 'Das Original aus Österreich. Reines Natron für Küche, Haushalt und Pflege – seit Generationen.',
   'footer.explore.heading': 'Entdecken',
   'footer.explore.shop': 'Shop',
+  'footer.explore.kueche': 'Küche',
+  'footer.explore.haushalt': 'Reinigung',
   'footer.explore.pflege': 'Pflege',
-  'footer.explore.haushalt': 'Haushalt',
   'footer.explore.bundles': 'Bundles',
   'footer.explore.about': 'Über uns',
   'footer.legal.heading': 'Rechtliches',
@@ -693,7 +691,7 @@ const de = {
   'legal.datenschutz.section.contact.body': 'Für alle Anliegen rund um den Datenschutz erreichen Sie uns unter datenschutz@kaiser-natron.at oder postalisch an die im Impressum angegebene Adresse.',
 
   // Category landings — Pflege (care) and Haushalt (clean).
-  'category.pflege.eyebrow': 'Pflege & Wohlbefinden',
+  'category.pflege.eyebrow': 'Pflege',
   'category.pflege.title.a': 'Baden, pflegen,',
   'category.pflege.title.em': 'durchatmen.',
   'category.pflege.sub': 'Bade- und Pflegeprodukte rund um Kaiser-Natron® — abgestimmt auf Alltag, Sport und entspannte Stunden.',
@@ -714,7 +712,7 @@ const de = {
   'category.pflege.cta.sub': 'Reinigung, Wäsche, Küche – das ganze Sortiment auf einen Blick.',
   'category.pflege.cta.button': 'Zum Shop',
 
-  'category.haushalt.eyebrow': 'Haushalt & Reinigung',
+  'category.haushalt.eyebrow': 'Reinigung',
   'category.haushalt.title.a': 'Schrubben, waschen,',
   'category.haushalt.title.em': 'alles sauber.',
   'category.haushalt.sub': 'Natron-basierte Reiniger und Waschhelfer, die auch bei hartnäckigem Schmutz überzeugen — ohne unnötige Chemie.',
@@ -735,7 +733,7 @@ const de = {
   'category.haushalt.cta.sub': 'Bade- und Küchenartikel, Bundles und mehr — alles auf einer Seite.',
   'category.haushalt.cta.button': 'Zum Shop',
 
-  'category.kueche.eyebrow': 'Küche & Backen',
+  'category.kueche.eyebrow': 'Küche',
   'category.kueche.title.a': 'Backen, kochen,',
   'category.kueche.title.em': 'fein dosiert.',
   'category.kueche.sub': 'Reines Kaiser-Natron® in Lebensmittelqualität – zum Backen, Kochen und für die kleinen Küchentricks des Alltags.',
@@ -1283,7 +1281,6 @@ const en = {
 
   // Bundle detail page (/bundles/<slug>) + home grid copy.
   'bundle.items': 'In this bundle',
-  'bundle.memberPrice': 'Member price',
   'product.notFound.title': 'Not found',
   'product.notFound.body': 'This item is no longer available or has been moved.',
 
@@ -1370,13 +1367,11 @@ const en = {
   // Bundles section
   'bundles.headline.a': 'Bundles &',
   'bundles.headline.em': 'Benefits',
-  'bundles.sub': 'Members save with tiered discounts, exclusive bundle deals, and early access to new products.',
-  'bundles.benefit.1.title': 'Tiered discount up to −25%',
-  'bundles.benefit.2.title': 'Exclusive bundle deals',
-  'bundles.benefit.3.title': 'Early access & new releases',
-  'bundles.joinCta': 'Become a member',
-  'bundles.card.priceLabel': 'Retail price',
-  'bundles.card.memberPrefix': 'Members:',
+  'bundles.sub': 'Curated sets of products chosen to work together — everything you need for one area, in a single pack.',
+  'bundles.benefit.1.title': 'Chosen to work together',
+  'bundles.benefit.2.title': 'Everything for one area',
+  'bundles.benefit.3.title': 'In a single delivery',
+  'bundles.card.priceLabel': 'Price',
   'bundles.card.moreItems': 'more',
   // Carousel chrome — ds.* because it belongs to the Bundles component.
   'ds.bundles.carousel.label': 'Bundle carousel',
@@ -1386,9 +1381,9 @@ const en = {
 
   // Design-system documentation pages
   'ds.bundleCard.title': 'Bundle card',
-  'ds.bundleCard.description': 'Composed card for curated product bundles. Media with optional badge, usage label, title, up to three line items, a price block (retail + member price) and a primary CTA. Two layouts — vertical for grid use and horizontal for carousel slides from md up.',
+  'ds.bundleCard.description': 'Composed card for curated product bundles. Media with optional badge, usage label, title, up to three line items, a price block and a primary CTA. Two layouts — vertical for grid use and horizontal for carousel slides from md up.',
   'ds.bundles.title': 'Bundles section',
-  'ds.bundles.description': 'Compound section combining a sticky sidebar (headline + three benefits + member CTA) with a scroll-snap carousel of horizontal bundle cards from md up. Keyboard and touch swipe work natively; the arrow controls loop past the ends.',
+  'ds.bundles.description': 'Compound section combining a sticky sidebar (headline + three benefits) with a scroll-snap carousel of horizontal bundle cards from md up. Keyboard and touch swipe work natively; the arrow controls loop past the ends.',
   'ds.revitalization.title': 'Revitalization Center',
   'ds.revitalization.description': 'Centered feature-teaser section on brand green. Eyebrow badge, display headline with an italic highlight, subheadline, up to three pillar bullets with accent dots and a single CTA. Designed for "coming soon" announcements.',
   'ds.about.title': 'About / history',
@@ -1468,8 +1463,9 @@ const en = {
   'footer.tagline': 'The original from Austria. Pure sodium bicarbonate for the kitchen, the home, and personal care — for generations.',
   'footer.explore.heading': 'Explore',
   'footer.explore.shop': 'Shop',
-  'footer.explore.pflege': 'Personal care',
-  'footer.explore.haushalt': 'Home',
+  'footer.explore.kueche': 'Kitchen',
+  'footer.explore.haushalt': 'Clean',
+  'footer.explore.pflege': 'Care',
   'footer.explore.bundles': 'Bundles',
   'footer.explore.about': 'About',
   'footer.legal.heading': 'Legal',
@@ -1524,7 +1520,7 @@ const en = {
   'legal.datenschutz.section.contact.body': 'For all privacy-related matters please contact datenschutz@kaiser-natron.at or write to the postal address listed in the imprint.',
 
   // Category landings (EN).
-  'category.pflege.eyebrow': 'Personal care & wellbeing',
+  'category.pflege.eyebrow': 'Care',
   'category.pflege.title.a': 'Bathe, soothe,',
   'category.pflege.title.em': 'breathe.',
   'category.pflege.sub': 'Bath and care products built around Kaiser-Natron® — tuned to everyday life, sport, and slow evenings at home.',
@@ -1545,7 +1541,7 @@ const en = {
   'category.pflege.cta.sub': 'Cleaning, laundry, kitchen — the whole range at a glance.',
   'category.pflege.cta.button': 'Visit the shop',
 
-  'category.haushalt.eyebrow': 'Home & cleaning',
+  'category.haushalt.eyebrow': 'Clean',
   'category.haushalt.title.a': 'Scrub, wash,',
   'category.haushalt.title.em': 'everything clean.',
   'category.haushalt.sub': 'Natron-based cleaners and laundry helpers that handle stubborn dirt — without unnecessary chemistry.',
@@ -1566,7 +1562,7 @@ const en = {
   'category.haushalt.cta.sub': 'Bath and kitchen products, bundles and more — all on one page.',
   'category.haushalt.cta.button': 'Visit the shop',
 
-  'category.kueche.eyebrow': 'Kitchen & baking',
+  'category.kueche.eyebrow': 'Kitchen',
   'category.kueche.title.a': 'Bake, cook,',
   'category.kueche.title.em': 'finely dosed.',
   'category.kueche.sub': 'Pure food-grade Kaiser-Natron® — for baking, cooking, and the small everyday kitchen tricks.',

@@ -51,8 +51,9 @@ const legalLinks = [
 
 const exploreLinks = [
   { key: 'footer.explore.shop', href: '/shop' },
-  { key: 'footer.explore.pflege', href: '/pflege' },
+  { key: 'footer.explore.kueche', href: '/kueche' },
   { key: 'footer.explore.haushalt', href: '/haushalt' },
+  { key: 'footer.explore.pflege', href: '/pflege' },
   { key: 'footer.explore.bundles', href: '/#bundles' },
   { key: 'footer.explore.about', href: '/#about' },
 ]

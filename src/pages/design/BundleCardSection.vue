@@ -28,7 +28,6 @@ const sample = {
     '1× Spülmittel 500 ml',
   ],
   price: 24.9,
-  memberPrice: 21.17,
   image: sampleImage,
   imageAlt: 'Haushalts-Bundle',
 }
@@ -116,7 +115,6 @@ const sampleWithOverflow = {
     '1× Spülmittel 500 ml',
   ]"
   :price="24.9"
-  :member-price="21.17"
   image="/products/cutouts/…-removebg-preview.png"
   badge="Bestseller"
   badge-variant="accent"

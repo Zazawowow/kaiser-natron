@@ -30,7 +30,6 @@ const bundles = [
       '1× Spülmittel 500 ml',
     ],
     price: 24.9,
-    memberPrice: 21.17,
     image: '/products/kaiser-natron-pulver-250-g-grosspackung.webp',
     imageAlt: 'Haushalts-Bundle mit Kaiser-Natron',
     badge: 'Bestseller',
@@ -46,7 +45,6 @@ const bundles = [
       '1× Linda Fleckenweg 200 ml',
     ],
     price: 22.9,
-    memberPrice: 19.47,
     image: '/products/holste-wasch-soda-500-g-beutel.webp',
     imageAlt: 'Wäsche & Pflege Bundle',
   },
@@ -60,7 +58,6 @@ const bundles = [
       '1× Kaiser-Natron Fußbad 500 g',
     ],
     price: 29.9,
-    memberPrice: 25.42,
     image: '/products/kaiser-natron-bad-500-g.webp',
     imageAlt: 'Wohlfühl-Bundle',
   },
@@ -82,7 +79,6 @@ const benefits = computed(() => [
       :headline-em="t('bundles.headline.em')"
       :sub="t('bundles.sub')"
       :benefits="benefits"
-      :join-cta="t('bundles.joinCta')"
     />
   </div>
 </template>

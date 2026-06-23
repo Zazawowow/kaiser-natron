@@ -71,9 +71,7 @@ const src = computed(() => `/design/preview/bundles?layout=${variant.value}`)
     t('bundles.benefit.2.title'),
     t('bundles.benefit.3.title'),
   ]"
-  :join-cta="t('bundles.joinCta')"
   @add="addBundle(bundleId)"
-  @join="openSignup()"
 /&gt;</pre>
       </div>
     </section>
@@ -104,11 +102,6 @@ const src = computed(() => `/design/preview/bundles?layout=${variant.value}`)
               <td class="px-5 py-3 font-mono text-[12px]">benefits</td>
               <td class="px-5 py-3 text-muted">String[]</td>
               <td class="px-5 py-3">Sidebar benefit bullets. First three are shown.</td>
-            </tr>
-            <tr>
-              <td class="px-5 py-3 font-mono text-[12px]">joinCta</td>
-              <td class="px-5 py-3 text-muted">String</td>
-              <td class="px-5 py-3">Label for the sidebar's primary button. Emits <code class="font-mono text-[12px]">join</code>.</td>
             </tr>
             <tr>
               <td class="px-5 py-3 font-mono text-[12px]">carousel*Label</td>

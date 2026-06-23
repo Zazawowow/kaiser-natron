@@ -158,7 +158,6 @@ const localizedBundles = computed(() =>
     badge: b.badgeKey ? t(b.badgeKey) : '',
     badgeVariant: b.badgeVariant,
     price: b.price,
-    memberPrice: b.memberPrice,
     href: b.href,
     aiEdited: b.aiEdited || false,
   })),

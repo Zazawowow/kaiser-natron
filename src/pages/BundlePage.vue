@@ -84,12 +84,6 @@ const priceLabel = computed(() => {
   return `€ ${b.price.toFixed(2).replace('.', ',')}`
 })
 
-const memberPriceLabel = computed(() => {
-  const b = bundle.value
-  if (!b?.memberPrice) return ''
-  return `€ ${b.memberPrice.toFixed(2).replace('.', ',')}`
-})
-
 // Localized bundle copy. The bundle record in src/api/bundles.js
 // only carries i18n KEYS for locale-dependent fields; we resolve
 // them here through `t()` so the labels update reactively when the
@@ -277,10 +271,6 @@ onBeforeUnmount(() => {
 
           <div class="flex flex-col gap-1">
             <span class="font-display text-3xl xl:text-4xl text-cream">{{ priceLabel }}</span>
-            <span v-if="memberPriceLabel" class="text-sm text-cream/75">
-              {{ t('bundle.memberPrice') }}
-              <span class="text-accent font-medium">{{ memberPriceLabel }}</span>
-            </span>
           </div>
 
           <div class="flex flex-wrap items-center gap-4 mt-2">
@@ -353,10 +343,6 @@ onBeforeUnmount(() => {
 
           <div class="flex flex-col gap-1">
             <span class="font-display text-3xl md:text-4xl text-cream">{{ priceLabel }}</span>
-            <span v-if="memberPriceLabel" class="text-sm text-cream/70">
-              {{ t('bundle.memberPrice') }}
-              <span class="text-accent font-medium">{{ memberPriceLabel }}</span>
-            </span>
           </div>
 
           <div class="flex flex-wrap items-center gap-4 mt-2">
