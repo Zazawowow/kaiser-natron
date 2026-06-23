@@ -569,6 +569,26 @@ advantages rather than membership perks.
 
 ---
 
+## 23. Second-fold banner image — powder, not bath (L7)
+
+**File:** `src/pages/HomePage.vue`
+
+The cream second-fold banner reads *"Ein Pulver, hundert Anwendungen im
+Haushalt"* / *"One powder, a hundred uses around the home"* but showed the **Bad
+500 g (bath)** product — and its add-to-cart + "learn more" link pointed there
+too, contradicting the powder message. Repointed the whole banner to **powder**:
+
+- `imgBanner` → `/products/kaiser-natron-pulver-3.490-g-eimer.webp` (the bulk
+  bucket — visually reinforces "a hundred uses"; deliberately *not* the 250 g
+  Großpackung, which is already the first-fold hero).
+- `bannerProductId` → `kaiser-natron-pulver-3490-g-eimer`, so the CTA adds the
+  powder and "learn more" links to `/shop/kaiser-natron-pulver-3490-g-eimer`.
+- `image-alt` → "Kaiser-Natron® Pulver 3.490 g Eimer".
+
+No new asset needed — the bucket image already shipped in `public/products/`.
+
+---
+
 ## Quick reference — the two new colours
 
 ```

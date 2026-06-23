@@ -32,6 +32,9 @@
 - **Intro artwork.** The brand intro uses the official Hebe + waterfall artwork.
 - **250 g pack image.** The large pack image was recoloured to the correct brand
   green so it no longer clashes with its background.
+- **"One powder, a hundred uses" banner.** This banner used to show the *bath*
+  product, which didn't match its message. It now shows **powder** (the bulk
+  bucket), and its buttons add/link to that powder product.
 - **Logo & search.** Prices in the search dropdown are now white so they're
   readable on the green bar.
 

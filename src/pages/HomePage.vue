@@ -57,14 +57,18 @@ const imgPulver250 =
 
 const heroProductId = 'kaiser-natron-pulver-250-g-grosspackung'
 
-// Second-fold banner — cream tone, image-left split, alternate cutout.
-const imgBanner = '/products/kaiser-natron-bad-500-g.webp'
-const bannerProductId = 'kaiser-natron-bad-500-g'
+// Second-fold banner — cream tone, image-left split. The headline is
+// "Ein Pulver, hundert Anwendungen" (one powder, a hundred uses), so the
+// banner shows POWDER — the 3.490 g bulk bucket, distinct from the 250 g
+// Großpackung used in the first-fold hero (L7: was the Bad 500 g image,
+// which contradicted the powder message).
+const imgBanner = '/products/kaiser-natron-pulver-3.490-g-eimer.webp'
+const bannerProductId = 'kaiser-natron-pulver-3490-g-eimer'
 
 // Brand-hero → product-hero teaser: one SKU per use-case (Cook /
 // Clean / Care). Avoids duplicating the Pulver 250 g (primary hero)
-// and Bad 500 g (cream banner) so the row reads as new surface area
-// rather than a repeat of what's already on screen.
+// and the Pulver Eimer (cream banner) so the row reads as new surface
+// area rather than a repeat of what's already on screen.
 const teaserIds = [
   'kaiser-natron-tabletten-100-g-dose',     // cook
   'kaiser-natron-allzweck-spray-500-ml',    // clean
@@ -398,7 +402,7 @@ onBeforeUnmount(() => {
     :eyebrow="t('home.banner.eyebrow')"
     :subheadline="t('home.banner.sub')"
     :image="imgBanner"
-    image-alt="Kaiser-Natron Pulver 250 g Großpackung"
+    image-alt="Kaiser-Natron® Pulver 3.490 g Eimer"
     :cta-label="t('ds.buttons.addToCart')"
     :secondary-label="t('ds.buttons.learnMore')"
     :secondary-href="`/shop/${bannerProductId}`"
