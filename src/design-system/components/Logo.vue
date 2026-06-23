@@ -1,6 +1,6 @@
 <script setup>
 defineProps({
-  title: { type: String, default: 'Kaiser Natron' },
+  title: { type: String, default: 'Kaiser-Natron®' },
 })
 </script>
 

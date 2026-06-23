@@ -4,7 +4,7 @@
 export const products = [
   {
     id: 'kaiser-natron-pulver-50-g-beutel',
-    brand: 'Kaiser-Natron',
+    brand: 'Kaiser-Natron®',
     title: 'Kaiser-Natron® Pulver',
     size: '50 g Beutel',
     category: 'Pulver',
@@ -17,7 +17,7 @@ export const products = [
   },
   {
     id: 'kaiser-natron-pulver-250-g-grosspackung',
-    brand: 'Kaiser-Natron',
+    brand: 'Kaiser-Natron®',
     title: 'Kaiser-Natron® Pulver',
     size: '250 g Großpackung',
     category: 'Pulver',
@@ -30,7 +30,7 @@ export const products = [
   },
   {
     id: 'kaiser-natron-pulver-3490-g-eimer',
-    brand: 'Kaiser-Natron',
+    brand: 'Kaiser-Natron®',
     title: 'Kaiser-Natron® Pulver',
     size: '3.490 g Eimer',
     category: 'Pulver',
@@ -43,7 +43,7 @@ export const products = [
   },
   {
     id: 'kaiser-natron-tabletten-100-g-dose',
-    brand: 'Kaiser-Natron',
+    brand: 'Kaiser-Natron®',
     title: 'Kaiser-Natron® Tabletten',
     size: '100 g Dose',
     category: 'Tabletten',
@@ -56,7 +56,7 @@ export const products = [
   },
   {
     id: 'kaiser-natron-bad-500-g',
-    brand: 'Kaiser-Natron',
+    brand: 'Kaiser-Natron®',
     title: 'Kaiser-Natron® Bad',
     size: '500 g',
     category: 'Körperpflege',
@@ -69,7 +69,7 @@ export const products = [
   },
   {
     id: 'kaiser-natron-fussbad-500-g',
-    brand: 'Kaiser-Natron',
+    brand: 'Kaiser-Natron®',
     title: 'Kaiser-Natron® Fußbad',
     size: '500 g',
     category: 'Körperpflege',
@@ -82,7 +82,7 @@ export const products = [
   },
   {
     id: 'kaiser-natron-daunenwasch-250-ml',
-    brand: 'Kaiser-Natron',
+    brand: 'Kaiser-Natron®',
     title: 'Kaiser-Natron® Daunenwasch',
     size: '250 ml',
     category: 'Wäsche',
@@ -95,7 +95,7 @@ export const products = [
   },
   {
     id: 'kaiser-natron-sport-profi-250-ml',
-    brand: 'Kaiser-Natron',
+    brand: 'Kaiser-Natron®',
     title: 'Kaiser-Natron® Sport Profi',
     size: '250 ml',
     category: 'Sport',
@@ -108,7 +108,7 @@ export const products = [
   },
   {
     id: 'kaiser-natron-spuelmittel-500-ml',
-    brand: 'Kaiser-Natron',
+    brand: 'Kaiser-Natron®',
     title: 'Kaiser-Natron® Spülmittel',
     size: '500 ml',
     category: 'Reinigung',
@@ -121,7 +121,7 @@ export const products = [
   },
   {
     id: 'kaiser-natron-allzweck-reiniger-750-ml',
-    brand: 'Kaiser-Natron',
+    brand: 'Kaiser-Natron®',
     title: 'Kaiser-Natron® Allzweck-Reiniger',
     size: '750 ml',
     category: 'Reinigung',
@@ -134,7 +134,7 @@ export const products = [
   },
   {
     id: 'kaiser-natron-allzweck-spray-500-ml',
-    brand: 'Kaiser-Natron',
+    brand: 'Kaiser-Natron®',
     title: 'Kaiser-Natron® Allzweck-Spray',
     size: '500 ml',
     category: 'Reinigung',
@@ -351,22 +351,23 @@ export function formatPrice(amount, currency = '€') {
 }
 
 /**
- * Shop use-cases — the three top-level bands on the Shop page and in
- * the desktop nav (Cook / Clean / Care). Product-level `category`
- * strings are fine-grained (Pulver, Reinigung, Wäsche, Körperpflege,
- * Sport, Tabletten); this table rolls them up into the three shop-
- * facing groups so the mapping is declared in one place.
+ * Shop use-cases — the four top-level bands on the Shop page, each in
+ * its own brand colour (kaiser-natron.de palette). Product-level
+ * `category` strings are fine-grained (Pulver, Reinigung, Wäsche,
+ * Körperpflege, Sport, Tabletten); this table rolls them up into the
+ * four shop-facing groups so the mapping is declared in one place.
  *
- *   cook  — kitchen & digestion (baking, gastro)
- *   clean — household cleaning & laundry
- *   care  — bath, body and sport
+ *   cook  — Küche: kitchen & digestion (baking, gastro)   — lime
+ *   clean — Reinigung: household cleaning                 — grapefruit
+ *   wash  — Wäsche: laundry & textile care                — plum
+ *   care  — Pflege: bath, body and sport                  — orange
  */
-export const USE_CASES = ['cook', 'clean', 'care']
+export const USE_CASES = ['cook', 'clean', 'wash', 'care']
 const USE_CASE_BY_CATEGORY = {
   Pulver: 'cook',
   Tabletten: 'cook',
   Reinigung: 'clean',
-  Wäsche: 'clean',
+  Wäsche: 'wash',
   Körperpflege: 'care',
   Sport: 'care',
 }
@@ -381,6 +382,6 @@ export function productsByUseCase(list = products) {
       acc[useCaseFor(p)].push(p)
       return acc
     },
-    { cook: [], clean: [], care: [] },
+    { cook: [], clean: [], wash: [], care: [] },
   )
 }

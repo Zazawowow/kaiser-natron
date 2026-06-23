@@ -113,7 +113,7 @@ const bundlesCopy = computed(() => ({
   headline: t('bundles.headline.a'),
   headlineEm: t('bundles.headline.em'),
   sub: t('bundles.sub'),
-  joinCta: t('bundles.joinCta'),
+  // "Become a member" CTA removed (U2 — no membership programme exists).
   benefits: [
     t('bundles.benefit.1.title'),
     t('bundles.benefit.2.title'),
@@ -126,12 +126,8 @@ const revitCopy = computed(() => ({
   headline: t('revit.headline.a'),
   headlineEm: t('revit.headline.em'),
   sub: t('revit.sub'),
-  notifyCta: t('revit.notifyCta'),
-  features: [
-    { title: t('revit.feature.1.title'), icon: '⚗️' },
-    { title: t('revit.feature.2.title'), icon: '💊' },
-    { title: t('revit.feature.3.title'), icon: '🌿' },
-  ],
+  // Feature/animation row AND the "early access" CTA removed at the brand
+  // owner's request (L10) → Revitalization renders eyebrow + headline + sub.
 }))
 
 const aboutCopy = computed(() => ({
@@ -164,6 +160,7 @@ const localizedBundles = computed(() =>
     price: b.price,
     memberPrice: b.memberPrice,
     href: b.href,
+    aiEdited: b.aiEdited || false,
   })),
 )
 
@@ -177,11 +174,6 @@ async function onBannerAdd() {
   cartOpen.value = true
 }
 
-async function onTeaserAdd(productId) {
-  if (!productId) return
-  await addToCart(productId, 1)
-  cartOpen.value = true
-}
 
 // Bundles share a single "add" handler. Until the backend exposes a
 // real bundle SKU endpoint, the UI stand-in adds the bundle's anchor
@@ -195,16 +187,10 @@ async function onBundleAdd(bundleId) {
   cartOpen.value = true
 }
 
-function onBundleJoin() {
-  // Placeholder — member signup flow is a backend concern. For now,
-  // clicking "Mitglied werden" simply scrolls to the bundles grid.
-  const el = document.getElementById('bundles')
-  if (el) el.scrollIntoView({ block: 'start' })
-}
-
-function onRevitNotify() {
-  // Placeholder — early-access capture goes to the backend once wired.
-  // No-op for the demo.
+async function onTeaserAdd(productId) {
+  if (!productId) return
+  await addToCart(productId, 1)
+  cartOpen.value = true
 }
 
 async function onQty({ productId, quantity }) {
@@ -383,9 +369,7 @@ onBeforeUnmount(() => {
     :headline-em="bundlesCopy.headlineEm"
     :sub="bundlesCopy.sub"
     :benefits="bundlesCopy.benefits"
-    :join-cta="bundlesCopy.joinCta"
     @add="onBundleAdd"
-    @join="onBundleJoin"
   />
 
   <!-- Wave surface → cream into the second-fold cream banner. -->
@@ -442,17 +426,14 @@ onBeforeUnmount(() => {
     />
   </svg>
 
-  <!-- Revitalization Center — brand green "coming soon" section. Three
-       pillars (science / therapy / natural healing), single CTA. -->
+  <!-- Revitalization Center — brand green "coming soon" section.
+       Headline + sub + single CTA (feature/animation row removed). -->
   <Revitalization
     class="-mt-px"
     :eyebrow="revitCopy.eyebrow"
     :headline="revitCopy.headline"
     :headline-em="revitCopy.headlineEm"
     :sub="revitCopy.sub"
-    :features="revitCopy.features"
-    :notify-cta="revitCopy.notifyCta"
-    @notify="onRevitNotify"
   />
 
   <!-- Brand → cream wave. Same construction as the first-fold wave, just

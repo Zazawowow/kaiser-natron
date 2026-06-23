@@ -3,6 +3,8 @@ import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import Navbar from '@/design-system/components/Navbar.vue'
 import ProductCard from '@/design-system/components/ProductCard.vue'
+import Hero from '@/design-system/components/Hero.vue'
+import Button from '@/design-system/components/Button.vue'
 import WaveDivider from '@/design-system/components/WaveDivider.vue'
 import Footer from '@/design-system/components/Footer.vue'
 import CartDrawer from '@/design-system/components/CartDrawer.vue'
@@ -49,46 +51,53 @@ const navItems = [
 const navSecondaryItems = []
 
 // Group products by use-case once; iterate a stable config below.
-// The featured tiles in the top banner each pick the FIRST product
-// in their group — a representative face for that band. The
-// sections themselves display every product in the group.
 const grouped = computed(() => productsByUseCase(products))
-const featuredTiles = computed(() =>
-  USE_CASES.map((id) => ({
-    id,
-    label: t(`shop.feature.${id}`),
-    cta: t(`shop.feature.cta.${id}`),
-    product: grouped.value[id][0],
-  })),
-)
+
+// Each use-case fronts a full-width category colour banner. The colour
+// is the brand's own use-group palette (tokens.css --color-cat-*):
+// cook=Küche=lime, clean=Haushalt=grapefruit, care=Pflege=orange. Each
+// banner is headed by a representative product image for that group.
+const CAT_TONE = { cook: 'kitchen', clean: 'clean', wash: 'wash', care: 'care' }
+const CAT_HERO_ID = {
+  cook: 'kaiser-natron-pulver-250-g-grosspackung',
+  clean: 'kaiser-natron-allzweck-spray-500-ml',
+  wash: 'kaiser-natron-daunenwasch-250-ml',
+  care: 'kaiser-natron-bad-500-g',
+}
 const sections = computed(() =>
-  USE_CASES.map((id, i) => ({
-    id,
-    headline: t(`shop.section.${id}.headline`),
-    headlineEm: t(`shop.section.${id}.headline.em`),
-    sub: t(`shop.section.${id}.sub`),
-    products: grouped.value[id],
-    // Alternate tones so neighbouring sections read as distinct
-    // surfaces without a hard rule. Cook/Care land on cream;
-    // Clean sits on surface between them for contrast.
-    tone: i % 2 === 0 ? 'cream' : 'surface',
-  })),
+  USE_CASES.map((id) => {
+    const heroProduct =
+      products.find((p) => p.id === CAT_HERO_ID[id]) || grouped.value[id][0]
+    return {
+      id,
+      cat: CAT_TONE[id],
+      feature: t(`shop.feature.${id}`),
+      headline: t(`shop.section.${id}.headline`),
+      headlineEm: t(`shop.section.${id}.headline.em`),
+      sub: t(`shop.section.${id}.sub`),
+      productsTitle: t(`shop.section.${id}.products.title`),
+      products: grouped.value[id],
+      heroImage: heroProduct.image,
+      heroAlt: heroProduct.title,
+      heroId: heroProduct.id,
+      heroHref: heroProduct.href,
+    }
+  }),
 )
 
 async function onAdd(product) {
   await addToCart(product.id, 1)
   cartOpen.value = true
 }
+// Banner "add to cart" — adds that section's representative hero product.
+async function onHeroAdd(productId) {
+  if (!productId) return
+  await addToCart(productId, 1)
+  cartOpen.value = true
+}
 async function onSearchSelect(product) {
   await addToCart(product.id, 1)
   cartOpen.value = true
-}
-function scrollToSection(event, id) {
-  const target = document.getElementById(id)
-  if (!target) return
-  event.preventDefault()
-  target.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  history.pushState(null, '', `#${id}`)
 }
 async function onQty({ productId, quantity }) {
   await updateCartItem(productId, quantity)
@@ -138,13 +147,11 @@ onBeforeUnmount(() => {
     @search="onSearchSelect"
   />
 
-  <!-- First-fold green banner — full viewport height, pulled up under
-       the sticky nav so the hero content centers at the TRUE viewport
-       midpoint (matches the home page's first fold). The content is a
-       page-title band + three featured product tiles, one per use-case
-       section, with anchor links into the sections below. -->
+  <!-- First-fold green banner — HALF viewport height (it only holds a
+       compact title band, so a full fold left too much empty green).
+       Pulled up under the sticky nav and vertically centred. -->
   <div
-    class="flex flex-col bg-brand text-cream md:min-h-[calc(100svh-var(--nav-h))] md:justify-center"
+    class="flex flex-col bg-brand text-cream md:min-h-[calc(50svh-var(--nav-h))] md:justify-center"
   >
     <div class="mx-auto w-full max-w-6xl px-6 py-12 sm:px-8 sm:py-16 md:px-12 md:py-12 lg:px-16 lg:py-16">
       <!-- Title band. Mixed-font banner treatment (Hero-style): normal
@@ -159,88 +166,71 @@ onBeforeUnmount(() => {
         </p>
       </div>
 
-      <!-- Three featured tiles — rule of 3. One representative product
-           per use-case, each tile is an anchor into its section. Uses
-           the cream-wash-on-brand container pattern from the
-           LanguageSwitcher's `brand` tone so tiles read as lifted off
-           the green ground without another heavy surface.
-           Image uses aspect-[4/3] (not aspect-square) with a svh-
-           relative height cap so the whole fold — title + sub + three
-           tiles + padding — stays inside 100svh at desktop heights
-           from ~720px up. Mobile stacks the tiles; the fold can
-           overflow below there because phones scroll naturally. -->
-      <ul class="mt-8 md:mt-10 grid gap-4 sm:gap-5 md:gap-6 grid-cols-1 sm:grid-cols-3">
-        <li v-for="tile in featuredTiles" :key="tile.id">
-          <a
-            :href="`#${tile.id}`"
-            class="group flex h-full flex-col items-center gap-4 p-4 md:p-5 rounded-md border border-cream-line bg-cream-wash hover:bg-cream-wash-strong transition-colors duration-base"
-            @click="scrollToSection($event, tile.id)"
-          >
-            <div class="w-full aspect-[4/3] max-h-[30svh] md:max-h-[26svh] lg:max-h-[28svh] rounded-md bg-paper overflow-hidden flex items-center justify-center">
-              <img
-                :src="tile.product.image"
-                :alt="tile.product.title"
-                loading="lazy"
-                decoding="async"
-                class="w-full h-full object-contain p-4 md:p-5"
-              />
-            </div>
-            <div class="flex flex-col items-center text-center gap-1">
-              <p class="eyebrow text-cream/75">{{ tile.label }}</p>
-              <h3 class="font-display text-lg md:text-xl font-normal leading-tight text-cream">
-                {{ tile.product.title }}
-              </h3>
-            </div>
-            <span
-              class="mt-auto inline-flex items-center gap-1.5 text-sm font-semibold tracking-label text-cream/80 group-hover:text-accent transition-colors duration-base"
-            >
-              {{ tile.cta }}
-              <span aria-hidden="true" class="transition-transform duration-base group-hover:translate-x-1">→</span>
-            </span>
-          </a>
-        </li>
-      </ul>
+      <!-- The three featured product tiles were removed; each use-case is
+           now fronted by its own full-width colour banner below. The green
+           fold keeps just the title band. -->
     </div>
   </div>
 
-  <!-- Three use-case sections. Each has its own banner-style mixed-font
-       heading (no eyebrow pill), a 3-up product grid capped at the
-       rule of 3 per row, and wave dividers on either side so the
-       page reads with the same rhythm as the home page. -->
-  <template v-for="(section, i) in sections" :key="section.id">
-    <!-- Wave into the section. Previous surface is `brand` for the
-         first divider (coming out of the green fold), then alternates
-         between cream/surface to match the previous section's tone. -->
-    <WaveDivider :from="i === 0 ? 'brand' : sections[i - 1].tone" :to="section.tone" />
+  <!-- Thin white separation between the green hero and the first colour
+       banner: a diagonal out of the green, then a slim white band. Each
+       section's own diagonal then carries cream → its colour. -->
+  <WaveDivider from="brand" to="cream" />
+  <div aria-hidden="true" class="-mt-px h-6 md:h-10 bg-cream"></div>
 
-    <section
-      :id="section.id"
-      :class="[
-        '-mt-px scroll-mt-[calc(var(--nav-h)+1rem)]',
-        section.tone === 'cream' ? 'bg-cream text-ink' : 'bg-surface text-ink',
-      ]"
-    >
+  <!-- Per use-case: a full-width category COLOUR banner (representative
+       product + the section's mixed-font heading) heads each group, then
+       the product grid sits on a neutral surface below. Diagonal wave
+       dividers carry the colour in and back out, matching the home-page
+       rhythm. Colours: cook=lime, clean=grapefruit, wash=plum, care=orange. -->
+  <template v-for="section in sections" :key="section.id">
+    <!-- Wave into the colour banner from the neutral surface above (the
+         white band for the first section, the product grid for the rest). -->
+    <WaveDivider from="cream" :to="section.cat" />
+
+    <!-- Category colour banner. `id` + scroll-mt keep deep-links
+         (/shop#care) landing just under the sticky nav. -->
+    <div :id="section.id" class="-mt-px scroll-mt-[calc(var(--nav-h)+1rem)]">
+      <Hero
+        class="w-full"
+        variant="split"
+        :tone="section.cat"
+        :eyebrow="section.feature"
+        :image="section.heroImage"
+        :image-alt="section.heroAlt"
+      >
+        <template #headline>
+          {{ section.headline }}
+          <em class="italic font-light">{{ section.headlineEm }}</em>
+        </template>
+        <template #subheadline>{{ section.sub }}</template>
+        <!-- Banner CTAs: "add to cart" in the brand crimson, "learn more"
+             as a white-outline ghost (adds / links the section's hero
+             product). -->
+        <template #actions>
+          <Button variant="accent" size="lg" @click="onHeroAdd(section.heroId)">
+            {{ t('ds.buttons.addToCart') }}
+          </Button>
+          <RouterLink
+            :to="section.heroHref"
+            class="inline-flex items-center justify-center rounded-pill border border-white/90 px-[34px] py-[17px] text-[14px] font-semibold uppercase tracking-label text-white transition-colors duration-base hover:bg-white/10"
+          >{{ t('ds.buttons.learnMore') }}</RouterLink>
+        </template>
+      </Hero>
+    </div>
+
+    <!-- Wave back out of the colour into the neutral product grid. -->
+    <WaveDivider :from="section.cat" to="cream" />
+
+    <section class="-mt-px bg-cream text-ink">
       <div class="mx-auto w-full max-w-6xl px-6 py-16 sm:px-8 sm:py-20 md:px-12 md:py-24 lg:px-16 lg:py-28">
-        <div class="flex flex-col gap-4 max-w-3xl">
-          <h2 class="font-display font-normal leading-[1.05] tracking-tight text-ink text-headline-lg">
-            {{ section.headline }}
-            <em class="italic font-light text-brand">{{ section.headlineEm }}</em>
-          </h2>
-          <p class="text-lg leading-relaxed text-muted max-w-2xl">
-            {{ section.sub }}
-          </p>
-        </div>
-
+        <h2
+          class="font-display font-normal leading-[1.05] tracking-tight text-ink text-headline-md mb-10 md:mb-12"
+        >{{ section.productsTitle }}</h2>
         <div
           v-if="section.products.length"
-          class="mt-12 md:mt-14 grid gap-5 md:gap-7 grid-cols-1 sm:grid-cols-2 md:grid-cols-3"
+          class="grid gap-5 md:gap-7 grid-cols-1 sm:grid-cols-2 md:grid-cols-3"
         >
-          <!-- Add-to-cart variant alternates by section index so
-               the three bands read as a pattern: green → yellow →
-               green. Only the middle band uses the accent (yellow)
-               variant; first and last stay on primary (brand green).
-               `i % 2 === 1` keeps this rhythm working if more
-               sections are ever appended. -->
           <ProductCard
             v-for="product in section.products"
             :key="product.id"

@@ -31,6 +31,9 @@ export const bundles = [
     price: 24.9,
     memberPrice: 21.17,
     image: '/bundles/background/haushalt-bundle-2.webp',
+    // AI-composed artwork — disclosed with an "AI Edited" overlay until
+    // real product photography replaces it (brand-owner L5/L6).
+    aiEdited: true,
     anchorProductId: 'kaiser-natron-pulver-250-g-grosspackung',
     href: '/bundles/haushalt',
   },
@@ -50,6 +53,7 @@ export const bundles = [
     price: 22.9,
     memberPrice: 19.47,
     image: '/bundles/background/waesche-pflege-bundle.webp',
+    aiEdited: true,
     anchorProductId: 'holste-wasch-soda-500-g-beutel',
     href: '/bundles/waesche',
   },
@@ -69,6 +73,7 @@ export const bundles = [
     price: 29.9,
     memberPrice: 25.42,
     image: '/bundles/background/wohlfuehl-bundle.webp',
+    aiEdited: true,
     anchorProductId: 'kaiser-natron-bad-500-g',
     href: '/bundles/wohlfuehl',
   },

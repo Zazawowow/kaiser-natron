@@ -92,6 +92,13 @@ const routes = [
     meta: { layout: 'none' },
   },
   {
+    path: '/kueche',
+    name: 'kueche',
+    component: () => import('@/pages/CategoryPage.vue'),
+    props: { slug: 'kueche', useCase: 'cook' },
+    meta: { layout: 'none' },
+  },
+  {
     path: '/impressum',
     name: 'impressum',
     component: () => import('@/pages/LegalPage.vue'),

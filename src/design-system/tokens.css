@@ -34,6 +34,17 @@
      accent highlight. */
   --color-highlight: #6eceb2;
 
+  /* Category use-groups — the brand colour-codes its four product
+     use-groups (sourced from kaiser-natron.de): Küche=lime,
+     Reinigung=grapefruit, Wäsche=plum, Pflege=orange. Drive the shop
+     page's per-section colour banners (Hero tones kitchen/clean/wash/
+     care). Lime is light → dark ink text; the other three are saturated
+     → cream (white) text. Tailwind v4 emits bg-cat-* utilities. */
+  --color-cat-kitchen: #c6d47d;
+  --color-cat-clean: #eb5a61;
+  --color-cat-wash: #c15a7e;
+  --color-cat-care: #f1864c;
+
   /* Neutrals — warm, brand-tinted */
   --color-ink: color-mix(in oklch, var(--color-brand), black 50%);
   --color-ink-placeholder: color-mix(in srgb, var(--color-ink) 35%, transparent);

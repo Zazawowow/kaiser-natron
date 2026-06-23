@@ -23,13 +23,13 @@ const props = defineProps({
   slug: {
     type: String,
     required: true,
-    validator: (v) => ['pflege', 'haushalt'].includes(v),
+    validator: (v) => ['pflege', 'haushalt', 'kueche'].includes(v),
   },
-  /** Maps to the existing use-case grouping (clean / care). */
+  /** Maps to the existing use-case grouping (cook / clean / care). */
   useCase: {
     type: String,
     required: true,
-    validator: (v) => ['clean', 'care'].includes(v),
+    validator: (v) => ['cook', 'clean', 'care'].includes(v),
   },
 })
 

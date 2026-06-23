@@ -333,6 +333,176 @@ to the colour-swatch reference so the in-app design-system page stays accurate.
 
 ---
 
+## 16. Brand name — ® trademark + hyphenation pass
+
+**Files:** `src/i18n/messages.js` (de + en), `src/api/products.js`,
+`src/design-system/components/Logo.vue`, `src/design-system/components/Navbar.vue`
+
+The brand name is now written **`Kaiser-Natron®`** consistently — hyphenated,
+with the ® mark — on every visible mention. Two problems were fixed:
+
+- **Missing ®** — display headlines, CTAs, the bundle line-item lists and the
+  product `brand` field carried no trademark mark. (The long Kaiserhacks recipe
+  copy and the product `title` fields already had `Kaiser-Natron®` and were left
+  as-is.)
+- **Spelling drift** — the English locale (and one German headline) used the
+  un-hyphenated `Kaiser Natron`. All standardised to the hyphenated form.
+
+| File | What changed |
+|------|--------------|
+| `src/i18n/messages.js` | `shop.headline`, `ds.hero.headline.a`, `home.banner.sub`, `home.brand.headline.a`, `home.teaser.cta`, and the `bundle.*.items.*` lists — de **and** en — now read `Kaiser-Natron®` |
+| `src/api/products.js` | `brand: 'Kaiser-Natron'` → `'Kaiser-Natron®'` (all 11 products; shown in search results via `Search.vue`) |
+| `src/design-system/components/Logo.vue` | default accessible `title` prop `'Kaiser Natron'` → `'Kaiser-Natron®'` |
+| `src/design-system/components/Navbar.vue` | logo link `aria-label` `'Kaiser Natron home'` → `'Kaiser-Natron home'` |
+
+> Not touched: generic ingredient references ("Natron", "Natronwasser",
+> "Natron-basierte …") — those mean the substance, not the brand, so they take
+> no ®. Image `alt` text keeps the plain hyphenated name (not on-screen).
+
+---
+
+## 17. Hero headline copy — versatility, not "shine"
+
+**File:** `src/i18n/messages.js` (`ds.hero.headline.*`, de + en)
+
+The product-hero headline was reworded from a generic cleaning-shine line to the
+brand's own versatility voice (drawn from kaiser-natron.de — *"Die
+Verwendungsmöglichkeiten … sind beinah grenzenlos"*). The three-part split
+(`a` / emphasised `em` / `b`) is unchanged; only the words changed.
+
+```
+DE  "Kaiser-Natron®  für alles  was glänzen soll."
+ →  "Kaiser-Natron®  für fast  alles im Alltag."
+
+EN  "Kaiser-Natron®  for everything  that should shine."
+ →  "Kaiser-Natron®  for almost  anything at home."
+```
+
+---
+
+## 18. Bundle artwork — "AI Edited" disclosure (L5 + L6)
+
+**Files:** `src/api/bundles.js`, `src/design-system/components/BundleCard.vue`,
+`src/design-system/components/Bundles.vue`, `src/pages/HomePage.vue`,
+`src/pages/BundlePage.vue`
+
+The bundle images are AI-composed. Rather than replace them, each is now marked
+with a small, faint **"AI Edited"** caption in the bottom-right of the image, so
+the AI origin is disclosed. It's data-driven, so it disappears automatically once
+real photography replaces a given image.
+
+- `bundles.js` — each bundle record gains `aiEdited: true`.
+- `BundleCard.vue` — new `aiEdited` Boolean prop; when true, renders the overlay
+  span inside the media area (both the card-link and plain-media branches).
+- `Bundles.vue` — passes `:ai-edited="bundle.aiEdited"` to all four BundleCard
+  instances (mobile + grid + sidebar + carousel).
+- `HomePage.vue` / `BundlePage.vue` — carry `aiEdited` through to the rendered
+  records; BundlePage renders the same overlay on its large hero image (desktop
+  + mobile).
+
+```html
+<span class="pointer-events-none absolute bottom-0 right-0 z-[1] px-2 py-0.5
+  text-[10px] font-medium uppercase tracking-label text-white/55
+  drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]">AI Edited</span>
+```
+
+> Set a bundle's `aiEdited: false` (or drop it) in `bundles.js` to remove the
+> badge once its image is a real photo.
+
+---
+
+## 19. Revitalization section — animation row + CTA removed (L10)
+
+**File:** `src/pages/HomePage.vue` (`revitCopy`, Revitalization usage)
+
+The Revitalization section was stripped back. Removed entirely:
+
+- the **three-pillar feature row** with the spinning orbit animations (the
+  emoji icons ⚗️💊🌿 were off-brand; the brand owner wanted the whole row gone), and
+- the **"early access" CTA** button (`revit.notifyCta` — "Get early access" /
+  "Early Access sichern").
+
+This is done at the **usage** site, not the component: `revitCopy` no longer
+passes `features` or `notifyCta`, and the `:features` / `:notify-cta` / `@notify`
+bindings (and the orphaned `onRevitNotify` handler) were removed. The section now
+renders **eyebrow + headline + sub only**.
+
+`Revitalization.vue` is unchanged and still reusable — its `v-if="features.length"`
+and `v-if="notifyCta"` guards simply render nothing when those props are absent.
+The unused `revit.feature.*` / `revit.notifyCta` i18n keys are left in place
+(harmless) in case the section is restored.
+
+---
+
+## 20. Shop page category banners + colours + Küche page (L8/U4)
+
+**Files:** `src/design-system/tokens.css`, `src/design-system/components/Hero.vue`,
+`src/pages/ShopPage.vue`, `src/router/index.js`, `src/pages/CategoryPage.vue`,
+`src/i18n/messages.js`
+
+On the **shop page**, the catalogue is split into **four** use-group sections,
+each fronted by a **full-width colour banner** in the brand's own use-group
+colour (sourced from kaiser-natron.de), with diagonal dividers carrying the
+colour in and back out to the neutral product grid below. (The home page was
+left unchanged — it keeps its 3-card `ProductTeaser`.)
+
+**Four sections + colours (design tokens).** `tokens.css` — the old "Haushalt"
+lump was split into **Clean** (cleaning) and **Wash** (laundry):
+| Token | Hex | Section | Products |
+|-------|-----|---------|----------|
+| `--color-cat-kitchen` | `#c6d47d` (lime) | Küche / cook | Pulver, Tabletten |
+| `--color-cat-clean` | `#eb5a61` (grapefruit) | Reinigung / clean | cleaners, sprays, descalers |
+| `--color-cat-wash` | `#c15a7e` (plum) | Wäsche / wash | wash-soda, starch, stain removers |
+| `--color-cat-care` | `#f1864c` (orange) | Pflege / care | bath, foot-bath, sport |
+Tailwind v4 auto-emits `bg-cat-kitchen` / `bg-cat-clean` / `bg-cat-wash` / `bg-cat-care`.
+
+**Product grouping.** `src/api/products.js` — `USE_CASES` is now
+`['cook','clean','wash','care']`; `Wäsche` maps to the new `wash` group (was
+`clean`). `productsByUseCase` returns all four buckets.
+
+**Hero tones.** `Hero.vue` has `kitchen` / `clean` / `wash` / `care` tones. Lime
+keeps dark ink text; the other three take cream (white) text. Each sets an
+`eyebrowColor` applied inline (overrides the global `.eyebrow { color: muted }`).
+`WaveDivider.vue` gained matching `kitchen` / `clean` / `wash` / `care` tones.
+
+**Shop page.** `ShopPage.vue` loops the four use-cases; each renders
+`WaveDivider → <Hero :tone="section.cat"> (hero product + mixed-font heading +
+CTAs) → WaveDivider → a section title + product grid`. `CAT_TONE` maps
+cook→kitchen, clean→clean, wash→wash, care→care; `CAT_HERO_ID` picks the headline
+product (Pulver / Allzweck-Spray / Daunenwasch / Bad). A per-section title
+(`shop.section.<id>.products.title`) now sits above each grid.
+
+**Banner CTAs.** Each banner carries two buttons (via the Hero `#actions` slot):
+**"add to cart"** in the brand crimson (`Button variant="accent"`, adds the
+section's hero product) and **"learn more"** as a white-outline ghost
+(`border-white/90 text-white`, links to the product page).
+> ⚠️ The white-outline "learn more" reads well on the saturated grapefruit / plum
+> / orange banners but is low-contrast on the light lime (Kitchen) banner — may
+> want a dark-outline variant there.
+
+**Shop first fold — halved.** The green title fold was `min-h:calc(100svh − nav)`
+but only holds a compact title band, leaving too much empty green. Reduced to
+`calc(50svh − var(--nav-h))`. A diagonal then drops into a **thin white band**
+(`h-6 md:h-10`) before the first colour banner, so the green hero and the lime
+Kitchen banner don't butt directly together.
+
+**Küche category page (new, separate from the shop sections).** Added for parity
+with `/haushalt` + `/pflege`:
+- `router/index.js` — new `/kueche` route → `CategoryPage` `{ slug: 'kueche', useCase: 'cook' }`.
+- `CategoryPage.vue` — `slug` validator allows `kueche`; `useCase` allows `cook`.
+- `messages.js` — full `category.kueche.*` copy (de + en), mirroring pflege/haushalt.
+
+> ⚠️ **Open decision on the standalone category pages.** The footer
+> (`Footer.vue:54-55`) links only to `/pflege` and `/haushalt` — **`/kueche` is not
+> linked anywhere** (reachable only by direct URL). Also, splitting Wäsche into the
+> `wash` group means the `/haushalt` page (`useCase: clean`) no longer lists laundry
+> products, and there's no `/waesche` page. The **shop page itself is complete** (all
+> four groups); only these secondary category pages need a taxonomy decision — wire
+> up `/kueche` (+ a `/waesche`?) and a footer link, or retire the standalone pages in
+> favour of the shop's in-page sections.
+
+---
+
 ## Quick reference — the two new colours
 
 ```

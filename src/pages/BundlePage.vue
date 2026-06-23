@@ -239,6 +239,10 @@ onBeforeUnmount(() => {
               decoding="async"
               class="absolute inset-0 w-full h-full object-cover"
             />
+            <span
+              v-if="bundle.aiEdited"
+              class="pointer-events-none absolute bottom-0 right-0 z-[1] px-2.5 py-1 text-[11px] font-medium uppercase tracking-label text-white/55 drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]"
+            >AI Edited</span>
           </div>
         </div>
 
@@ -311,6 +315,10 @@ onBeforeUnmount(() => {
             decoding="async"
             class="block w-full h-auto"
           />
+          <span
+            v-if="bundle.aiEdited"
+            class="pointer-events-none absolute bottom-0 right-0 z-[1] px-2.5 py-1 text-[11px] font-medium uppercase tracking-label text-white/55 drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]"
+          >AI Edited</span>
         </div>
       </section>
 

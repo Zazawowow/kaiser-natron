@@ -60,6 +60,9 @@ const props = defineProps({
     default: 'cover',
     validator: (v) => ['contain', 'cover'].includes(v),
   },
+  // Overlays a faint "AI Edited" disclosure on the media when the
+  // artwork is AI-composed (brand-owner transparency request).
+  aiEdited: { type: Boolean, default: false },
 })
 
 defineEmits(['add'])
@@ -128,6 +131,10 @@ const extraCount = computed(() => Math.max(0, props.items.length - MAX_ITEMS))
             : 'object-contain ' + (layout === 'horizontal' ? 'p-6 md:p-5' : 'p-8'),
         ]"
       />
+      <span
+        v-if="aiEdited"
+        class="pointer-events-none absolute bottom-0 right-0 z-[1] px-2 py-0.5 text-[10px] font-medium uppercase tracking-label text-white/55 drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]"
+      >AI Edited</span>
     </RouterLink>
     <component
       v-else
@@ -158,6 +165,10 @@ const extraCount = computed(() => Math.max(0, props.items.length - MAX_ITEMS))
             : 'object-contain ' + (layout === 'horizontal' ? 'p-6 md:p-5' : 'p-8'),
         ]"
       />
+      <span
+        v-if="aiEdited"
+        class="pointer-events-none absolute bottom-0 right-0 z-[1] px-2 py-0.5 text-[10px] font-medium uppercase tracking-label text-white/55 drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]"
+      >AI Edited</span>
     </component>
 
     <!-- Body -->

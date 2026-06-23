@@ -37,7 +37,7 @@ const props = defineProps({
   tone: {
     type: String,
     default: 'cream',
-    validator: (t) => ['cream', 'paper', 'brand'].includes(t),
+    validator: (t) => ['cream', 'paper', 'brand', 'kitchen', 'clean', 'wash', 'care'].includes(t),
   },
   /** Only affects the split variant. When true, the image sits on the left
    *  and copy on the right from `lg` up. Mobile order is unchanged (image
@@ -74,6 +74,42 @@ const tones = {
     sub: 'text-cream/80',
     disc: 'bg-brand-soft/30',
     glow: 'bg-accent/5',
+  },
+  // Category use-group tones (home-page banners). Lime is light, so it
+  // keeps dark ink text; grapefruit + orange are saturated, so they take
+  // cream (white) text. The decorative disc/glow are soft white tints so
+  // they read on any of the three category grounds.
+  kitchen: {
+    surface: 'bg-cat-kitchen',
+    text: 'text-ink',
+    sub: 'text-ink/70',
+    disc: 'bg-white/35',
+    glow: 'bg-white/25',
+    eyebrowColor: 'var(--color-brand)',
+  },
+  clean: {
+    surface: 'bg-cat-clean',
+    text: 'text-cream',
+    sub: 'text-cream/85',
+    disc: 'bg-white/15',
+    glow: 'bg-white/10',
+    eyebrowColor: 'rgba(255,255,255,0.9)',
+  },
+  wash: {
+    surface: 'bg-cat-wash',
+    text: 'text-cream',
+    sub: 'text-cream/85',
+    disc: 'bg-white/15',
+    glow: 'bg-white/10',
+    eyebrowColor: 'rgba(255,255,255,0.9)',
+  },
+  care: {
+    surface: 'bg-cat-care',
+    text: 'text-cream',
+    sub: 'text-cream/85',
+    disc: 'bg-white/15',
+    glow: 'bg-white/10',
+    eyebrowColor: 'rgba(255,255,255,0.9)',
   },
 }
 
@@ -177,7 +213,11 @@ const imageHeightClass = computed(() =>
            lets the headline actually respect its own max width so
            the font-size clamp and wrapping can take effect. -->
       <div :class="['relative z-[1] flex flex-col gap-6 min-w-0', layout.copy]">
-        <p v-if="eyebrow" class="eyebrow">{{ eyebrow }}</p>
+        <p
+          v-if="eyebrow"
+          class="eyebrow"
+          :style="tone.eyebrowColor ? { color: tone.eyebrowColor } : null"
+        >{{ eyebrow }}</p>
 
         <!-- Headline sizing uses responsive Tailwind arbitrary values
              so each breakpoint compiles to a plain media-query

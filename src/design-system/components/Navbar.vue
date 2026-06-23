@@ -204,7 +204,7 @@ onBeforeUnmount(() => {
         <RouterLink
           to="/"
           :class="['block shrink-0 py-1', tone.logo]"
-          aria-label="Kaiser Natron home"
+          aria-label="Kaiser-Natron home"
           @click="onLogoClick"
         >
           <Logo :class="logoClasses" />

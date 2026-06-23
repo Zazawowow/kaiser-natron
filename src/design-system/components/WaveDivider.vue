@@ -26,13 +26,15 @@ const props = defineProps({
   from: {
     type: String,
     default: 'brand',
-    validator: (v) => ['brand', 'cream', 'surface', 'paper'].includes(v),
+    validator: (v) =>
+      ['brand', 'cream', 'surface', 'paper', 'kitchen', 'clean', 'wash', 'care'].includes(v),
   },
   /** Colour of the section below the wave — fills the solid bottom. */
   to: {
     type: String,
     default: 'cream',
-    validator: (v) => ['brand', 'cream', 'surface', 'paper'].includes(v),
+    validator: (v) =>
+      ['brand', 'cream', 'surface', 'paper', 'kitchen', 'clean', 'wash', 'care'].includes(v),
   },
 })
 
@@ -41,12 +43,20 @@ const toneVar = {
   cream: 'var(--color-cream)',
   surface: 'var(--color-surface)',
   paper: 'var(--color-paper)',
+  kitchen: 'var(--color-cat-kitchen)',
+  clean: 'var(--color-cat-clean)',
+  wash: 'var(--color-cat-wash)',
+  care: 'var(--color-cat-care)',
 }
 const toneBg = {
   brand: 'bg-brand',
   cream: 'bg-cream',
   surface: 'bg-surface',
   paper: 'bg-paper',
+  kitchen: 'bg-cat-kitchen',
+  clean: 'bg-cat-clean',
+  wash: 'bg-cat-wash',
+  care: 'bg-cat-care',
 }
 
 // The wrapping bg-* class paints any 1-device-pixel gap that could
