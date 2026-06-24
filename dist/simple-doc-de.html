@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Kaiser-Natron® — Was sich geändert hat (Überblick in einfacher Sprache)</title>
+<style>
+  :root {
+    --brand: #006548;
+    --brand-soft: #4a9079;
+    --crimson: #cc0230;
+    --mint: #6eceb2;
+    --gold: #e9c84b;
+    --ink: #0a2c20;
+    --muted: #5c7a6f;
+    --paper: #ffffff;
+    --cream: #f4f7f4;
+    --line: #d9e4df;
+    --kitchen: #c6d47d;
+    --clean: #eb5a61;
+    --wash: #c15a7e;
+    --care: #f1864c;
+    --serif: 'Zeitung', 'Iowan Old Style', 'Palatino', Georgia, serif;
+    --sans: 'Zeitung', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-font-smoothing: antialiased; }
+  body {
+    margin: 0;
+    font-family: var(--sans);
+    color: var(--ink);
+    background: var(--cream);
+    line-height: 1.6;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 24px 80px; }
+
+  /* Header */
+  header.hero {
+    background: var(--brand);
+    color: #fff;
+    padding: 56px 24px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+  header.hero::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: -1px;
+    height: 64px;
+    background: var(--cream);
+    clip-path: polygon(0 100%, 100% 100%, 100% 38%);
+  }
+  .hero-inner { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: .22em;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--mint);
+    margin: 0 0 14px;
+  }
+  h1 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(30px, 5vw, 46px);
+    line-height: 1.05;
+    margin: 0 0 14px;
+    letter-spacing: -0.01em;
+  }
+  h1 em { font-style: italic; font-weight: 300; color: var(--mint); }
+  .hero p { max-width: 60ch; color: rgba(255,255,255,.85); margin: 0; font-size: 16px; }
+  .meta { margin-top: 22px; font-size: 13px; color: rgba(255,255,255,.7); }
+
+  /* Intro */
+  .intro {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px 22px;
+    margin: -34px 0 38px;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 10px 30px rgba(0,101,72,.07);
+    font-size: 15px;
+    color: var(--muted);
+  }
+
+  /* Sections */
+  section.group { margin-bottom: 34px; }
+  .group > h2 {
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0 0 16px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--brand);
+  }
+  ul.items { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  ul.items li {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--mint);
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-size: 15px;
+  }
+  ul.items li strong { color: var(--brand); font-weight: 600; }
+  ul.items li em { font-style: italic; color: var(--ink); }
+
+  /* Category swatch list */
+  .cats { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+  .cat { display: flex; align-items: center; gap: 12px; font-size: 14px; }
+  .cat .sw { width: 26px; height: 18px; border-radius: 4px; flex: none; border: 1px solid rgba(0,0,0,.06); }
+
+  code {
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 0.86em;
+    background: var(--cream);
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    padding: 1px 6px;
+    color: var(--brand);
+    white-space: nowrap;
+  }
+
+  /* Developer reference — swatch cards + spec rows */
+  .refgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
+  .refcard {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--paper); border: 1px solid var(--line);
+    border-radius: 10px; padding: 10px 12px;
+  }
+  .refcard .chip { width: 34px; height: 34px; border-radius: 7px; flex: none; border: 1px solid rgba(0,0,0,.08); }
+  .refcard .role { display: block; font-size: 13.5px; font-weight: 600; color: var(--ink); }
+  .refcard .hex { display: block; font-family: ui-monospace, Menlo, monospace; font-size: 12px; color: var(--muted); }
+  .specs { margin: 14px 0 0; font-size: 14px; color: var(--ink); }
+  .specs li { margin-bottom: 6px; }
+
+  /* "Waiting on you" — crimson accent */
+  .group.waiting > h2 { border-bottom-color: var(--crimson); }
+  .group.waiting ul.items li { border-left-color: var(--crimson); }
+
+  /* "View on site" link */
+  .viewlink-row { margin: -6px 0 16px; }
+  .viewlink {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--brand);
+    transition: color .15s;
+  }
+  .viewlink::after { content: "\2197"; font-size: 13px; }
+  .viewlink:hover { color: var(--crimson); text-decoration: underline; }
+  .cat a, ul.items li strong a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--mint); transition: color .15s, border-color .15s; }
+  .cat a:hover, ul.items li strong a:hover { color: var(--crimson); border-color: var(--crimson); }
+
+  /* Per-card "view on site" link */
+  ul.items li { position: relative; }
+  .cardlink {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    color: var(--brand);
+    text-decoration: none;
+  }
+  .cardlink::after { content: " \2197"; }
+  .cardlink:hover { color: var(--crimson); text-decoration: underline; }
+
+  footer.foot {
+    margin-top: 44px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    font-size: 12.5px;
+    color: var(--muted);
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+  }
+
+  @media print {
+    body { background: #fff; }
+    .intro, ul.items li { box-shadow: none; }
+    ul.items li { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">Überblick in einfacher Sprache</p>
+    <h1>Kaiser-Natron<sup>®</sup> —<br><em>was sich geändert hat, einfach erklärt</em></h1>
+    <p>Eine nicht-technische Zusammenfassung der gestalterischen und inhaltlichen Änderungen an der Website. Die ausführliche Entwicklerversion finden Sie unter <strong>/dev-doc-de</strong> — das ist dieselbe Geschichte, nur ohne den Code.</p>
+    <p class="meta">Aktualisiert am 24. Juni 2026 · Branch feat/shop-category-sections</p>
+    <p class="meta"><a href="/simple-doc" style="color:var(--mint);text-decoration:underline;">English ↗</a></p>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="intro">
+    Alles Folgende rückt die Website <em>näher</em> an die etablierte Marke Kaiser-Natron® heran — die offizielle Farbpalette, die Schrift und das kantige Design — anstatt einen neuen Look einzuführen.
+  </div>
+
+  <section class="group">
+    <h2>Erscheinungsbild</h2>
+    <ul class="items">
+      <li><strong>Farben.</strong> Die Website verwendet jetzt die offizielle Markenpalette: das tiefe Markengrün <code>#006548</code>, ein kräftiges Rot <code>#cc0230</code> für alles Anklickbare (Buttons, „In den Warenkorb“) und ein sanftes Mint <code>#6eceb2</code>, das Links aufleuchten lässt, wenn Sie mit der Maus darüberfahren. Das warme Gelb <code>#e9c84b</code> dient jetzt nur noch als Hervorhebung von Text auf Grün. <em>(Vollständige Übersicht ganz unten.)</em><br><a class="cardlink" href="/" target="_blank" rel="noopener">Auf der Website ansehen</a></li>
+      <li><strong>Hintergründe sind weiß.</strong> Die Seiten liegen jetzt auf sauberem Weiß <code>#ffffff</code> statt auf den alten getönten Flächen, sodass Produkte und Text besser hervortreten.<br><a class="cardlink" href="/" target="_blank" rel="noopener">Auf der Website ansehen</a></li>
+      <li><strong>Markenschrift.</strong> Überschriften und Text verwenden die markeneigene Schrift <strong>„Zeitung“</strong>, die von der Website selbst gehostet wird (eine lokale <code>.woff2</code>-Datei, nicht von Google geliehen), damit sie immer gleich aussieht und schnell lädt. Eine Schriftfamilie für alles — Überschriften und Fließtext.<br><a class="cardlink" href="/" target="_blank" rel="noopener">Auf der Website ansehen</a></li>
+      <li><strong>Diagonale Abschnittstrenner.</strong> Die welligen Linien zwischen den farbigen Bändern wurden durch saubere diagonale Kanten ersetzt.<br><a class="cardlink" href="/shop" target="_blank" rel="noopener">Auf der Website ansehen</a></li>
+      <li><strong>Buttons.</strong> Alle Buttons haben jetzt einen einheitlichen Stil — rot mit weißer Schrift. Die großen „Handlungsaufforderungs“-Buttons auf den Hero-Bannern heben sich klar ab.<br><a class="cardlink" href="/shop" target="_blank" rel="noopener">Auf der Website ansehen</a></li>
+      <li><strong>Gelbe Hervorhebung entfernt.</strong> Überschriften verwenden nicht mehr den alten gelben Akzent; sie wirken jetzt klarer.<br><a class="cardlink" href="/" target="_blank" rel="noopener">Auf der Website ansehen</a></li>
+    </ul>
+  </section>
+
+  <section class="group">
+    <h2>Markendetails</h2>
+    <ul class="items">
+      <li><strong>Markenzeichen &amp; Schreibweise.</strong> Jede sichtbare Nennung lautet jetzt <strong>Kaiser-Natron®</strong> — mit Bindestrich und dem Zeichen ®.<br><a class="cardlink" href="/" target="_blank" rel="noopener">Auf der Website ansehen</a></li>
+      <li><strong>Hero-Überschrift.</strong> Der einleitende Satz betont jetzt die Vielseitigkeit — <em>„Kaiser-Natron® für fast alles im Haushalt“</em> — statt der alten Formulierung „das glänzen soll“.<br><a class="cardlink" href="/" target="_blank" rel="noopener">Auf der Website ansehen</a></li>
+      <li><strong>Intro-Bild.</strong> Das Marken-Intro verwendet das offizielle Hebe- und Wasserfall-Motiv.<br><a class="cardlink" href="/" target="_blank" rel="noopener">Auf der Website ansehen</a></li>
+      <li><strong>Bild der 250-g-Packung.</strong> Das große Packungsbild wurde auf das korrekte Markengrün umgefärbt, sodass es nicht mehr mit seinem Hintergrund kollidiert.<br><a class="cardlink" href="/shop" target="_blank" rel="noopener">Auf der Website ansehen</a></li>
+      <li><strong>Banner „Ein Pulver, hundert Anwendungen“.</strong> Dieses Banner zeigte früher das <em>Bade</em>-Produkt, was nicht zur Botschaft passte. Jetzt zeigt es das <strong>Pulver</strong> (den großen Eimer), und seine Buttons fügen dieses Pulverprodukt hinzu bzw. verlinken darauf.<br><a class="cardlink" href="/" target="_blank" rel="noopener">Auf der Website ansehen</a></li>
+      <li><strong>Logo &amp; Suche.</strong> Die Preise im Such-Dropdown sind jetzt weiß, damit sie auf der grünen Leiste lesbar sind.<br><a class="cardlink" href="/" target="_blank" rel="noopener">Auf der Website ansehen</a></li>
+    </ul>
+  </section>
+
+  <section class="group">
+    <h2>Ehrlichkeit &amp; Inhalt</h2>
+    <ul class="items">
+      <li><strong>Hinweis „KI-bearbeitet“ auf Bundle-Bildern.</strong> Die Bundle-Fotos, die mit KI-Unterstützung erstellt wurden, tragen jetzt eine kleine, ehrliche Bildunterschrift „KI-bearbeitet“. (Diese kann ausgeblendet werden, sobald echte Fotografien sie ersetzen.)<br><a class="cardlink" href="/#bundles" target="_blank" rel="noopener">Auf der Website ansehen</a></li>
+      <li><strong>Revitalisierungs-Bereich entfernt.</strong> Der nicht markenkonforme Bereich „Revitalization Center“ (Icons + Name, die der Inhaber beanstandet hat) wurde vorerst von der Website genommen. Er bleibt in Reserve und kann später mit korrigiertem Namen zurückkehren.<br><a class="cardlink" href="/" target="_blank" rel="noopener">Auf der Website ansehen</a></li>
+      <li><strong>„Das Original aus Österreich“ entfernt.</strong> Diese Aussage ist aus dem Footer-Slogan (deutsch + englisch) verschwunden, der jetzt nur noch reines Natron für Küche, Haushalt und Pflege beschreibt.<br><a class="cardlink" href="/" target="_blank" rel="noopener">Auf der Website ansehen</a></li>
+      <li><strong>Mitgliedschaft vollständig entfernt.</strong> Es gibt kein Mitgliedschaftsprogramm, daher ist jede Spur davon verschwunden: der Button „Mitglied werden“, der niedrigere „Mitgliederpreis“ und die Formulierungen zu Mitgliedervorteilen. <strong>Bundles zeigen jetzt einen einzigen Preis</strong>, den alle zahlen, und der Abschnitt erklärt, warum ein Bundle praktisch ist (zusammengestellte Sets, alles für einen Bereich, eine Lieferung) statt Mitglieder-Ersparnissen.<br><a class="cardlink" href="/#bundles" target="_blank" rel="noopener">Auf der Website ansehen</a></li>
+    </ul>
+  </section>
+
+  <section class="group">
+    <h2>Der Shop, nach Anwendung</h2>
+    <ul class="items">
+      <li>
+        <strong>Vier farblich gekennzeichnete Bereiche.</strong> Der Shop ist jetzt danach gegliedert, was Sie gerade tun, jeweils mit eigener Markenfarbe:
+        <div class="cats">
+          <div class="cat"><span class="sw" style="background:var(--kitchen)"></span> <span><strong><a href="/shop#cook" target="_blank" rel="noopener">Küche / Kitchen</a></strong> — Limettengrün <code>#c6d47d</code> (Backen, Kochen, Verdauung)</span></div>
+          <div class="cat"><span class="sw" style="background:var(--clean)"></span> <span><strong><a href="/shop#clean" target="_blank" rel="noopener">Reinigung / Clean</a></strong> — Grapefruitrot <code>#eb5a61</code> (Haushaltsreinigung)</span></div>
+          <div class="cat"><span class="sw" style="background:var(--wash)"></span> <span><strong><a href="/shop#wash" target="_blank" rel="noopener">Wäsche / Wash</a></strong> — Pflaume <code>#c15a7e</code> (Wäsche &amp; Textilpflege)</span></div>
+          <div class="cat"><span class="sw" style="background:var(--care)"></span> <span><strong><a href="/shop#care" target="_blank" rel="noopener">Pflege / Care</a></strong> — Orange <code>#f1864c</code> (Bad, Körper)</span></div>
+        </div>
+        <a class="cardlink" href="/shop" target="_blank" rel="noopener">Auf der Website ansehen</a>
+      </li>
+      <li><strong>Banner.</strong> Jeder Bereich beginnt mit einem farbigen Banner über die volle Breite, das sein Top-Produkt zeigt, mit einem Button „In den Warenkorb“ und einem Button „Mehr erfahren“.<br><a class="cardlink" href="/shop" target="_blank" rel="noopener">Auf der Website ansehen</a></li>
+      <li><strong>Schnellzugriff auf Kategorien.</strong> Unter der Hauptüberschrift des Shops gibt es jetzt eine Reihe abgeschrägter Buttons — einen pro Kategorie, jeder in seiner eigenen Farbe —, die Sie sanft zum jeweiligen Bereich scrollen. Der grüne Kopfbereich geht jetzt nahtlos in den ersten farbigen Bereich über (die kleine weiße Lücke ist verschwunden).<br><a class="cardlink" href="/shop" target="_blank" rel="noopener">Auf der Website ansehen</a></li>
+      <li><strong>Sport Profi zur Wäsche verschoben.</strong> Es ist ein Wäscheprodukt und steht daher jetzt unter Wäsche / Wash statt unter Pflege.<br><a class="cardlink" href="/shop#wash" target="_blank" rel="noopener">Auf der Website ansehen</a></li>
+    </ul>
+  </section>
+
+  <section class="group">
+    <h2>Kategorieseiten</h2>
+    <ul class="items">
+      <li><strong>Drei eigene Seiten sind jetzt erreichbar</strong> über den Footer: <strong><a href="/kueche" target="_blank" rel="noopener">Küche</a></strong>, <strong><a href="/haushalt" target="_blank" rel="noopener">Reinigung</a></strong> (Haushalt) und <strong><a href="/pflege" target="_blank" rel="noopener">Pflege</a></strong> — jede eine ausführlichere Landingpage mit eigenen Produkten, Vorteilen und Handlungsaufforderung.<br><a class="cardlink" href="/kueche" target="_blank" rel="noopener">Auf der Website ansehen</a></li>
+      <li><strong>Einheitliche Bezeichnungen.</strong> Diese Seiten und ihre Footer-Links verwenden jetzt dieselben Kurzbezeichnungen wie die Shop-Bereiche, sodass alles einheitlich klingt.<br><a class="cardlink" href="/kueche" target="_blank" rel="noopener">Auf der Website ansehen</a></li>
+      <li><strong>Die Seite Wäsche / Wash ist zurückgestellt</strong>, bis die Markentexte dafür vorliegen — die Wäsche ist in der Zwischenzeit bereits durch den Wash-Bereich des Shops abgedeckt.<br><a class="cardlink" href="/shop#wash" target="_blank" rel="noopener">Auf der Website ansehen</a></li>
+    </ul>
+  </section>
+
+  <section class="group">
+    <h2>Kurzreferenz (für den Entwickler)</h2>
+    <p class="viewlink-row"><a class="viewlink" href="/design" target="_blank" rel="noopener">Das Designsystem öffnen</a></p>
+    <p style="font-size:14px;color:var(--muted);margin:0 0 14px;">Die genauen Werte, falls sie hilfreich sind — nichts, worauf Sie reagieren müssten.</p>
+    <div class="refgrid">
+      <div class="refcard"><span class="chip" style="background:#006548"></span><span><span class="role">Markengrün</span><span class="hex">#006548</span></span></div>
+      <div class="refcard"><span class="chip" style="background:#cc0230"></span><span><span class="role">Rot — Buttons/CTAs</span><span class="hex">#cc0230</span></span></div>
+      <div class="refcard"><span class="chip" style="background:#6eceb2"></span><span><span class="role">Mint — Link-Hover</span><span class="hex">#6eceb2</span></span></div>
+      <div class="refcard"><span class="chip" style="background:#e9c84b"></span><span><span class="role">Gelb — Hervorhebung auf Grün</span><span class="hex">#e9c84b</span></span></div>
+      <div class="refcard"><span class="chip" style="background:#ffffff"></span><span><span class="role">Weiß — Hintergründe</span><span class="hex">#ffffff</span></span></div>
+      <div class="refcard"><span class="chip" style="background:#c6d47d"></span><span><span class="role">Küche — Limette</span><span class="hex">#c6d47d</span></span></div>
+      <div class="refcard"><span class="chip" style="background:#eb5a61"></span><span><span class="role">Reinigung — Grapefruit</span><span class="hex">#eb5a61</span></span></div>
+      <div class="refcard"><span class="chip" style="background:#c15a7e"></span><span><span class="role">Wäsche — Pflaume</span><span class="hex">#c15a7e</span></span></div>
+      <div class="refcard"><span class="chip" style="background:#f1864c"></span><span><span class="role">Pflege — Orange</span><span class="hex">#f1864c</span></span></div>
+    </div>
+    <ul class="specs">
+      <li><strong>Schrift:</strong> Zeitung (selbst gehostete <code>.woff2</code>), eine Familie für Überschriften und Fließtext.</li>
+      <li><strong>Buttons:</strong> vollständig abgerundete „Pillen“-Form; rote Füllung mit weißer Schrift.</li>
+      <li><strong>Trenner:</strong> gerade diagonale Kanten zwischen den farbigen Bändern (keine Wellen).</li>
+      <li><strong>Vollständige technische Details:</strong> siehe <strong>/dev-doc-de</strong>.</li>
+    </ul>
+  </section>
+
+  <section class="group waiting">
+    <h2>Warten noch auf eine Entscheidung (Inhaltsverantwortliche)</h2>
+    <ul class="items">
+      <li><strong>Verbleibende Herkunftsangaben.</strong> Die Zeile „Original aus Österreich“ ist weg, aber einige Erwähnungen von „abgefüllt in Österreich“ sowie die Wiener Impressumsadresse bleiben bestehen. Sagen Sie uns Bescheid, ob die Korrektur auch darauf ausgeweitet werden soll.</li>
+      <li><strong>Produktbeschreibungen Holste &amp; Linda.</strong> Diese stehen nicht auf der Markenseite, daher müssen die Texte von Ihnen kommen.</li>
+      <li><strong>Landingpage Wäsche / Wash.</strong> Liefern Sie Texte, wenn Sie eine eigene Seite wünschen.</li>
+      <li><strong>Rechtliche Seiten.</strong> AGB, Widerruf/Stornierung, Versand, Lieferkosten und der Transparenzhinweis Hersteller vs. Wiederverkäufer.</li>
+    </ul>
+  </section>
+
+  <footer class="foot">
+    <span>Kaiser-Natron® — Änderungsübersicht in einfacher Sprache</span>
+    <span>Ausführliche Version: /dev-doc-de</span>
+  </footer>
+
+</div>
+</body>
+</html>

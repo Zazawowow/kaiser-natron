@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Kaiser-Natron® — Markenreview, Status</title>
+<style>
+  :root {
+    --brand: #006548;
+    --brand-soft: #4a9079;
+    --crimson: #cc0230;
+    --mint: #6eceb2;
+    --gold: #e9c84b;
+    --ink: #0a2c20;
+    --muted: #5c7a6f;
+    --paper: #ffffff;
+    --cream: #f4f7f4;
+    --line: #d9e4df;
+    --kitchen: #c6d47d;
+    --clean: #eb5a61;
+    --wash: #c15a7e;
+    --care: #f1864c;
+    --done: #006548;
+    --partial: #d98a1f;
+    --open: #cc0230;
+    --review: #6b7f8c;
+    --serif: 'Zeitung', 'Iowan Old Style', 'Palatino', Georgia, serif;
+    --sans: 'Zeitung', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-font-smoothing: antialiased; }
+  body {
+    margin: 0;
+    font-family: var(--sans);
+    color: var(--ink);
+    background: var(--cream);
+    line-height: 1.55;
+  }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 0 24px 80px; }
+
+  /* ---- Header ---- */
+  header.hero {
+    background: var(--brand);
+    color: #fff;
+    padding: 56px 24px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+  header.hero::after {
+    /* angled divider — echoes the Soulmates angular CI, not waves */
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: -1px;
+    height: 64px;
+    background: var(--cream);
+    clip-path: polygon(0 100%, 100% 100%, 100% 38%);
+  }
+  .hero-inner { max-width: 920px; margin: 0 auto; position: relative; z-index: 1; }
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: .22em;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--mint);
+    margin: 0 0 14px;
+  }
+  h1 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(30px, 5vw, 46px);
+    line-height: 1.05;
+    margin: 0 0 14px;
+    letter-spacing: -0.01em;
+  }
+  h1 em { font-style: italic; font-weight: 300; color: var(--mint); }
+  .hero p { max-width: 60ch; color: rgba(255,255,255,.85); margin: 0; font-size: 16px; }
+  .meta { margin-top: 22px; font-size: 13px; color: rgba(255,255,255,.7); }
+
+  /* ---- Summary chips ---- */
+  .summary {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin: -34px 0 38px;
+    position: relative;
+    z-index: 2;
+  }
+  .stat {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px 14px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,101,72,.07);
+  }
+  .stat .n { font-family: var(--serif); font-size: 30px; line-height: 1; font-weight: 600; }
+  .stat .l { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-top: 7px; }
+  .stat.done .n { color: var(--done); }
+  .stat.review .n { color: var(--review); }
+  .stat.partial .n { color: var(--partial); }
+  .stat.open .n { color: var(--open); }
+  .stat.note .n { color: var(--brand-soft); }
+
+  /* ---- Legend ---- */
+  .legend { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 0 0 34px; font-size: 13px; color: var(--muted); }
+  .legend span { display: inline-flex; align-items: center; gap: 7px; }
+  .dot { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
+  .dot.done { background: var(--done); }
+  .dot.review { background: var(--review); }
+  .dot.partial { background: var(--partial); }
+  .dot.open { background: var(--open); }
+  .dot.note { background: var(--brand-soft); }
+
+  /* ---- Section ---- */
+  section.group { margin-bottom: 40px; }
+  .group > h2 {
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0 0 4px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--brand);
+    display: flex; align-items: baseline; gap: 12px;
+  }
+  .group > h2 .count { font-family: var(--sans); font-size: 13px; font-weight: 500; color: var(--muted); }
+
+  /* ---- Item card ---- */
+  .item {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-left-width: 5px;
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-top: 12px;
+  }
+  .item.done { border-left-color: var(--done); }
+  .item.review { border-left-color: var(--review); }
+  .item.partial { border-left-color: var(--partial); }
+  .item.open { border-left-color: var(--open); }
+  .item.note { border-left-color: var(--brand-soft); }
+
+  .item-head { display: flex; align-items: flex-start; gap: 12px; }
+  .badge {
+    flex: none;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    padding: 4px 10px;
+    border-radius: 999px;
+    white-space: nowrap;
+    margin-top: 2px;
+  }
+  .badge.done { background: rgba(0,101,72,.10); color: var(--done); }
+  .badge.review { background: rgba(107,127,140,.14); color: var(--review); }
+  .badge.partial { background: rgba(217,138,31,.14); color: var(--partial); }
+  .badge.open { background: rgba(204,2,48,.10); color: var(--open); }
+  .badge.note { background: rgba(74,144,121,.14); color: var(--brand-soft); }
+
+  .quote { margin: 0; font-size: 15px; color: var(--ink); }
+  .note {
+    margin: 10px 0 0;
+    font-size: 14px;
+    color: var(--muted);
+    padding-left: 14px;
+    border-left: 2px solid var(--line);
+  }
+  .note strong { color: var(--brand); font-weight: 600; }
+
+  /* category swatch row */
+  .swatches { display: inline-flex; gap: 5px; margin-left: 4px; vertical-align: middle; }
+  .sw { width: 13px; height: 13px; border-radius: 3px; display: inline-block; border: 1px solid rgba(0,0,0,.06); }
+
+  /* opinion block */
+  .opinion {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 22px 24px;
+    margin-top: 12px;
+    font-size: 14.5px;
+    color: var(--ink);
+  }
+  .opinion p { margin: 0 0 12px; }
+  .opinion p:last-child { margin-bottom: 0; }
+
+  footer.foot {
+    margin-top: 48px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    font-size: 12.5px;
+    color: var(--muted);
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+  }
+
+  @media (max-width: 640px) {
+    .summary { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media print {
+    body { background: #fff; }
+    .stat, .item, .opinion { box-shadow: none; }
+    header.hero { padding-bottom: 48px; }
+    .item { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">Markenreview · Umsetzungsstand</p>
+    <h1>Kaiser-Natron<sup>®</sup> Website-Review —<br><em>was erledigt ist, was als Nächstes kommt</em></h1>
+    <p>Jeder Punkt aus dem Markeninhaber-Review, abgeglichen mit dem aktuellen Build. Jeder Eintrag trägt seinen tatsächlichen Status und eine kurze Notiz dazu, was geändert wurde oder was noch benötigt wird.</p>
+    <p class="meta">Erstellt am 24. Juni 2026 · Branch <code>feat/shop-category-sections</code> · 28 Review-Punkte · <a href="/review-doc" style="color:var(--mint);text-decoration:underline;">English ↗</a></p>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="summary">
+    <div class="stat done"><div class="n">18</div><div class="l">Erledigt</div></div>
+    <div class="stat review"><div class="n">2</div><div class="l">Geprüft / beibehalten</div></div>
+    <div class="stat partial"><div class="n">2</div><div class="l">In Arbeit</div></div>
+    <div class="stat open"><div class="n">6</div><div class="l">Eingabe nötig</div></div>
+  </div>
+
+  <div class="legend">
+    <span><i class="dot done"></i> Erledigt — umgesetzt &amp; auf dem Branch</span>
+    <span><i class="dot review"></i> Geprüft — auf Ihre Entscheidung hin beibehalten / bestätigt</span>
+    <span><i class="dot partial"></i> In Arbeit — teilweise erledigt</span>
+    <span><i class="dot open"></i> Eingabe nötig — Rechtstext, Inhalt oder eine Entscheidung</span>
+  </div>
+
+  <!-- ===================== LAYOUT ===================== -->
+  <section class="group">
+    <h2>Layout <span class="count">15 Punkte</span></h2>
+
+    <div class="item done">
+      <div class="item-head"><span class="badge done">Erledigt</span>
+        <p class="quote">Das Gesamtlayout passt nicht zur Markenidentität (CI) von Kaiser-Natron®.</p></div>
+      <p class="note"><strong>An die CI angepasst:</strong> die offizielle Markenpalette, die Schrift Zeitung, die schrägen (Soulmates-)Trennlinien und das offizielle Artwork sind alle vorhanden. Die ganzheitliche Konsistenz bleibt als Leitlinie für jede Änderung bestehen.</p>
+    </div>
+
+    <div class="item review">
+      <div class="item-head"><span class="badge review">Geprüft</span>
+        <p class="quote">Das Kaiser-Natron®-Logo auf der Startseite ist viel zu klein und nicht prominent genug.</p></div>
+      <p class="note"><strong>In der aktuellen Größe beibehalten</strong> auf Ihre Entscheidung in dieser Sitzung hin — jederzeit erneut anpassbar, falls Sie es vergrößern möchten.</p>
+    </div>
+
+    <div class="item done">
+      <div class="item-head"><span class="badge done">Erledigt</span>
+        <p class="quote">Die Quelle wurde verfälscht dargestellt (Berge, Hebes Haar, der „Berg“ neben ihrem Kopf, der Bach). Alle Illustrationen sollten dem originalen Kaiser-Natron®-Design entsprechen.</p></div>
+      <p class="note"><strong>Marken-Hero neu aufgebaut</strong> mit dem offiziellen Artwork von Hebe + Wasserfall, das die verzerrte Komposition ersetzt.</p>
+    </div>
+
+    <div class="item done">
+      <div class="item-head"><span class="badge done">Erledigt</span>
+        <p class="quote">Falsche Schrift und falsche Farbpalette.</p></div>
+      <p class="note"><strong>Korrigiert:</strong> selbst gehostete Schrift Zeitung und die offizielle Markenpalette (Grün <code>#006548</code>, Karmesinrot, Mint, Gold) durchgängig.</p>
+    </div>
+
+    <div class="item done">
+      <div class="item-head"><span class="badge done">Erledigt</span>
+        <p class="quote">Das schräge Soulmates-Konzept geht verloren; wellenförmige Elemente passen nicht zur Struktur.</p></div>
+      <p class="note"><strong>Wellen entfernt.</strong> Alle Abschnitts-Trennlinien sind nun schräg/diagonal und greifen die Geometrie des Logos auf, um die Markenwiedererkennung wiederherzustellen.</p>
+    </div>
+
+    <div class="item done">
+      <div class="item-head"><span class="badge done">Erledigt</span>
+        <p class="quote">Das Bild der 250-g-Packung: Hintergrundfarbe und Produktbild sind visuell nicht aufeinander abgestimmt.</p></div>
+      <p class="note"><strong>Gelöst:</strong> das Artwork der 250-g-Schachtel wurde in das Markengrün umgefärbt, sodass Produkt und Hintergrund zusammenpassen.</p>
+    </div>
+
+    <div class="item done">
+      <div class="item-head"><span class="badge done">Erledigt</span>
+        <p class="quote">„…für alles, was glänzen soll. Reinigt, backt und neutralisiert…“ passt nicht zum Tone of Voice.</p></div>
+      <p class="note"><strong>Neu formuliert</strong> in Richtung Vielseitigkeit — „Kaiser-Natron® für fast alles im Alltag“ / „…for almost anything at home“, aus der Live-Markensprache übernommen.</p>
+    </div>
+
+    <div class="item done">
+      <div class="item-head"><span class="badge done">Erledigt</span>
+        <p class="quote">Unter „Bundles &amp; Benefits“: KI-generierte Bilder müssen ab August mit einem Symbol als KI-Inhalt gekennzeichnet werden.</p></div>
+      <p class="note"><strong>Gekennzeichnet:</strong> ein dezenter Hinweis „AI Edited“ sitzt nun auf jedem KI-komponierten Bundle-Bild. Er schaltet sich automatisch ab, sobald echte Fotos sie ersetzen.</p>
+    </div>
+
+    <div class="item partial">
+      <div class="item-head"><span class="badge partial">In Arbeit</span>
+        <p class="quote">Die Produktdarstellungen in den KI-Bildern sind ungenau; als Hersteller würde ich KI-Bilder ganz vermeiden.</p></div>
+      <p class="note"><strong>Vorerst gekennzeichnet</strong> mit dem AI-Edited-Badge. Die vollständige Entfernung ist vorbereitet und einsatzbereit — es braucht nur Ihre <strong>echte Produktfotografie</strong> zum Einsetzen.</p>
+    </div>
+
+    <div class="item done">
+      <div class="item-head"><span class="badge done">Erledigt</span>
+        <p class="quote">„Ein Pulver, hundert Anwendungen…“ passt nicht zum darüber gezeigten Badbild; das Pulverprodukt sollte gezeigt werden.</p></div>
+      <p class="note"><strong>In dieser Sitzung behoben:</strong> das Banner zeigt nun das Pulver (den Großgebinde-Eimer), und sein „in den Warenkorb“ / „mehr erfahren“ verweist auf dieses Pulverprodukt.</p>
+    </div>
+
+    <div class="item done">
+      <div class="item-head"><span class="badge done">Erledigt</span>
+        <p class="quote">Die Kategorien „Körperpflege“, „Haushalt“ und „Küche“ sind durcheinander, und „Küche“ ist praktisch verloren gegangen.</p></div>
+      <p class="note"><strong>Wiederhergestellt:</strong> der Shop ist in vier klare Kategoriebereiche neu aufgebaut — Küche, Reinigung, Wäsche, Pflege — und Küche hat nun einen eigenen Bereich und eine eigenständige Seite.</p>
+    </div>
+
+    <div class="item done">
+      <div class="item-head"><span class="badge done">Erledigt</span>
+        <p class="quote">Das Farbcodierungskonzept der Produktgruppen ist verloren gegangen.
+          <span class="swatches"><i class="sw" style="background:var(--kitchen)"></i><i class="sw" style="background:var(--clean)"></i><i class="sw" style="background:var(--wash)"></i><i class="sw" style="background:var(--care)"></i></span></p></div>
+      <p class="note"><strong>Wiederhergestellt</strong> aus den markeneigenen Gruppenfarben — Küche (Limette), Reinigung (Grapefruit), Wäsche (Pflaume), Pflege (Orange) — als vollbreite Banner und Trennlinien.</p>
+    </div>
+
+    <div class="item done">
+      <div class="item-head"><span class="badge done">Erledigt</span>
+        <p class="quote">Die Icons und der Name des „Revitalization Center“ passen nicht zur Markenidentität.</p></div>
+      <p class="note"><strong>Bereich vorerst entfernt</strong> von der Website, sodass weder die markenfremden Icons noch der Name erscheinen. Die Komponente bleibt in Reserve und kann jederzeit mit der korrekten Benennung zurückkehren, wenn Sie es wünschen.</p>
+    </div>
+
+    <div class="item done">
+      <div class="item-head"><span class="badge done">Erledigt</span>
+        <p class="quote">Das ®-Symbol fehlt an mehreren Stellen, und die Schreibweise sollte überprüft werden.</p></div>
+      <p class="note"><strong>Geprüft:</strong> ® wurde zu jeder sichtbaren Nennung hinzugefügt und der Name durchgängig als „Kaiser-Natron®“ mit Bindestrich geschrieben.</p>
+    </div>
+
+    <div class="item done">
+      <div class="item-head"><span class="badge done">Erledigt</span>
+        <p class="quote">Das Kaiser-Natron®-Logo sollte weiß sein.</p></div>
+      <p class="note"><strong>Als in Ordnung bestätigt:</strong> das Logo wird auf grünen/dunklen Flächen weiß und auf hellen Flächen in Markengrün dargestellt — das jeweils richtige Verhalten im Kontext. So freigegeben.</p>
+    </div>
+  </section>
+
+  <!-- ===================== UI ===================== -->
+  <section class="group">
+    <h2>Benutzeroberfläche <span class="count">6 Punkte</span></h2>
+
+    <div class="item review">
+      <div class="item-head"><span class="badge review">Bestätigt</span>
+        <p class="quote">Fehlendes Navigationsmenü in der mobilen Ansicht.</p></div>
+      <p class="note"><strong>Die Navigation ist vorhanden</strong> auf Mobilgeräten (im aktuellen Build geprüft). Falls ein bestimmtes Gerät sie bei Ihnen ausgeblendet hat, senden Sie uns einen Screenshot und wir gehen dem nach.</p>
+    </div>
+
+    <div class="item done">
+      <div class="item-head"><span class="badge done">Erledigt</span>
+        <p class="quote">Die Animation von Hebe ist meiner Meinung nach nicht gelungen.</p></div>
+      <p class="note"><strong>Aktualisiert:</strong> die Intro wurde rund um das offizielle Artwork von Hebe + Wasserfall überarbeitet und greift damit das Anliegen zur Animation auf.</p>
+    </div>
+
+    <div class="item done">
+      <div class="item-head"><span class="badge done">Erledigt</span>
+        <p class="quote">„Bundles &amp; Benefits“: „Als Mitglied…“ — Mitglied wovon? Keine Information, wie man eines wird oder was es kostet.</p></div>
+      <p class="note"><strong>Mitgliedschaft vollständig entfernt</strong> in dieser Sitzung — der Beitritts-Button, der „Mitgliederpreis“ und alle Mitglieder-Formulierungen sind verschwunden. Bundles zeigen nun einen einzigen Preis mit schlichtem Text zum Bundle-Wert.</p>
+    </div>
+
+    <div class="item partial">
+      <div class="item-head"><span class="badge partial">In Arbeit</span>
+        <p class="quote">Die Seitenstruktur ergibt keinen Sinn: Drei Klassiker → 250-g-Packung → Bundles → Badbild mit allgemeinem Text. Die 250-g-Packung und das Badbild sind falsch platziert.</p></div>
+      <p class="note">Das <strong>Badbild ist gelöst</strong> (jetzt Pulver, siehe oben). Die <strong>Neuanordnung der Abschnitte</strong> ist der offene Teil — Ihre vollständige Notiz hier gibt uns genau das, was nötig ist, und sie ist als nächste Layout-Aufgabe eingeplant.</p>
+    </div>
+
+    <div class="item done">
+      <div class="item-head"><span class="badge done">Erledigt</span>
+        <p class="quote">Der Shop sollte nach Produktkategorien organisiert sein. Sport Profi ist ein Wäscheprodukt und gehört unter „Haushalt“, nicht unter „Baden &amp; Pflege“.</p></div>
+      <p class="note">Der Shop ist <strong>nach Kategorie organisiert</strong>, und <strong>Sport Profi ist nun unter Wäsche</strong> (Haushalt) einsortiert, nicht mehr unter Pflege.</p>
+    </div>
+
+    <div class="item open">
+      <div class="item-head"><span class="badge open">Eingabe nötig</span>
+        <p class="quote">Die Produkte von Holste und Linda haben keine Produktbeschreibungen.</p></div>
+      <p class="note">Diese stehen nicht auf der Kaiser-Natron®-Website, daher muss der Text von Ihnen kommen (oder genehmigen Sie, dass wir Platzhalter zur Prüfung entwerfen).</p>
+    </div>
+  </section>
+
+  <!-- ===================== GENERAL ===================== -->
+  <section class="group">
+    <h2>Allgemein &amp; Rechtliches <span class="count">7 Punkte</span></h2>
+
+    <div class="item done">
+      <div class="item-head"><span class="badge done">Erledigt</span>
+        <p class="quote">„Das Original aus Österreich.“ Das ist meiner Meinung nach nicht zutreffend.</p></div>
+      <p class="note"><strong>Entfernt:</strong> die Aussage „Original aus Österreich“ wurde aus dem Footer-Slogan (DE + EN) gelöscht. Der Slogan handelt nun schlicht von reinem Natron für Küche, Haushalt und Pflege.</p>
+    </div>
+
+    <div class="item open">
+      <div class="item-head"><span class="badge open">Eingabe nötig</span>
+        <p class="quote">Allgemeine Geschäftsbedingungen (AGB) fehlen.</p></div>
+      <p class="note">Die Seitenstruktur kann sofort angelegt werden; der Rechtstext muss von Ihnen kommen.</p>
+    </div>
+
+    <div class="item open">
+      <div class="item-head"><span class="badge open">Eingabe nötig</span>
+        <p class="quote">Widerruf / Widerrufsrecht fehlt. Ein Kündigungsbutton ist seit Juni 2026 verpflichtend.</p></div>
+      <p class="note">Wir können den <strong>„Vertrag kündigen“-Button + Ablauf</strong> jetzt mit Platzhaltertext aufbauen; die verbindliche Rechtsformulierung kommt von Ihnen.</p>
+    </div>
+
+    <div class="item open">
+      <div class="item-head"><span class="badge open">Eingabe nötig</span>
+        <p class="quote">Versandinformationen fehlen.</p></div>
+      <p class="note">Benötigt Ihre Versandbedingungen; wir platzieren sie im Checkout und auf einer eigenen Seite.</p>
+    </div>
+
+    <div class="item open">
+      <div class="item-head"><span class="badge open">Eingabe nötig</span>
+        <p class="quote">Lieferkosten fehlen.</p></div>
+      <p class="note">Benötigt Ihre Tarife (pauschal / gestaffelt / kostenfrei ab Schwellenwert) zur Anzeige im Warenkorb und Checkout.</p>
+    </div>
+
+    <div class="item done">
+      <div class="item-head"><span class="badge done">Erledigt</span>
+        <p class="quote">Zahlungsoptionen fehlen.</p></div>
+      <p class="note"><strong>Nicht fehlend</strong> — die Zahlungsoptionen sind bereits auf der Website vorhanden, hier ist also keine Änderung nötig.</p>
+    </div>
+
+    <div class="item open">
+      <div class="item-head"><span class="badge open">Eingabe nötig</span>
+        <p class="quote">Transparenz: Die Website scheint sich als offizieller Hersteller zu präsentieren, während das Impressum etwas anderes aussagt — das könnte Kunden verwirren.</p></div>
+      <p class="note">Dies ist eine Positionierungsentscheidung für Sie (offizieller Hersteller vs. Wiederverkäufer). Sobald entschieden, machen wir die Darstellung über die gesamte Website und das Impressum hinweg konsistent.</p>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <span>Kaiser-Natron® — Umsetzungsstand des Markenreviews</span>
+    <span>18 erledigt · 2 beibehalten · 2 in Arbeit · 6 warten auf Eingabe</span>
+  </footer>
+
+</div>
+</body>
+</html>

@@ -8,7 +8,10 @@ import { fileURLToPath, URL } from 'node:url'
 // (try_files $uri $uri.html …). This dev-only middleware mirrors that so
 // the same clean URLs (/dev-doc, /simple-doc, /review-doc) work under
 // `vite dev` instead of being swallowed by the SPA history fallback.
-const DOC_SLUGS = ['dev-doc', 'simple-doc', 'review-doc']
+const DOC_SLUGS = [
+  'dev-doc', 'simple-doc', 'review-doc',
+  'dev-doc-de', 'simple-doc-de', 'review-doc-de',
+]
 function cleanDocUrls() {
   return {
     name: 'clean-doc-urls',
