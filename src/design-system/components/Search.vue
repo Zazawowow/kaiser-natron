@@ -10,7 +10,7 @@ const props = defineProps({
   products: { type: Array, default: () => [] },
   /**
    * Surface tone. Default is 'brand' so the overlay reads as the site's
-   * primary affordance (pine green). Use 'paper' for light chrome, 'cream'
+   * primary affordance (brand green). Use 'paper' for light chrome, 'cream'
    * for a warm-neutral alternative.
    */
   tone: {

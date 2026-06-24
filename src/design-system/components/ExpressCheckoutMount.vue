@@ -107,7 +107,7 @@ async function mountElement() {
           colorPrimary: '#006548',
           colorBackground: '#ffffff',
           colorText: '#0f3825',
-          fontFamily: '"DM Sans", ui-sans-serif, system-ui, sans-serif',
+          fontFamily: '"Zeitung", ui-sans-serif, system-ui, -apple-system, Arial, sans-serif',
           borderRadius: '10px',
           spacingUnit: '4px',
         },

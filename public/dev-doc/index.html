@@ -311,7 +311,7 @@
     <p class="eyebrow">Developer Handoff · Restyle Change Log</p>
     <h1>Kaiser-Natron<sup>®</sup> restyle —<br><em>every change, documented</em></h1>
     <p>A plain-language summary of every visual change in this restyle pass — the exact file, what changed, and the CSS / Tailwind classes involved. Organised by theme so you can review one concern at a time.</p>
-    <p class="meta">Updated 24 June 2026 · Branch <code>feat/shop-category-sections</code> · 27 changes</p>
+    <p class="meta">Updated 24 June 2026 · Branch <code>feat/shop-category-sections</code> · 28 changes</p>
   </div>
 </header>
 
@@ -353,6 +353,7 @@
       <a href="#s25"><span class="n">§25</span> Sport-Profi recategorised to Laundry</a>
       <a href="#s26"><span class="n">§26</span> "Das Original aus Österreich" removed</a>
       <a href="#s27"><span class="n">§27</span> Shop hero — category jump-buttons + gap removed</a>
+      <a href="#s28"><span class="n">§28</span> /design showcase updated to the rebrand</a>
       <a href="#qref" class="qref"><span class="n">★</span> Quick reference — the two new colours</a>
     </div>
   </nav>
@@ -836,6 +837,23 @@ EN  "Kaiser-Natron®  for everything  that should shine."
     </div>
   </div>
 
+  <!-- ===================== §28 ===================== -->
+  <div class="item" id="s28">
+    <div class="item-head"><span class="secnum">§28</span><h3>/design showcase brought up to date with the rebrand</h3></div>
+    <div class="files"><span class="file-chip">design/ColorsSection.vue</span><span class="file-chip">TypographySection.vue</span><span class="file-chip">HeroSection.vue</span><span class="file-chip">previews/HeroPreview.vue</span><span class="file-chip">i18n/messages.js</span><span class="file-chip">tokens.css</span><span class="file-chip">Hero.vue</span><span class="file-chip">Search.vue</span><span class="file-chip">StripePaymentMount.vue</span><span class="file-chip">ExpressCheckoutMount.vue</span></div>
+    <div class="body">
+      <p>The <code>/design</code> style guide still described the <em>old</em> design (Fraunces + DM Sans, "pine green", warm-yellow CTAs, three Hero tones) and omitted the new tokens. Audited all 26 sections and corrected every drift:</p>
+      <ul>
+        <li><strong>Colours.</strong> <code>ColorsSection</code> now shows the mint <code>highlight</code>, the four category colours (<code>cat-kitchen/clean/wash/care</code>), plus <code>brand-float</code> and <code>cream-dark</code>. New group titles <code>ds.colors.group.highlight</code> / <code>.categories</code>; <code>ds.colors.description</code> rewritten.</li>
+        <li><strong>Typography.</strong> Both cards now read <strong>Zeitung</strong> (was Fraunces/DM Sans); added a fluid headline-scale block (<code>text-display</code> / <code>text-headline-lg</code> / <code>text-headline-md</code>). Descriptions rewritten to the single Zeitung family.</li>
+        <li><strong>Hero.</strong> Added the four category banner tones (kitchen/clean/wash/care) to the tone switcher and <code>HeroPreview</code> validator; <code>ds.hero.description</code> "three surface tones" → seven.</li>
+        <li><strong>Buttons.</strong> <code>ds.buttons.description</code> fixed — accent is crimson (was "warm-yellow"), "pine-green" → "brand-green".</li>
+        <li><strong>Revitalization.</strong> Showcase description notes it's in reserve / not used on the live site (removed in §24).</li>
+        <li><strong>Stale references swept.</strong> <code>tokens.css</code> header rewritten; checkout font in the Stripe / Express mounts changed from hardcoded DM Sans → the <code>--font-sans</code> stack; "Fraunces" / "pine green" comments corrected.</li>
+      </ul>
+    </div>
+  </div>
+
   <!-- ===================== QUICK REFERENCE ===================== -->
   <div class="item" id="qref" style="border-left-color: var(--crimson);">
     <div class="item-head"><span class="secnum" style="background:var(--crimson); box-shadow:0 4px 12px rgba(204,2,48,.22);">★</span><h3>Quick reference — the two new colours</h3></div>
@@ -853,7 +871,7 @@ White    #ffffff   — page backgrounds (cream + surface) and button text on gre
 
   <footer class="foot">
     <span>Kaiser-Natron® — developer change log</span>
-    <span>27 documented changes · feat/shop-category-sections</span>
+    <span>28 documented changes · feat/shop-category-sections</span>
   </footer>
 
 </div>

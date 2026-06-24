@@ -12,11 +12,17 @@ const variant = computed(() =>
   ['split', 'centered'].includes(route.query.variant) ? route.query.variant : 'split',
 )
 const tone = computed(() =>
-  ['cream', 'paper', 'brand'].includes(route.query.tone) ? route.query.tone : 'cream',
+  ['cream', 'paper', 'brand', 'kitchen', 'clean', 'wash', 'care'].includes(route.query.tone)
+    ? route.query.tone
+    : 'cream',
 )
 const reverse = computed(() => route.query.reverse === '1')
 
-const navVariant = computed(() => (tone.value === 'brand' ? 'brand' : tone.value))
+// Navbar only has cream/paper/brand chrome variants; category-tone
+// previews keep a neutral cream nav above the coloured banner.
+const navVariant = computed(() =>
+  ['cream', 'paper', 'brand'].includes(tone.value) ? tone.value : 'cream',
+)
 const imgPulver250 = '/products/kaiser-natron-pulver-250-g-grosspackung.webp'
 const imgBad = '/products/kaiser-natron-bad-500-g.webp'
 const image = computed(() => (reverse.value ? imgBad : imgPulver250))

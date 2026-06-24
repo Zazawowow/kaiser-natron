@@ -271,6 +271,7 @@ const de = {
   'ds.heading.interactive': 'Interaktiv',
   'ds.heading.withoutPadding': 'Ohne Innenabstand',
   'ds.heading.scale': 'Skala',
+  'ds.heading.headlineScale': 'Headline-Skala (fluid)',
   'ds.heading.display': 'Display',
   'ds.heading.body': 'Fließtext',
   'ds.heading.nonUppercase': 'Ohne Großbuchstaben',
@@ -291,9 +292,11 @@ const de = {
 
   // Colors
   'ds.colors.title': 'Farben',
-  'ds.colors.description': 'Pinie-Grün auf Creme mit warmem Gelb als Akzent. Alle UI-Farben fließen aus diesen Tokens — niemals Werte in Komponenten hartkodieren.',
+  'ds.colors.description': 'Markengrün (#006548) auf Creme. Warmes Gelb (#e9c84b) als Texthervorhebung auf Grün, Crimson (#cc0230) für Buttons und CTAs, Mint (#6eceb2) als Highlight in der Navigation. Vier Kategoriefarben (Küche/Lime, Reinigung/Grapefruit, Wäsche/Plum, Pflege/Orange) tragen die Shop-Banner. Alle UI-Farben fließen aus diesen Tokens — niemals Werte in Komponenten hartkodieren.',
   'ds.colors.group.brand': 'Marke',
   'ds.colors.group.accent': 'Akzent',
+  'ds.colors.group.highlight': 'Highlight (Mint)',
+  'ds.colors.group.categories': 'Kategoriefarben',
   'ds.colors.group.surface': 'Fläche',
   'ds.colors.group.ink': 'Schrift',
   'ds.colors.group.line': 'Linie',
@@ -301,9 +304,9 @@ const de = {
 
   // Typography
   'ds.typography.title': 'Typografie',
-  'ds.typography.description': 'Fraunces für Display — warm, organisch, mit optischen Größen. DM Sans für Fließtext und UI — klar und geometrisch.',
-  'ds.typography.serifDesc': 'Serife mit optischer Skalierung. Für Hero-Bereiche, Section-Titel und Produktnamen.',
-  'ds.typography.sansDesc': 'Klare geometrische Sans-Serif. Für Fließtext, UI, Navigation und Labels.',
+  'ds.typography.description': 'Zeitung (selbst-gehostet) für das gesamte System — eine einzige Schriftfamilie für Display und Fließtext. Warm und charaktervoll, mit fluider Headline-Skala für die ganzflächigen Sektionen.',
+  'ds.typography.serifDesc': 'Zeitung im Display-Einsatz. Für Hero-Bereiche, Section-Titel und Produktnamen.',
+  'ds.typography.sansDesc': 'Dieselbe Zeitung im Body-Einsatz. Für Fließtext, UI, Navigation und Labels.',
   'ds.typography.sample': 'Der schnelle braune Fuchs',
 
   // Radii
@@ -362,7 +365,7 @@ const de = {
 
   // Buttons
   'ds.buttons.title': 'Buttons',
-  'ds.buttons.description': 'Pillenförmig. Pinie-grüner Primary mit warmgelbem Label für die wichtigste Aktion, warmgelber Accent auf Markenflächen, plus Secondary-, Ghost- und Danger-Varianten.',
+  'ds.buttons.description': 'Pillenförmig. Markengrüner Primary für die wichtigste Aktion, Crimson-Accent (#cc0230, weiße Schrift) für CTAs auf allen Flächen, plus Secondary-, Ghost- und Danger-Varianten.',
   'ds.buttons.primary': 'Primary',
   'ds.buttons.accent': 'Accent',
   'ds.buttons.secondary': 'Secondary',
@@ -430,7 +433,7 @@ const de = {
 
   // Hero
   'ds.hero.title': 'Hero',
-  'ds.hero.description': 'Ganzflächiger Bühnenbereich für die Startseite und Kategorie-Auftakte. Eyebrow, Display-Headline mit optionaler Kursiv-Hervorhebung, Unterzeile, Produkt-Cutout auf dekorativer Scheibe und ein Primary/Secondary-CTA-Paar. Responsiv von 390 bis 1280 px, drei Flächen­töne, zwei Layouts.',
+  'ds.hero.description': 'Ganzflächiger Bühnenbereich für die Startseite und die Kategorie-Banner im Shop. Eyebrow, Display-Headline mit optionaler Kursiv-Hervorhebung, Unterzeile, Produkt-Cutout auf dekorativer Scheibe und ein Primary/Secondary-CTA-Paar. Responsiv von 390 bis 1280 px, sieben Flächentöne (Creme/Papier/Marke plus die vier Kategoriefarben Küche/Reinigung/Wäsche/Pflege), zwei Layouts.',
   'ds.hero.variant.label': 'Layout',
   'ds.hero.variant.split': 'Split',
   'ds.hero.variant.centered': 'Zentriert',
@@ -562,7 +565,7 @@ const de = {
   'ds.bundles.title': 'Bundles-Sektion',
   'ds.bundles.description': 'Kompound-Sektion mit fixer Sidebar (Headline + drei Vorteile) und einem Scroll-Snap-Karussell mit horizontalen Bundle-Karten von md aufwärts. Tastatur und Touch-Swipe funktionieren out of the box; die Pfeile loopen am Ende zurück zum Anfang.',
   'ds.revitalization.title': 'Revitalization Center',
-  'ds.revitalization.description': 'Zentrierte Feature-Teaser-Sektion auf Markengrün. Eyebrow-Badge, Display-Headline mit italic-Highlight, Unterzeile, bis zu drei Pillar-Punkte mit Akzent-Dots und ein einzelner CTA. Gedacht für „Demnächst"-Ankündigungen.',
+  'ds.revitalization.description': 'In Reserve — derzeit nicht auf der Live-Seite eingesetzt, aber als Komponente erhalten. Zentrierte Feature-Teaser-Sektion auf Markengrün. Eyebrow-Badge, Display-Headline mit italic-Highlight, Unterzeile, bis zu drei Pillar-Punkte mit Akzent-Dots und ein einzelner CTA. Gedacht für „Demnächst"-Ankündigungen.',
   'ds.about.title': 'About / Geschichte',
   'ds.about.description': 'Zentrierte Intro-Zone plus drei Meilenstein-Karten in den drei Flächentönen (Papier / Creme / Marke) von links nach rechts. Fortlaufende Tonabfolge gibt der Zeitachse visuelle Progression.',
 
@@ -1111,6 +1114,7 @@ const en = {
   'ds.heading.interactive': 'Interactive',
   'ds.heading.withoutPadding': 'Without padding',
   'ds.heading.scale': 'Scale',
+  'ds.heading.headlineScale': 'Headline scale (fluid)',
   'ds.heading.display': 'Display',
   'ds.heading.body': 'Body',
   'ds.heading.nonUppercase': 'Non-uppercase',
@@ -1128,18 +1132,20 @@ const en = {
   'ds.logo.usageIntro': 'Use color utilities to set the fill:',
 
   'ds.colors.title': 'Colors',
-  'ds.colors.description': 'Pine green on cream, with a warm yellow accent. All UI color flows from these tokens — never hand-pick values in components.',
+  'ds.colors.description': 'Brand green (#006548) on cream. Warm yellow (#e9c84b) for text emphasis on green, crimson (#cc0230) for buttons and CTAs, mint (#6eceb2) as the navigation highlight. Four category colours (kitchen/lime, clean/grapefruit, wash/plum, care/orange) carry the shop banners. All UI color flows from these tokens — never hand-pick values in components.',
   'ds.colors.group.brand': 'Brand',
   'ds.colors.group.accent': 'Accent',
+  'ds.colors.group.highlight': 'Highlight (mint)',
+  'ds.colors.group.categories': 'Category colours',
   'ds.colors.group.surface': 'Surface',
   'ds.colors.group.ink': 'Ink',
   'ds.colors.group.line': 'Line',
   'ds.colors.group.semantic': 'Semantic',
 
   'ds.typography.title': 'Typography',
-  'ds.typography.description': 'Fraunces for display — warm, organic, optical-sized. DM Sans for body and UI — clean and geometric.',
-  'ds.typography.serifDesc': 'Serif with optical sizing. Use for hero, section titles, product names.',
-  'ds.typography.sansDesc': 'Clean geometric sans. Use for body, UI, navigation, labels.',
+  'ds.typography.description': 'Zeitung (self-hosted) across the whole system — a single family for both display and body. Warm and characterful, with a fluid headline scale for the full-bleed sections.',
+  'ds.typography.serifDesc': 'Zeitung used at display scale. For hero, section titles and product names.',
+  'ds.typography.sansDesc': 'The same Zeitung at body scale. For body, UI, navigation and labels.',
   'ds.typography.sample': 'The quick brown fox',
 
   'ds.radii.title': 'Radii',
@@ -1194,7 +1200,7 @@ const en = {
   'ds.icons.group.devices': 'Devices',
 
   'ds.buttons.title': 'Buttons',
-  'ds.buttons.description': 'Pill-shaped. Pine-green primary with warm-yellow label for the main call to action, warm-yellow accent on brand surfaces, plus secondary, ghost, and danger variants.',
+  'ds.buttons.description': 'Pill-shaped. Brand-green primary for the main call to action, crimson accent (#cc0230, white text) for CTAs on any surface, plus secondary, ghost, and danger variants.',
   'ds.buttons.primary': 'Primary',
   'ds.buttons.accent': 'Accent',
   'ds.buttons.secondary': 'Secondary',
@@ -1257,7 +1263,7 @@ const en = {
   'ds.product.added': 'Added',
 
   'ds.hero.title': 'Hero',
-  'ds.hero.description': 'Full-bleed stage for the home page and category tops. Eyebrow, display headline with optional italic emphasis, subheadline, product cutout on a decorative disc, and a primary/secondary CTA pair. Responsive from 390 to 1280px, three surface tones, two layouts.',
+  'ds.hero.description': 'Full-bleed stage for the home page and the shop category banners. Eyebrow, display headline with optional italic emphasis, subheadline, product cutout on a decorative disc, and a primary/secondary CTA pair. Responsive from 390 to 1280px, seven surface tones (cream/paper/brand plus the four category colours kitchen/clean/wash/care), two layouts.',
   'ds.hero.variant.label': 'Layout',
   'ds.hero.variant.split': 'Split',
   'ds.hero.variant.centered': 'Centered',
@@ -1385,7 +1391,7 @@ const en = {
   'ds.bundles.title': 'Bundles section',
   'ds.bundles.description': 'Compound section combining a sticky sidebar (headline + three benefits) with a scroll-snap carousel of horizontal bundle cards from md up. Keyboard and touch swipe work natively; the arrow controls loop past the ends.',
   'ds.revitalization.title': 'Revitalization Center',
-  'ds.revitalization.description': 'Centered feature-teaser section on brand green. Eyebrow badge, display headline with an italic highlight, subheadline, up to three pillar bullets with accent dots and a single CTA. Designed for "coming soon" announcements.',
+  'ds.revitalization.description': 'In reserve — not currently used on the live site, but kept as a component. Centered feature-teaser section on brand green. Eyebrow badge, display headline with an italic highlight, subheadline, up to three pillar bullets with accent dots and a single CTA. Designed for "coming soon" announcements.',
   'ds.about.title': 'About / history',
   'ds.about.description': 'Centered intro plus three milestone cards running the Card primitive\'s tones left-to-right (paper / cream / brand). The continuous tonal step gives the timeline a clear sense of visual progression.',
   'ds.nav.footer': 'Footer',

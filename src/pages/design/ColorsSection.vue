@@ -6,9 +6,11 @@ import { useI18n } from '@/i18n/index.js'
 const { t } = useI18n()
 
 const groups = computed(() => [
-  { title: t('ds.colors.group.brand'), names: ['brand', 'brand-hover', 'brand-soft'] },
+  { title: t('ds.colors.group.brand'), names: ['brand', 'brand-hover', 'brand-soft', 'brand-float'] },
   { title: t('ds.colors.group.accent'), names: ['accent', 'accent-soft', 'accent-ink', 'accent-fill', 'accent-fill-hover', 'accent-fill-ink'] },
-  { title: t('ds.colors.group.surface'), names: ['surface', 'paper', 'cream'] },
+  { title: t('ds.colors.group.highlight'), names: ['highlight'] },
+  { title: t('ds.colors.group.categories'), names: ['cat-kitchen', 'cat-clean', 'cat-wash', 'cat-care'] },
+  { title: t('ds.colors.group.surface'), names: ['surface', 'paper', 'cream', 'cream-dark'] },
   { title: t('ds.colors.group.ink'), names: ['ink', 'muted'] },
   { title: t('ds.colors.group.line'), names: ['line', 'line-strong'] },
   { title: t('ds.colors.group.semantic'), names: ['success', 'warning', 'danger'] },

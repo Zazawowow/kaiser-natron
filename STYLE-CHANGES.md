@@ -669,6 +669,42 @@ cream→colour for the rest).
 
 ---
 
+## 28. `/design` showcase brought up to date with the rebrand
+
+**Files:** `src/pages/design/ColorsSection.vue`, `TypographySection.vue`,
+`HeroSection.vue`, `previews/HeroPreview.vue`, `src/i18n/messages.js`,
+`src/design-system/tokens.css`, `Hero.vue`, `Search.vue`,
+`StripePaymentMount.vue`, `ExpressCheckoutMount.vue`.
+
+The `/design` style guide still described the *old* design (Fraunces + DM Sans,
+"pine green", warm-yellow CTAs, three Hero tones) and omitted the new tokens.
+Audited all 26 sections and corrected every drift:
+
+- **Colours.** `ColorsSection` now shows the **mint `highlight`**, the **four
+  category colours** (`cat-kitchen/clean/wash/care`), plus `brand-float` and
+  `cream-dark` that were missing. New group titles `ds.colors.group.highlight`
+  / `.categories` (DE+EN). `ds.colors.description` rewritten (brand green +
+  crimson + mint + category colours).
+- **Typography.** Both cards now read **Zeitung** (was "Fraunces"/"DM Sans");
+  added a **fluid headline-scale** block (`text-display` / `text-headline-lg` /
+  `text-headline-md`) with new key `ds.heading.headlineScale`.
+  `ds.typography.description` / `serifDesc` / `sansDesc` rewritten to the single
+  Zeitung family.
+- **Hero.** Added the four **category banner tones** (kitchen/clean/wash/care)
+  to the tone switcher and to `HeroPreview`'s tone validator (labels reuse
+  `shop.feature.*`). `ds.hero.description`: "three surface tones" → seven.
+- **Buttons.** `ds.buttons.description` fixed — accent is **crimson** (was
+  described as warm-yellow), "pine-green" → "brand-green".
+- **Revitalization.** Showcase description now notes it's **in reserve / not
+  used on the live site** (component kept; removed from the site in §24).
+- **Stale references swept.** `tokens.css` header comment rewritten to the
+  current brand; checkout font in `StripePaymentMount` / `ExpressCheckoutMount`
+  changed from hardcoded **DM Sans** → the `--font-sans` stack (Zeitung +
+  system fallback); "Fraunces"/"pine green" comments in `Hero.vue` / `Search.vue`
+  corrected.
+
+---
+
 ## Quick reference — the two new colours
 
 ```

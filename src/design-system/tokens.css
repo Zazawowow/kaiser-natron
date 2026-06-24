@@ -1,7 +1,9 @@
 /*
  * Design tokens — single source of truth.
- * Inspired by the Kaiser Natron reference site:
- *   pine green + warm yellow on cream, Fraunces serif + DM Sans, pill buttons.
+ * Kaiser-Natron® brand: brand green #006548 on white, crimson CTA #cc0230,
+ * mint highlight #6eceb2, warm-yellow emphasis on green, four category
+ * colours (lime/grapefruit/plum/orange), the self-hosted Zeitung typeface,
+ * pill buttons and angled (diagonal) section dividers.
  * Consumed by Tailwind v4 via @theme and by raw CSS via var(--*).
  */
 

@@ -15,6 +15,12 @@ const tones = computed(() => [
   { id: 'cream', label: t('ds.navbar.tone.cream'), swatch: 'var(--color-cream)' },
   { id: 'paper', label: t('ds.navbar.tone.paper'), swatch: '#ffffff' },
   { id: 'brand', label: t('ds.navbar.tone.brand'), swatch: 'var(--color-brand)' },
+  // Category use-group banner tones (shop sections). Labels reuse the
+  // shop feature names; ids match the Hero/WaveDivider tone names.
+  { id: 'kitchen', label: t('shop.feature.cook'), swatch: 'var(--color-cat-kitchen)' },
+  { id: 'clean', label: t('shop.feature.clean'), swatch: 'var(--color-cat-clean)' },
+  { id: 'wash', label: t('shop.feature.wash'), swatch: 'var(--color-cat-wash)' },
+  { id: 'care', label: t('shop.feature.care'), swatch: 'var(--color-cat-care)' },
 ])
 
 const variant = ref('split')

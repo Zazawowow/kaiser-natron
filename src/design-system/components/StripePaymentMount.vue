@@ -25,7 +25,7 @@
  * The Payment Element (not the deprecated Card Element) is the
  * right surface — single component covers cards, SEPA, Apple Pay,
  * Google Pay; themed via the `appearance` API to match the DS
- * (brand pine green / paper / DM Sans / 10px radius).
+ * (brand green / white / Zeitung / 10px radius).
  *
  * The parent (`CheckoutPage`) calls `confirm()` on this component
  * via `defineExpose`. The return shape mirrors `stripe.confirmPayment`:
@@ -121,7 +121,7 @@ async function mountElement() {
           colorBackground: '#ffffff',
           colorText: '#0f3825',
           colorDanger: '#b23a2a',
-          fontFamily: '"DM Sans", ui-sans-serif, system-ui, sans-serif',
+          fontFamily: '"Zeitung", ui-sans-serif, system-ui, -apple-system, Arial, sans-serif',
           borderRadius: '10px',
           spacingUnit: '4px',
         },

@@ -222,7 +222,7 @@ const imageHeightClass = computed(() =>
         <!-- Headline sizing uses responsive Tailwind arbitrary values
              so each breakpoint compiles to a plain media-query
              `font-size` rule — no scoped-CSS hash, no HMR edge
-             cases. Italic Fraunces at ≥2.25rem overhangs the
+             cases. Italic Zeitung at ≥2.25rem overhangs the
              line-box at ≤400px and gets clipped by the section's
              `overflow-hidden` (needed for the halo/disc decor);
              capping at 1.625rem on phones keeps the whole phrase
@@ -363,7 +363,7 @@ const imageHeightClass = computed(() =>
 <style scoped>
 /* overflow-clip (vs overflow-hidden) contains the decorative halo and
    disc behind the product image WITHOUT establishing a new scrollport.
-   The margin lets up to 1rem of content — including Fraunces italic
+   The margin lets up to 1rem of content — including Zeitung italic
    overhang — extend past the section edge before being clipped. No
    Tailwind utility covers this pair, so it lives here rather than as
    inline CSS on every call site. */
