@@ -631,7 +631,7 @@ const de = {
   'ds.cartDrawer.integrationBody': 'Die Komponente kennt kein Backend direkt – sie emittiert `update-quantity`, `remove` und `checkout`. Ihr Zustand kommt aus dem API-Layer in `src/api/cart.js`, der heute lokal arbeitet und später 1:1 auf die dokumentierten Endpunkte (siehe `docs/api/cart.md`) umgestellt wird, ohne dass oben etwas anzupassen ist.',
 
   // Footer — sitewide chrome with legal + explore links.
-  'footer.tagline': 'Das Original aus Österreich. Reines Natron für Küche, Haushalt und Pflege – seit Generationen.',
+  'footer.tagline': 'Reines Natron für Küche, Haushalt und Pflege – seit Generationen.',
   'footer.explore.heading': 'Entdecken',
   'footer.explore.shop': 'Shop',
   'footer.explore.kueche': 'Küche',
@@ -1460,7 +1460,7 @@ const en = {
   'ds.cartDrawer.integrationBody': 'The component owns no network code — it emits `update-quantity`, `remove`, and `checkout`. Its state comes from the API boundary in `src/api/cart.js`, which is a local implementation today and swaps to the documented endpoints (see `docs/api/cart.md`) without changes above this line.',
 
   // Footer (EN).
-  'footer.tagline': 'The original from Austria. Pure sodium bicarbonate for the kitchen, the home, and personal care — for generations.',
+  'footer.tagline': 'Pure sodium bicarbonate for the kitchen, the home, and personal care — for generations.',
   'footer.explore.heading': 'Explore',
   'footer.explore.shop': 'Shop',
   'footer.explore.kueche': 'Kitchen',

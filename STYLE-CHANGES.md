@@ -589,6 +589,86 @@ No new asset needed — the bucket image already shipped in `public/products/`.
 
 ---
 
+## 24. Revitalization section removed from the homepage
+
+**Files:** `src/pages/HomePage.vue`, plus nav arrays in `ShopPage.vue`,
+`CategoryPage.vue`, `BundlePage.vue`, `ProductPage.vue`, `KaiserhacksPage.vue`,
+`LoginPage.vue`, `RegisterPage.vue`, `LegalPage.vue`.
+
+The brand owner flagged the "Revitalization Center" name + icons as off-brand.
+Removed the section from the public site **for now**:
+
+- `HomePage.vue` — removed the `<Revitalization>` block and the two diagonal
+  SVG dividers that bracketed it (the cream banner now flows straight into the
+  cream About section), plus the `Revitalization` import and the `revitCopy`
+  computed.
+- Stripped the now-dead `{ key: 'nav.revitalization', href: '/#revitalize' }`
+  entry from every page's nav array (9 files) so nothing links to the missing
+  anchor.
+
+Kept in reserve (not deleted): `Revitalization.vue`, its design-system docs
+page, the `revit.*` i18n keys, and the `/design/preview/revitalization` route —
+so the section can be reinstated (with a corrected name) by re-adding the import,
+`revitCopy`, the render block, and the nav entries.
+
+---
+
+## 25. Sport-Profi recategorised to Laundry (Wäsche)
+
+**File:** `src/api/products.js`
+
+Brand-owner review: *Sport Profi is a laundry product and belongs under
+Household, not Bathing & Care.* In the four-group taxonomy laundry = `wash`, so
+`USE_CASE_BY_CATEGORY.Sport` changed `'care'` → `'wash'`. The
+`kaiser-natron-sport-profi-250-ml` product now appears in the **Wäsche / wash**
+(plum) section instead of Pflege / care. Doc comment updated to match.
+
+---
+
+## 26. "Das Original aus Österreich" removed (G1)
+
+**File:** `src/i18n/messages.js`
+
+Brand-owner review: the "Original from Austria" claim is inaccurate. Removed the
+leading sentence from `footer.tagline` (DE + EN); the tagline now opens at
+*"Reines Natron für Küche, Haushalt und Pflege …"* / *"Pure sodium bicarbonate
+for the kitchen, the home, and personal care …"*.
+
+> ℹ️ Other Austria-flavoured strings remain and are separate decisions, not part
+> of this change: `footer.madeIn` / `product.prop.made-in-austria` ("In
+> Österreich abgefüllt" / "Bottled in Austria") and the Impressum/Datenschutz
+> Vienna address. Flag to the user if the origin correction should extend to
+> these.
+
+---
+
+## 27. Shop hero — skewed category jump-buttons + white gap removed
+
+**File:** `src/pages/ShopPage.vue`
+
+**Jump-buttons.** Under the shop hero's title + sub, a row of four **skewed
+parallelogram buttons** (one per use-group, each filled with its own category
+colour) now smooth-scrolls to the matching section:
+
+- Rendered by looping `sections`; label is `section.feature`
+  (Küche/Reinigung/Wäsche/Pflege · Kitchen/Clean/Wash/Care).
+- Shape: `-skew-x-12` on the button with a counter-skew `skew-x-12` on the inner
+  `<span>` so the text stays upright — echoes the angled (Soulmates) CI.
+- Colour map `CAT_BTN`: `bg-cat-kitchen text-brand` (lime is light → dark ink),
+  the other three `bg-cat-* text-white`.
+- `scrollToSection(id)` calls `el.scrollIntoView({ behavior: 'smooth' })`; each
+  section's existing `scroll-mt-[calc(var(--nav-h)+1rem)]` keeps the landing
+  just below the sticky nav.
+
+**White gap removed.** The thin white band (`-mt-px h-6 md:h-10 bg-cream`) and
+its preceding `WaveDivider from="brand" to="cream"` — added in §20 — are gone.
+The green hero now flows **straight into the first colour banner** via a single
+diagonal: the section loop is `(section, i)` and the first divider is
+`:from="i === 0 ? 'brand' : 'cream'"` (green→lime for the first section,
+cream→colour for the rest).
+
+---
+
 ## Quick reference — the two new colours
 
 ```

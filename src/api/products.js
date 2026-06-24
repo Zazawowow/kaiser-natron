@@ -359,8 +359,8 @@ export function formatPrice(amount, currency = '€') {
  *
  *   cook  — Küche: kitchen & digestion (baking, gastro)   — lime
  *   clean — Reinigung: household cleaning                 — grapefruit
- *   wash  — Wäsche: laundry & textile care                — plum
- *   care  — Pflege: bath, body and sport                  — orange
+ *   wash  — Wäsche: laundry & textile care (incl. Sport-Profi) — plum
+ *   care  — Pflege: bath and body                          — orange
  */
 export const USE_CASES = ['cook', 'clean', 'wash', 'care']
 const USE_CASE_BY_CATEGORY = {
@@ -369,7 +369,9 @@ const USE_CASE_BY_CATEGORY = {
   Reinigung: 'clean',
   Wäsche: 'wash',
   Körperpflege: 'care',
-  Sport: 'care',
+  // Sport-Profi is a laundry product (brand-owner review) → Wäsche/wash,
+  // not Pflege/care.
+  Sport: 'wash',
 }
 
 export function useCaseFor(product) {

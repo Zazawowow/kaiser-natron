@@ -44,7 +44,6 @@ function goCheckout() {
 const navItems = [
   { key: 'nav.shop', href: '/shop' },
   { key: 'nav.bundles', href: '/#bundles' },
-  { key: 'nav.revitalization', href: '/#revitalize' },
   { key: 'nav.about', href: '/#about' },
   { key: 'nav.kaiserhacks', href: '/kaiserhacks' },
 ]
@@ -58,6 +57,15 @@ const grouped = computed(() => productsByUseCase(products))
 // cook=Küche=lime, clean=Haushalt=grapefruit, care=Pflege=orange. Each
 // banner is headed by a representative product image for that group.
 const CAT_TONE = { cook: 'kitchen', clean: 'clean', wash: 'wash', care: 'care' }
+// Skewed category jump-buttons in the hero — filled with each group's
+// own colour. Lime is light, so its label takes the dark brand ink;
+// the saturated three carry white text (matches the banner treatment).
+const CAT_BTN = {
+  kitchen: 'bg-cat-kitchen text-brand',
+  clean: 'bg-cat-clean text-white',
+  wash: 'bg-cat-wash text-white',
+  care: 'bg-cat-care text-white',
+}
 const CAT_HERO_ID = {
   cook: 'kaiser-natron-pulver-250-g-grosspackung',
   clean: 'kaiser-natron-allzweck-spray-500-ml',
@@ -84,6 +92,14 @@ const sections = computed(() =>
     }
   }),
 )
+
+// Hero category buttons → smooth-scroll to that section. Each section's
+// `scroll-mt` offset keeps the landing just below the sticky nav.
+function scrollToSection(id) {
+  if (typeof document === 'undefined') return
+  const el = document.getElementById(id)
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+}
 
 async function onAdd(product) {
   await addToCart(product.id, 1)
@@ -164,29 +180,39 @@ onBeforeUnmount(() => {
         <p class="text-base md:text-lg leading-relaxed text-cream/80 max-w-2xl">
           {{ t('shop.sub') }}
         </p>
-      </div>
 
-      <!-- The three featured product tiles were removed; each use-case is
-           now fronted by its own full-width colour banner below. The green
-           fold keeps just the title band. -->
+        <!-- Category jump-buttons: skewed parallelograms in each group's
+             own colour (echoing the angled CI), smooth-scrolling to the
+             matching section below. Replaces the old featured tiles. -->
+        <div class="mt-4 flex flex-wrap justify-center gap-3">
+          <button
+            v-for="section in sections"
+            :key="`jump-${section.id}`"
+            type="button"
+            class="-skew-x-12 rounded-[3px] px-7 py-3 shadow-sm transition-transform duration-base hover:-translate-y-0.5"
+            :class="CAT_BTN[section.cat]"
+            @click="scrollToSection(section.id)"
+          >
+            <span class="block skew-x-12 text-sm font-semibold uppercase tracking-label">
+              {{ section.feature }}
+            </span>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
-
-  <!-- Thin white separation between the green hero and the first colour
-       banner: a diagonal out of the green, then a slim white band. Each
-       section's own diagonal then carries cream → its colour. -->
-  <WaveDivider from="brand" to="cream" />
-  <div aria-hidden="true" class="-mt-px h-6 md:h-10 bg-cream"></div>
 
   <!-- Per use-case: a full-width category COLOUR banner (representative
        product + the section's mixed-font heading) heads each group, then
        the product grid sits on a neutral surface below. Diagonal wave
        dividers carry the colour in and back out, matching the home-page
-       rhythm. Colours: cook=lime, clean=grapefruit, wash=plum, care=orange. -->
-  <template v-for="section in sections" :key="section.id">
-    <!-- Wave into the colour banner from the neutral surface above (the
-         white band for the first section, the product grid for the rest). -->
-    <WaveDivider from="cream" :to="section.cat" />
+       rhythm. Colours: cook=lime, clean=grapefruit, wash=plum, care=orange.
+       The first section flows straight out of the green hero (from="brand");
+       the rest rise out of the cream product grid above them. -->
+  <template v-for="(section, i) in sections" :key="section.id">
+    <!-- Diagonal into the colour banner: green→colour for the first
+         section (no white gap), cream→colour for the rest. -->
+    <WaveDivider :from="i === 0 ? 'brand' : 'cream'" :to="section.cat" />
 
     <!-- Category colour banner. `id` + scroll-mt keep deep-links
          (/shop#care) landing just under the sticky nav. -->

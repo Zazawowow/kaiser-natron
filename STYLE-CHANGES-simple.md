@@ -43,9 +43,12 @@
 - **"AI Edited" note on bundle images.** The bundle photos that were
   AI-assisted now carry a small, honest "AI Edited" caption. (These can be
   switched off the moment real photographs replace them.)
-- **Revitalization section simplified.** The off-brand animated icon row and the
-  "get early access" prompt were removed; it now shows just the heading and
-  intro text.
+- **Revitalization section removed.** The off-brand "Revitalization Center"
+  section (icons + name the owner flagged) is taken off the site for now. It's
+  kept in reserve and can return with a corrected name later.
+- **"The Original from Austria" removed.** That claim is gone from the footer
+  tagline (German + English), which now just describes pure natron for the
+  kitchen, home and care.
 - **Membership fully removed.** There's no membership programme, so every trace
   of one is gone: the "become a member" button, the lower "member price", and
   the member-perks wording. **Bundles now show a single price** everyone pays,
@@ -59,9 +62,15 @@
   - **Küche / Kitchen** — lime green (baking, cooking, digestion)
   - **Reinigung / Clean** — grapefruit red (household cleaning)
   - **Wäsche / Wash** — plum (laundry & textile care)
-  - **Pflege / Care** — orange (bath, body, sport)
+  - **Pflege / Care** — orange (bath, body)
 - **Banners.** Each section opens with a full-width colour banner showing its
   star product, with an "add to cart" and a "learn more" button.
+- **Quick category buttons.** Under the shop's main heading there's now a row of
+  angled buttons — one per category, each in its own colour — that smoothly
+  scroll you down to that section. The green header now flows straight into the
+  first coloured section (the little white gap is gone).
+- **Sport Profi moved to Laundry.** It's a laundry product, so it now sits under
+  Wäsche / Wash instead of Care.
 
 ## Category pages
 
@@ -77,9 +86,11 @@
 
 ## Still waiting on a decision (content owner)
 
-- **Origin wording** — the real brand is German (Bielefeld); the site currently
-  frames it as Austrian. Needs your correct origin claim.
-- **Membership pricing/wording** — keep it and reword, or remove entirely?
+- **Remaining origin wording** — the "Original from Austria" line is gone, but a
+  couple of "bottled in Austria" mentions and the Vienna imprint address remain.
+  Let us know if the correction should extend to those.
 - **Holste & Linda product descriptions** — these aren't on the brand site, so
   the copy needs to come from you.
 - **Wäsche / Wash landing page** — provide copy if you want a dedicated page.
+- **Legal pages** — Terms (AGB), withdrawal/cancellation, shipping, delivery
+  costs, and the manufacturer-vs-reseller transparency note.

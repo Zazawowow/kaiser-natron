@@ -6,7 +6,6 @@ import Hero from '@/design-system/components/Hero.vue'
 import BrandHero from '@/design-system/components/BrandHero.vue'
 import ProductTeaser from '@/design-system/components/ProductTeaser.vue'
 import Bundles from '@/design-system/components/Bundles.vue'
-import Revitalization from '@/design-system/components/Revitalization.vue'
 import About from '@/design-system/components/About.vue'
 import Footer from '@/design-system/components/Footer.vue'
 import CartDrawer from '@/design-system/components/CartDrawer.vue'
@@ -100,7 +99,6 @@ const teaserProducts = computed(() =>
 const navItems = [
   { key: 'nav.shop', href: '/shop' },
   { key: 'nav.bundles', href: '/#bundles' },
-  { key: 'nav.revitalization', href: '/#revitalize' },
   { key: 'nav.about', href: '/#about' },
   { key: 'nav.kaiserhacks', href: '/kaiserhacks' },
 ]
@@ -123,15 +121,6 @@ const bundlesCopy = computed(() => ({
     t('bundles.benefit.2.title'),
     t('bundles.benefit.3.title'),
   ],
-}))
-
-const revitCopy = computed(() => ({
-  eyebrow: t('revit.eyebrow'),
-  headline: t('revit.headline.a'),
-  headlineEm: t('revit.headline.em'),
-  sub: t('revit.sub'),
-  // Feature/animation row AND the "early access" CTA removed at the brand
-  // owner's request (L10) → Revitalization renders eyebrow + headline + sub.
 }))
 
 const aboutCopy = computed(() => ({
@@ -414,45 +403,6 @@ onBeforeUnmount(() => {
       {{ t('home.banner.headline.b') }}
     </template>
   </Hero>
-
-  <!-- Wave cream → brand into the Revitalization section. -->
-  <svg
-    aria-hidden="true"
-    class="block w-full h-24 md:h-32 shrink-0 -mb-px bg-cream"
-    viewBox="0 0 1440 128"
-    preserveAspectRatio="none"
-  >
-    <rect width="1440" height="128" fill="var(--color-brand)" />
-    <path
-      d="M0,0 L0,116 L1440,12 L1440,0 Z"
-      fill="var(--color-cream)"
-    />
-  </svg>
-
-  <!-- Revitalization Center — brand green "coming soon" section.
-       Headline + sub + single CTA (feature/animation row removed). -->
-  <Revitalization
-    class="-mt-px"
-    :eyebrow="revitCopy.eyebrow"
-    :headline="revitCopy.headline"
-    :headline-em="revitCopy.headlineEm"
-    :sub="revitCopy.sub"
-  />
-
-  <!-- Brand → cream wave. Same construction as the first-fold wave, just
-       between the revit section and the about section. -->
-  <svg
-    aria-hidden="true"
-    class="block w-full h-24 md:h-32 shrink-0 -mb-px bg-brand"
-    viewBox="0 0 1440 128"
-    preserveAspectRatio="none"
-  >
-    <rect width="1440" height="128" fill="var(--color-cream)" />
-    <path
-      d="M0,0 L0,116 L1440,12 L1440,0 Z"
-      fill="var(--color-brand)"
-    />
-  </svg>
 
   <!-- About / History — cream section, three milestones (1881 / early
        1900s / today) rendered as paper cards on the cream surface. -->
