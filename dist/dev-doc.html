@@ -290,6 +290,23 @@
     display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
   }
 
+  /* ---- "View on site" link ---- */
+  .viewlink-row { margin: 16px 0 0; }
+  .viewlink {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--brand);
+    transition: color .15s;
+  }
+  .viewlink::after { content: "\2197"; font-size: 13px; }
+  .viewlink:hover { color: var(--crimson); text-decoration: underline; }
+
   @media (max-width: 640px) {
     .nav-grid { grid-template-columns: 1fr; }
   }
@@ -381,6 +398,7 @@
 
 --color-highlight: #6eceb2;</code></pre>
       <p>Because these are registered in <code>@theme</code>, Tailwind auto-generates the utility classes <code>bg-accent-fill</code>, <code>text-accent-fill-ink</code>, <code>border-accent-fill</code>, <code>hover:bg-accent-fill-hover</code>, and <code>text-highlight</code> / <code>hover:text-highlight</code>.</p>
+      <p class="viewlink-row"><a class="viewlink" href="/design/colors" target="_blank" rel="noopener">Open in /design</a></p>
     </div>
   </div>
 
@@ -395,6 +413,7 @@
 --color-surface: #faf7f1;  →  #ffffff;</code></pre>
       <p><code>index.html</code> — the browser theme colour was matched to white:</p>
       <pre><code>&lt;meta name="theme-color" content="#ffffff" /&gt;   &lt;!-- was #faf7f1 --&gt;</code></pre>
+      <p class="viewlink-row"><a class="viewlink" href="/design/colors" target="_blank" rel="noopener">Open in /design</a></p>
     </div>
   </div>
 
@@ -413,6 +432,7 @@
 @font-face { font-family:'Zeitung'; font-weight:700; font-display:swap;
   src:url('./fonts/Zeitung-Bold.woff2') format('woff2'); }</code></pre>
       <p><code>index.html</code> — the Google Fonts <code>&lt;link&gt;</code> (Fraunces + DM Sans) and its <code>preconnect</code> hints were <strong>removed</strong>.</p>
+      <p class="viewlink-row"><a class="viewlink" href="/design/typography" target="_blank" rel="noopener">Open in /design</a></p>
     </div>
   </div>
 
@@ -441,6 +461,7 @@ lg: 'text-[14px] px-[34px] py-[17px] tracking-label',</code></pre>
         </tbody>
       </table>
       <div class="callout info"><span class="ico">ℹ️</span><p><strong>Note:</strong> <code>secondary</code> and <code>accent</code> are currently identical (both crimson). The Hero's "Learn more" secondary CTA (rendered inline, see §5) was matched to the same crimson fill.</p></div>
+      <p class="viewlink-row"><a class="viewlink" href="/design/buttons" target="_blank" rel="noopener">Open in /design</a></p>
     </div>
   </div>
 
@@ -454,6 +475,7 @@ lg: 'text-[14px] px-[34px] py-[17px] tracking-label',</code></pre>
        text-[14px] font-semibold uppercase tracking-label text-accent-fill-ink
        transition-colors duration-base hover:bg-accent-fill-hover"</code></pre>
       <p>The Hero's <strong>primary</strong> CTA already uses the <code>accent</code> variant on green surfaces, so it's crimson too.</p>
+      <p class="viewlink-row"><a class="viewlink" href="/design/hero" target="_blank" rel="noopener">Open in /design</a></p>
     </div>
   </div>
 
@@ -473,6 +495,7 @@ lg: 'text-[14px] px-[34px] py-[17px] tracking-label',</code></pre>
           <tr><td><code>BundlePage.vue</code></td><td>add-to-cart already <code>accent</code> (unchanged)</td></tr>
         </tbody>
       </table>
+      <p class="viewlink-row"><a class="viewlink" href="/design/buttons" target="_blank" rel="noopener">Open in /design</a></p>
     </div>
   </div>
 
@@ -483,6 +506,7 @@ lg: 'text-[14px] px-[34px] py-[17px] tracking-label',</code></pre>
     <div class="body">
       <pre><code>&lt;!-- checkout button --&gt;
 &lt;Button variant="accent" …&gt;   &lt;!-- was variant="primary" --&gt;</code></pre>
+      <p class="viewlink-row"><a class="viewlink" href="/design/buttons" target="_blank" rel="noopener">Open in /design</a></p>
     </div>
   </div>
 
@@ -509,6 +533,7 @@ lg: 'text-[14px] px-[34px] py-[17px] tracking-label',</code></pre>
   color: var(--color-accent-fill-ink);
   border-color: var(--color-accent-fill);
 }</code></pre>
+      <p class="viewlink-row"><a class="viewlink" href="/design/badges" target="_blank" rel="noopener">Open in /design</a></p>
     </div>
   </div>
 
@@ -521,6 +546,7 @@ lg: 'text-[14px] px-[34px] py-[17px] tracking-label',</code></pre>
       <pre><code>text-accent       →  text-highlight        (active nav tab)
 hover:text-accent →  hover:text-highlight   (nav tab + footer link hover)</code></pre>
       <div class="callout info"><span class="ico">ℹ️</span><p><strong>Not changed:</strong> the mobile cart-count number badge (<code>Navbar.vue</code>, a green circle with a count) is still yellow — it's a count indicator, not a tab highlight. Easy to switch if wanted.</p></div>
+      <p class="viewlink-row"><a class="viewlink" href="/design/navbar" target="_blank" rel="noopener">Open in /design</a></p>
     </div>
   </div>
 
@@ -539,6 +565,7 @@ hover:text-accent →  hover:text-highlight   (nav tab + footer link hover)</cod
         </tbody>
       </table>
       <p>(<code>--color-cream</code> is now <code>#ffffff</code>, so these read as white on the green heroes.)</p>
+      <p class="viewlink-row"><a class="viewlink" href="/" target="_blank" rel="noopener">View on site</a></p>
     </div>
   </div>
 
@@ -553,6 +580,7 @@ viewBox:  0 0 1440 64    →  0 0 1440 128
 path:     (cubic-bézier wave)  →  M0,0 L0,116 L1440,12 L1440,0 Z</code></pre>
       <p>The seam-free construction is unchanged: a full-height <code>&lt;rect&gt;</code> paints the <em>lower</em> section colour and the <code>&lt;path&gt;</code> paints the <em>upper</em> section colour.</p>
       <p>The same diagonal divider also sits between the <strong>Kaiserhacks</strong> green header and the white body below it: <code>Kaiserhacks.vue</code> imports <code>WaveDivider</code> and renders <code>&lt;WaveDivider from="brand" to="surface" /&gt;</code> between the <code>bg-brand</code> header and the content <code>&lt;div&gt;</code> (which gains <code>-mt-px</code> to sit flush).</p>
+      <p class="viewlink-row"><a class="viewlink" href="/" target="_blank" rel="noopener">View on site</a></p>
     </div>
   </div>
 
@@ -565,6 +593,7 @@ path:     (cubic-bézier wave)  →  M0,0 L0,116 L1440,12 L1440,0 Z</code></pre>
       <pre><code>// brand tone
 price: 'text-accent'  →  'text-cream'   // (#ffffff on green)</code></pre>
       <p>The <code>paper</code> and <code>cream</code> tones keep <code>text-brand</code> (unchanged).</p>
+      <p class="viewlink-row"><a class="viewlink" href="/design/search" target="_blank" rel="noopener">Open in /design</a></p>
     </div>
   </div>
 
@@ -581,6 +610,7 @@ price: 'text-accent'  →  'text-cream'   // (#ffffff on green)</code></pre>
         <li><strong>Animation unchanged</strong> — same choreography/timing: lady slides in from the left (<code>left-m</code>), waterfall from the right (<code>right-m</code>), the white natron fades in once she's landed (<code>mound-m</code>), tagline + SINCE 1881 last; same edge-feather mask and reduced-motion handling.</li>
       </ul>
       <div class="callout info"><span class="ico">ℹ️</span><p><strong>Side effect:</strong> the home-page chunk shrank ~214 KB → ~70 KB because the new <code>heroFigures.js</code> (~57 KB) replaces the much larger traced <code>splashPaths.js</code> import. <code>splashPaths.js</code> / <code>SplashIntro.vue</code> remain only as unused legacy.</p></div>
+      <p class="viewlink-row"><a class="viewlink" href="/" target="_blank" rel="noopener">View on site</a></p>
     </div>
   </div>
 
@@ -594,6 +624,7 @@ price: 'text-accent'  →  'text-cream'   // (#ffffff on green)</code></pre>
         <li><strong>Where product images live:</strong> <code>public/products/*.webp</code> (served as static assets; the build mirrors them to <code>dist/products/*.webp</code>). Convention: <strong>transparent RGBA, ~1200 px tall</strong>.</li>
         <li>The replacement was supplied as a 939×1200 transparent PNG and saved straight to WebP (<code>quality 92</code>, no scaling needed — already matching the original dimensions), so edges/text stay crisp.</li>
       </ul>
+      <p class="viewlink-row"><a class="viewlink" href="/shop" target="_blank" rel="noopener">View on site</a></p>
     </div>
   </div>
 
@@ -603,6 +634,7 @@ price: 'text-accent'  →  'text-cream'   // (#ffffff on green)</code></pre>
     <div class="files"><span class="file-chip">src/pages/design/ColorsSection.vue</span></div>
     <div class="body">
       <p>The new <code>accent-fill</code>, <code>accent-fill-hover</code>, <code>accent-fill-ink</code> tokens were added to the colour-swatch reference so the in-app design-system page stays accurate.</p>
+      <p class="viewlink-row"><a class="viewlink" href="/design" target="_blank" rel="noopener">Open in /design</a></p>
     </div>
   </div>
 
@@ -626,6 +658,7 @@ price: 'text-accent'  →  'text-cream'   // (#ffffff on green)</code></pre>
         </tbody>
       </table>
       <div class="callout info"><span class="ico">ℹ️</span><p><strong>Not touched:</strong> generic ingredient references ("Natron", "Natronwasser", "Natron-basierte …") — those mean the substance, not the brand, so they take no ®. Image <code>alt</code> text keeps the plain hyphenated name (not on-screen).</p></div>
+      <p class="viewlink-row"><a class="viewlink" href="/" target="_blank" rel="noopener">View on site</a></p>
     </div>
   </div>
 
@@ -640,6 +673,7 @@ price: 'text-accent'  →  'text-cream'   // (#ffffff on green)</code></pre>
 
 EN  "Kaiser-Natron®  for everything  that should shine."
  →  "Kaiser-Natron®  for almost  anything at home."</code></pre>
+      <p class="viewlink-row"><a class="viewlink" href="/" target="_blank" rel="noopener">View on site</a></p>
     </div>
   </div>
 
@@ -659,6 +693,7 @@ EN  "Kaiser-Natron®  for everything  that should shine."
   text-[10px] font-medium uppercase tracking-label text-white/55
   drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]"&gt;AI Edited&lt;/span&gt;</code></pre>
       <div class="callout info"><span class="ico">ℹ️</span><p>Set a bundle's <code>aiEdited: false</code> (or drop it) in <code>bundles.js</code> to remove the badge once its image is a real photo.</p></div>
+      <p class="viewlink-row"><a class="viewlink" href="/#bundles" target="_blank" rel="noopener">View on site</a></p>
     </div>
   </div>
 
@@ -674,6 +709,7 @@ EN  "Kaiser-Natron®  for everything  that should shine."
       </ul>
       <p>This is done at the <strong>usage</strong> site, not the component: <code>revitCopy</code> no longer passes <code>features</code> or <code>notifyCta</code>, and the <code>:features</code> / <code>:notify-cta</code> / <code>@notify</code> bindings (and the orphaned <code>onRevitNotify</code> handler) were removed. The section now renders <strong>eyebrow + headline + sub only</strong>.</p>
       <p><code>Revitalization.vue</code> is unchanged and still reusable — its <code>v-if="features.length"</code> and <code>v-if="notifyCta"</code> guards simply render nothing when those props are absent. The unused <code>revit.feature.*</code> / <code>revit.notifyCta</code> i18n keys are left in place (harmless) in case the section is restored.</p>
+      <p class="viewlink-row"><a class="viewlink" href="/design/revitalization" target="_blank" rel="noopener">Open in /design</a></p>
     </div>
   </div>
 
@@ -720,6 +756,7 @@ EN  "Kaiser-Natron®  for everything  that should shine."
         <li><code>messages.js</code> — full <code>category.kueche.*</code> copy (de + en), mirroring pflege/haushalt.</li>
       </ul>
       <div class="callout info"><span class="ico">ℹ️</span><p><strong>Resolved (see §21).</strong> The three content-complete category pages (<code>/kueche</code>, <code>/haushalt</code>, <code>/pflege</code>) are now wired into the footer. <code>/waesche</code> (wash) is intentionally <strong>deferred</strong> pending brand copy — the shop's in-page <code>wash</code> section covers laundry in the meantime.</p></div>
+      <p class="viewlink-row"><a class="viewlink" href="/shop" target="_blank" rel="noopener">View on site</a></p>
     </div>
   </div>
 
@@ -740,6 +777,7 @@ EN  "Kaiser-Natron®  for everything  that should shine."
         </tbody>
       </table>
       <p>Route slugs are unchanged (<code>/haushalt</code> still serves the <code>clean</code> group); only the visible labels/eyebrows moved to the new names.</p>
+      <p class="viewlink-row"><a class="viewlink" href="/kueche" target="_blank" rel="noopener">View on site</a></p>
     </div>
   </div>
 
@@ -764,6 +802,7 @@ EN  "Kaiser-Natron®  for everything  that should shine."
         </li>
       </ul>
       <p>The <code>headline.em</code> stays "Vorteile / Benefits" — it now reads as the bundles' advantages rather than membership perks.</p>
+      <p class="viewlink-row"><a class="viewlink" href="/#bundles" target="_blank" rel="noopener">View on site</a></p>
     </div>
   </div>
 
@@ -779,6 +818,7 @@ EN  "Kaiser-Natron®  for everything  that should shine."
         <li><code>image-alt</code> → "Kaiser-Natron® Pulver 3.490 g Eimer".</li>
       </ul>
       <p>No new asset needed — the bucket image already shipped in <code>public/products/</code>.</p>
+      <p class="viewlink-row"><a class="viewlink" href="/" target="_blank" rel="noopener">View on site</a></p>
     </div>
   </div>
 
@@ -793,6 +833,7 @@ EN  "Kaiser-Natron®  for everything  that should shine."
         <li>Stripped the now-dead <code>{ key: 'nav.revitalization', href: '/#revitalize' }</code> entry from every page's nav array (9 files) so nothing links to the missing anchor.</li>
       </ul>
       <p>Kept in reserve (not deleted): <code>Revitalization.vue</code>, its design-system docs page, the <code>revit.*</code> i18n keys, and the <code>/design/preview/revitalization</code> route — so the section can be reinstated (with a corrected name) by re-adding the import, <code>revitCopy</code>, the render block, and the nav entries.</p>
+      <p class="viewlink-row"><a class="viewlink" href="/" target="_blank" rel="noopener">View on site</a></p>
     </div>
   </div>
 
@@ -802,6 +843,7 @@ EN  "Kaiser-Natron®  for everything  that should shine."
     <div class="files"><span class="file-chip">src/api/products.js</span></div>
     <div class="body">
       <p>Brand-owner review: <em>Sport Profi is a laundry product and belongs under Household, not Bathing &amp; Care.</em> In the four-group taxonomy laundry = <code>wash</code>, so <code>USE_CASE_BY_CATEGORY.Sport</code> changed <code>'care'</code> → <code>'wash'</code>. The <code>kaiser-natron-sport-profi-250-ml</code> product now appears in the <strong>Wäsche / wash</strong> (plum) section instead of Pflege / care. Doc comment updated to match.</p>
+      <p class="viewlink-row"><a class="viewlink" href="/shop#wash" target="_blank" rel="noopener">View on site</a></p>
     </div>
   </div>
 
@@ -812,6 +854,7 @@ EN  "Kaiser-Natron®  for everything  that should shine."
     <div class="body">
       <p>Brand-owner review: the "Original from Austria" claim is inaccurate. Removed the leading sentence from <code>footer.tagline</code> (DE + EN); the tagline now opens at <em>"Reines Natron für Küche, Haushalt und Pflege …"</em> / <em>"Pure sodium bicarbonate for the kitchen, the home, and personal care …"</em>.</p>
       <div class="callout info"><span class="ico">ℹ️</span><p>Other Austria-flavoured strings remain and are separate decisions, not part of this change: <code>footer.madeIn</code> / <code>product.prop.made-in-austria</code> ("In Österreich abgefüllt" / "Bottled in Austria") and the Impressum/Datenschutz Vienna address. Flag to the user if the origin correction should extend to these.</p></div>
+      <p class="viewlink-row"><a class="viewlink" href="/" target="_blank" rel="noopener">View on site</a></p>
     </div>
   </div>
 
@@ -834,6 +877,7 @@ EN  "Kaiser-Natron®  for everything  that should shine."
         <li><code>scrollToSection(id)</code> calls <code>el.scrollIntoView({ behavior: 'smooth' })</code>; each section's existing <code>scroll-mt</code> keeps the landing just below the sticky nav.</li>
       </ul>
       <p><strong>White gap removed.</strong> The thin white band (<code>-mt-px h-6 md:h-10 bg-cream</code>) and its preceding <code>WaveDivider from="brand" to="cream"</code> — added in §20 — are gone. The green hero now flows <strong>straight into the first colour banner</strong> via a single diagonal: the section loop is <code>(section, i)</code> and the first divider is <code>:from="i === 0 ? 'brand' : 'cream'"</code>.</p>
+      <p class="viewlink-row"><a class="viewlink" href="/shop" target="_blank" rel="noopener">View on site</a></p>
     </div>
   </div>
 
@@ -851,6 +895,7 @@ EN  "Kaiser-Natron®  for everything  that should shine."
         <li><strong>Revitalization.</strong> Showcase description notes it's in reserve / not used on the live site (removed in §24).</li>
         <li><strong>Stale references swept.</strong> <code>tokens.css</code> header rewritten; checkout font in the Stripe / Express mounts changed from hardcoded DM Sans → the <code>--font-sans</code> stack; "Fraunces" / "pine green" comments corrected.</li>
       </ul>
+      <p class="viewlink-row"><a class="viewlink" href="/design" target="_blank" rel="noopener">Open in /design</a></p>
     </div>
   </div>
 
@@ -866,6 +911,7 @@ EN  "Kaiser-Natron®  for everything  that should shine."
       <pre><code>Crimson  #cc0230   — all buttons / CTAs / solid pills (with #ffffff text)
 Mint     #6eceb2   — nav tab + footer link hover/active highlight
 White    #ffffff   — page backgrounds (cream + surface) and button text on green</code></pre>
+      <p class="viewlink-row"><a class="viewlink" href="/design/colors" target="_blank" rel="noopener">Open in /design</a></p>
     </div>
   </div>
 

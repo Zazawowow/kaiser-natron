@@ -140,6 +140,40 @@
   .group.waiting > h2 { border-bottom-color: var(--crimson); }
   .group.waiting ul.items li { border-left-color: var(--crimson); }
 
+  /* "View on site" link */
+  .viewlink-row { margin: -6px 0 16px; }
+  .viewlink {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--brand);
+    transition: color .15s;
+  }
+  .viewlink::after { content: "\2197"; font-size: 13px; }
+  .viewlink:hover { color: var(--crimson); text-decoration: underline; }
+  .cat a, ul.items li strong a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--mint); transition: color .15s, border-color .15s; }
+  .cat a:hover, ul.items li strong a:hover { color: var(--crimson); border-color: var(--crimson); }
+
+  /* Per-card "view on site" link */
+  ul.items li { position: relative; }
+  .cardlink {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    color: var(--brand);
+    text-decoration: none;
+  }
+  .cardlink::after { content: " \2197"; }
+  .cardlink:hover { color: var(--crimson); text-decoration: underline; }
+
   footer.foot {
     margin-top: 44px;
     padding-top: 20px;
@@ -176,34 +210,34 @@
   <section class="group">
     <h2>Look &amp; feel</h2>
     <ul class="items">
-      <li><strong>Colours.</strong> The site now uses the official brand palette: the deep brand green <code>#006548</code>, a crimson red <code>#cc0230</code> for anything clickable (buttons, "add to cart"), and a soft mint <code>#6eceb2</code> that lights up links when you hover them. The warm yellow <code>#e9c84b</code> is now used only as emphasis text on green. <em>(Full reference at the bottom.)</em></li>
-      <li><strong>Backgrounds are white.</strong> Pages sit on clean white <code>#ffffff</code> instead of the old tinted panels, so products and text stand out.</li>
-      <li><strong>Brand typeface.</strong> Headlines and text use the brand's own <strong>"Zeitung"</strong> font, self-hosted by the site (a local <code>.woff2</code> file, not borrowed from Google), so it always looks the same and loads fast. One family for everything — headlines and body.</li>
-      <li><strong>Section dividers are diagonal.</strong> The wavy lines between coloured bands were replaced with clean diagonal edges.</li>
-      <li><strong>Buttons.</strong> All buttons share one consistent style — crimson with white text. The big "call to action" buttons on hero banners stand out clearly.</li>
-      <li><strong>Removed the yellow highlight.</strong> Headlines no longer use the old yellow accent; they're cleaner now.</li>
+      <li><strong>Colours.</strong> The site now uses the official brand palette: the deep brand green <code>#006548</code>, a crimson red <code>#cc0230</code> for anything clickable (buttons, "add to cart"), and a soft mint <code>#6eceb2</code> that lights up links when you hover them. The warm yellow <code>#e9c84b</code> is now used only as emphasis text on green. <em>(Full reference at the bottom.)</em><br><a class="cardlink" href="/" target="_blank" rel="noopener">View on site</a></li>
+      <li><strong>Backgrounds are white.</strong> Pages sit on clean white <code>#ffffff</code> instead of the old tinted panels, so products and text stand out.<br><a class="cardlink" href="/" target="_blank" rel="noopener">View on site</a></li>
+      <li><strong>Brand typeface.</strong> Headlines and text use the brand's own <strong>"Zeitung"</strong> font, self-hosted by the site (a local <code>.woff2</code> file, not borrowed from Google), so it always looks the same and loads fast. One family for everything — headlines and body.<br><a class="cardlink" href="/" target="_blank" rel="noopener">View on site</a></li>
+      <li><strong>Section dividers are diagonal.</strong> The wavy lines between coloured bands were replaced with clean diagonal edges.<br><a class="cardlink" href="/shop" target="_blank" rel="noopener">View on site</a></li>
+      <li><strong>Buttons.</strong> All buttons share one consistent style — crimson with white text. The big "call to action" buttons on hero banners stand out clearly.<br><a class="cardlink" href="/shop" target="_blank" rel="noopener">View on site</a></li>
+      <li><strong>Removed the yellow highlight.</strong> Headlines no longer use the old yellow accent; they're cleaner now.<br><a class="cardlink" href="/" target="_blank" rel="noopener">View on site</a></li>
     </ul>
   </section>
 
   <section class="group">
     <h2>Brand details</h2>
     <ul class="items">
-      <li><strong>Trademark &amp; spelling.</strong> Every visible mention now reads <strong>Kaiser-Natron®</strong> — hyphenated, with the ® symbol.</li>
-      <li><strong>Hero headline.</strong> The opening line now speaks to versatility — <em>"Kaiser-Natron® for almost anything at home"</em> — instead of the old "that should shine" wording.</li>
-      <li><strong>Intro artwork.</strong> The brand intro uses the official Hebe + waterfall artwork.</li>
-      <li><strong>250 g pack image.</strong> The large pack image was recoloured to the correct brand green so it no longer clashes with its background.</li>
-      <li><strong>"One powder, a hundred uses" banner.</strong> This banner used to show the <em>bath</em> product, which didn't match its message. It now shows <strong>powder</strong> (the bulk bucket), and its buttons add/link to that powder product.</li>
-      <li><strong>Logo &amp; search.</strong> Prices in the search dropdown are now white so they're readable on the green bar.</li>
+      <li><strong>Trademark &amp; spelling.</strong> Every visible mention now reads <strong>Kaiser-Natron®</strong> — hyphenated, with the ® symbol.<br><a class="cardlink" href="/" target="_blank" rel="noopener">View on site</a></li>
+      <li><strong>Hero headline.</strong> The opening line now speaks to versatility — <em>"Kaiser-Natron® for almost anything at home"</em> — instead of the old "that should shine" wording.<br><a class="cardlink" href="/" target="_blank" rel="noopener">View on site</a></li>
+      <li><strong>Intro artwork.</strong> The brand intro uses the official Hebe + waterfall artwork.<br><a class="cardlink" href="/" target="_blank" rel="noopener">View on site</a></li>
+      <li><strong>250 g pack image.</strong> The large pack image was recoloured to the correct brand green so it no longer clashes with its background.<br><a class="cardlink" href="/shop" target="_blank" rel="noopener">View on site</a></li>
+      <li><strong>"One powder, a hundred uses" banner.</strong> This banner used to show the <em>bath</em> product, which didn't match its message. It now shows <strong>powder</strong> (the bulk bucket), and its buttons add/link to that powder product.<br><a class="cardlink" href="/" target="_blank" rel="noopener">View on site</a></li>
+      <li><strong>Logo &amp; search.</strong> Prices in the search dropdown are now white so they're readable on the green bar.<br><a class="cardlink" href="/" target="_blank" rel="noopener">View on site</a></li>
     </ul>
   </section>
 
   <section class="group">
     <h2>Honesty &amp; content</h2>
     <ul class="items">
-      <li><strong>"AI Edited" note on bundle images.</strong> The bundle photos that were AI-assisted now carry a small, honest "AI Edited" caption. (These can be switched off the moment real photographs replace them.)</li>
-      <li><strong>Revitalization section removed.</strong> The off-brand "Revitalization Center" section (icons + name the owner flagged) is taken off the site for now. It's kept in reserve and can return with a corrected name later.</li>
-      <li><strong>"The Original from Austria" removed.</strong> That claim is gone from the footer tagline (German + English), which now just describes pure natron for the kitchen, home and care.</li>
-      <li><strong>Membership fully removed.</strong> There's no membership programme, so every trace of one is gone: the "become a member" button, the lower "member price", and the member-perks wording. <strong>Bundles now show a single price</strong> everyone pays, and the section talks about why a bundle is handy (curated sets, everything for one area, one delivery) instead of member savings.</li>
+      <li><strong>"AI Edited" note on bundle images.</strong> The bundle photos that were AI-assisted now carry a small, honest "AI Edited" caption. (These can be switched off the moment real photographs replace them.)<br><a class="cardlink" href="/#bundles" target="_blank" rel="noopener">View on site</a></li>
+      <li><strong>Revitalization section removed.</strong> The off-brand "Revitalization Center" section (icons + name the owner flagged) is taken off the site for now. It's kept in reserve and can return with a corrected name later.<br><a class="cardlink" href="/" target="_blank" rel="noopener">View on site</a></li>
+      <li><strong>"The Original from Austria" removed.</strong> That claim is gone from the footer tagline (German + English), which now just describes pure natron for the kitchen, home and care.<br><a class="cardlink" href="/" target="_blank" rel="noopener">View on site</a></li>
+      <li><strong>Membership fully removed.</strong> There's no membership programme, so every trace of one is gone: the "become a member" button, the lower "member price", and the member-perks wording. <strong>Bundles now show a single price</strong> everyone pays, and the section talks about why a bundle is handy (curated sets, everything for one area, one delivery) instead of member savings.<br><a class="cardlink" href="/#bundles" target="_blank" rel="noopener">View on site</a></li>
     </ul>
   </section>
 
@@ -213,29 +247,31 @@
       <li>
         <strong>Four colour-coded sections.</strong> The shop is now organised by what you're doing, each with its own brand colour:
         <div class="cats">
-          <div class="cat"><span class="sw" style="background:var(--kitchen)"></span> <span><strong>Küche / Kitchen</strong> — lime green <code>#c6d47d</code> (baking, cooking, digestion)</span></div>
-          <div class="cat"><span class="sw" style="background:var(--clean)"></span> <span><strong>Reinigung / Clean</strong> — grapefruit red <code>#eb5a61</code> (household cleaning)</span></div>
-          <div class="cat"><span class="sw" style="background:var(--wash)"></span> <span><strong>Wäsche / Wash</strong> — plum <code>#c15a7e</code> (laundry &amp; textile care)</span></div>
-          <div class="cat"><span class="sw" style="background:var(--care)"></span> <span><strong>Pflege / Care</strong> — orange <code>#f1864c</code> (bath, body)</span></div>
+          <div class="cat"><span class="sw" style="background:var(--kitchen)"></span> <span><strong><a href="/shop#cook" target="_blank" rel="noopener">Küche / Kitchen</a></strong> — lime green <code>#c6d47d</code> (baking, cooking, digestion)</span></div>
+          <div class="cat"><span class="sw" style="background:var(--clean)"></span> <span><strong><a href="/shop#clean" target="_blank" rel="noopener">Reinigung / Clean</a></strong> — grapefruit red <code>#eb5a61</code> (household cleaning)</span></div>
+          <div class="cat"><span class="sw" style="background:var(--wash)"></span> <span><strong><a href="/shop#wash" target="_blank" rel="noopener">Wäsche / Wash</a></strong> — plum <code>#c15a7e</code> (laundry &amp; textile care)</span></div>
+          <div class="cat"><span class="sw" style="background:var(--care)"></span> <span><strong><a href="/shop#care" target="_blank" rel="noopener">Pflege / Care</a></strong> — orange <code>#f1864c</code> (bath, body)</span></div>
         </div>
+        <a class="cardlink" href="/shop" target="_blank" rel="noopener">View on site</a>
       </li>
-      <li><strong>Banners.</strong> Each section opens with a full-width colour banner showing its star product, with an "add to cart" and a "learn more" button.</li>
-      <li><strong>Quick category buttons.</strong> Under the shop's main heading there's now a row of angled buttons — one per category, each in its own colour — that smoothly scroll you down to that section. The green header now flows straight into the first coloured section (the little white gap is gone).</li>
-      <li><strong>Sport Profi moved to Laundry.</strong> It's a laundry product, so it now sits under Wäsche / Wash instead of Care.</li>
+      <li><strong>Banners.</strong> Each section opens with a full-width colour banner showing its star product, with an "add to cart" and a "learn more" button.<br><a class="cardlink" href="/shop" target="_blank" rel="noopener">View on site</a></li>
+      <li><strong>Quick category buttons.</strong> Under the shop's main heading there's now a row of angled buttons — one per category, each in its own colour — that smoothly scroll you down to that section. The green header now flows straight into the first coloured section (the little white gap is gone).<br><a class="cardlink" href="/shop" target="_blank" rel="noopener">View on site</a></li>
+      <li><strong>Sport Profi moved to Laundry.</strong> It's a laundry product, so it now sits under Wäsche / Wash instead of Care.<br><a class="cardlink" href="/shop#wash" target="_blank" rel="noopener">View on site</a></li>
     </ul>
   </section>
 
   <section class="group">
     <h2>Category pages</h2>
     <ul class="items">
-      <li><strong>Three dedicated pages are now reachable</strong> from the footer: <strong>Küche</strong>, <strong>Reinigung</strong> (Haushalt) and <strong>Pflege</strong> — each a fuller landing page with its own products, benefits and call-to-action.</li>
-      <li><strong>Consistent names.</strong> These pages and their footer links now use the same short names as the shop sections, so everything reads the same way.</li>
-      <li><strong>Wäsche / Wash page is on hold</strong> until its brand copy is supplied — laundry is already covered by the shop's Wash section in the meantime.</li>
+      <li><strong>Three dedicated pages are now reachable</strong> from the footer: <strong><a href="/kueche" target="_blank" rel="noopener">Küche</a></strong>, <strong><a href="/haushalt" target="_blank" rel="noopener">Reinigung</a></strong> (Haushalt) and <strong><a href="/pflege" target="_blank" rel="noopener">Pflege</a></strong> — each a fuller landing page with its own products, benefits and call-to-action.<br><a class="cardlink" href="/kueche" target="_blank" rel="noopener">View on site</a></li>
+      <li><strong>Consistent names.</strong> These pages and their footer links now use the same short names as the shop sections, so everything reads the same way.<br><a class="cardlink" href="/kueche" target="_blank" rel="noopener">View on site</a></li>
+      <li><strong>Wäsche / Wash page is on hold</strong> until its brand copy is supplied — laundry is already covered by the shop's Wash section in the meantime.<br><a class="cardlink" href="/shop#wash" target="_blank" rel="noopener">View on site</a></li>
     </ul>
   </section>
 
   <section class="group">
     <h2>Quick reference (for the developer)</h2>
+    <p class="viewlink-row"><a class="viewlink" href="/design" target="_blank" rel="noopener">Open the design system</a></p>
     <p style="font-size:14px;color:var(--muted);margin:0 0 14px;">The exact values, in case they're handy — nothing you need to act on.</p>
     <div class="refgrid">
       <div class="refcard"><span class="chip" style="background:#006548"></span><span><span class="role">Brand green</span><span class="hex">#006548</span></span></div>
