@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Kaiser-Natron® — Restyle Change Log (Developer Handoff)</title>
+<style>
+  :root {
+    --brand: #006548;
+    --brand-soft: #4a9079;
+    --crimson: #cc0230;
+    --mint: #6eceb2;
+    --gold: #e9c84b;
+    --ink: #0a2c20;
+    --muted: #5c7a6f;
+    --paper: #ffffff;
+    --cream: #f4f7f4;
+    --line: #d9e4df;
+    --kitchen: #c6d47d;
+    --clean: #eb5a61;
+    --wash: #c15a7e;
+    --care: #f1864c;
+    --done: #006548;
+    --partial: #d98a1f;
+    --open: #cc0230;
+    --review: #6b7f8c;
+    --serif: 'Zeitung', 'Iowan Old Style', 'Palatino', Georgia, serif;
+    --sans: 'Zeitung', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: var(--sans);
+    color: var(--ink);
+    background: var(--cream);
+    line-height: 1.55;
+  }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 0 24px 80px; }
+
+  /* ---- Header ---- */
+  header.hero {
+    background: var(--brand);
+    color: #fff;
+    padding: 56px 24px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+  header.hero::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: -1px;
+    height: 64px;
+    background: var(--cream);
+    clip-path: polygon(0 100%, 100% 100%, 100% 38%);
+  }
+  .hero-inner { max-width: 920px; margin: 0 auto; position: relative; z-index: 1; }
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: .22em;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--mint);
+    margin: 0 0 14px;
+  }
+  h1 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(30px, 5vw, 46px);
+    line-height: 1.05;
+    margin: 0 0 14px;
+    letter-spacing: -0.01em;
+  }
+  h1 em { font-style: italic; font-weight: 300; color: var(--mint); }
+  .hero p { max-width: 62ch; color: rgba(255,255,255,.85); margin: 0; font-size: 16px; }
+  .meta { margin-top: 22px; font-size: 13px; color: rgba(255,255,255,.7); }
+  .meta code { background: rgba(255,255,255,.14); padding: 1px 7px; border-radius: 5px; font-family: var(--mono); font-size: 12px; }
+
+  /* ---- Intro / how to read ---- */
+  .intro {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 22px 24px;
+    margin: -34px 0 34px;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 10px 30px rgba(0,101,72,.07);
+    font-size: 14.5px;
+  }
+  .intro p { margin: 0 0 12px; }
+  .intro p:last-child { margin-bottom: 0; }
+  .intro code { background: var(--cream); padding: 1px 6px; border-radius: 5px; font-family: var(--mono); font-size: .9em; color: var(--brand); }
+
+  /* ---- Contents nav ---- */
+  .nav-block { margin: 0 0 38px; }
+  .nav-block h2 {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 14px;
+    color: var(--ink);
+  }
+  .nav-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px 16px;
+  }
+  .nav-grid a {
+    display: flex;
+    align-items: baseline;
+    gap: 9px;
+    font-size: 13px;
+    text-decoration: none;
+    color: var(--ink);
+    padding: 6px 10px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--paper);
+    transition: border-color .15s, background .15s;
+  }
+  .nav-grid a:hover { border-color: var(--brand-soft); background: #fbfdfc; }
+  .nav-grid a .n {
+    flex: none;
+    font-family: var(--serif);
+    font-weight: 700;
+    color: var(--brand);
+    font-size: 12.5px;
+    min-width: 26px;
+  }
+  .nav-grid a.qref { grid-column: 1 / -1; border-left: 3px solid var(--crimson); }
+  .nav-grid a.qref .n { color: var(--crimson); }
+
+  /* ---- Item card ---- */
+  .item {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-left-width: 5px;
+    border-left-color: var(--brand);
+    border-radius: 10px;
+    padding: 20px 22px 22px;
+    margin-bottom: 18px;
+    box-shadow: 0 10px 30px rgba(0,101,72,.05);
+  }
+  .item-head { display: flex; align-items: center; gap: 14px; margin-bottom: 6px; }
+  .secnum {
+    flex: none;
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    background: var(--brand);
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 16px;
+    box-shadow: 0 4px 12px rgba(0,101,72,.22);
+  }
+  .item-head h3 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 21px;
+    line-height: 1.15;
+    margin: 0;
+  }
+
+  /* ---- File chips ---- */
+  .files { display: flex; flex-wrap: wrap; gap: 7px; margin: 8px 0 16px; }
+  .file-chip {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    background: var(--cream);
+    border: 1px solid var(--line);
+    color: var(--muted);
+    padding: 3px 9px;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+
+  /* ---- Body content ---- */
+  .body { font-size: 14.5px; }
+  .body p { margin: 0 0 12px; }
+  .body ul { margin: 0 0 14px; padding-left: 22px; }
+  .body li { margin: 0 0 6px; }
+  .body li::marker { color: var(--brand-soft); }
+  .body strong { color: var(--brand); font-weight: 600; }
+  .body em { font-style: italic; }
+  .body code {
+    font-family: var(--mono);
+    font-size: .88em;
+    background: var(--cream);
+    border: 1px solid var(--line);
+    padding: 1px 5px;
+    border-radius: 5px;
+    color: var(--ink);
+  }
+  .body h4 {
+    font-family: var(--serif);
+    font-size: 15.5px;
+    font-weight: 600;
+    margin: 18px 0 8px;
+    color: var(--ink);
+  }
+
+  /* ---- code blocks ---- */
+  pre {
+    background: #06231a;
+    color: #d8efe6;
+    border-radius: 10px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    line-height: 1.5;
+    margin: 0 0 14px;
+  }
+  pre code { all: unset; font-family: var(--mono); white-space: pre; }
+
+  /* ---- tables ---- */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 4px 0 16px;
+    font-size: 13.5px;
+  }
+  th {
+    text-align: left;
+    background: var(--cream);
+    color: var(--brand);
+    font-weight: 600;
+    padding: 9px 12px;
+    border: 1px solid var(--line);
+    font-size: 12.5px;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+  }
+  td {
+    padding: 9px 12px;
+    border: 1px solid var(--line);
+    vertical-align: top;
+  }
+  tr:nth-child(even) td { background: #fbfdfc; }
+  td code, th code { font-family: var(--mono); font-size: .9em; background: rgba(0,101,72,.06); padding: 1px 5px; border-radius: 4px; }
+
+  /* ---- callouts ---- */
+  .callout {
+    border-radius: 10px;
+    padding: 13px 16px 13px 16px;
+    margin: 0 0 14px;
+    font-size: 14px;
+    display: flex;
+    gap: 11px;
+    align-items: flex-start;
+  }
+  .callout .ico { flex: none; font-size: 16px; line-height: 1.4; }
+  .callout p { margin: 0; }
+  .callout.warn { background: rgba(217,138,31,.10); border: 1px solid rgba(217,138,31,.32); border-left: 4px solid var(--partial); }
+  .callout.warn strong { color: #9a6212; }
+  .callout.info { background: rgba(110,206,178,.12); border: 1px solid rgba(0,101,72,.22); border-left: 4px solid var(--brand); }
+  .callout.info strong { color: var(--brand); }
+
+  /* ---- colour swatches ---- */
+  .swrow { display: flex; flex-wrap: wrap; gap: 12px; margin: 4px 0 16px; }
+  .swcard {
+    display: flex; align-items: center; gap: 10px;
+    border: 1px solid var(--line);
+    border-radius: 9px;
+    padding: 8px 12px 8px 8px;
+    background: var(--paper);
+    font-size: 13px;
+  }
+  .swbox {
+    width: 34px; height: 34px;
+    border-radius: 7px;
+    flex: none;
+    border: 1px solid rgba(0,0,0,.10);
+  }
+  .swcard .hex { font-family: var(--mono); font-size: 12px; color: var(--muted); display: block; }
+  .swcard .role { font-weight: 600; color: var(--ink); display: block; }
+  .swinline { display: inline-block; width: 12px; height: 12px; border-radius: 3px; vertical-align: middle; border: 1px solid rgba(0,0,0,.12); margin-right: 4px; }
+
+  footer.foot {
+    margin-top: 48px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    font-size: 12.5px;
+    color: var(--muted);
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+  }
+
+  @media (max-width: 640px) {
+    .nav-grid { grid-template-columns: 1fr; }
+  }
+  @media print {
+    html { scroll-behavior: auto; }
+    body { background: #fff; }
+    .item, .intro { box-shadow: none; }
+    header.hero { padding-bottom: 48px; }
+    .item { break-inside: avoid; }
+    pre, table { break-inside: avoid; }
+    .nav-block { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">Developer Handoff · Restyle Change Log</p>
+    <h1>Kaiser-Natron<sup>®</sup> restyle —<br><em>every change, documented</em></h1>
+    <p>A plain-language summary of every visual change in this restyle pass — the exact file, what changed, and the CSS / Tailwind classes involved. Organised by theme so you can review one concern at a time.</p>
+    <p class="meta">Updated 24 June 2026 · Branch <code>feat/shop-category-sections</code> · 27 changes</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="intro">
+    <p>The design system is <strong>token-driven</strong>: colours, fonts, and sizes live as CSS custom properties in <code>src/design-system/tokens.css</code> (consumed by Tailwind v4 via <code>@theme</code>). Most colour changes happen there once and cascade everywhere.</p>
+    <p>This log records only the <strong>latest final state</strong> of each item — the file, what it is now, and the token/class — not the iterations it took to get there.</p>
+  </div>
+
+  <!-- ===================== CONTENTS ===================== -->
+  <nav class="nav-block">
+    <h2>Contents</h2>
+    <div class="nav-grid">
+      <a href="#s1"><span class="n">§1</span> New brand colours (design tokens)</a>
+      <a href="#s2"><span class="n">§2</span> Pages are pure white</a>
+      <a href="#s3"><span class="n">§3</span> Typeface → Zeitung (self-hosted)</a>
+      <a href="#s4"><span class="n">§4</span> Buttons</a>
+      <a href="#s5"><span class="n">§5</span> Hero call-to-action buttons</a>
+      <a href="#s6"><span class="n">§6</span> "Add to cart" buttons are crimson</a>
+      <a href="#s7"><span class="n">§7</span> Cart checkout button is crimson</a>
+      <a href="#s8"><span class="n">§8</span> Other solid pills/chips → crimson</a>
+      <a href="#s9"><span class="n">§9</span> Mint highlight on nav tabs &amp; footer links</a>
+      <a href="#s10"><span class="n">§10</span> Yellow highlight removed from hero text</a>
+      <a href="#s11"><span class="n">§11</span> Section dividers: wave → diagonal</a>
+      <a href="#s12"><span class="n">§12</span> Search dropdown prices → white</a>
+      <a href="#s13"><span class="n">§13</span> Brand-hero intro artwork → official assets</a>
+      <a href="#s14"><span class="n">§14</span> 250 g Großpackung box recoloured</a>
+      <a href="#s15"><span class="n">§15</span> Design-system docs page</a>
+      <a href="#s16"><span class="n">§16</span> Brand name — ® + hyphenation pass</a>
+      <a href="#s17"><span class="n">§17</span> Hero headline copy — versatility</a>
+      <a href="#s18"><span class="n">§18</span> Bundle artwork — "AI Edited" disclosure</a>
+      <a href="#s19"><span class="n">§19</span> Revitalization — animation row + CTA removed</a>
+      <a href="#s20"><span class="n">§20</span> Shop category banners + colours + Küche</a>
+      <a href="#s21"><span class="n">§21</span> Category pages wired up + naming aligned</a>
+      <a href="#s22"><span class="n">§22</span> Membership removed — bundles single-price</a>
+      <a href="#s23"><span class="n">§23</span> Second-fold banner image — powder</a>
+      <a href="#s24"><span class="n">§24</span> Revitalization removed from homepage</a>
+      <a href="#s25"><span class="n">§25</span> Sport-Profi recategorised to Laundry</a>
+      <a href="#s26"><span class="n">§26</span> "Das Original aus Österreich" removed</a>
+      <a href="#s27"><span class="n">§27</span> Shop hero — category jump-buttons + gap removed</a>
+      <a href="#qref" class="qref"><span class="n">★</span> Quick reference — the two new colours</a>
+    </div>
+  </nav>
+
+  <!-- ===================== §1 ===================== -->
+  <div class="item" id="s1">
+    <div class="item-head"><span class="secnum">§1</span><h3>New brand colours (design tokens)</h3></div>
+    <div class="files"><span class="file-chip">src/design-system/tokens.css</span></div>
+    <div class="body">
+      <p>Two new colours were introduced and two existing ones repurposed.</p>
+      <table>
+        <thead><tr><th>Token</th><th>Value</th><th>Meaning</th></tr></thead>
+        <tbody>
+          <tr><td><code>--color-accent-fill</code></td><td><span class="swinline" style="background:#cc0230"></span><code>#cc0230</code></td><td>Crimson — the new fill for all solid CTA buttons, pills and chips</td></tr>
+          <tr><td><code>--color-accent-fill-hover</code></td><td><code>oklch(accent-fill − 12% black)</code></td><td>Darker crimson for hover</td></tr>
+          <tr><td><code>--color-accent-fill-ink</code></td><td><span class="swinline" style="background:#ffffff"></span><code>#ffffff</code></td><td>White — the text/icon colour that sits on crimson</td></tr>
+          <tr><td><code>--color-highlight</code></td><td><span class="swinline" style="background:#6eceb2"></span><code>#6eceb2</code></td><td>Mint — hover/active state for nav tabs and footer links</td></tr>
+          <tr><td><code>--color-accent</code></td><td><span class="swinline" style="background:#e9c84b"></span><code>#e9c84b</code> (unchanged)</td><td>Old warm yellow — now only used as the token behind a few non-button accents</td></tr>
+        </tbody>
+      </table>
+      <pre><code>/* tokens.css — added */
+--color-accent-fill: #cc0230;
+--color-accent-fill-hover: color-mix(in oklch, var(--color-accent-fill), black 12%);
+--color-accent-fill-ink: #ffffff;
+
+--color-highlight: #6eceb2;</code></pre>
+      <p>Because these are registered in <code>@theme</code>, Tailwind auto-generates the utility classes <code>bg-accent-fill</code>, <code>text-accent-fill-ink</code>, <code>border-accent-fill</code>, <code>hover:bg-accent-fill-hover</code>, and <code>text-highlight</code> / <code>hover:text-highlight</code>.</p>
+    </div>
+  </div>
+
+  <!-- ===================== §2 ===================== -->
+  <div class="item" id="s2">
+    <div class="item-head"><span class="secnum">§2</span><h3>Pages are pure white</h3></div>
+    <div class="files"><span class="file-chip">src/design-system/tokens.css</span><span class="file-chip">index.html</span></div>
+    <div class="body">
+      <p>The two off-white page surfaces were set to pure white. Everything that paints a page background (<code>bg-cream</code>, <code>bg-surface</code>) and the cream-coloured logo (<code>text-cream</code>) followed automatically.</p>
+      <pre><code>/* before → after */
+--color-cream:   #f4efe4;  →  #ffffff;
+--color-surface: #faf7f1;  →  #ffffff;</code></pre>
+      <p><code>index.html</code> — the browser theme colour was matched to white:</p>
+      <pre><code>&lt;meta name="theme-color" content="#ffffff" /&gt;   &lt;!-- was #faf7f1 --&gt;</code></pre>
+    </div>
+  </div>
+
+  <!-- ===================== §3 ===================== -->
+  <div class="item" id="s3">
+    <div class="item-head"><span class="secnum">§3</span><h3>Typeface → Zeitung (self-hosted)</h3></div>
+    <div class="files"><span class="file-chip">src/design-system/tokens.css</span><span class="file-chip">src/assets/styles.css</span><span class="file-chip">src/assets/fonts/</span><span class="file-chip">index.html</span></div>
+    <div class="body">
+      <p>All text now uses <strong>Zeitung</strong>, self-hosted (no external font CDN). The licensed <code>.woff2</code> files were mirrored from the production site into <code>src/assets/fonts/</code> (Regular 400 + Bold 700 — the only two weights that exist; the browser synthesises intermediate weights and there are no italics).</p>
+      <pre><code>/* tokens.css */
+--font-serif: 'Zeitung', ui-sans-serif, system-ui, -apple-system, Arial, sans-serif;
+--font-sans:  'Zeitung', ui-sans-serif, system-ui, -apple-system, Arial, sans-serif;</code></pre>
+      <pre><code>/* styles.css — added @font-face */
+@font-face { font-family:'Zeitung'; font-weight:400; font-display:swap;
+  src:url('./fonts/Zeitung-Regular.woff2') format('woff2'); }
+@font-face { font-family:'Zeitung'; font-weight:700; font-display:swap;
+  src:url('./fonts/Zeitung-Bold.woff2') format('woff2'); }</code></pre>
+      <p><code>index.html</code> — the Google Fonts <code>&lt;link&gt;</code> (Fraunces + DM Sans) and its <code>preconnect</code> hints were <strong>removed</strong>.</p>
+    </div>
+  </div>
+
+  <!-- ===================== §4 ===================== -->
+  <div class="item" id="s4">
+    <div class="item-head"><span class="secnum">§4</span><h3>Buttons</h3></div>
+    <div class="files"><span class="file-chip">src/design-system/components/Button.vue</span></div>
+    <div class="body">
+      <p><code>Button.vue</code> is the single source of truth for buttons. Variants are picked with <code>&lt;Button variant="…"&gt;</code>.</p>
+      <h4>4a. Text style — uppercase, 14px</h4>
+      <pre><code>// base string — added `uppercase`
+'... font-sans font-semibold uppercase ...'
+
+// sizes — text set to 14px across the board
+sm: 'text-[14px] px-[18px] py-[9px] tracking-label',
+md: 'text-[14px] px-[26px] py-[13px] tracking-label',
+lg: 'text-[14px] px-[34px] py-[17px] tracking-label',</code></pre>
+      <h4>4b. Variant colours</h4>
+      <table>
+        <thead><tr><th>Variant</th><th>Before</th><th>After</th></tr></thead>
+        <tbody>
+          <tr><td><code>primary</code> (green button)</td><td>green fill, <strong>yellow</strong> text</td><td>green fill, <strong>white</strong> text — <code>bg-brand text-white border-brand</code></td></tr>
+          <tr><td><code>accent</code> (main CTA)</td><td>yellow fill, green text</td><td><strong>crimson</strong> fill, white text — <code>bg-accent-fill text-accent-fill-ink border-accent-fill</code></td></tr>
+          <tr><td><code>secondary</code></td><td>outline</td><td><strong>crimson</strong> fill, white text (same as accent)</td></tr>
+          <tr><td><code>ghost</code> / <code>danger</code></td><td>unchanged</td><td>unchanged</td></tr>
+        </tbody>
+      </table>
+      <div class="callout info"><span class="ico">ℹ️</span><p><strong>Note:</strong> <code>secondary</code> and <code>accent</code> are currently identical (both crimson). The Hero's "Learn more" secondary CTA (rendered inline, see §5) was matched to the same crimson fill.</p></div>
+    </div>
+  </div>
+
+  <!-- ===================== §5 ===================== -->
+  <div class="item" id="s5">
+    <div class="item-head"><span class="secnum">§5</span><h3>Hero call-to-action buttons</h3></div>
+    <div class="files"><span class="file-chip">src/design-system/components/Hero.vue</span></div>
+    <div class="body">
+      <p>The Hero renders its <strong>secondary</strong> CTA inline (not via <code>&lt;Button&gt;</code>), so it has to be styled directly. On brand-green heroes it is now crimson fill + white text, uppercase, 14px:</p>
+      <pre><code>class="… rounded-pill border border-accent-fill bg-accent-fill px-[34px] py-[17px]
+       text-[14px] font-semibold uppercase tracking-label text-accent-fill-ink
+       transition-colors duration-base hover:bg-accent-fill-hover"</code></pre>
+      <p>The Hero's <strong>primary</strong> CTA already uses the <code>accent</code> variant on green surfaces, so it's crimson too.</p>
+    </div>
+  </div>
+
+  <!-- ===================== §6 ===================== -->
+  <div class="item" id="s6">
+    <div class="item-head"><span class="secnum">§6</span><h3>"Add to cart" buttons are crimson</h3></div>
+    <div class="files"><span class="file-chip">src/design-system/components/ProductCard.vue</span><span class="file-chip">src/design-system/components/BundleCard.vue</span><span class="file-chip">src/pages/ShopPage.vue</span><span class="file-chip">src/pages/ProductPage.vue</span><span class="file-chip">src/pages/BundlePage.vue</span></div>
+    <div class="body">
+      <p>Every add-to-cart button is now the crimson <code>accent</code> variant.</p>
+      <table>
+        <thead><tr><th>File</th><th>Change</th></tr></thead>
+        <tbody>
+          <tr><td><code>ProductCard.vue</code></td><td><code>ctaVariant</code> prop default <code>'primary'</code> → <code>'accent'</code></td></tr>
+          <tr><td><code>BundleCard.vue</code></td><td>add-to-cart <code>&lt;Button&gt;</code> <code>variant="primary"</code> → <code>"accent"</code></td></tr>
+          <tr><td><code>ShopPage.vue</code></td><td>product grid <code>:cta-variant="… 'accent' : 'primary'"</code> → <code>cta-variant="accent"</code> (no more alternating)</td></tr>
+          <tr><td><code>ProductPage.vue</code></td><td>main add-to-cart already <code>accent</code> (unchanged)</td></tr>
+          <tr><td><code>BundlePage.vue</code></td><td>add-to-cart already <code>accent</code> (unchanged)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ===================== §7 ===================== -->
+  <div class="item" id="s7">
+    <div class="item-head"><span class="secnum">§7</span><h3>Cart checkout button is crimson</h3></div>
+    <div class="files"><span class="file-chip">src/design-system/components/CartDrawer.vue</span></div>
+    <div class="body">
+      <pre><code>&lt;!-- checkout button --&gt;
+&lt;Button variant="accent" …&gt;   &lt;!-- was variant="primary" --&gt;</code></pre>
+    </div>
+  </div>
+
+  <!-- ===================== §8 ===================== -->
+  <div class="item" id="s8">
+    <div class="item-head"><span class="secnum">§8</span><h3>Other solid pills/chips → crimson + white</h3></div>
+    <div class="files"><span class="file-chip">IconButton.vue</span><span class="file-chip">LanguageSwitcher.vue</span><span class="file-chip">Navbar.vue</span><span class="file-chip">Kaiserhacks.vue</span><span class="file-chip">Badge.vue</span><span class="file-chip">About.vue</span></div>
+    <div class="body">
+      <p>All previously-yellow solid fills now use the crimson token pair <code>bg-accent-fill</code> + <code>text-accent-fill-ink</code>.</p>
+      <table>
+        <thead><tr><th>File</th><th>Element</th></tr></thead>
+        <tbody>
+          <tr><td><code>IconButton.vue</code></td><td><code>accent</code> variant (cart icon button)</td></tr>
+          <tr><td><code>LanguageSwitcher.vue</code></td><td>active language pill (all 3 tones)</td></tr>
+          <tr><td><code>Navbar.vue</code></td><td>mobile cart CTA pill</td></tr>
+          <tr><td><code>Kaiserhacks.vue</code></td><td>video play chip</td></tr>
+          <tr><td><code>Badge.vue</code></td><td><code>accent</code> badge variant</td></tr>
+          <tr><td><code>About.vue</code></td><td>"HISTORY &amp; SCIENCE" eyebrow (<code>Badge variant="brand"</code> → <code>"accent"</code>) and the "TODAY" timeline pill (<code>.pill-accent</code> CSS now crimson + white)</td></tr>
+        </tbody>
+      </table>
+      <pre><code>/* About.vue — .pill-accent (the "TODAY" pill) */
+.pill-accent {
+  background: var(--color-accent-fill);
+  color: var(--color-accent-fill-ink);
+  border-color: var(--color-accent-fill);
+}</code></pre>
+    </div>
+  </div>
+
+  <!-- ===================== §9 ===================== -->
+  <div class="item" id="s9">
+    <div class="item-head"><span class="secnum">§9</span><h3>Mint highlight on nav tabs &amp; footer links</h3></div>
+    <div class="files"><span class="file-chip">src/design-system/components/Navbar.vue</span><span class="file-chip">src/design-system/components/Footer.vue</span></div>
+    <div class="body">
+      <p>The hover/active highlight on the brand-green navbar (and the brand footer links) changed from yellow to mint via the new <code>--color-highlight</code> token:</p>
+      <pre><code>text-accent       →  text-highlight        (active nav tab)
+hover:text-accent →  hover:text-highlight   (nav tab + footer link hover)</code></pre>
+      <div class="callout info"><span class="ico">ℹ️</span><p><strong>Not changed:</strong> the mobile cart-count number badge (<code>Navbar.vue</code>, a green circle with a count) is still yellow — it's a count indicator, not a tab highlight. Easy to switch if wanted.</p></div>
+    </div>
+  </div>
+
+  <!-- ===================== §10 ===================== -->
+  <div class="item" id="s10">
+    <div class="item-head"><span class="secnum">§10</span><h3>Yellow "highlight" removed from hero text &amp; titles</h3></div>
+    <div class="files"><span class="file-chip">src/pages/HomePage.vue</span><span class="file-chip">CategoryPage.vue</span><span class="file-chip">ProductPage.vue</span><span class="file-chip">ShopPage.vue</span><span class="file-chip">BrandHero.vue</span><span class="file-chip">Revitalization.vue</span><span class="file-chip">Kaiserhacks.vue</span></div>
+    <div class="body">
+      <p>The italic emphasis words inside hero/section headlines, and the small eyebrow labels above them, were yellow. They now match the surrounding white hero text.</p>
+      <table>
+        <thead><tr><th>File</th><th>Change</th></tr></thead>
+        <tbody>
+          <tr><td><code>HomePage.vue</code>, <code>CategoryPage.vue</code>, <code>ProductPage.vue</code>, <code>ShopPage.vue</code></td><td>headline <code>&lt;em&gt;</code> emphasis: <code>text-accent-soft</code> → <code>text-cream</code></td></tr>
+          <tr><td><code>BrandHero.vue</code>, <code>Revitalization.vue</code></td><td>same emphasis swap</td></tr>
+          <tr><td><code>CategoryPage.vue</code>, <code>ShopPage.vue</code>, <code>Kaiserhacks.vue</code></td><td>hero eyebrows: <code>text-accent</code> → <code>text-cream/75</code></td></tr>
+        </tbody>
+      </table>
+      <p>(<code>--color-cream</code> is now <code>#ffffff</code>, so these read as white on the green heroes.)</p>
+    </div>
+  </div>
+
+  <!-- ===================== §11 ===================== -->
+  <div class="item" id="s11">
+    <div class="item-head"><span class="secnum">§11</span><h3>Section dividers: wave → diagonal</h3></div>
+    <div class="files"><span class="file-chip">src/design-system/components/WaveDivider.vue</span><span class="file-chip">src/pages/HomePage.vue</span><span class="file-chip">src/design-system/components/Kaiserhacks.vue</span></div>
+    <div class="body">
+      <p>The soft S-curve between coloured sections became a <strong>straight diagonal</strong> that sits <strong>low on the left, high on the right</strong>, and the divider band was <strong>doubled in height</strong> so the slope is roughly twice as steep.</p>
+      <pre><code>height:   h-12 md:h-16   →  h-24 md:h-32   (48/64px → 96/128px)
+viewBox:  0 0 1440 64    →  0 0 1440 128
+path:     (cubic-bézier wave)  →  M0,0 L0,116 L1440,12 L1440,0 Z</code></pre>
+      <p>The seam-free construction is unchanged: a full-height <code>&lt;rect&gt;</code> paints the <em>lower</em> section colour and the <code>&lt;path&gt;</code> paints the <em>upper</em> section colour.</p>
+      <p>The same diagonal divider also sits between the <strong>Kaiserhacks</strong> green header and the white body below it: <code>Kaiserhacks.vue</code> imports <code>WaveDivider</code> and renders <code>&lt;WaveDivider from="brand" to="surface" /&gt;</code> between the <code>bg-brand</code> header and the content <code>&lt;div&gt;</code> (which gains <code>-mt-px</code> to sit flush).</p>
+    </div>
+  </div>
+
+  <!-- ===================== §12 ===================== -->
+  <div class="item" id="s12">
+    <div class="item-head"><span class="secnum">§12</span><h3>Search dropdown prices → white (on green)</h3></div>
+    <div class="files"><span class="file-chip">src/design-system/components/Search.vue</span></div>
+    <div class="body">
+      <p>In the search overlay, the price labels on the brand-green tone were yellow. They are now white to match the rest of the green-surface text:</p>
+      <pre><code>// brand tone
+price: 'text-accent'  →  'text-cream'   // (#ffffff on green)</code></pre>
+      <p>The <code>paper</code> and <code>cream</code> tones keep <code>text-brand</code> (unchanged).</p>
+    </div>
+  </div>
+
+  <!-- ===================== §13 ===================== -->
+  <div class="item" id="s13">
+    <div class="item-head"><span class="secnum">§13</span><h3>Brand-hero intro artwork → official brand assets</h3></div>
+    <div class="files"><span class="file-chip">src/design-system/components/BrandHero.vue</span><span class="file-chip">src/components/heroFigures.js</span><span class="file-chip">src/assets/brand/{hebe,waterfall}.svg</span></div>
+    <div class="body">
+      <p>The home-page intro animation (the in-flow figure entrance — the full-screen <code>SplashIntro</code> overlay was already retired) previously used hand-traced approximations of the woman + waterfall. It now uses the <strong>official Kaiser-Natron brand vectors</strong>: the Ikone ("Hebe") and the Waterfall (2021 Druckdaten-Final), converted from EPS to SVG.</p>
+      <ul>
+        <li><strong>Source SVGs</strong> live in <code>src/assets/brand/</code> for provenance; the extracted path data lives in <code>src/components/heroFigures.js</code> (<code>ladyMint</code>, <code>ladyWhite</code>, <code>waterfall</code>).</li>
+        <li><strong>Dark outline removed</strong> — the brand icon's <code>#006648</code> outline tone is dropped; the figures render as flat mint silhouettes, matching the established splash aesthetic. Mint tones: lady <code>#72c1ad</code>, waterfall <code>#6eceb2</code>; natron handful <code>#ffffff</code>.</li>
+        <li><strong>Composition</strong> — shared <code>0 0 2760 3624</code> viewBox: the lady at the origin (native 1828×3624), the waterfall <strong>half-scale</strong> (<code>scale(0.5)</code>) to her right and <strong>vertically centred</strong> against her (<code>translate(1793,1310)</code>).</li>
+        <li><strong>Animation unchanged</strong> — same choreography/timing: lady slides in from the left (<code>left-m</code>), waterfall from the right (<code>right-m</code>), the white natron fades in once she's landed (<code>mound-m</code>), tagline + SINCE 1881 last; same edge-feather mask and reduced-motion handling.</li>
+      </ul>
+      <div class="callout info"><span class="ico">ℹ️</span><p><strong>Side effect:</strong> the home-page chunk shrank ~214 KB → ~70 KB because the new <code>heroFigures.js</code> (~57 KB) replaces the much larger traced <code>splashPaths.js</code> import. <code>splashPaths.js</code> / <code>SplashIntro.vue</code> remain only as unused legacy.</p></div>
+    </div>
+  </div>
+
+  <!-- ===================== §14 ===================== -->
+  <div class="item" id="s14">
+    <div class="item-head"><span class="secnum">§14</span><h3>Product image — 250 g Großpackung box recoloured</h3></div>
+    <div class="files"><span class="file-chip">public/products/kaiser-natron-pulver-250-g-grosspackung.webp</span><span class="file-chip">dist/products/…</span></div>
+    <div class="body">
+      <p>The 250 g box product shot had a muted, grey/pine green that didn't match the brighter brand green of the other Kaiser-Natron powder packs (e.g. the 50 g sachet <code>public/products/kaiser-natron-pulver-50-g-beutel.webp</code>). It was replaced with an updated box render carrying the correct vivid brand green (the dark-green 3-D side panels and the red bottom band are intact).</p>
+      <ul>
+        <li><strong>Where product images live:</strong> <code>public/products/*.webp</code> (served as static assets; the build mirrors them to <code>dist/products/*.webp</code>). Convention: <strong>transparent RGBA, ~1200 px tall</strong>.</li>
+        <li>The replacement was supplied as a 939×1200 transparent PNG and saved straight to WebP (<code>quality 92</code>, no scaling needed — already matching the original dimensions), so edges/text stay crisp.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ===================== §15 ===================== -->
+  <div class="item" id="s15">
+    <div class="item-head"><span class="secnum">§15</span><h3>Design-system docs page</h3></div>
+    <div class="files"><span class="file-chip">src/pages/design/ColorsSection.vue</span></div>
+    <div class="body">
+      <p>The new <code>accent-fill</code>, <code>accent-fill-hover</code>, <code>accent-fill-ink</code> tokens were added to the colour-swatch reference so the in-app design-system page stays accurate.</p>
+    </div>
+  </div>
+
+  <!-- ===================== §16 ===================== -->
+  <div class="item" id="s16">
+    <div class="item-head"><span class="secnum">§16</span><h3>Brand name — ® trademark + hyphenation pass</h3></div>
+    <div class="files"><span class="file-chip">src/i18n/messages.js</span><span class="file-chip">src/api/products.js</span><span class="file-chip">src/design-system/components/Logo.vue</span><span class="file-chip">src/design-system/components/Navbar.vue</span></div>
+    <div class="body">
+      <p>The brand name is now written <strong>Kaiser-Natron®</strong> consistently — hyphenated, with the ® mark — on every visible mention. Two problems were fixed:</p>
+      <ul>
+        <li><strong>Missing ®</strong> — display headlines, CTAs, the bundle line-item lists and the product <code>brand</code> field carried no trademark mark. (The long Kaiserhacks recipe copy and the product <code>title</code> fields already had <code>Kaiser-Natron®</code> and were left as-is.)</li>
+        <li><strong>Spelling drift</strong> — the English locale (and one German headline) used the un-hyphenated <code>Kaiser Natron</code>. All standardised to the hyphenated form.</li>
+      </ul>
+      <table>
+        <thead><tr><th>File</th><th>What changed</th></tr></thead>
+        <tbody>
+          <tr><td><code>src/i18n/messages.js</code></td><td><code>shop.headline</code>, <code>ds.hero.headline.a</code>, <code>home.banner.sub</code>, <code>home.brand.headline.a</code>, <code>home.teaser.cta</code>, and the <code>bundle.*.items.*</code> lists — de <strong>and</strong> en — now read <code>Kaiser-Natron®</code></td></tr>
+          <tr><td><code>src/api/products.js</code></td><td><code>brand: 'Kaiser-Natron'</code> → <code>'Kaiser-Natron®'</code> (all 11 products; shown in search results via <code>Search.vue</code>)</td></tr>
+          <tr><td><code>src/design-system/components/Logo.vue</code></td><td>default accessible <code>title</code> prop <code>'Kaiser Natron'</code> → <code>'Kaiser-Natron®'</code></td></tr>
+          <tr><td><code>src/design-system/components/Navbar.vue</code></td><td>logo link <code>aria-label</code> <code>'Kaiser Natron home'</code> → <code>'Kaiser-Natron home'</code></td></tr>
+        </tbody>
+      </table>
+      <div class="callout info"><span class="ico">ℹ️</span><p><strong>Not touched:</strong> generic ingredient references ("Natron", "Natronwasser", "Natron-basierte …") — those mean the substance, not the brand, so they take no ®. Image <code>alt</code> text keeps the plain hyphenated name (not on-screen).</p></div>
+    </div>
+  </div>
+
+  <!-- ===================== §17 ===================== -->
+  <div class="item" id="s17">
+    <div class="item-head"><span class="secnum">§17</span><h3>Hero headline copy — versatility, not "shine"</h3></div>
+    <div class="files"><span class="file-chip">src/i18n/messages.js</span></div>
+    <div class="body">
+      <p>The product-hero headline (<code>ds.hero.headline.*</code>, de + en) was reworded from a generic cleaning-shine line to the brand's own versatility voice (drawn from kaiser-natron.de — <em>"Die Verwendungsmöglichkeiten … sind beinah grenzenlos"</em>). The three-part split (<code>a</code> / emphasised <code>em</code> / <code>b</code>) is unchanged; only the words changed.</p>
+      <pre><code>DE  "Kaiser-Natron®  für alles  was glänzen soll."
+ →  "Kaiser-Natron®  für fast  alles im Alltag."
+
+EN  "Kaiser-Natron®  for everything  that should shine."
+ →  "Kaiser-Natron®  for almost  anything at home."</code></pre>
+    </div>
+  </div>
+
+  <!-- ===================== §18 ===================== -->
+  <div class="item" id="s18">
+    <div class="item-head"><span class="secnum">§18</span><h3>Bundle artwork — "AI Edited" disclosure (L5 + L6)</h3></div>
+    <div class="files"><span class="file-chip">src/api/bundles.js</span><span class="file-chip">BundleCard.vue</span><span class="file-chip">Bundles.vue</span><span class="file-chip">src/pages/HomePage.vue</span><span class="file-chip">src/pages/BundlePage.vue</span></div>
+    <div class="body">
+      <p>The bundle images are AI-composed. Rather than replace them, each is now marked with a small, faint <strong>"AI Edited"</strong> caption in the bottom-right of the image, so the AI origin is disclosed. It's data-driven, so it disappears automatically once real photography replaces a given image.</p>
+      <ul>
+        <li><code>bundles.js</code> — each bundle record gains <code>aiEdited: true</code>.</li>
+        <li><code>BundleCard.vue</code> — new <code>aiEdited</code> Boolean prop; when true, renders the overlay span inside the media area (both the card-link and plain-media branches).</li>
+        <li><code>Bundles.vue</code> — passes <code>:ai-edited="bundle.aiEdited"</code> to all four BundleCard instances (mobile + grid + sidebar + carousel).</li>
+        <li><code>HomePage.vue</code> / <code>BundlePage.vue</code> — carry <code>aiEdited</code> through to the rendered records; BundlePage renders the same overlay on its large hero image (desktop + mobile).</li>
+      </ul>
+      <pre><code>&lt;span class="pointer-events-none absolute bottom-0 right-0 z-[1] px-2 py-0.5
+  text-[10px] font-medium uppercase tracking-label text-white/55
+  drop-shadow-[0_1px_2px_rgba(0,0,0,0.45)]"&gt;AI Edited&lt;/span&gt;</code></pre>
+      <div class="callout info"><span class="ico">ℹ️</span><p>Set a bundle's <code>aiEdited: false</code> (or drop it) in <code>bundles.js</code> to remove the badge once its image is a real photo.</p></div>
+    </div>
+  </div>
+
+  <!-- ===================== §19 ===================== -->
+  <div class="item" id="s19">
+    <div class="item-head"><span class="secnum">§19</span><h3>Revitalization section — animation row + CTA removed (L10)</h3></div>
+    <div class="files"><span class="file-chip">src/pages/HomePage.vue</span></div>
+    <div class="body">
+      <p>The Revitalization section was stripped back. Removed entirely:</p>
+      <ul>
+        <li>the <strong>three-pillar feature row</strong> with the spinning orbit animations (the emoji icons ⚗️💊🌿 were off-brand; the brand owner wanted the whole row gone), and</li>
+        <li>the <strong>"early access" CTA</strong> button (<code>revit.notifyCta</code> — "Get early access" / "Early Access sichern").</li>
+      </ul>
+      <p>This is done at the <strong>usage</strong> site, not the component: <code>revitCopy</code> no longer passes <code>features</code> or <code>notifyCta</code>, and the <code>:features</code> / <code>:notify-cta</code> / <code>@notify</code> bindings (and the orphaned <code>onRevitNotify</code> handler) were removed. The section now renders <strong>eyebrow + headline + sub only</strong>.</p>
+      <p><code>Revitalization.vue</code> is unchanged and still reusable — its <code>v-if="features.length"</code> and <code>v-if="notifyCta"</code> guards simply render nothing when those props are absent. The unused <code>revit.feature.*</code> / <code>revit.notifyCta</code> i18n keys are left in place (harmless) in case the section is restored.</p>
+    </div>
+  </div>
+
+  <!-- ===================== §20 ===================== -->
+  <div class="item" id="s20">
+    <div class="item-head"><span class="secnum">§20</span><h3>Shop page category banners + colours + Küche page (L8/U4)</h3></div>
+    <div class="files"><span class="file-chip">src/design-system/tokens.css</span><span class="file-chip">Hero.vue</span><span class="file-chip">src/pages/ShopPage.vue</span><span class="file-chip">src/router/index.js</span><span class="file-chip">src/pages/CategoryPage.vue</span><span class="file-chip">src/i18n/messages.js</span></div>
+    <div class="body">
+      <p>On the <strong>shop page</strong>, the catalogue is split into <strong>four</strong> use-group sections, each fronted by a <strong>full-width colour banner</strong> in the brand's own use-group colour (sourced from kaiser-natron.de), with diagonal dividers carrying the colour in and back out to the neutral product grid below. (The home page was left unchanged — it keeps its 3-card <code>ProductTeaser</code>.)</p>
+      <h4>Four sections + colours (design tokens)</h4>
+      <p><code>tokens.css</code> — the old "Haushalt" lump was split into <strong>Clean</strong> (cleaning) and <strong>Wash</strong> (laundry):</p>
+      <div class="swrow">
+        <div class="swcard"><span class="swbox" style="background:#c6d47d"></span><span><span class="role">Kitchen · lime</span><span class="hex">#c6d47d</span></span></div>
+        <div class="swcard"><span class="swbox" style="background:#eb5a61"></span><span><span class="role">Clean · grapefruit</span><span class="hex">#eb5a61</span></span></div>
+        <div class="swcard"><span class="swbox" style="background:#c15a7e"></span><span><span class="role">Wash · plum</span><span class="hex">#c15a7e</span></span></div>
+        <div class="swcard"><span class="swbox" style="background:#f1864c"></span><span><span class="role">Care · orange</span><span class="hex">#f1864c</span></span></div>
+      </div>
+      <table>
+        <thead><tr><th>Token</th><th>Hex</th><th>Section</th><th>Products</th></tr></thead>
+        <tbody>
+          <tr><td><code>--color-cat-kitchen</code></td><td><span class="swinline" style="background:#c6d47d"></span><code>#c6d47d</code> (lime)</td><td>Küche / cook</td><td>Pulver, Tabletten</td></tr>
+          <tr><td><code>--color-cat-clean</code></td><td><span class="swinline" style="background:#eb5a61"></span><code>#eb5a61</code> (grapefruit)</td><td>Reinigung / clean</td><td>cleaners, sprays, descalers</td></tr>
+          <tr><td><code>--color-cat-wash</code></td><td><span class="swinline" style="background:#c15a7e"></span><code>#c15a7e</code> (plum)</td><td>Wäsche / wash</td><td>wash-soda, starch, stain removers</td></tr>
+          <tr><td><code>--color-cat-care</code></td><td><span class="swinline" style="background:#f1864c"></span><code>#f1864c</code> (orange)</td><td>Pflege / care</td><td>bath, foot-bath, sport</td></tr>
+        </tbody>
+      </table>
+      <p>Tailwind v4 auto-emits <code>bg-cat-kitchen</code> / <code>bg-cat-clean</code> / <code>bg-cat-wash</code> / <code>bg-cat-care</code>.</p>
+      <h4>Product grouping</h4>
+      <p><code>src/api/products.js</code> — <code>USE_CASES</code> is now <code>['cook','clean','wash','care']</code>; <code>Wäsche</code> maps to the new <code>wash</code> group (was <code>clean</code>). <code>productsByUseCase</code> returns all four buckets.</p>
+      <h4>Hero tones</h4>
+      <p><code>Hero.vue</code> has <code>kitchen</code> / <code>clean</code> / <code>wash</code> / <code>care</code> tones. Lime keeps dark ink text; the other three take cream (white) text. Each sets an <code>eyebrowColor</code> applied inline (overrides the global <code>.eyebrow { color: muted }</code>). <code>WaveDivider.vue</code> gained matching <code>kitchen</code> / <code>clean</code> / <code>wash</code> / <code>care</code> tones.</p>
+      <h4>Shop page</h4>
+      <p><code>ShopPage.vue</code> loops the four use-cases; each renders <code>WaveDivider → &lt;Hero :tone="section.cat"&gt; (hero product + mixed-font heading + CTAs) → WaveDivider → a section title + product grid</code>. <code>CAT_TONE</code> maps cook→kitchen, clean→clean, wash→wash, care→care; <code>CAT_HERO_ID</code> picks the headline product (Pulver / Allzweck-Spray / Daunenwasch / Bad). A per-section title (<code>shop.section.&lt;id&gt;.products.title</code>) now sits above each grid.</p>
+      <h4>Banner CTAs</h4>
+      <p>Each banner carries two buttons (via the Hero <code>#actions</code> slot): <strong>"add to cart"</strong> in the brand crimson (<code>Button variant="accent"</code>, adds the section's hero product) and <strong>"learn more"</strong> as a white-outline ghost (<code>border-white/90 text-white</code>, links to the product page).</p>
+      <div class="callout warn"><span class="ico">⚠️</span><p>The white-outline "learn more" reads well on the saturated grapefruit / plum / orange banners but is low-contrast on the light lime (Kitchen) banner — may want a dark-outline variant there.</p></div>
+      <h4>Shop first fold — halved</h4>
+      <p>The green title fold was <code>min-h:calc(100svh − nav)</code> but only holds a compact title band, leaving too much empty green. Reduced to <code>calc(50svh − var(--nav-h))</code>. A diagonal then drops into a <strong>thin white band</strong> (<code>h-6 md:h-10</code>) before the first colour banner, so the green hero and the lime Kitchen banner don't butt directly together.</p>
+      <h4>Küche category page (new, separate from the shop sections)</h4>
+      <p>Added for parity with <code>/haushalt</code> + <code>/pflege</code>:</p>
+      <ul>
+        <li><code>router/index.js</code> — new <code>/kueche</code> route → <code>CategoryPage</code> <code>{ slug: 'kueche', useCase: 'cook' }</code>.</li>
+        <li><code>CategoryPage.vue</code> — <code>slug</code> validator allows <code>kueche</code>; <code>useCase</code> allows <code>cook</code>.</li>
+        <li><code>messages.js</code> — full <code>category.kueche.*</code> copy (de + en), mirroring pflege/haushalt.</li>
+      </ul>
+      <div class="callout info"><span class="ico">ℹ️</span><p><strong>Resolved (see §21).</strong> The three content-complete category pages (<code>/kueche</code>, <code>/haushalt</code>, <code>/pflege</code>) are now wired into the footer. <code>/waesche</code> (wash) is intentionally <strong>deferred</strong> pending brand copy — the shop's in-page <code>wash</code> section covers laundry in the meantime.</p></div>
+    </div>
+  </div>
+
+  <!-- ===================== §21 ===================== -->
+  <div class="item" id="s21">
+    <div class="item-head"><span class="secnum">§21</span><h3>Category pages wired up + naming aligned to shop sections</h3></div>
+    <div class="files"><span class="file-chip">src/design-system/components/Footer.vue</span><span class="file-chip">src/i18n/messages.js</span></div>
+    <div class="body">
+      <p><strong>Decision.</strong> Of the four use-groups, the three with complete copy (<code>cook</code>/<code>clean</code>/<code>care</code> → <code>/kueche</code>, <code>/haushalt</code>, <code>/pflege</code>) are kept as standalone landing pages <em>alongside</em> the shop's in-page sections, and linked from the footer. The <code>wash</code> group has no standalone page (<code>/waesche</code>) yet — <strong>deferred</strong> until brand copy is supplied; the shop's <code>wash</code> section covers laundry meanwhile.</p>
+      <p><strong>Footer links.</strong> <code>Footer.vue</code> <code>exploreLinks</code> now lists <code>Shop → Küche → Haushalt → Pflege → Bundles → About</code> (the <code>/kueche</code> link was previously missing — page was reachable only by direct URL). Order follows the shop's use-group order.</p>
+      <p><strong>Naming aligned to the shop.</strong> The footer <strong>link labels</strong> and the category-page <strong>eyebrows</strong> now use the shop's plain section names (<code>shop.feature.*</code>) instead of the older descriptive variants, so a section and its landing page read identically:</p>
+      <table>
+        <thead><tr><th>Page (route)</th><th>use-case</th><th>eyebrow + footer label — DE / EN</th><th>was</th></tr></thead>
+        <tbody>
+          <tr><td><code>/kueche</code></td><td>cook</td><td><strong>Küche / Kitchen</strong></td><td>"Küche &amp; Backen" / "Kitchen &amp; baking"</td></tr>
+          <tr><td><code>/haushalt</code></td><td>clean</td><td><strong>Reinigung / Clean</strong></td><td>"Haushalt &amp; Reinigung" / "Home &amp; cleaning"</td></tr>
+          <tr><td><code>/pflege</code></td><td>care</td><td><strong>Pflege / Care</strong></td><td>"Pflege &amp; Wohlbefinden" / "Personal care &amp; wellbeing"</td></tr>
+        </tbody>
+      </table>
+      <p>Route slugs are unchanged (<code>/haushalt</code> still serves the <code>clean</code> group); only the visible labels/eyebrows moved to the new names.</p>
+    </div>
+  </div>
+
+  <!-- ===================== §22 ===================== -->
+  <div class="item" id="s22">
+    <div class="item-head"><span class="secnum">§22</span><h3>Membership removed — bundles are single-price (U2)</h3></div>
+    <div class="files"><span class="file-chip">src/api/bundles.js</span><span class="file-chip">BundleCard.vue</span><span class="file-chip">Bundles.vue</span><span class="file-chip">BundlePage.vue</span><span class="file-chip">HomePage.vue</span><span class="file-chip">src/i18n/messages.js</span><span class="file-chip">BundleCardSection.vue</span><span class="file-chip">BundlesSection.vue</span><span class="file-chip">previews/BundlesPreview.vue</span></div>
+    <div class="body">
+      <p>There is <strong>no membership programme</strong>, so every trace of one was removed (the join button went earlier in §U2; this completes it). <strong>Decision: single retail price</strong> — bundles now show only their regular price (e.g. €24,90); the old lower <code>memberPrice</code> was dropped entirely (no discount remains).</p>
+      <ul>
+        <li><strong>Data.</strong> <code>bundles.js</code> — <code>memberPrice</code> deleted from all three bundles.</li>
+        <li><strong><code>BundleCard.vue</code></strong> — removed the <code>memberPrice</code> prop, the <code>memberLabel</code> computed, and the "Mitglieder: €X" line under the price.</li>
+        <li><strong><code>Bundles.vue</code></strong> — removed all four <code>:member-price</code> bindings, the <code>joinCta</code> prop, the <code>join</code> emit, both "become a member" buttons (stacked + sidebar), and the now-unused <code>Button</code> import. Stale "why join" / "member pitch" comments reworded to "why bundle".</li>
+        <li><strong><code>BundlePage.vue</code></strong> — removed the <code>memberPriceLabel</code> computed and the member price line in both desktop and mobile hero blocks.</li>
+        <li><strong><code>HomePage.vue</code></strong> — dropped <code>memberPrice</code> from the localized-bundle mapping.</li>
+        <li><strong>Copy (<code>messages.js</code>).</strong> Deleted orphaned keys <code>bundle.memberPrice</code>, <code>bundles.joinCta</code>, <code>bundles.card.memberPrefix</code>. <code>bundles.card.priceLabel</code> → "Preis" / "Price" (was "Verkaufspreis" / "Retail price"). The section subtitle + three benefits were rewritten from membership perks to <strong>bundle value</strong> (no savings claim, since the price is now flat):
+          <ul>
+            <li>sub: "Kuratierte Sets … in einem Paket." / "Curated sets … in a single pack."</li>
+            <li>benefits: <em>Aufeinander abgestimmt · Alles für einen Bereich · In einer Lieferung</em> (EN: <em>Chosen to work together · Everything for one area · In a single delivery</em>).</li>
+            <li><code>ds.bundleCard.description</code> / <code>ds.bundles.description</code> updated to drop the member-price / member-CTA mentions.</li>
+          </ul>
+        </li>
+      </ul>
+      <p>The <code>headline.em</code> stays "Vorteile / Benefits" — it now reads as the bundles' advantages rather than membership perks.</p>
+    </div>
+  </div>
+
+  <!-- ===================== §23 ===================== -->
+  <div class="item" id="s23">
+    <div class="item-head"><span class="secnum">§23</span><h3>Second-fold banner image — powder, not bath (L7)</h3></div>
+    <div class="files"><span class="file-chip">src/pages/HomePage.vue</span></div>
+    <div class="body">
+      <p>The cream second-fold banner reads <em>"Ein Pulver, hundert Anwendungen im Haushalt"</em> / <em>"One powder, a hundred uses around the home"</em> but showed the <strong>Bad 500 g (bath)</strong> product — and its add-to-cart + "learn more" link pointed there too, contradicting the powder message. Repointed the whole banner to <strong>powder</strong>:</p>
+      <ul>
+        <li><code>imgBanner</code> → <code>/products/kaiser-natron-pulver-3.490-g-eimer.webp</code> (the bulk bucket — visually reinforces "a hundred uses"; deliberately <em>not</em> the 250 g Großpackung, which is already the first-fold hero).</li>
+        <li><code>bannerProductId</code> → <code>kaiser-natron-pulver-3490-g-eimer</code>, so the CTA adds the powder and "learn more" links to <code>/shop/kaiser-natron-pulver-3490-g-eimer</code>.</li>
+        <li><code>image-alt</code> → "Kaiser-Natron® Pulver 3.490 g Eimer".</li>
+      </ul>
+      <p>No new asset needed — the bucket image already shipped in <code>public/products/</code>.</p>
+    </div>
+  </div>
+
+  <!-- ===================== §24 ===================== -->
+  <div class="item" id="s24">
+    <div class="item-head"><span class="secnum">§24</span><h3>Revitalization section removed from the homepage</h3></div>
+    <div class="files"><span class="file-chip">src/pages/HomePage.vue</span><span class="file-chip">ShopPage.vue</span><span class="file-chip">CategoryPage.vue</span><span class="file-chip">BundlePage.vue</span><span class="file-chip">ProductPage.vue</span><span class="file-chip">KaiserhacksPage.vue</span><span class="file-chip">LoginPage.vue</span><span class="file-chip">RegisterPage.vue</span><span class="file-chip">LegalPage.vue</span></div>
+    <div class="body">
+      <p>The brand owner flagged the "Revitalization Center" name + icons as off-brand. Removed the section from the public site <strong>for now</strong>:</p>
+      <ul>
+        <li><code>HomePage.vue</code> — removed the <code>&lt;Revitalization&gt;</code> block and the two diagonal SVG dividers that bracketed it (the cream banner now flows straight into the cream About section), plus the <code>Revitalization</code> import and the <code>revitCopy</code> computed.</li>
+        <li>Stripped the now-dead <code>{ key: 'nav.revitalization', href: '/#revitalize' }</code> entry from every page's nav array (9 files) so nothing links to the missing anchor.</li>
+      </ul>
+      <p>Kept in reserve (not deleted): <code>Revitalization.vue</code>, its design-system docs page, the <code>revit.*</code> i18n keys, and the <code>/design/preview/revitalization</code> route — so the section can be reinstated (with a corrected name) by re-adding the import, <code>revitCopy</code>, the render block, and the nav entries.</p>
+    </div>
+  </div>
+
+  <!-- ===================== §25 ===================== -->
+  <div class="item" id="s25">
+    <div class="item-head"><span class="secnum">§25</span><h3>Sport-Profi recategorised to Laundry (Wäsche)</h3></div>
+    <div class="files"><span class="file-chip">src/api/products.js</span></div>
+    <div class="body">
+      <p>Brand-owner review: <em>Sport Profi is a laundry product and belongs under Household, not Bathing &amp; Care.</em> In the four-group taxonomy laundry = <code>wash</code>, so <code>USE_CASE_BY_CATEGORY.Sport</code> changed <code>'care'</code> → <code>'wash'</code>. The <code>kaiser-natron-sport-profi-250-ml</code> product now appears in the <strong>Wäsche / wash</strong> (plum) section instead of Pflege / care. Doc comment updated to match.</p>
+    </div>
+  </div>
+
+  <!-- ===================== §26 ===================== -->
+  <div class="item" id="s26">
+    <div class="item-head"><span class="secnum">§26</span><h3>"Das Original aus Österreich" removed (G1)</h3></div>
+    <div class="files"><span class="file-chip">src/i18n/messages.js</span></div>
+    <div class="body">
+      <p>Brand-owner review: the "Original from Austria" claim is inaccurate. Removed the leading sentence from <code>footer.tagline</code> (DE + EN); the tagline now opens at <em>"Reines Natron für Küche, Haushalt und Pflege …"</em> / <em>"Pure sodium bicarbonate for the kitchen, the home, and personal care …"</em>.</p>
+      <div class="callout info"><span class="ico">ℹ️</span><p>Other Austria-flavoured strings remain and are separate decisions, not part of this change: <code>footer.madeIn</code> / <code>product.prop.made-in-austria</code> ("In Österreich abgefüllt" / "Bottled in Austria") and the Impressum/Datenschutz Vienna address. Flag to the user if the origin correction should extend to these.</p></div>
+    </div>
+  </div>
+
+  <!-- ===================== §27 ===================== -->
+  <div class="item" id="s27">
+    <div class="item-head"><span class="secnum">§27</span><h3>Shop hero — skewed category jump-buttons + white gap removed</h3></div>
+    <div class="files"><span class="file-chip">src/pages/ShopPage.vue</span></div>
+    <div class="body">
+      <p><strong>Jump-buttons.</strong> Under the shop hero's title + sub, a row of four <strong>skewed parallelogram buttons</strong> (one per use-group, each filled with its own category colour) smooth-scrolls to the matching section:</p>
+      <div class="swrow">
+        <div class="swcard"><span class="swbox" style="background:#c6d47d"></span><span><span class="role">Küche / Kitchen</span><span class="hex">dark ink label</span></span></div>
+        <div class="swcard"><span class="swbox" style="background:#eb5a61"></span><span><span class="role">Reinigung / Clean</span><span class="hex">white label</span></span></div>
+        <div class="swcard"><span class="swbox" style="background:#c15a7e"></span><span><span class="role">Wäsche / Wash</span><span class="hex">white label</span></span></div>
+        <div class="swcard"><span class="swbox" style="background:#f1864c"></span><span><span class="role">Pflege / Care</span><span class="hex">white label</span></span></div>
+      </div>
+      <ul>
+        <li>Rendered by looping <code>sections</code>; label is <code>section.feature</code>.</li>
+        <li>Shape: <code>-skew-x-12</code> on the button with a counter-skew <code>skew-x-12</code> on the inner <code>&lt;span&gt;</code> so the text stays upright — echoes the angled (Soulmates) CI.</li>
+        <li>Colour map <code>CAT_BTN</code>: <code>bg-cat-kitchen text-brand</code> (lime is light → dark ink), the other three <code>bg-cat-* text-white</code>.</li>
+        <li><code>scrollToSection(id)</code> calls <code>el.scrollIntoView({ behavior: 'smooth' })</code>; each section's existing <code>scroll-mt</code> keeps the landing just below the sticky nav.</li>
+      </ul>
+      <p><strong>White gap removed.</strong> The thin white band (<code>-mt-px h-6 md:h-10 bg-cream</code>) and its preceding <code>WaveDivider from="brand" to="cream"</code> — added in §20 — are gone. The green hero now flows <strong>straight into the first colour banner</strong> via a single diagonal: the section loop is <code>(section, i)</code> and the first divider is <code>:from="i === 0 ? 'brand' : 'cream'"</code>.</p>
+    </div>
+  </div>
+
+  <!-- ===================== QUICK REFERENCE ===================== -->
+  <div class="item" id="qref" style="border-left-color: var(--crimson);">
+    <div class="item-head"><span class="secnum" style="background:var(--crimson); box-shadow:0 4px 12px rgba(204,2,48,.22);">★</span><h3>Quick reference — the two new colours</h3></div>
+    <div class="body">
+      <div class="swrow">
+        <div class="swcard"><span class="swbox" style="background:#cc0230"></span><span><span class="role">Crimson</span><span class="hex">#cc0230</span></span></div>
+        <div class="swcard"><span class="swbox" style="background:#6eceb2"></span><span><span class="role">Mint</span><span class="hex">#6eceb2</span></span></div>
+        <div class="swcard"><span class="swbox" style="background:#ffffff"></span><span><span class="role">White</span><span class="hex">#ffffff</span></span></div>
+      </div>
+      <pre><code>Crimson  #cc0230   — all buttons / CTAs / solid pills (with #ffffff text)
+Mint     #6eceb2   — nav tab + footer link hover/active highlight
+White    #ffffff   — page backgrounds (cream + surface) and button text on green</code></pre>
+    </div>
+  </div>
+
+  <footer class="foot">
+    <span>Kaiser-Natron® — developer change log</span>
+    <span>27 documented changes · feat/shop-category-sections</span>
+  </footer>
+
+</div>
+</body>
+</html>
