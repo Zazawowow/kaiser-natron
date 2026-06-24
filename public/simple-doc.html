@@ -112,6 +112,30 @@
   .cat { display: flex; align-items: center; gap: 12px; font-size: 14px; }
   .cat .sw { width: 26px; height: 18px; border-radius: 4px; flex: none; border: 1px solid rgba(0,0,0,.06); }
 
+  code {
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 0.86em;
+    background: var(--cream);
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    padding: 1px 6px;
+    color: var(--brand);
+    white-space: nowrap;
+  }
+
+  /* Developer reference — swatch cards + spec rows */
+  .refgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
+  .refcard {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--paper); border: 1px solid var(--line);
+    border-radius: 10px; padding: 10px 12px;
+  }
+  .refcard .chip { width: 34px; height: 34px; border-radius: 7px; flex: none; border: 1px solid rgba(0,0,0,.08); }
+  .refcard .role { display: block; font-size: 13.5px; font-weight: 600; color: var(--ink); }
+  .refcard .hex { display: block; font-family: ui-monospace, Menlo, monospace; font-size: 12px; color: var(--muted); }
+  .specs { margin: 14px 0 0; font-size: 14px; color: var(--ink); }
+  .specs li { margin-bottom: 6px; }
+
   /* "Waiting on you" — crimson accent */
   .group.waiting > h2 { border-bottom-color: var(--crimson); }
   .group.waiting ul.items li { border-left-color: var(--crimson); }
@@ -138,7 +162,7 @@
   <div class="hero-inner">
     <p class="eyebrow">Plain-Language Guide</p>
     <h1>Kaiser-Natron<sup>®</sup> —<br><em>what changed, in plain words</em></h1>
-    <p>A non-technical summary of the visual and content changes to the site. The detailed developer version lives at <strong>/dev-doc.html</strong> — this is the same story without the code.</p>
+    <p>A non-technical summary of the visual and content changes to the site. The detailed developer version lives at <strong>/dev-doc</strong> — this is the same story without the code.</p>
     <p class="meta">Updated 24 June 2026 · Branch feat/shop-category-sections</p>
   </div>
 </header>
@@ -152,9 +176,9 @@
   <section class="group">
     <h2>Look &amp; feel</h2>
     <ul class="items">
-      <li><strong>Colours.</strong> The site now uses the official brand palette: the deep brand green, a crimson red for anything clickable (buttons, "add to cart"), and a soft mint that lights up links when you hover them.</li>
-      <li><strong>Backgrounds are white.</strong> Pages sit on clean white instead of the old tinted panels, so products and text stand out.</li>
-      <li><strong>Brand typeface.</strong> Headlines and text use the brand's own "Zeitung" font, loaded directly by the site (not borrowed from Google), so it always looks the same and loads fast.</li>
+      <li><strong>Colours.</strong> The site now uses the official brand palette: the deep brand green <code>#006548</code>, a crimson red <code>#cc0230</code> for anything clickable (buttons, "add to cart"), and a soft mint <code>#6eceb2</code> that lights up links when you hover them. The warm yellow <code>#e9c84b</code> is now used only as emphasis text on green. <em>(Full reference at the bottom.)</em></li>
+      <li><strong>Backgrounds are white.</strong> Pages sit on clean white <code>#ffffff</code> instead of the old tinted panels, so products and text stand out.</li>
+      <li><strong>Brand typeface.</strong> Headlines and text use the brand's own <strong>"Zeitung"</strong> font, self-hosted by the site (a local <code>.woff2</code> file, not borrowed from Google), so it always looks the same and loads fast. One family for everything — headlines and body.</li>
       <li><strong>Section dividers are diagonal.</strong> The wavy lines between coloured bands were replaced with clean diagonal edges.</li>
       <li><strong>Buttons.</strong> All buttons share one consistent style — crimson with white text. The big "call to action" buttons on hero banners stand out clearly.</li>
       <li><strong>Removed the yellow highlight.</strong> Headlines no longer use the old yellow accent; they're cleaner now.</li>
@@ -189,10 +213,10 @@
       <li>
         <strong>Four colour-coded sections.</strong> The shop is now organised by what you're doing, each with its own brand colour:
         <div class="cats">
-          <div class="cat"><span class="sw" style="background:var(--kitchen)"></span> <span><strong>Küche / Kitchen</strong> — lime green (baking, cooking, digestion)</span></div>
-          <div class="cat"><span class="sw" style="background:var(--clean)"></span> <span><strong>Reinigung / Clean</strong> — grapefruit red (household cleaning)</span></div>
-          <div class="cat"><span class="sw" style="background:var(--wash)"></span> <span><strong>Wäsche / Wash</strong> — plum (laundry &amp; textile care)</span></div>
-          <div class="cat"><span class="sw" style="background:var(--care)"></span> <span><strong>Pflege / Care</strong> — orange (bath, body)</span></div>
+          <div class="cat"><span class="sw" style="background:var(--kitchen)"></span> <span><strong>Küche / Kitchen</strong> — lime green <code>#c6d47d</code> (baking, cooking, digestion)</span></div>
+          <div class="cat"><span class="sw" style="background:var(--clean)"></span> <span><strong>Reinigung / Clean</strong> — grapefruit red <code>#eb5a61</code> (household cleaning)</span></div>
+          <div class="cat"><span class="sw" style="background:var(--wash)"></span> <span><strong>Wäsche / Wash</strong> — plum <code>#c15a7e</code> (laundry &amp; textile care)</span></div>
+          <div class="cat"><span class="sw" style="background:var(--care)"></span> <span><strong>Pflege / Care</strong> — orange <code>#f1864c</code> (bath, body)</span></div>
         </div>
       </li>
       <li><strong>Banners.</strong> Each section opens with a full-width colour banner showing its star product, with an "add to cart" and a "learn more" button.</li>
@@ -210,6 +234,28 @@
     </ul>
   </section>
 
+  <section class="group">
+    <h2>Quick reference (for the developer)</h2>
+    <p style="font-size:14px;color:var(--muted);margin:0 0 14px;">The exact values, in case they're handy — nothing you need to act on.</p>
+    <div class="refgrid">
+      <div class="refcard"><span class="chip" style="background:#006548"></span><span><span class="role">Brand green</span><span class="hex">#006548</span></span></div>
+      <div class="refcard"><span class="chip" style="background:#cc0230"></span><span><span class="role">Crimson — buttons/CTAs</span><span class="hex">#cc0230</span></span></div>
+      <div class="refcard"><span class="chip" style="background:#6eceb2"></span><span><span class="role">Mint — link hover</span><span class="hex">#6eceb2</span></span></div>
+      <div class="refcard"><span class="chip" style="background:#e9c84b"></span><span><span class="role">Yellow — emphasis on green</span><span class="hex">#e9c84b</span></span></div>
+      <div class="refcard"><span class="chip" style="background:#ffffff"></span><span><span class="role">White — backgrounds</span><span class="hex">#ffffff</span></span></div>
+      <div class="refcard"><span class="chip" style="background:#c6d47d"></span><span><span class="role">Kitchen — lime</span><span class="hex">#c6d47d</span></span></div>
+      <div class="refcard"><span class="chip" style="background:#eb5a61"></span><span><span class="role">Clean — grapefruit</span><span class="hex">#eb5a61</span></span></div>
+      <div class="refcard"><span class="chip" style="background:#c15a7e"></span><span><span class="role">Wash — plum</span><span class="hex">#c15a7e</span></span></div>
+      <div class="refcard"><span class="chip" style="background:#f1864c"></span><span><span class="role">Care — orange</span><span class="hex">#f1864c</span></span></div>
+    </div>
+    <ul class="specs">
+      <li><strong>Typeface:</strong> Zeitung (self-hosted <code>.woff2</code>), one family for headlines and body.</li>
+      <li><strong>Buttons:</strong> fully rounded "pill" shape; crimson fill with white text.</li>
+      <li><strong>Dividers:</strong> straight diagonal edges between coloured bands (no waves).</li>
+      <li><strong>Full technical detail:</strong> see <strong>/dev-doc</strong>.</li>
+    </ul>
+  </section>
+
   <section class="group waiting">
     <h2>Still waiting on a decision (content owner)</h2>
     <ul class="items">
@@ -222,7 +268,7 @@
 
   <footer class="foot">
     <span>Kaiser-Natron® — plain-language change guide</span>
-    <span>Detailed version: /dev-doc.html</span>
+    <span>Detailed version: /dev-doc</span>
   </footer>
 
 </div>
