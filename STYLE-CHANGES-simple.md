@@ -72,6 +72,13 @@
 - **Sport Profi moved to Laundry.** It's a laundry product, so it now sits under
   Wäsche / Wash instead of Care.
 
+## Mobile menu button
+
+- **Menu button is now red.** On phones, the round menu button in the bottom-right
+  corner used to be green, which made it blend in next to the red cart button.
+  It's now the same crimson red as the cart and every other button, so the two
+  match and clearly look tappable.
+
 ## Category pages
 
 - **Three dedicated pages are now reachable** from the footer: **Küche**,

@@ -328,7 +328,7 @@
     <p class="eyebrow">Developer Handoff · Restyle Change Log</p>
     <h1>Kaiser-Natron<sup>®</sup> restyle —<br><em>every change, documented</em></h1>
     <p>A plain-language summary of every visual change in this restyle pass — the exact file, what changed, and the CSS / Tailwind classes involved. Organised by theme so you can review one concern at a time.</p>
-    <p class="meta">Updated 24 June 2026 · Branch <code>feat/shop-category-sections</code> · 28 changes</p>
+    <p class="meta">Updated 26 June 2026 · Branch <code>feat/shop-category-sections</code> · 29 changes</p>
     <p class="meta"><a href="/dev-doc-de" style="color:var(--mint);text-decoration:underline;">Deutsch ↗</a></p>
   </div>
 </header>
@@ -372,6 +372,7 @@
       <a href="#s26"><span class="n">§26</span> "Das Original aus Österreich" removed</a>
       <a href="#s27"><span class="n">§27</span> Shop hero — category jump-buttons + gap removed</a>
       <a href="#s28"><span class="n">§28</span> /design showcase updated to the rebrand</a>
+      <a href="#s29"><span class="n">§29</span> Mobile menu button → crimson</a>
       <a href="#qref" class="qref"><span class="n">★</span> Quick reference — the two new colours</a>
     </div>
   </nav>
@@ -900,6 +901,21 @@ EN  "Kaiser-Natron®  for everything  that should shine."
     </div>
   </div>
 
+  <!-- ===================== §29 ===================== -->
+  <div class="item" id="s29">
+    <div class="item-head"><span class="secnum">§29</span><h3>Mobile menu button → crimson</h3></div>
+    <div class="files"><span class="file-chip">src/design-system/components/Navbar.vue</span></div>
+    <div class="body">
+      <p>The floating mobile menu (hamburger) button in the bottom-right cluster was the green <code>float</code> variant (<code>bg-brand-float</code>), so it didn't read as an action and clashed with the crimson cart button sitting next to it. It now uses the <strong><code>accent</code></strong> variant — crimson fill, white icon — matching the cart and the rest of the CTAs:</p>
+      <table>
+        <tr><th>Was</th><th>Now</th></tr>
+        <tr><td><code>variant="float"</code> (green, <code>shadow → lg</code>)</td><td><code>variant="accent"</code> + <code>shadow="md"</code> (crimson)</td></tr>
+      </table>
+      <p>Icon size (24) and stroke width (2) are unchanged. The two floating buttons are now a matched crimson pair.</p>
+      <p class="viewlink-row"><a class="viewlink" href="/" target="_blank" rel="noopener">View on site</a> <span style="color:var(--muted)">— on a narrow viewport (&lt; 1100px), bottom-right.</span></p>
+    </div>
+  </div>
+
   <!-- ===================== QUICK REFERENCE ===================== -->
   <div class="item" id="qref" style="border-left-color: var(--crimson);">
     <div class="item-head"><span class="secnum" style="background:var(--crimson); box-shadow:0 4px 12px rgba(204,2,48,.22);">★</span><h3>Quick reference — the two new colours</h3></div>
@@ -918,7 +934,7 @@ White    #ffffff   — page backgrounds (cream + surface) and button text on gre
 
   <footer class="foot">
     <span>Kaiser-Natron® — developer change log</span>
-    <span>28 documented changes · feat/shop-category-sections</span>
+    <span>29 documented changes · feat/shop-category-sections</span>
   </footer>
 
 </div>

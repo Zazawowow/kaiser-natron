@@ -705,6 +705,23 @@ Audited all 26 sections and corrected every drift:
 
 ---
 
+## 29. Mobile menu button → crimson
+
+**File:** `src/design-system/components/Navbar.vue`
+
+The floating mobile menu (hamburger) button in the bottom-right cluster used the
+green `float` variant (`bg-brand-float`), so it didn't read as an action and
+clashed with the crimson cart button beside it. Switched to the **`accent`**
+variant (`bg-accent-fill` crimson, white icon) with `shadow="md"` to match the
+cart — the two floating buttons are now a matched crimson pair. Icon size (24)
+and stroke width (2) unchanged.
+
+| Was | Now |
+| --- | --- |
+| `variant="float"` (green, default `shadow → lg`) | `variant="accent"` + `shadow="md"` (crimson) |
+
+---
+
 ## Quick reference — the two new colours
 
 ```

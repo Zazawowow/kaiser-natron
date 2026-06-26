@@ -325,8 +325,9 @@ onBeforeUnmount(() => {
       />
       <IconButton
         icon="menu"
-        variant="float"
+        variant="accent"
         size="lg"
+        shadow="md"
         :icon-size="24"
         :icon-stroke-width="2"
         :aria-label="t('menu.open')"

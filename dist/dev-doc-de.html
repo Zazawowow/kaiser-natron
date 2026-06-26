@@ -328,7 +328,7 @@
     <p class="eyebrow">Entwickler-Handoff · Restyle-Änderungsprotokoll</p>
     <h1>Kaiser-Natron<sup>®</sup> Restyle —<br><em>jede Änderung, dokumentiert</em></h1>
     <p>Eine allgemeinverständliche Zusammenfassung jeder visuellen Änderung in diesem Restyle-Durchgang — die genaue Datei, was sich geändert hat und welche CSS- / Tailwind-Klassen beteiligt sind. Nach Thema gegliedert, damit du ein Anliegen nach dem anderen prüfen kannst.</p>
-    <p class="meta">Aktualisiert am 24. Juni 2026 · Branch <code>feat/shop-category-sections</code> · 28 Änderungen</p>
+    <p class="meta">Aktualisiert am 26. Juni 2026 · Branch <code>feat/shop-category-sections</code> · 29 Änderungen</p>
     <p class="meta"><a href="/dev-doc" style="color:var(--mint);text-decoration:underline;">English ↗</a></p>
   </div>
 </header>
@@ -372,6 +372,7 @@
       <a href="#s26"><span class="n">§26</span> „Das Original aus Österreich“ entfernt</a>
       <a href="#s27"><span class="n">§27</span> Shop-Hero — Kategorie-Sprungbuttons + Lücke entfernt</a>
       <a href="#s28"><span class="n">§28</span> /design-Showcase auf das Rebrand aktualisiert</a>
+      <a href="#s29"><span class="n">§29</span> Mobiler Menü-Button → Purpurrot</a>
       <a href="#qref" class="qref"><span class="n">★</span> Schnellreferenz — die zwei neuen Farben</a>
     </div>
   </nav>
@@ -900,6 +901,21 @@ EN  "Kaiser-Natron®  for everything  that should shine."
     </div>
   </div>
 
+  <!-- ===================== §29 ===================== -->
+  <div class="item" id="s29">
+    <div class="item-head"><span class="secnum">§29</span><h3>Mobiler Menü-Button → Purpurrot</h3></div>
+    <div class="files"><span class="file-chip">src/design-system/components/Navbar.vue</span></div>
+    <div class="body">
+      <p>Der schwebende mobile Menü-Button (Hamburger) im Cluster unten rechts war die grüne <code>float</code>-Variante (<code>bg-brand-float</code>) und wirkte daher nicht wie eine Aktion — zudem stand er im Kontrast zum purpurroten Warenkorb-Button direkt daneben. Er nutzt jetzt die Variante <strong><code>accent</code></strong> — purpurrote Füllung, weißes Icon — passend zum Warenkorb und zu den übrigen CTAs:</p>
+      <table>
+        <tr><th>Vorher</th><th>Jetzt</th></tr>
+        <tr><td><code>variant="float"</code> (grün, <code>shadow → lg</code>)</td><td><code>variant="accent"</code> + <code>shadow="md"</code> (purpurrot)</td></tr>
+      </table>
+      <p>Icon-Größe (24) und Strichstärke (2) bleiben unverändert. Die beiden schwebenden Buttons sind nun ein einheitliches purpurrotes Paar.</p>
+      <p class="viewlink-row"><a class="viewlink" href="/" target="_blank" rel="noopener">Auf der Seite ansehen</a> <span style="color:var(--muted)">— bei schmalem Viewport (&lt; 1100px), unten rechts.</span></p>
+    </div>
+  </div>
+
   <!-- ===================== QUICK REFERENCE ===================== -->
   <div class="item" id="qref" style="border-left-color: var(--crimson);">
     <div class="item-head"><span class="secnum" style="background:var(--crimson); box-shadow:0 4px 12px rgba(204,2,48,.22);">★</span><h3>Schnellreferenz — die zwei neuen Farben</h3></div>
@@ -918,7 +934,7 @@ White    #ffffff   — page backgrounds (cream + surface) and button text on gre
 
   <footer class="foot">
     <span>Kaiser-Natron® — Entwickler-Änderungsprotokoll</span>
-    <span>28 dokumentierte Änderungen · feat/shop-category-sections</span>
+    <span>29 dokumentierte Änderungen · feat/shop-category-sections</span>
   </footer>
 
 </div>
