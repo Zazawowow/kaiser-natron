@@ -1,4 +1,5 @@
 <script setup>
+import { publicAsset } from '@/lib/publicAsset.js'
 import { ref } from 'vue'
 import SectionShell from './SectionShell.vue'
 import BundleCard from '@/design-system/components/BundleCard.vue'
@@ -17,7 +18,7 @@ function onAdd(id) {
 // One shared product fixture across the whole page. Using the transparent
 // cutout (not the jpg product shot) because it sits cleanly on the cream
 // media panel without a visible square crop edge.
-const sampleImage = '/products/kaiser-natron-pulver-250-g-grosspackung.webp'
+const sampleImage = publicAsset('products/kaiser-natron-pulver-250-g-grosspackung.webp')
 
 const sample = {
   name: 'Haushalts-Bundle',
@@ -115,7 +116,7 @@ const sampleWithOverflow = {
     '1× Spülmittel 500 ml',
   ]"
   :price="24.9"
-  image="/products/cutouts/…-removebg-preview.png"
+  :image="publicAsset('products/cutouts/…-removebg-preview.png')"
   badge="Bestseller"
   badge-variant="accent"
   tone="paper"

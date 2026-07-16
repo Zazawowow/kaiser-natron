@@ -1,4 +1,5 @@
 <script setup>
+import { publicAsset } from '@/lib/publicAsset.js'
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import Navbar from '@/design-system/components/Navbar.vue'
@@ -52,7 +53,7 @@ function goCheckout() {
 }
 
 const imgPulver250 =
-  '/products/kaiser-natron-pulver-250-g-grosspackung.webp'
+  publicAsset('products/kaiser-natron-pulver-250-g-grosspackung.webp')
 
 const heroProductId = 'kaiser-natron-pulver-250-g-grosspackung'
 
@@ -61,7 +62,7 @@ const heroProductId = 'kaiser-natron-pulver-250-g-grosspackung'
 // banner shows POWDER — the 3.490 g bulk bucket, distinct from the 250 g
 // Großpackung used in the first-fold hero (L7: was the Bad 500 g image,
 // which contradicted the powder message).
-const imgBanner = '/products/kaiser-natron-pulver-3.490-g-eimer.webp'
+const imgBanner = publicAsset('products/kaiser-natron-pulver-3.490-g-eimer.webp')
 const bannerProductId = 'kaiser-natron-pulver-3490-g-eimer'
 
 // Brand-hero → product-hero teaser: one SKU per use-case (Cook /

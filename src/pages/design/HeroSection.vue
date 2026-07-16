@@ -1,4 +1,5 @@
 <script setup>
+import { publicAsset } from '@/lib/publicAsset.js'
 import { ref, computed } from 'vue'
 import SectionShell from './SectionShell.vue'
 import DevicePreview from '@/design-system/components/DevicePreview.vue'
@@ -95,7 +96,7 @@ const src = computed(
   eyebrow="Neu"
   headline="Kaiser-Natron Pulver"
   subheadline="Reinigt. Backt. Neutralisiert."
-  image="/products/cutouts/…-removebg-preview.png"
+  :image="publicAsset('products/cutouts/…-removebg-preview.png')"
   image-alt="Kaiser-Natron Pulver 250 g"
   badge="Bestseller"
   cta-label="In den Warenkorb"

@@ -1,4 +1,5 @@
 <script setup>
+import { publicAsset } from '@/lib/publicAsset.js'
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import Navbar from '@/design-system/components/Navbar.vue'
@@ -23,8 +24,8 @@ const reverse = computed(() => route.query.reverse === '1')
 const navVariant = computed(() =>
   ['cream', 'paper', 'brand'].includes(tone.value) ? tone.value : 'cream',
 )
-const imgPulver250 = '/products/kaiser-natron-pulver-250-g-grosspackung.webp'
-const imgBad = '/products/kaiser-natron-bad-500-g.webp'
+const imgPulver250 = publicAsset('products/kaiser-natron-pulver-250-g-grosspackung.webp')
+const imgBad = publicAsset('products/kaiser-natron-bad-500-g.webp')
 const image = computed(() => (reverse.value ? imgBad : imgPulver250))
 const imageAlt = computed(() =>
   reverse.value ? 'Kaiser-Natron Bad 500 g' : 'Kaiser-Natron Pulver 250 g Großpackung',

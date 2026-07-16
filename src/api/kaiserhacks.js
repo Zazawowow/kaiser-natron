@@ -1,3 +1,4 @@
+import { publicAsset } from '@/lib/publicAsset.js'
 // Mock Kaiserhacks content at the API boundary. Localized copy lives in
 // src/i18n/messages.js under `kaiserhacks.*` keys, matching the bundle
 // fixture pattern. The backend can replace this module with HTTP calls while
@@ -8,9 +9,9 @@
 //   video.poster    final thumbnail URL
 //   video.sourceHref optional import/origin metadata, not used for playback
 
-const genericThumb = '/videos/kaiserhacks/generic-thumbnail.svg'
-const videoPath = (id) => `/videos/kaiserhacks/${id}.mp4`
-const posterPath = (id) => `/videos/kaiserhacks/${id}.jpg`
+const genericThumb = publicAsset('videos/kaiserhacks/generic-thumbnail.svg')
+const videoPath = (id) => publicAsset(`videos/kaiserhacks/${id}.mp4`)
+const posterPath = (id) => publicAsset(`videos/kaiserhacks/${id}.jpg`)
 
 export const kaiserhacksPage = {
   eyebrowKey: 'kaiserhacks.eyebrow',

@@ -1,3 +1,4 @@
+import { publicAsset } from '@/lib/publicAsset.js'
 // Bundle catalogue. Mirrors `products.js` shape so the home grid,
 // the dedicated /bundles/<slug> pages, and any future cart wire-up
 // all read from a single source of truth.
@@ -29,7 +30,7 @@ export const bundles = [
     badgeKey: 'bundle.haushalt.badge',
     badgeVariant: 'accent',
     price: 24.9,
-    image: '/bundles/background/haushalt-bundle-2.webp',
+    image: publicAsset('bundles/background/haushalt-bundle-2.webp'),
     // AI-composed artwork — disclosed with an "AI Edited" overlay until
     // real product photography replaces it (brand-owner L5/L6).
     aiEdited: true,
@@ -50,7 +51,7 @@ export const bundles = [
     badgeKey: '',
     badgeVariant: 'accent',
     price: 22.9,
-    image: '/bundles/background/waesche-pflege-bundle.webp',
+    image: publicAsset('bundles/background/waesche-pflege-bundle.webp'),
     aiEdited: true,
     anchorProductId: 'holste-wasch-soda-500-g-beutel',
     href: '/bundles/waesche',
@@ -69,7 +70,7 @@ export const bundles = [
     badgeKey: '',
     badgeVariant: 'accent',
     price: 29.9,
-    image: '/bundles/background/wohlfuehl-bundle.webp',
+    image: publicAsset('bundles/background/wohlfuehl-bundle.webp'),
     aiEdited: true,
     anchorProductId: 'kaiser-natron-bad-500-g',
     href: '/bundles/wohlfuehl',

@@ -1,4 +1,5 @@
 <script setup>
+import { publicAsset } from '@/lib/publicAsset.js'
 import { ref } from 'vue'
 import SectionShell from './SectionShell.vue'
 import ProductCard from '@/design-system/components/ProductCard.vue'
@@ -12,7 +13,7 @@ function onAdd(name) {
   setTimeout(() => { if (lastAdded.value === name) lastAdded.value = '' }, 2000)
 }
 
-const imgPulver250 = '/products/kaiser-natron-pulver-250-g-grosspackung.webp'
+const imgPulver250 = publicAsset('products/kaiser-natron-pulver-250-g-grosspackung.webp')
 </script>
 
 <template>
@@ -87,7 +88,7 @@ const imgPulver250 = '/products/kaiser-natron-pulver-250-g-grosspackung.webp'
   title="Kaiser-Natron® Pulver"
   size="250 g Großpackung"
   :price="4.49"
-  image="/products/cutouts/…-removebg-preview.png"
+  :image="publicAsset('products/cutouts/…-removebg-preview.png')"
   badge="Bestseller"
   badge-variant="accent"
   tone="paper"

@@ -1,4 +1,5 @@
 <script setup>
+import { publicAsset } from '@/lib/publicAsset.js'
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import Bundles from '@/design-system/components/Bundles.vue'
@@ -30,7 +31,7 @@ const bundles = [
       '1× Spülmittel 500 ml',
     ],
     price: 24.9,
-    image: '/products/kaiser-natron-pulver-250-g-grosspackung.webp',
+    image: publicAsset('products/kaiser-natron-pulver-250-g-grosspackung.webp'),
     imageAlt: 'Haushalts-Bundle mit Kaiser-Natron',
     badge: 'Bestseller',
     badgeVariant: 'accent',
@@ -45,7 +46,7 @@ const bundles = [
       '1× Linda Fleckenweg 200 ml',
     ],
     price: 22.9,
-    image: '/products/holste-wasch-soda-500-g-beutel.webp',
+    image: publicAsset('products/holste-wasch-soda-500-g-beutel.webp'),
     imageAlt: 'Wäsche & Pflege Bundle',
   },
   {
@@ -58,7 +59,7 @@ const bundles = [
       '1× Kaiser-Natron Fußbad 500 g',
     ],
     price: 29.9,
-    image: '/products/kaiser-natron-bad-500-g.webp',
+    image: publicAsset('products/kaiser-natron-bad-500-g.webp'),
     imageAlt: 'Wohlfühl-Bundle',
   },
 ]
