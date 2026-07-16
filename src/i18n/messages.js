@@ -3,6 +3,10 @@
 // EN is a separate catalog.
 
 const de = {
+  // ENERGEIA umbrella strip (umbrella deployments only, see App.vue)
+  'umbrella.partOf': 'Eine Marke der ENERGEIA Familie',
+  'umbrella.back': 'Zurück zur Übersicht',
+  'umbrella.backAria': 'Zurück zur ENERGEIA Markenübersicht',
   // Navbar (also used by the Navbar preview)
   'nav.shop': 'Shop',
   'nav.cook': 'Kochen',
@@ -862,6 +866,9 @@ const atOverrides = {
 }
 
 const en = {
+  'umbrella.partOf': 'A brand of the ENERGEIA family',
+  'umbrella.back': 'Back to overview',
+  'umbrella.backAria': 'Back to the ENERGEIA brand overview',
   'nav.shop': 'Shop',
   'nav.cook': 'Cook',
   'nav.clean': 'Clean',

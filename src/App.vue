@@ -11,6 +11,14 @@ const isDev = import.meta.env.DEV
 const A11yToolbar = isDev
   ? defineAsyncComponent(() => import('./design-system/devtools/A11yToolbar.vue'))
   : null
+
+// ENERGEIA umbrella deployments (VITE_UMBRELLA=1 at build time) get the
+// house strip above the page chrome; standalone kaiser-natron.at builds
+// are untouched.
+const isUmbrella = import.meta.env.VITE_UMBRELLA === '1'
+const UmbrellaStrip = isUmbrella
+  ? defineAsyncComponent(() => import('./design-system/components/UmbrellaStrip.vue'))
+  : null
 </script>
 
 <template>
@@ -21,6 +29,7 @@ const A11yToolbar = isDev
        BrandHero on the home page now plays the figure entrance
        animation in flow, so the user lands on usable chrome (nav +
        hero) immediately rather than waiting through a 2.8s overlay. -->
+  <UmbrellaStrip v-if="isUmbrella && !isPreview && !inIframe" />
   <router-view />
   <A11yToolbar v-if="isDev && isDesignRoute && !isPreview && !inIframe" />
 </template>

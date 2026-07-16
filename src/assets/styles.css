@@ -2,6 +2,16 @@
 @import '../design-system/tokens.css';
 @import '../design-system/motion.css';
 
+/* Cross-document view transitions: same-origin full-page navigations
+   (umbrella site ⇄ this shop) cross-fade instead of hard-cutting.
+   No effect on in-SPA route changes, and a plain instant load in
+   browsers without support. */
+@media not (prefers-reduced-motion: reduce) {
+  @view-transition {
+    navigation: auto;
+  }
+}
+
 /* Zeitung — self-hosted (licensed; mirrored from kaiser-natron.de).
    Only Regular (400) and Bold (700) ship; intermediate weights are
    synthesized by the browser. No italics in the family, so the

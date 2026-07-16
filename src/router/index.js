@@ -184,7 +184,9 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(),
+  // BASE_URL follows Vite's `base` — '/' standalone, '/kaiser-natron/'
+  // when built for the ENERGEIA umbrella deployment.
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes,
   // Scroll rules:
   //  • Browser back/forward → restore the previous scroll y so
