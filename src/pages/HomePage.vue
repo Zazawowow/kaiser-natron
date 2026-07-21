@@ -10,6 +10,7 @@ import Bundles from '@/design-system/components/Bundles.vue'
 import About from '@/design-system/components/About.vue'
 import Footer from '@/design-system/components/Footer.vue'
 import CartDrawer from '@/design-system/components/CartDrawer.vue'
+import { cartRevealPending } from '@/lib/umbrellaCart.js'
 import {
   products,
   fetchCart,
@@ -219,6 +220,21 @@ function syncNavHeight() {
   const h = Math.round(node.getBoundingClientRect().height)
   document.documentElement.style.setProperty('--nav-h', `${h}px`)
 }
+// Umbrella ?add= deep link: reveal the drawer once the App-level
+// handler has put the product in the cart. A watch (not a mount-time
+// check) because the handler resolves through dynamic imports and can
+// finish after mount.
+watch(
+  cartRevealPending,
+  (pending) => {
+    if (pending) {
+      cartOpen.value = true
+      cartRevealPending.value = false
+    }
+  },
+  { immediate: true },
+)
+
 onMounted(() => {
   fetchCart()
   syncNavHeight()

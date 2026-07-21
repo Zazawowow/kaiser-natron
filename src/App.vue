@@ -28,7 +28,12 @@ if (isUmbrella && typeof window !== 'undefined') {
   const params = new URLSearchParams(window.location.search)
   const addId = params.get('add')
   if (addId) {
-    import('@/api/cart.js').then(({ addToCart }) => addToCart(addId))
+    import('@/api/cart.js').then(async ({ addToCart }) => {
+      await addToCart(addId)
+      // Ask the landing page to reveal its cart drawer (see lib/umbrellaCart).
+      const { cartRevealPending } = await import('@/lib/umbrellaCart.js')
+      cartRevealPending.value = true
+    })
     params.delete('add')
     const qs = params.toString()
     history.replaceState(
