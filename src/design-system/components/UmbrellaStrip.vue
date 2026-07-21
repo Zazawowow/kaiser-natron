@@ -30,11 +30,19 @@ const { t } = useI18n()
 
 <style scoped>
 .umbrella-strip {
+  /* Sticky WITH the brand navbar: the strip pins at the very top and
+     the navbar pins right below it (Navbar shifts its sticky top by
+     the strip's 30px in umbrella builds) — the house stays visible
+     wherever the user scrolls. */
+  position: sticky;
+  top: 0;
+  z-index: 40; /* above the navbar's z-30 */
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: 0.45rem 1.25rem;
+  padding: 0 1.25rem;
   background: #faf9f7; /* ENERGEIA paper */
   color: #231f20; /* ENERGEIA ink */
   border-bottom: 1px solid rgb(35 31 32 / 0.12);

@@ -93,10 +93,13 @@ const tone = computed(() => tones[props.variant])
 // Both layouts stay pinned at the top of the scroll container while the user
 // scrolls. `sticky` keeps it in normal document flow until it hits the top edge,
 // which avoids the layout-shift that `position: fixed` would introduce.
+// Umbrella builds: the ENERGEIA house strip (30px, sticky — see
+// UmbrellaStrip.vue) pins above, so both sticky tops shift down by it.
+const isUmbrella = import.meta.env.VITE_UMBRELLA === '1'
 const layoutClasses = computed(() =>
   props.layout === 'floating'
-    ? 'sticky top-4 md:top-6 z-30 mx-4 md:mx-6 rounded-lg border shadow-md'
-    : 'sticky top-0 z-30 border-b',
+    ? `sticky ${isUmbrella ? 'top-[calc(30px_+_1rem)] md:top-[calc(30px_+_1.5rem)]' : 'top-4 md:top-6'} z-30 mx-4 md:mx-6 rounded-lg border shadow-md`
+    : `sticky ${isUmbrella ? 'top-[30px]' : 'top-0'} z-30 border-b`,
 )
 
 // Edge-to-edge: the bar's contents span the full bar width. Logo sits at the
