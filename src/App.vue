@@ -19,6 +19,25 @@ const isUmbrella = import.meta.env.VITE_UMBRELLA === '1'
 const UmbrellaStrip = isUmbrella
   ? defineAsyncComponent(() => import('./design-system/components/UmbrellaStrip.vue'))
   : null
+
+// Umbrella deep-link: ?add=<productId> pre-fills the cart (the umbrella
+// page's product cards link here with it), then cleans the URL so a
+// reload doesn't add twice. Goes through api/cart.js — the sanctioned
+// surface — so it keeps working when the real backend lands.
+if (isUmbrella && typeof window !== 'undefined') {
+  const params = new URLSearchParams(window.location.search)
+  const addId = params.get('add')
+  if (addId) {
+    import('@/api/cart.js').then(({ addToCart }) => addToCart(addId))
+    params.delete('add')
+    const qs = params.toString()
+    history.replaceState(
+      null,
+      '',
+      window.location.pathname + (qs ? `?${qs}` : '') + window.location.hash,
+    )
+  }
+}
 </script>
 
 <template>
